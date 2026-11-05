@@ -40,9 +40,9 @@ MAX_TOKENS=128000 bash run_experiments.sh repair opus55 bedrock us.anthropic.cla
 bash run_experiments.sh query opus55 bedrock us.anthropic.claude-opus-5-5
 ```
 
-Results go to `out/repair/opus55/` and `out/query/opus55/`. Protocols, options, outputs and the paper's ablations are
-in [docs/aced_repair.md](docs/aced_repair.md) and [docs/aced_query.md](docs/aced_query.md). Agents run their analysis
-code on your machine; read [docs/setup.md](docs/setup.md) before evaluating untrusted models.
+Options, outputs and the paper's other settings are in [docs/aced_repair.md](docs/aced_repair.md) and
+[docs/aced_query.md](docs/aced_query.md). Agents run their analysis code on your machine; see
+[docs/setup.md](docs/setup.md) before evaluating untrusted models.
 
 ## Repository layout
 
