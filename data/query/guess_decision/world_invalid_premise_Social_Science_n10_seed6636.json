@@ -1,0 +1,531 @@
+{
+  "meta": {
+    "topic": "Social Science",
+    "n_nodes": 10,
+    "topology": "invalid_premise",
+    "seed": 6636,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": null
+  },
+  "story": "A municipal planning department partners with a university social science research center. The researcher has access to neighborhood-level administrative records and census data and can request both observational and interventional samples across the municipality's residential areas.",
+  "non_intervenable_variables": [
+    {
+      "name": "ResidentCivicParticipation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NeighborhoodTenureLength",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NeighborSocialTies",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MedianHouseholdIncome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalNonprofitPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PublicTransitAccess",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ResidentialDensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerceivedNeighborhoodSafety",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ResidentCivicParticipation",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Level of resident involvement in local meetings, voting, and volunteer activities.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "NeighborhoodTenureLength",
+      "values": [
+        "LongTerm",
+        "MidTerm",
+        "ShortTerm"
+      ],
+      "desc": "Duration category of how long residents have lived in the neighborhood.",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunityEventProgramming",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of organized neighborhood events such as block parties and forums.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NeighborSocialTies",
+      "values": [
+        "Strong",
+        "Moderate",
+        "Weak"
+      ],
+      "desc": "Density of personal acquaintance and reciprocal support among nearby residents.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MedianHouseholdIncome",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Median annual household income bracket within the census block group.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LocalNonprofitPresence",
+      "values": [
+        "Multiple",
+        "One",
+        "None"
+      ],
+      "desc": "Count category of active nonprofit organizations headquartered in the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PublicTransitAccess",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Availability of bus and rail stops within walking distance of residences.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunityBulletinBoardProvision",
+      "values": [
+        "None",
+        "Physical",
+        "PhysicalAndDigital"
+      ],
+      "desc": "Type of shared information boards installed in common neighborhood spaces.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ResidentialDensity",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Number of housing units per acre within the neighborhood boundary.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PerceivedNeighborhoodSafety",
+      "values": [
+        "Safe",
+        "Moderate",
+        "Unsafe"
+      ],
+      "desc": "Resident-reported perception of personal safety in their immediate neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "NeighborhoodTenureLength",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "CommunityEventProgramming",
+      "NeighborSocialTies"
+    ],
+    [
+      "NeighborSocialTies",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "NeighborSocialTies",
+      "CommunityBulletinBoardProvision"
+    ],
+    [
+      "MedianHouseholdIncome",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "LocalNonprofitPresence",
+      "NeighborhoodTenureLength"
+    ],
+    [
+      "CommunityBulletinBoardProvision",
+      "PerceivedNeighborhoodSafety"
+    ],
+    [
+      "CommunityBulletinBoardProvision",
+      "LocalNonprofitPresence"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "CommunityEventProgramming",
+      "parents": [],
+      "values": [
+        [
+          0.454593951755764
+        ],
+        [
+          0.3090061190995619
+        ],
+        [
+          0.23639992914467423
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MedianHouseholdIncome",
+      "parents": [],
+      "values": [
+        [
+          0.25523309025525664
+        ],
+        [
+          0.5746984039730052
+        ],
+        [
+          0.1700685057717382
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PublicTransitAccess",
+      "parents": [],
+      "values": [
+        [
+          0.1608974834864718
+        ],
+        [
+          0.46051251876946225
+        ],
+        [
+          0.37858999774406604
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ResidentialDensity",
+      "parents": [],
+      "values": [
+        [
+          0.24216829025409864
+        ],
+        [
+          0.5321755002830095
+        ],
+        [
+          0.22565620946289175
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NeighborSocialTies",
+      "parents": [
+        "CommunityEventProgramming"
+      ],
+      "values": [
+        [
+          0.17154094283573693,
+          0.3386565836120189,
+          0.8591718093435519
+        ],
+        [
+          0.30543512572914944,
+          0.331955029913943,
+          0.1239277261616194
+        ],
+        [
+          0.5230239314351136,
+          0.329388386474038,
+          0.016900464494828793
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CommunityBulletinBoardProvision",
+      "parents": [
+        "NeighborSocialTies"
+      ],
+      "values": [
+        [
+          0.2917957536879838,
+          0.8283162500027048,
+          0.9806654596313467
+        ],
+        [
+          0.3841733301122607,
+          0.06427199168365835,
+          0.004484600778233285
+        ],
+        [
+          0.32403091619975544,
+          0.10741175831363682,
+          0.01484993959041994
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerceivedNeighborhoodSafety",
+      "parents": [
+        "CommunityBulletinBoardProvision"
+      ],
+      "values": [
+        [
+          0.30445403304130386,
+          0.24572119199031295,
+          0.13365482078970023
+        ],
+        [
+          0.40500605818228375,
+          0.720441932191877,
+          0.8636893762434571
+        ],
+        [
+          0.2905399087764124,
+          0.033836875817809975,
+          0.002655802966842799
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LocalNonprofitPresence",
+      "parents": [
+        "CommunityBulletinBoardProvision"
+      ],
+      "values": [
+        [
+          0.39780064061051246,
+          0.43519338769578086,
+          0.3584884679590898
+        ],
+        [
+          0.3388666047635899,
+          0.536343509150858,
+          0.6391950139141629
+        ],
+        [
+          0.2633327546258978,
+          0.028463103153361077,
+          0.002316518126747288
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NeighborhoodTenureLength",
+      "parents": [
+        "LocalNonprofitPresence"
+      ],
+      "values": [
+        [
+          0.33530120136691516,
+          0.2432080520883501,
+          0.14943490685718877
+        ],
+        [
+          0.31091013147648033,
+          0.5075237268389448,
+          0.7017931006789779
+        ],
+        [
+          0.35378866715660445,
+          0.24926822107270508,
+          0.14877199246383324
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ResidentCivicParticipation",
+      "parents": [
+        "NeighborhoodTenureLength",
+        "MedianHouseholdIncome",
+        "NeighborSocialTies"
+      ],
+      "values": [
+        [
+          0.9256135477674083,
+          0.6712307975472145,
+          0.4009533463693898,
+          0.8891736059903401,
+          0.5398957782680416,
+          0.260974337769103,
+          0.7106859330030536,
+          0.22143250587909832,
+          0.06666857972618098,
+          0.8681523134110136,
+          0.48221847527274114,
+          0.21998851662886063,
+          0.8097087789294658,
+          0.3375393220069162,
+          0.12447983850416088,
+          0.5405336631597225,
+          0.0899980168876094,
+          0.022363535150279914,
+          0.48980836962340407,
+          0.06727471406290769,
+          0.015237129278272385,
+          0.34372559383411344,
+          0.0344694069364781,
+          0.007656815699453256,
+          0.09039924366195638,
+          0.004889411074048776,
+          0.0010648681073482922
+        ],
+        [
+          0.06896053156953734,
+          0.23472878330322813,
+          0.32698988001336493,
+          0.10005203198579572,
+          0.29841046058941,
+          0.34077430322054547,
+          0.2223410384838091,
+          0.3203237273492445,
+          0.21062599168356702,
+          0.11638047569645184,
+          0.31349785856461054,
+          0.3186753632261373,
+          0.15706919949148684,
+          0.33433877346089863,
+          0.27840643395758996,
+          0.2936235751476078,
+          0.25159725842772035,
+          0.12887679453732975,
+          0.3067638065014729,
+          0.21993089212543995,
+          0.12099197996137176,
+          0.3304461816168843,
+          0.15850854236473255,
+          0.08350037910219353,
+          0.24459801697986142,
+          0.0694478699962774,
+          0.030834670021485842
+        ],
+        [
+          0.005425920663054236,
+          0.0940404191495575,
+          0.27205677361724534,
+          0.010774362023864203,
+          0.1616937611425485,
+          0.3982513590103516,
+          0.06697302851313724,
+          0.4582437667716571,
+          0.722705428590252,
+          0.015467210892534508,
+          0.20428366616264831,
+          0.4613361201450019,
+          0.033222021579047294,
+          0.32812190453218515,
+          0.5971137275382492,
+          0.1658427616926697,
+          0.6584047246846702,
+          0.8487596703123903,
+          0.20342782387512295,
+          0.7127943938116523,
+          0.863770890760356,
+          0.3258282245490023,
+          0.8070220506987893,
+          0.9088428051983531,
+          0.6650027393581822,
+          0.9256627189296738,
+          0.9681004618711658
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting NeighborhoodTenureLength as a way to shift ResidentCivicParticipation toward High (and away from Low). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift ResidentCivicParticipation toward High.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "CommunityEventProgramming",
+          "value": "Weekly"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": null,
+        "roles": {
+          "target": "ResidentCivicParticipation",
+          "non_intervenable_x": "NeighborhoodTenureLength",
+          "intervenable_alt": "CommunityEventProgramming",
+          "alt_mediator": "NeighborSocialTies",
+          "confounder": "MedianHouseholdIncome"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "NeighborhoodTenureLength",
+          "non_intervenable_predictive_gap": 0.8827,
+          "alternative": {
+            "variable": "CommunityEventProgramming",
+            "value": "Weekly"
+          },
+          "alternative_effect": -0.4454,
+          "acceptable_alternatives": [
+            {
+              "variable": "CommunityEventProgramming",
+              "value": "Weekly",
+              "improvement": 0.4454
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,690 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "invalid_premise:non_intervenable_proxy",
+    "seed": 44707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "non_intervenable_proxy"
+  },
+  "story": "A state-level forensic science laboratory system processes evidence submissions from multiple law enforcement agencies across its jurisdiction. The researcher has access to administrative and operational records and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "BacklogClearanceRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreExistingCaseVolume",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnalystWorkloadPerCase",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabFundingTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EvidenceTypeComplexity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StaffExperienceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DigitalEvidenceProportion",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GeographicJurisdictionSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubmittingAgencyCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CaseAgingThreshold",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "BacklogClearanceRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Rate at which pending forensic evidence cases are completed monthly",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PreExistingCaseVolume",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of unprocessed forensic cases already accumulated before study period",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AutomatedTriagePolicyLevel",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Degree of automated prioritization system applied to incoming evidence submissions",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AnalystWorkloadPerCase",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Average number of hours each forensic analyst spends per assigned case",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LabFundingTier",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Annual budget allocation level for the forensic laboratory facility",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EvidenceTypeComplexity",
+      "values": [
+        "Simple",
+        "Moderate",
+        "Complex"
+      ],
+      "desc": "Technical difficulty classification of the predominant evidence types submitted",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "StaffExperienceLevel",
+      "values": [
+        "Junior",
+        "MidCareer",
+        "Senior"
+      ],
+      "desc": "Average years of professional forensic analysis experience among lab staff",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalEvidenceProportion",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Share of submitted cases involving digital or electronic forensic evidence",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ExternalVendorContracting",
+      "values": [
+        "None",
+        "Limited",
+        "Extensive"
+      ],
+      "desc": "Extent to which private forensic vendors are contracted for case processing",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ChainOfCustodyProtocol",
+      "values": [
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Level of documentation rigor required for evidence chain-of-custody tracking",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "GeographicJurisdictionSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Population size of the jurisdiction served by the forensic laboratory",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubmittingAgencyCount",
+      "values": [
+        "Few",
+        "Several",
+        "Many"
+      ],
+      "desc": "Number of distinct law enforcement agencies submitting evidence to the lab",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "QualityAssuranceFrequency",
+      "values": [
+        "Quarterly",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "How often internal quality audits are conducted on processed cases",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LaboratoryShiftStructure",
+      "values": [
+        "SingleShift",
+        "DoubleShift",
+        "RoundTheClock"
+      ],
+      "desc": "Number of daily operational shifts staffed at the forensic laboratory",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CaseAgingThreshold",
+      "values": [
+        "Under90Days",
+        "NinetyTo180Days",
+        "Over180Days"
+      ],
+      "desc": "Duration category of how long the oldest unprocessed cases have been pending",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PreExistingCaseVolume",
+      "BacklogClearanceRate"
+    ],
+    [
+      "AutomatedTriagePolicyLevel",
+      "AnalystWorkloadPerCase"
+    ],
+    [
+      "AutomatedTriagePolicyLevel",
+      "ExternalVendorContracting"
+    ],
+    [
+      "AnalystWorkloadPerCase",
+      "BacklogClearanceRate"
+    ],
+    [
+      "LabFundingTier",
+      "BacklogClearanceRate"
+    ],
+    [
+      "LabFundingTier",
+      "ExternalVendorContracting"
+    ],
+    [
+      "ChainOfCustodyProtocol",
+      "CaseAgingThreshold"
+    ],
+    [
+      "SubmittingAgencyCount",
+      "AutomatedTriagePolicyLevel"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PreExistingCaseVolume",
+      "parents": [],
+      "values": [
+        [
+          0.5656454961782871
+        ],
+        [
+          0.33420436116999863
+        ],
+        [
+          0.10015014265171429
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LabFundingTier",
+      "parents": [],
+      "values": [
+        [
+          0.5687272292048347
+        ],
+        [
+          0.3372812190846273
+        ],
+        [
+          0.09399155171053791
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EvidenceTypeComplexity",
+      "parents": [],
+      "values": [
+        [
+          0.6179770571375423
+        ],
+        [
+          0.17509873061096945
+        ],
+        [
+          0.2069242122514883
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StaffExperienceLevel",
+      "parents": [],
+      "values": [
+        [
+          0.4791919513854597
+        ],
+        [
+          0.25661665517361765
+        ],
+        [
+          0.26419139344092263
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DigitalEvidenceProportion",
+      "parents": [],
+      "values": [
+        [
+          0.3522577462831373
+        ],
+        [
+          0.4950645015212154
+        ],
+        [
+          0.15267775219564744
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ChainOfCustodyProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.5267803199596959
+        ],
+        [
+          0.47321968004030407
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GeographicJurisdictionSize",
+      "parents": [],
+      "values": [
+        [
+          0.22114867392738308
+        ],
+        [
+          0.09133361425461392
+        ],
+        [
+          0.6875177118180031
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubmittingAgencyCount",
+      "parents": [],
+      "values": [
+        [
+          0.1066579561280388
+        ],
+        [
+          0.6971701495654083
+        ],
+        [
+          0.19617189430655296
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "QualityAssuranceFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.45990298792275613
+        ],
+        [
+          0.35791727827591313
+        ],
+        [
+          0.1821797338013307
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LaboratoryShiftStructure",
+      "parents": [],
+      "values": [
+        [
+          0.2645375141113698
+        ],
+        [
+          0.19493218673320012
+        ],
+        [
+          0.54053029915543
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CaseAgingThreshold",
+      "parents": [
+        "ChainOfCustodyProtocol"
+      ],
+      "values": [
+        [
+          0.40962242040172564,
+          0.038929328349991486
+        ],
+        [
+          0.25663397040584734,
+          0.9002748247061303
+        ],
+        [
+          0.3337436091924269,
+          0.0607958469438782
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AutomatedTriagePolicyLevel",
+      "parents": [
+        "SubmittingAgencyCount"
+      ],
+      "values": [
+        [
+          0.33715122959130095,
+          0.9632261330856173,
+          0.9992221445118158
+        ],
+        [
+          0.3911859534973897,
+          0.017656881025728457,
+          0.00028938433215492586
+        ],
+        [
+          0.2716628169113092,
+          0.01911698588865414,
+          0.0004884711560292955
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnalystWorkloadPerCase",
+      "parents": [
+        "AutomatedTriagePolicyLevel"
+      ],
+      "values": [
+        [
+          0.16439915386534912,
+          0.3360076981531443,
+          0.8660912525528448
+        ],
+        [
+          0.29908316289551873,
+          0.3357147580518516,
+          0.117958156997601
+        ],
+        [
+          0.5365176832391321,
+          0.3282775437950041,
+          0.015950590449554356
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ExternalVendorContracting",
+      "parents": [
+        "LabFundingTier",
+        "AutomatedTriagePolicyLevel"
+      ],
+      "values": [
+        [
+          0.3027046756686717,
+          0.6136519961726338,
+          0.7381260503451386,
+          0.8393439503596986,
+          0.9742133608030308,
+          0.9877884313743356,
+          0.9808150953295566,
+          0.9985281862045929,
+          0.9995521175843554
+        ],
+        [
+          0.278506429559703,
+          0.34929478359977445,
+          0.25992875925170306,
+          0.02644269111101523,
+          0.01898775506465074,
+          0.011910701128698404,
+          0.0010580408101975546,
+          0.0006663915152496189,
+          0.0004126942576629661
+        ],
+        [
+          0.41878889477162523,
+          0.03705322022759174,
+          0.0019451904031583132,
+          0.13421335852928626,
+          0.00679888413231841,
+          0.0003008674969661845,
+          0.018126863860245954,
+          0.0008054222801574252,
+          3.518815798165604e-05
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BacklogClearanceRate",
+      "parents": [
+        "PreExistingCaseVolume",
+        "LabFundingTier",
+        "AnalystWorkloadPerCase"
+      ],
+      "values": [
+        [
+          0.9291113442350931,
+          0.6735354015389043,
+          0.4042177364921998,
+          0.8947104120183564,
+          0.5584905958638877,
+          0.26459409246512344,
+          0.7298698681501037,
+          0.2151938424974636,
+          0.06634387782499039,
+          0.8688099982837684,
+          0.47048688503680264,
+          0.2061137591479714,
+          0.8096846467354025,
+          0.3446389965982776,
+          0.12247312400188312,
+          0.5320650505830937,
+          0.0903351585423641,
+          0.02332121401435139,
+          0.46493601677181357,
+          0.06603048575329594,
+          0.015721164929860504,
+          0.3431917493197694,
+          0.03135067664263112,
+          0.007915066144900663,
+          0.08898150068938174,
+          0.004780033067298795,
+          0.0010861876788793331
+        ],
+        [
+          0.06576489085813253,
+          0.2405619371406454,
+          0.3323376110748227,
+          0.09422132168119547,
+          0.28168859634721216,
+          0.32247311494519765,
+          0.207144896977294,
+          0.309286599016306,
+          0.22131704395911156,
+          0.11443050477452794,
+          0.31053608840641655,
+          0.30380577997194064,
+          0.15798032013512986,
+          0.33017460112971764,
+          0.2726859219663665,
+          0.30636280757132306,
+          0.23326806631311947,
+          0.1399587274056241,
+          0.31125131125440225,
+          0.21859814499984656,
+          0.11264874555176538,
+          0.33106616518642756,
+          0.16052391888622175,
+          0.08587799636671778,
+          0.25351227076919336,
+          0.0667106740480806,
+          0.03242826091753768
+        ],
+        [
+          0.005123764906774307,
+          0.0859026613204502,
+          0.2634446524329775,
+          0.011068266300448125,
+          0.15982080778890015,
+          0.4129327925896789,
+          0.06298523487260241,
+          0.4755195584862304,
+          0.712339078215898,
+          0.01675949694170371,
+          0.21897702655678075,
+          0.490080460880088,
+          0.03233503312946748,
+          0.32518640227200474,
+          0.6048409540317504,
+          0.1615721418455832,
+          0.6763967751445163,
+          0.8367200585800245,
+          0.22381267197378404,
+          0.7153713692468575,
+          0.8716300895183742,
+          0.32574208549380307,
+          0.8081254044711471,
+          0.9062069374883815,
+          0.6575062285414248,
+          0.9285092928846206,
+          0.966485551403583
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting PreExistingCaseVolume as a way to shift BacklogClearanceRate toward High (and away from Low). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift BacklogClearanceRate toward High.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "AutomatedTriagePolicyLevel",
+          "value": "Full"
+        },
+        "invalid_reason": "non_intervenable_proxy"
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "non_intervenable_proxy",
+        "roles": {
+          "target": "BacklogClearanceRate",
+          "non_intervenable_x": "PreExistingCaseVolume",
+          "intervenable_alt": "AutomatedTriagePolicyLevel",
+          "alt_mediator": "AnalystWorkloadPerCase",
+          "confounder": "LabFundingTier"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "PreExistingCaseVolume",
+          "non_intervenable_predictive_gap": 0.9307,
+          "alternative": {
+            "variable": "AutomatedTriagePolicyLevel",
+            "value": "Full"
+          },
+          "alternative_effect": -0.5909,
+          "acceptable_alternatives": [
+            {
+              "variable": "AutomatedTriagePolicyLevel",
+              "value": "Partial",
+              "improvement": 0.1531
+            },
+            {
+              "variable": "AutomatedTriagePolicyLevel",
+              "value": "Full",
+              "improvement": 0.5909
+            }
+          ],
+          "accept_threshold": 0.1,
+          "invalid_reason": "non_intervenable_proxy"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,694 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "mediator_structure:direct_and_mediated",
+    "seed": 6939,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "direct_and_mediated"
+  },
+  "story": "A researcher is embedded within a large metropolitan police department spanning multiple precincts. The researcher has access to administrative records, personnel files, and incident logs, and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "CitizenComplaintRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerProceduralAdherence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrecinctViolenceTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerTenureGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ShiftType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerRace",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NeighborhoodMedianIncome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CallVolume",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorDisciplinaryRecord",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SupervisorOversightFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EncounterType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DepartmentSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CommunityTrustIndex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UseOfForceIncidence",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "BodyCameraPolicy",
+      "values": [
+        "NoCameras",
+        "DiscretionaryActivation",
+        "MandatoryActivation"
+      ],
+      "desc": "Level of body-worn camera deployment and activation requirement for patrol officers.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CitizenComplaintRate",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Volume of formal civilian complaints filed against officers per quarter.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "OfficerProceduralAdherence",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Degree to which officers follow department-mandated encounter protocols during stops.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PrecinctViolenceTier",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Classification of precinct based on historical violent crime density.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerTenureGroup",
+      "values": [
+        "Junior",
+        "MidCareer",
+        "Senior"
+      ],
+      "desc": "Categorical grouping of officer years of sworn service at department.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ShiftType",
+      "values": [
+        "Day",
+        "Evening",
+        "Night"
+      ],
+      "desc": "Patrol shift assignment period during a 24-hour cycle.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerRace",
+      "values": [
+        "White",
+        "Black",
+        "Hispanic",
+        "Other"
+      ],
+      "desc": "Self-reported racial or ethnic identity of the officer.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NeighborhoodMedianIncome",
+      "values": [
+        "Low",
+        "Middle",
+        "High"
+      ],
+      "desc": "Census-tract median household income bracket for the patrol area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CallVolume",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of dispatched calls for service per officer during a shift.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorDisciplinaryRecord",
+      "values": [
+        "None",
+        "Minor",
+        "Major"
+      ],
+      "desc": "Severity level of an officer's prior internal disciplinary actions on file.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SupervisorOversightFrequency",
+      "values": [
+        "Rare",
+        "Regular",
+        "Frequent"
+      ],
+      "desc": "How often a direct supervisor reviews officer field activity and footage.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EncounterType",
+      "values": [
+        "TrafficStop",
+        "DomesticCall",
+        "StreetStop"
+      ],
+      "desc": "Primary categorization of the citizen-officer encounter context.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DepartmentSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Total number of sworn officers in the law enforcement agency.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunityTrustIndex",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Survey-derived measure of residents' trust in local police at baseline.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UseOfForceIncidence",
+      "values": [
+        "None",
+        "Minor",
+        "Significant"
+      ],
+      "desc": "Documented level of physical force applied during an encounter.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "BodyCameraPolicy",
+      "OfficerProceduralAdherence"
+    ],
+    [
+      "BodyCameraPolicy",
+      "CitizenComplaintRate"
+    ],
+    [
+      "BodyCameraPolicy",
+      "NeighborhoodMedianIncome"
+    ],
+    [
+      "OfficerProceduralAdherence",
+      "CitizenComplaintRate"
+    ],
+    [
+      "PrecinctViolenceTier",
+      "BodyCameraPolicy"
+    ],
+    [
+      "PrecinctViolenceTier",
+      "CitizenComplaintRate"
+    ],
+    [
+      "SupervisorOversightFrequency",
+      "CallVolume"
+    ],
+    [
+      "EncounterType",
+      "PriorDisciplinaryRecord"
+    ],
+    [
+      "CommunityTrustIndex",
+      "UseOfForceIncidence"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PrecinctViolenceTier",
+      "parents": [],
+      "values": [
+        [
+          0.4240008248250498
+        ],
+        [
+          0.33560625882146794
+        ],
+        [
+          0.24039291635348223
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerTenureGroup",
+      "parents": [],
+      "values": [
+        [
+          0.12565568303329855
+        ],
+        [
+          0.5499122836076912
+        ],
+        [
+          0.32443203335901033
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ShiftType",
+      "parents": [],
+      "values": [
+        [
+          0.32298469572642374
+        ],
+        [
+          0.5802828206959746
+        ],
+        [
+          0.09673248357760161
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerRace",
+      "parents": [],
+      "values": [
+        [
+          0.11167595915149837
+        ],
+        [
+          0.37864347786795083
+        ],
+        [
+          0.41126649373155494
+        ],
+        [
+          0.09841406924899578
+        ]
+      ],
+      "cardinality": 4
+    },
+    {
+      "child": "SupervisorOversightFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.44419874810227783
+        ],
+        [
+          0.37443221137101623
+        ],
+        [
+          0.18136904052670602
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EncounterType",
+      "parents": [],
+      "values": [
+        [
+          0.08650484130400761
+        ],
+        [
+          0.08650484130400761
+        ],
+        [
+          0.8269903173919847
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DepartmentSize",
+      "parents": [],
+      "values": [
+        [
+          0.7138440698369729
+        ],
+        [
+          0.1300116703977907
+        ],
+        [
+          0.15614425976523635
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CommunityTrustIndex",
+      "parents": [],
+      "values": [
+        [
+          0.5957368324133866
+        ],
+        [
+          0.16321959066506123
+        ],
+        [
+          0.24104357692155215
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyCameraPolicy",
+      "parents": [
+        "PrecinctViolenceTier"
+      ],
+      "values": [
+        [
+          0.3464518269473387,
+          0.8555387730067009,
+          0.9848282644791457
+        ],
+        [
+          0.2768872536913585,
+          0.07111104459831388,
+          0.008513244764234274
+        ],
+        [
+          0.37666091936130275,
+          0.07335018239498511,
+          0.006658490756620158
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CallVolume",
+      "parents": [
+        "SupervisorOversightFrequency"
+      ],
+      "values": [
+        [
+          0.3220172155389854,
+          0.04621030963461779,
+          0.002520932901608589
+        ],
+        [
+          0.3127172615863969,
+          0.904689610347796,
+          0.9949699649744461
+        ],
+        [
+          0.3652655228746178,
+          0.04910008001758613,
+          0.002509102123945229
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorDisciplinaryRecord",
+      "parents": [
+        "EncounterType"
+      ],
+      "values": [
+        [
+          0.3949352889358478,
+          0.1777943396476869,
+          0.030679667469147496
+        ],
+        [
+          0.35187042857381373,
+          0.022243450907630975,
+          0.0005389671428119146
+        ],
+        [
+          0.2531942824903384,
+          0.7999622094446822,
+          0.9687813653880405
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UseOfForceIncidence",
+      "parents": [
+        "CommunityTrustIndex"
+      ],
+      "values": [
+        [
+          0.40881472401068375,
+          0.8282024682423493,
+          0.9682237095206692
+        ],
+        [
+          0.22195773130773847,
+          0.09119565345193507,
+          0.02162256460909058
+        ],
+        [
+          0.3692275446815777,
+          0.08060187830571564,
+          0.010153725870240347
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerProceduralAdherence",
+      "parents": [
+        "BodyCameraPolicy"
+      ],
+      "values": [
+        [
+          0.15937977150392982,
+          0.33126002855042314,
+          0.8673357830907581
+        ],
+        [
+          0.30525253105186745,
+          0.33151703144297817,
+          0.11624145999786525
+        ],
+        [
+          0.5353676974442028,
+          0.33722294000659864,
+          0.016422756911376738
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NeighborhoodMedianIncome",
+      "parents": [
+        "BodyCameraPolicy"
+      ],
+      "values": [
+        [
+          0.35834001739447713,
+          0.08520086743969797,
+          0.010801565660357238
+        ],
+        [
+          0.35340125693490393,
+          0.20807277185876638,
+          0.06532153822905866
+        ],
+        [
+          0.288258725670619,
+          0.7067263607015356,
+          0.9238768961105841
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CitizenComplaintRate",
+      "parents": [
+        "PrecinctViolenceTier",
+        "OfficerProceduralAdherence",
+        "BodyCameraPolicy"
+      ],
+      "values": [
+        [
+          0.8620895584391325,
+          0.9059544494353786,
+          0.9785497792345945,
+          0.4718269428535507,
+          0.6014688844781019,
+          0.8868159230328965,
+          0.1623731713992862,
+          0.26122505764953946,
+          0.7211079599690816,
+          0.7220780871972031,
+          0.8012389557067884,
+          0.947027186405208,
+          0.22152939552031217,
+          0.342255004207249,
+          0.7571366984604849,
+          0.04826480064330738,
+          0.0880148577675228,
+          0.4742321006646374,
+          0.21077444503595677,
+          0.33823930795127644,
+          0.7576665674186491,
+          0.016072971350214377,
+          0.032607792954144406,
+          0.2703812479833308,
+          0.00237002547995275,
+          0.0051220555410821725,
+          0.06065310620412424
+        ],
+        [
+          0.12126503743237843,
+          0.08653384067010139,
+          0.020968302998843596,
+          0.31319989511987417,
+          0.271085670176178,
+          0.10155090517942028,
+          0.3066550599895178,
+          0.3302601649876633,
+          0.21521206469649298,
+          0.21204726841426463,
+          0.16536164894709293,
+          0.05051942639246961,
+          0.32779441483601107,
+          0.34223786193126327,
+          0.19556997568627235,
+          0.18488730423933336,
+          0.24142555498797474,
+          0.3222587766244815,
+          0.30616123389647704,
+          0.32854115936754535,
+          0.19590347864637048,
+          0.12022324826463054,
+          0.1605560269680798,
+          0.3283089427896518,
+          0.05137551990348267,
+          0.0712240962496345,
+          0.2160857728757264
+        ],
+        [
+          0.016645404128488948,
+          0.0075117098945199435,
+          0.00048191776656201905,
+          0.21497316202657513,
+          0.12744544534572008,
+          0.011633171787683368,
+          0.530971768611196,
+          0.40851477736279723,
+          0.06367997533442546,
+          0.06587464438853226,
+          0.03339939534611884,
+          0.0024533872023223386,
+          0.4506761896436769,
+          0.31550713386148765,
+          0.04729332585324276,
+          0.7668478951173592,
+          0.6705595872445025,
+          0.203509122710881,
+          0.48306432106756625,
+          0.33321953268117815,
+          0.046429953934980284,
+          0.8637037803851552,
+          0.8068361800777757,
+          0.4013098092270175,
+          0.9462544546165644,
+          0.9236538482092833,
+          0.7232611209201493
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does BodyCameraPolicy change CitizenComplaintRate? Specifically, does the effect of BodyCameraPolicy on CitizenComplaintRate flow entirely through OfficerProceduralAdherence, or is there also a separate pathway that does not pass through OfficerProceduralAdherence? Investigate using interventions and explain your conclusion.",
+      "answer": "also_direct_or_other",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "direct_and_mediated",
+        "roles": {
+          "treatment": "BodyCameraPolicy",
+          "outcome": "CitizenComplaintRate",
+          "mediator": "OfficerProceduralAdherence",
+          "confounder": "PrecinctViolenceTier"
+        },
+        "gold": {
+          "label": "also_direct_or_other",
+          "T": "BodyCameraPolicy",
+          "M": "OfficerProceduralAdherence",
+          "O": "CitizenComplaintRate",
+          "total_effect": -1.1584,
+          "max_residual_effect": 0.8347
+        }
+      }
+    }
+  ]
+}

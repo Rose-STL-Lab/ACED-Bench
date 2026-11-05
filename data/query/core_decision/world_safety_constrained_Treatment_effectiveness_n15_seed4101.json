@@ -1,0 +1,774 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 4101,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A large academic medical center maintains comprehensive electronic health records for its pulmonology clinic patients. The research team has access to these records and can request both observational and interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "AsthmaExacerbationFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AdrenalSuppressionStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AirwayInflammationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineAsthmaGravity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmokingExposure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidAllergicRhinitis",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "AsthmaExacerbationFrequency",
+      "values": [
+        "Rare",
+        "Occasional",
+        "Frequent"
+      ],
+      "desc": "Number of asthma exacerbation episodes per six-month period.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AdrenalSuppressionStatus",
+      "values": [
+        "Normal",
+        "Mildly-suppressed",
+        "Suppressed"
+      ],
+      "desc": "Degree of hypothalamic-pituitary-adrenal axis suppression on cortisol testing.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LowDoseIcsLamaCombo",
+      "values": [
+        "None",
+        "Standard",
+        "Optimized"
+      ],
+      "desc": "Combination of low-dose inhaled corticosteroid with long-acting muscarinic antagonist.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HighDoseIcsRegimen",
+      "values": [
+        "None",
+        "Moderate",
+        "High"
+      ],
+      "desc": "High-dose inhaled corticosteroid monotherapy dosing level prescribed.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LeukotrieneReceptorAntagonist",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Oral leukotriene receptor antagonist therapy such as montelukast.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AirwayInflammationLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Eosinophilic airway inflammation measured by fractional exhaled nitric oxide.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineAsthmaGravity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Physician-classified asthma severity at study enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Pediatric",
+        "Adult",
+        "Elderly"
+      ],
+      "desc": "Age category of the enrolled patient at time of screening.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmokingExposure",
+      "values": [
+        "None",
+        "Secondhand",
+        "Active"
+      ],
+      "desc": "Patient tobacco smoke exposure classification at baseline.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InhalerTechniqueTraining",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether structured inhaler technique education was provided.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AllergenAvoidancePlan",
+      "values": [
+        "None",
+        "Partial",
+        "Comprehensive"
+      ],
+      "desc": "Extent of individualized environmental allergen avoidance measures.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Body mass index classification of the patient at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ComorbidAllergicRhinitis",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Presence of co-existing allergic rhinitis diagnosis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FollowUpVisitSchedule",
+      "values": [
+        "Quarterly",
+        "Monthly"
+      ],
+      "desc": "Frequency of scheduled clinical follow-up visits during the study.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "WrittenActionPlanProvided",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a personalized written asthma action plan was given.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "LowDoseIcsLamaCombo",
+      "AirwayInflammationLevel"
+    ],
+    [
+      "LowDoseIcsLamaCombo",
+      "ComorbidAllergicRhinitis"
+    ],
+    [
+      "HighDoseIcsRegimen",
+      "AsthmaExacerbationFrequency"
+    ],
+    [
+      "HighDoseIcsRegimen",
+      "AdrenalSuppressionStatus"
+    ],
+    [
+      "HighDoseIcsRegimen",
+      "WrittenActionPlanProvided"
+    ],
+    [
+      "HighDoseIcsRegimen",
+      "FollowUpVisitSchedule"
+    ],
+    [
+      "LeukotrieneReceptorAntagonist",
+      "AsthmaExacerbationFrequency"
+    ],
+    [
+      "AirwayInflammationLevel",
+      "AsthmaExacerbationFrequency"
+    ],
+    [
+      "BaselineAsthmaGravity",
+      "AsthmaExacerbationFrequency"
+    ],
+    [
+      "BaselineAsthmaGravity",
+      "AdrenalSuppressionStatus"
+    ],
+    [
+      "SmokingExposure",
+      "InhalerTechniqueTraining"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "LowDoseIcsLamaCombo",
+      "parents": [],
+      "values": [
+        [
+          0.45592962636071505
+        ],
+        [
+          0.09212667149663943
+        ],
+        [
+          0.45194370214264545
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HighDoseIcsRegimen",
+      "parents": [],
+      "values": [
+        [
+          0.2001493746803168
+        ],
+        [
+          0.5429230688807016
+        ],
+        [
+          0.2569275564389816
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LeukotrieneReceptorAntagonist",
+      "parents": [],
+      "values": [
+        [
+          0.8625014490923928
+        ],
+        [
+          0.13749855090760718
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineAsthmaGravity",
+      "parents": [],
+      "values": [
+        [
+          0.212007634764157
+        ],
+        [
+          0.24772839424999152
+        ],
+        [
+          0.5402639709858514
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.09794091004377742
+        ],
+        [
+          0.37796670793366777
+        ],
+        [
+          0.5240923820225549
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SmokingExposure",
+      "parents": [],
+      "values": [
+        [
+          0.25588152013507337
+        ],
+        [
+          0.1361993465039425
+        ],
+        [
+          0.6079191333609842
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AllergenAvoidancePlan",
+      "parents": [],
+      "values": [
+        [
+          0.22778334101847245
+        ],
+        [
+          0.4973367994036433
+        ],
+        [
+          0.2748798595778843
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [],
+      "values": [
+        [
+          0.4188000119609754
+        ],
+        [
+          0.09593332617124334
+        ],
+        [
+          0.4852666618677813
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AirwayInflammationLevel",
+      "parents": [
+        "LowDoseIcsLamaCombo"
+      ],
+      "values": [
+        [
+          0.17395846416159963,
+          0.7125389079240597,
+          0.9135665057049621
+        ],
+        [
+          0.3009157947510352,
+          0.2230333097209246,
+          0.07941368283119549
+        ],
+        [
+          0.5251257410873652,
+          0.06442778235501574,
+          0.007019811463842455
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComorbidAllergicRhinitis",
+      "parents": [
+        "LowDoseIcsLamaCombo"
+      ],
+      "values": [
+        [
+          0.44881522709188226,
+          0.9784419438963727,
+          0.9996048629037351
+        ],
+        [
+          0.5511847729081178,
+          0.021558056103627345,
+          0.00039513709626496317
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "WrittenActionPlanProvided",
+      "parents": [
+        "HighDoseIcsRegimen"
+      ],
+      "values": [
+        [
+          0.5356626814373722,
+          0.9658410902090442,
+          0.9985591186143445
+        ],
+        [
+          0.4643373185626279,
+          0.0341589097909557,
+          0.0014408813856556068
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FollowUpVisitSchedule",
+      "parents": [
+        "HighDoseIcsRegimen"
+      ],
+      "values": [
+        [
+          0.3911162989888608,
+          0.15310335215234455,
+          0.04841549400686827
+        ],
+        [
+          0.6088837010111393,
+          0.8468966478476555,
+          0.9515845059931317
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AdrenalSuppressionStatus",
+      "parents": [
+        "BaselineAsthmaGravity",
+        "HighDoseIcsRegimen"
+      ],
+      "values": [
+        [
+          0.5750094465546111,
+          0.2747539062668297,
+          0.05644959786633571,
+          0.40428102124657356,
+          0.15083860590612413,
+          0.024010514408520908,
+          0.06718541617362479,
+          0.013193738897248399,
+          0.0015276918327858558
+        ],
+        [
+          0.2854140290107684,
+          0.3325709265338965,
+          0.19094411817355164,
+          0.3271031897297259,
+          0.2925780378749858,
+          0.14541443890946146,
+          0.21472077287644498,
+          0.10712983661011208,
+          0.03905779604818127
+        ],
+        [
+          0.13957652443462054,
+          0.39267516719927364,
+          0.7526062839601125,
+          0.2686157890237005,
+          0.55658335621889,
+          0.8305750466820175,
+          0.7180938109499302,
+          0.8796764244926395,
+          0.9594145121190328
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InhalerTechniqueTraining",
+      "parents": [
+        "SmokingExposure"
+      ],
+      "values": [
+        [
+          0.6570644480822979,
+          0.6900924461384366,
+          0.7212887984314337
+        ],
+        [
+          0.34293555191770203,
+          0.3099075538615635,
+          0.2787112015685664
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AsthmaExacerbationFrequency",
+      "parents": [
+        "BaselineAsthmaGravity",
+        "AirwayInflammationLevel",
+        "HighDoseIcsRegimen",
+        "LeukotrieneReceptorAntagonist"
+      ],
+      "values": [
+        [
+          0.8124662533366224,
+          0.8853358102703415,
+          0.9573115499795218,
+          0.972722681567679,
+          0.9865407887722522,
+          0.9924510346945007,
+          0.35644199072018734,
+          0.5273616690327537,
+          0.7904763982150901,
+          0.8692511185354338,
+          0.9288598132499715,
+          0.9568809248748421,
+          0.05198890255369696,
+          0.12236666036369281,
+          0.3704616348832097,
+          0.5345793450872429,
+          0.7410193108419292,
+          0.8377863681896297,
+          0.6855446977891243,
+          0.8012014144757253,
+          0.9214125718222776,
+          0.9532803043977118,
+          0.976786876025361,
+          0.9860730244417617,
+          0.18812179587950847,
+          0.3234849599079199,
+          0.6245055859516961,
+          0.7694237243471646,
+          0.8825684198181655,
+          0.9246885353189932,
+          0.018374892578219285,
+          0.04782741380117806,
+          0.18175810754937224,
+          0.3370312250292887,
+          0.5647014937891602,
+          0.7288606390879898,
+          0.19151974712188793,
+          0.33892123981378697,
+          0.6497250729790619,
+          0.77225909800294,
+          0.8845148766293577,
+          0.9220588280521568,
+          0.013155265435388882,
+          0.032812294300470585,
+          0.14224069198978742,
+          0.2689323438535678,
+          0.5163144788229855,
+          0.6775864084187447,
+          0.0008715540013037489,
+          0.002305797354597782,
+          0.012865808905619204,
+          0.033302425063293804,
+          0.10474682907810053,
+          0.2125925403649922
+        ],
+        [
+          0.1584049042372155,
+          0.10381607768216414,
+          0.04070354751401607,
+          0.026595730105387773,
+          0.013279325818852375,
+          0.007482791948744672,
+          0.33989797241336633,
+          0.3090963743071659,
+          0.16943025060105835,
+          0.11462614500353925,
+          0.06663270315616501,
+          0.04145633773764445,
+          0.2013425362738859,
+          0.25758758122217934,
+          0.3326337292575296,
+          0.2982805654614242,
+          0.20726595452136765,
+          0.14000442704272179,
+          0.23821452217120917,
+          0.16716430485413736,
+          0.0725109108050733,
+          0.04454141197218079,
+          0.02264991480445424,
+          0.013719457887956978,
+          0.3156877221528782,
+          0.33823844734651537,
+          0.2674578975499405,
+          0.1815968828629817,
+          0.10414115590796402,
+          0.07000921525673846,
+          0.12355702168419878,
+          0.1902723154294184,
+          0.3273111304915454,
+          0.3186273513642418,
+          0.29950391142854876,
+          0.2089110013679456,
+          0.3014874475504827,
+          0.34600771747066683,
+          0.24808348274779357,
+          0.1817011053582172,
+          0.10269323588218206,
+          0.07296061339760822,
+          0.10980381277926235,
+          0.1500345639284732,
+          0.290053175734105,
+          0.33142855388736275,
+          0.30367950465211174,
+          0.2318380878448838,
+          0.029034467863350594,
+          0.048834592894977005,
+          0.10791514766730105,
+          0.15742813847255013,
+          0.26591704814319445,
+          0.32774438961667013
+        ],
+        [
+          0.029128842426162243,
+          0.010848112047494177,
+          0.0019849025064619654,
+          0.0006815883269330038,
+          0.00017988540889544725,
+          6.617335675446423e-05,
+          0.3036600368664464,
+          0.1635419566600803,
+          0.04009335118385146,
+          0.016122736461027035,
+          0.004507483593863552,
+          0.0016627373875134814,
+          0.7466685611724172,
+          0.6200457584141279,
+          0.29690463585926063,
+          0.1671400894513329,
+          0.051714734636702966,
+          0.022209204767648417,
+          0.07624078003966665,
+          0.03163428067013738,
+          0.0060765173726491555,
+          0.002178283630107353,
+          0.0005632091701848297,
+          0.0002075176702813778,
+          0.4961904819676132,
+          0.3382765927455647,
+          0.10803651649836336,
+          0.04897939278985376,
+          0.013290424273870394,
+          0.005302249424268349,
+          0.858068085737582,
+          0.7619002707694036,
+          0.4909307619590824,
+          0.34434142360646963,
+          0.13579459478229097,
+          0.06222835954406455,
+          0.5069928053276294,
+          0.31507104271554615,
+          0.1021914442731444,
+          0.04603979663884285,
+          0.01279188748846035,
+          0.004980558550235046,
+          0.8770409217853488,
+          0.8171531417710561,
+          0.5677061322761076,
+          0.39963910225906957,
+          0.18000601652490275,
+          0.09057550373637151,
+          0.9700939781353457,
+          0.9488596097504253,
+          0.8792190434270797,
+          0.8092694364641562,
+          0.6293361227787049,
+          0.4596630700183377
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift AsthmaExacerbationFrequency toward Rare (and away from Frequent), but only if the same action does not make AdrenalSuppressionStatus more likely to be Suppressed. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "LowDoseIcsLamaCombo",
+        "value": "Optimized"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "AsthmaExacerbationFrequency",
+          "safety_outcome": "AdrenalSuppressionStatus",
+          "good_intervention": "LowDoseIcsLamaCombo",
+          "risky_intervention": "HighDoseIcsRegimen",
+          "weak_intervention": "LeukotrieneReceptorAntagonist",
+          "good_mediator": "AirwayInflammationLevel",
+          "confounder": "BaselineAsthmaGravity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "LowDoseIcsLamaCombo",
+            "value": "Optimized"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "LowDoseIcsLamaCombo",
+              "value": "Optimized",
+              "delta_target": -0.3363,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "HighDoseIcsRegimen",
+              "value": "High",
+              "delta_target": -0.3495,
+              "delta_safety": 0.2752,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.7138,
+            "E_safety": 1.5897
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

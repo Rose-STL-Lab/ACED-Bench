@@ -1,0 +1,552 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 10,
+    "topology": "mediator_structure:which_mediator",
+    "seed": 14111,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "which_mediator"
+  },
+  "story": "A state workforce development board oversees apprenticeship programs across multiple trade disciplines. The research office has access to administrative records for enrolled apprentices and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "CompetencyExamResult",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HandsOnTaskComplexity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClassroomAttendanceRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PeerStudyGroupParticipation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorWorkExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationalAttainment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmployerSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TradeSpecialty",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "MentorshipFormat",
+      "values": [
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Whether the apprentice receives standard or intensive one-on-one mentorship sessions.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CompetencyExamResult",
+      "values": [
+        "Pass",
+        "BorderlinePass",
+        "Fail"
+      ],
+      "desc": "Final trade competency examination outcome classification for the apprentice.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "HandsOnTaskComplexity",
+      "values": [
+        "Advanced",
+        "Intermediate",
+        "Basic"
+      ],
+      "desc": "Highest complexity level of workshop tasks the apprentice has completed.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ClassroomAttendanceRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of scheduled classroom theory sessions the apprentice attended.",
+      "role": "decoy_M1",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PeerStudyGroupParticipation",
+      "values": [
+        "Regular",
+        "Occasional",
+        "None"
+      ],
+      "desc": "Frequency of the apprentice joining informal peer study or practice groups.",
+      "role": "decoy_M2",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorWorkExperience",
+      "values": [
+        "Substantial",
+        "Some",
+        "None"
+      ],
+      "desc": "Amount of relevant manual or technical work experience before entering the apprenticeship.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under20",
+        "20to25",
+        "Over25"
+      ],
+      "desc": "Age bracket of the apprentice at program enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationalAttainment",
+      "values": [
+        "HighSchoolDiploma",
+        "SomeCollege",
+        "NoHighSchool"
+      ],
+      "desc": "Highest level of formal education completed before starting the apprenticeship.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmployerSize",
+      "values": [
+        "Large",
+        "Medium",
+        "Small"
+      ],
+      "desc": "Size classification of the host employer providing the apprenticeship placement.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TradeSpecialty",
+      "values": [
+        "Electrical",
+        "Plumbing",
+        "Carpentry"
+      ],
+      "desc": "Specific skilled trade discipline in which the apprentice is enrolled.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "MentorshipFormat",
+      "HandsOnTaskComplexity"
+    ],
+    [
+      "MentorshipFormat",
+      "ClassroomAttendanceRate"
+    ],
+    [
+      "HandsOnTaskComplexity",
+      "CompetencyExamResult"
+    ],
+    [
+      "HandsOnTaskComplexity",
+      "TradeSpecialty"
+    ],
+    [
+      "PeerStudyGroupParticipation",
+      "CompetencyExamResult"
+    ],
+    [
+      "PriorWorkExperience",
+      "MentorshipFormat"
+    ],
+    [
+      "PriorWorkExperience",
+      "CompetencyExamResult"
+    ],
+    [
+      "AgeGroup",
+      "EmployerSize"
+    ],
+    [
+      "EmployerSize",
+      "EducationalAttainment"
+    ],
+    [
+      "TradeSpecialty",
+      "EmployerSize"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PeerStudyGroupParticipation",
+      "parents": [],
+      "values": [
+        [
+          0.09106456901408552
+        ],
+        [
+          0.20785048205953408
+        ],
+        [
+          0.7010849489263805
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorWorkExperience",
+      "parents": [],
+      "values": [
+        [
+          0.22269509824662467
+        ],
+        [
+          0.603279399732672
+        ],
+        [
+          0.17402550202070335
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.1189848994665751
+        ],
+        [
+          0.4425046431000422
+        ],
+        [
+          0.43851045743338274
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MentorshipFormat",
+      "parents": [
+        "PriorWorkExperience"
+      ],
+      "values": [
+        [
+          0.3734878377795638,
+          0.7403570546746959,
+          0.9316893079123048
+        ],
+        [
+          0.6265121622204363,
+          0.25964294532530413,
+          0.06831069208769523
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HandsOnTaskComplexity",
+      "parents": [
+        "MentorshipFormat"
+      ],
+      "values": [
+        [
+          0.15882062490573304,
+          0.8691345549211561
+        ],
+        [
+          0.3009180450442753,
+          0.1152330649070965
+        ],
+        [
+          0.5402613300499917,
+          0.015632380171747215
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClassroomAttendanceRate",
+      "parents": [
+        "MentorshipFormat"
+      ],
+      "values": [
+        [
+          0.20274576000570987,
+          0.7773948276448087
+        ],
+        [
+          0.3272163295310943,
+          0.17843392523323257
+        ],
+        [
+          0.47003791046319576,
+          0.0441712471219587
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CompetencyExamResult",
+      "parents": [
+        "PriorWorkExperience",
+        "HandsOnTaskComplexity",
+        "PeerStudyGroupParticipation"
+      ],
+      "values": [
+        [
+          0.9656669448742036,
+          0.908123391906114,
+          0.8334859711263017,
+          0.8408835411326012,
+          0.6001675057656722,
+          0.403720930048201,
+          0.5930768213263945,
+          0.2796244671996391,
+          0.12841943078302573,
+          0.9241180792044895,
+          0.7976664655982925,
+          0.668560666584554,
+          0.6539102338616469,
+          0.3256086263959795,
+          0.16450343660017644,
+          0.3369139245972628,
+          0.09386205305787534,
+          0.03193245962986934,
+          0.6746947653390164,
+          0.3273200063051494,
+          0.16471115945699483,
+          0.16232862586158434,
+          0.03315154634712534,
+          0.010182301225642731,
+          0.030256803094685203,
+          0.004943792063157409,
+          0.0015890819340775362
+        ],
+        [
+          0.03325343094225689,
+          0.08383143791492034,
+          0.14366496318334634,
+          0.13602828572296724,
+          0.27914777503135624,
+          0.3184050620116832,
+          0.2881099975194871,
+          0.3205160647561126,
+          0.2786859241489775,
+          0.07097531759048549,
+          0.16948249430002496,
+          0.2422004787174746,
+          0.2564632533526708,
+          0.3419707276108848,
+          0.3087779409246872,
+          0.334984056851941,
+          0.24611273573309925,
+          0.15951479483714526,
+          0.23311066518524556,
+          0.3259371426970509,
+          0.30015176401619736,
+          0.3057823139187967,
+          0.16262636096505528,
+          0.09178254059040176,
+          0.159675550196007,
+          0.07216589733358741,
+          0.042217424434596015
+        ],
+        [
+          0.0010796241835394633,
+          0.008045170178965584,
+          0.02284906569035206,
+          0.023088173144431574,
+          0.12068471920297154,
+          0.2778740079401159,
+          0.11881318115411826,
+          0.39985946804424827,
+          0.5928946450679968,
+          0.004906603205025099,
+          0.032851040101682535,
+          0.08923885469797141,
+          0.08962651278568216,
+          0.3324206459931357,
+          0.5267186224751365,
+          0.3281020185507962,
+          0.6600252112090255,
+          0.8085527455329855,
+          0.09219456947573812,
+          0.3467428509977997,
+          0.5351370765268079,
+          0.5318890602196189,
+          0.8042220926878194,
+          0.8980351581839555,
+          0.8100676467093078,
+          0.9228903106032551,
+          0.9561934936313266
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TradeSpecialty",
+      "parents": [
+        "HandsOnTaskComplexity"
+      ],
+      "values": [
+        [
+          0.41231889132563915,
+          0.044039672768506254,
+          0.002035809506554225
+        ],
+        [
+          0.22638005751166454,
+          0.044982906998252734,
+          0.00386846859075787
+        ],
+        [
+          0.3613010511626963,
+          0.910977420233241,
+          0.994095721902688
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmployerSize",
+      "parents": [
+        "AgeGroup",
+        "TradeSpecialty"
+      ],
+      "values": [
+        [
+          0.48015774526287747,
+          0.3407433704358756,
+          0.17481209617983792,
+          0.5634539264180757,
+          0.3350520020016545,
+          0.15457563783365533,
+          0.5436106348319679,
+          0.2999589860512891,
+          0.13218351251653837
+        ],
+        [
+          0.24922492549027178,
+          0.11701613616129981,
+          0.03971921184061969,
+          0.05290008137430383,
+          0.02081234183941095,
+          0.006352732714816042,
+          0.009231584923973598,
+          0.003370241363709091,
+          0.0009826236634042273
+        ],
+        [
+          0.2706173292468509,
+          0.5422404934028245,
+          0.7854686919795424,
+          0.3836459922076205,
+          0.6441356561589345,
+          0.8390716294515287,
+          0.44715778024405856,
+          0.6966707725850018,
+          0.8668338638200573
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EducationalAttainment",
+      "parents": [
+        "EmployerSize"
+      ],
+      "values": [
+        [
+          0.4130004705862835,
+          0.378693647991766,
+          0.24521658180513903
+        ],
+        [
+          0.28106102445931075,
+          0.5429117124115413,
+          0.740597320859058
+        ],
+        [
+          0.3059385049544058,
+          0.0783946395966927,
+          0.014186097335802866
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "Among the variables [HandsOnTaskComplexity, ClassroomAttendanceRate, PeerStudyGroupParticipation], which one is on the actual causal pathway from MentorshipFormat to CompetencyExamResult? Identify the single variable and explain how you ruled out the others.",
+      "answer": "which_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "which_mediator",
+        "roles": {
+          "treatment": "MentorshipFormat",
+          "outcome": "CompetencyExamResult",
+          "true_mediator": "HandsOnTaskComplexity",
+          "decoy_M1": "ClassroomAttendanceRate",
+          "decoy_M2": "PeerStudyGroupParticipation",
+          "confounder": "PriorWorkExperience"
+        },
+        "gold": {
+          "label": "which_mediator",
+          "T": "MentorshipFormat",
+          "O": "CompetencyExamResult",
+          "true_mediator": "HandsOnTaskComplexity",
+          "candidates": [
+            "HandsOnTaskComplexity",
+            "ClassroomAttendanceRate",
+            "PeerStudyGroupParticipation"
+          ],
+          "candidate_do_effects": {
+            "HandsOnTaskComplexity": 1.172,
+            "ClassroomAttendanceRate": 0.0,
+            "PeerStudyGroupParticipation": 0.5722
+          },
+          "total_effect": -0.754
+        }
+      }
+    }
+  ]
+}

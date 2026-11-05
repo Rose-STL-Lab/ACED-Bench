@@ -1,0 +1,873 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 4000,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A state-level newborn screening laboratory serves multiple birthing hospitals across the region. The research team has access to archived screening records and may request additional observational or interventional data collection from participating facilities.",
+  "non_intervenable_variables": [
+    {
+      "name": "DisorderDetectionRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FalsePositiveBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnalyteCoverageScope",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GestationalAgeAtBirth",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LaboratoryAccreditationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BirthWeight",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilyHistoryOfGeneticDisorder",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NICUAdmissionStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DisorderDetectionRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of true genetic disorders identified through newborn screening.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FalsePositiveBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Rate of initial positive screens that are not confirmed on follow-up testing.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MultiplexGenomicPanel",
+      "values": [
+        "None",
+        "Standard",
+        "Expanded"
+      ],
+      "desc": "Scope of next-generation sequencing panel applied to dried blood spot samples.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LoweredCutoffThreshold",
+      "values": [
+        "Standard",
+        "Reduced",
+        "AggressivelyReduced"
+      ],
+      "desc": "Degree to which analyte reference cutoff values are shifted downward.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ParentalEducationProgram",
+      "values": [
+        "None",
+        "BasicBrochure",
+        "GuidedCounseling"
+      ],
+      "desc": "Level of structured prenatal education about newborn screening provided to families.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AnalyteCoverageScope",
+      "values": [
+        "Broad",
+        "Moderate",
+        "Narrow"
+      ],
+      "desc": "Number of distinct metabolic and genetic analytes measured per screening specimen.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "GestationalAgeAtBirth",
+      "values": [
+        "Term",
+        "LatePreterm",
+        "EarlyPreterm"
+      ],
+      "desc": "Gestational age category of the neonate at time of delivery.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SampleCollectionTiming",
+      "values": [
+        "24-48hrs",
+        "49-72hrs",
+        "After72hrs"
+      ],
+      "desc": "Postnatal age window when dried blood spot specimen is collected.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LaboratoryAccreditationLevel",
+      "values": [
+        "Tier1",
+        "Tier2",
+        "Tier3"
+      ],
+      "desc": "Quality accreditation tier of the newborn screening laboratory processing samples.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BirthWeight",
+      "values": [
+        "Normal",
+        "Low",
+        "VeryLow"
+      ],
+      "desc": "Weight classification of the neonate at birth.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SecondScreenPolicy",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a routine repeat blood spot is collected at a later postnatal visit.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyHistoryOfGeneticDisorder",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Documented presence of known heritable conditions in first-degree relatives.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TandemMassSpecQuality",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Performance calibration grade of tandem mass spectrometry instrumentation used.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NICUAdmissionStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the neonate was admitted to a neonatal intensive care unit after birth.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BioinformaticsPipelineVersion",
+      "values": [
+        "Legacy",
+        "Updated"
+      ],
+      "desc": "Version of variant-calling software pipeline used for genomic data interpretation.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "FalsePositiveBurden",
+      "TandemMassSpecQuality"
+    ],
+    [
+      "MultiplexGenomicPanel",
+      "AnalyteCoverageScope"
+    ],
+    [
+      "MultiplexGenomicPanel",
+      "NICUAdmissionStatus"
+    ],
+    [
+      "LoweredCutoffThreshold",
+      "DisorderDetectionRate"
+    ],
+    [
+      "LoweredCutoffThreshold",
+      "FalsePositiveBurden"
+    ],
+    [
+      "ParentalEducationProgram",
+      "DisorderDetectionRate"
+    ],
+    [
+      "ParentalEducationProgram",
+      "MultiplexGenomicPanel"
+    ],
+    [
+      "AnalyteCoverageScope",
+      "DisorderDetectionRate"
+    ],
+    [
+      "GestationalAgeAtBirth",
+      "DisorderDetectionRate"
+    ],
+    [
+      "GestationalAgeAtBirth",
+      "FalsePositiveBurden"
+    ],
+    [
+      "SecondScreenPolicy",
+      "TandemMassSpecQuality"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "LoweredCutoffThreshold",
+      "parents": [],
+      "values": [
+        [
+          0.5073671476732139
+        ],
+        [
+          0.2675629548609825
+        ],
+        [
+          0.2250698974658037
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ParentalEducationProgram",
+      "parents": [],
+      "values": [
+        [
+          0.22301310133611288
+        ],
+        [
+          0.09938579282251989
+        ],
+        [
+          0.6776011058413671
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GestationalAgeAtBirth",
+      "parents": [],
+      "values": [
+        [
+          0.09324585706007052
+        ],
+        [
+          0.13860860753745607
+        ],
+        [
+          0.7681455354024734
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SampleCollectionTiming",
+      "parents": [],
+      "values": [
+        [
+          0.5945039043270421
+        ],
+        [
+          0.3076407115287521
+        ],
+        [
+          0.09785538414420562
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LaboratoryAccreditationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.25800007050068247
+        ],
+        [
+          0.5166770898595233
+        ],
+        [
+          0.22532283963979421
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BirthWeight",
+      "parents": [],
+      "values": [
+        [
+          0.5669198063888645
+        ],
+        [
+          0.20085495224214095
+        ],
+        [
+          0.23222524136899447
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SecondScreenPolicy",
+      "parents": [],
+      "values": [
+        [
+          0.7052115676619766
+        ],
+        [
+          0.2947884323380234
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FamilyHistoryOfGeneticDisorder",
+      "parents": [],
+      "values": [
+        [
+          0.2692182530457412
+        ],
+        [
+          0.7307817469542588
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BioinformaticsPipelineVersion",
+      "parents": [],
+      "values": [
+        [
+          0.11132928402553675
+        ],
+        [
+          0.8886707159744632
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MultiplexGenomicPanel",
+      "parents": [
+        "ParentalEducationProgram"
+      ],
+      "values": [
+        [
+          0.349418286647333,
+          0.564870311924873,
+          0.5836415679473693
+        ],
+        [
+          0.2796207976896707,
+          0.4267346488784924,
+          0.4162370060643271
+        ],
+        [
+          0.3709609156629964,
+          0.008395039196634542,
+          0.00012142598830355637
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FalsePositiveBurden",
+      "parents": [
+        "GestationalAgeAtBirth",
+        "LoweredCutoffThreshold"
+      ],
+      "values": [
+        [
+          0.5585677885761324,
+          0.27043291505030653,
+          0.055784131365371664,
+          0.3954705629207685,
+          0.1419960471429327,
+          0.02268584909119178,
+          0.06348861776827454,
+          0.014163873841416302,
+          0.0015213432522935319
+        ],
+        [
+          0.2973265418843001,
+          0.3340437257186674,
+          0.19994887053450097,
+          0.3252992839392257,
+          0.29161107254406304,
+          0.14324346170866137,
+          0.21551389841745286,
+          0.11459152930223374,
+          0.039575366950126825
+        ],
+        [
+          0.14410566953956758,
+          0.3955233592310261,
+          0.7442669981001273,
+          0.2792301531400058,
+          0.5663928803130043,
+          0.8340706892001469,
+          0.7209974838142725,
+          0.87124459685635,
+          0.9589032897975797
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnalyteCoverageScope",
+      "parents": [
+        "MultiplexGenomicPanel"
+      ],
+      "values": [
+        [
+          0.16138181872246105,
+          0.7111209351188328,
+          0.9087487127879812
+        ],
+        [
+          0.30565843902874845,
+          0.22119645496489979,
+          0.08371701578947117
+        ],
+        [
+          0.5329597422487905,
+          0.06768260991626733,
+          0.007534271422547805
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NICUAdmissionStatus",
+      "parents": [
+        "MultiplexGenomicPanel"
+      ],
+      "values": [
+        [
+          0.467268324138838,
+          0.9684207830102611,
+          0.999068189789722
+        ],
+        [
+          0.532731675861162,
+          0.031579216989738784,
+          0.0009318102102780823
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TandemMassSpecQuality",
+      "parents": [
+        "SecondScreenPolicy",
+        "FalsePositiveBurden"
+      ],
+      "values": [
+        [
+          0.3710384197591191,
+          0.01136937181557908,
+          0.00016046965418989128,
+          0.7161378672754048,
+          0.10040524274918247,
+          0.0029832889781098095
+        ],
+        [
+          0.29564567043526213,
+          0.1538723343472016,
+          0.03688828126385291,
+          0.25922929596493666,
+          0.6173269875869718,
+          0.3115484734264546
+        ],
+        [
+          0.33331590980561887,
+          0.8347582938372194,
+          0.9629512490819573,
+          0.024632836759658324,
+          0.28226776966384576,
+          0.6854682375954356
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DisorderDetectionRate",
+      "parents": [
+        "GestationalAgeAtBirth",
+        "AnalyteCoverageScope",
+        "LoweredCutoffThreshold",
+        "ParentalEducationProgram"
+      ],
+      "values": [
+        [
+          0.8178151240598954,
+          0.8366660201135099,
+          0.8881300804775494,
+          0.955681942838228,
+          0.958423458346522,
+          0.9714719145213278,
+          0.9852319800648872,
+          0.988380882734578,
+          0.992019798964125,
+          0.37282836089493615,
+          0.41412312491947845,
+          0.5437672107124993,
+          0.7858020941039583,
+          0.8059335212387174,
+          0.8716278344439966,
+          0.9351210279780195,
+          0.9406299131817625,
+          0.9603015749505378,
+          0.05813250531495684,
+          0.061672677977386216,
+          0.1260937143301178,
+          0.38021221005104894,
+          0.3869928232346967,
+          0.5355115128579505,
+          0.7462114480059214,
+          0.759420968373213,
+          0.8352757750196248,
+          0.6910838539904682,
+          0.7312141988718533,
+          0.7930890826803816,
+          0.9200389985879293,
+          0.9252237106854344,
+          0.9512094186391161,
+          0.9758896509987537,
+          0.9767789253163901,
+          0.9845904216610509,
+          0.19107570629421058,
+          0.21557353939630042,
+          0.3270890246893028,
+          0.6308871581325259,
+          0.6688205846933932,
+          0.7699357305520932,
+          0.8805933749700943,
+          0.892728304514647,
+          0.9200210491054278,
+          0.019105790135019403,
+          0.02153008095821273,
+          0.04632287884606397,
+          0.18121609314803355,
+          0.21011316138328207,
+          0.33411340278772506,
+          0.5701552038609541,
+          0.5951092081605346,
+          0.7038475923423811,
+          0.1963145851877673,
+          0.2089413970407439,
+          0.3416023046238352,
+          0.6243762295472319,
+          0.6732397535297417,
+          0.7629007879645608,
+          0.8817139283899285,
+          0.8907329636477618,
+          0.9261298495331363,
+          0.013015136281511028,
+          0.014885841277425099,
+          0.03429132714012258,
+          0.13300141209622712,
+          0.15862278817755512,
+          0.28105610974100526,
+          0.5069996452561064,
+          0.5411159455970073,
+          0.6575678350019687,
+          0.0008503687264199229,
+          0.0010633201960995018,
+          0.0024642011036278473,
+          0.013326059610191857,
+          0.014706567537127924,
+          0.030500483411471605,
+          0.10459662077633215,
+          0.11813888356515957,
+          0.21086401048319495
+        ],
+        [
+          0.1543421661484415,
+          0.14034830518296568,
+          0.10101961812221315,
+          0.04231550741299105,
+          0.039903698274119104,
+          0.027821946413694405,
+          0.014573481540317956,
+          0.011465035900933082,
+          0.007914470757617295,
+          0.3309307038978453,
+          0.3156063672238539,
+          0.2928499092483094,
+          0.1752361919211007,
+          0.16106143572742038,
+          0.11319372829761565,
+          0.060736294393125737,
+          0.055739104298512206,
+          0.03815413804686335,
+          0.21441333358374448,
+          0.21193956213325701,
+          0.27625730946762356,
+          0.3163506493334223,
+          0.33765748537205575,
+          0.29941680468887244,
+          0.20040104542598416,
+          0.19317557222449125,
+          0.13993083535622078,
+          0.23221169485428095,
+          0.2064446396760963,
+          0.17348524621669476,
+          0.0737748789438345,
+          0.06992450437696471,
+          0.046436695579185554,
+          0.02352229133122176,
+          0.022736182685568426,
+          0.015184638439418427,
+          0.31762778569037475,
+          0.31597348028114053,
+          0.32648732565703975,
+          0.26527089835085055,
+          0.24474271486252105,
+          0.1851323158773577,
+          0.10620774902946349,
+          0.0957316301334554,
+          0.07465971039806749,
+          0.12982625682158858,
+          0.12965366653872698,
+          0.192374299698841,
+          0.3098361931079599,
+          0.3075427126808444,
+          0.33101217533579164,
+          0.2828258602479786,
+          0.27948056868964954,
+          0.22845543390581147,
+          0.30622455858278874,
+          0.3063194944716313,
+          0.31460285852176584,
+          0.2701426041217201,
+          0.243034439025147,
+          0.18845667564010243,
+          0.10496863104579572,
+          0.09827814715323215,
+          0.068678695802744,
+          0.11261332431672168,
+          0.11827095504909836,
+          0.16746561188453404,
+          0.2904961481204846,
+          0.2985876193336421,
+          0.3287163242153693,
+          0.30459499962967257,
+          0.2939951606181729,
+          0.2536885617385189,
+          0.0290332562340767,
+          0.032493199532594955,
+          0.04653870415843626,
+          0.09887303295572665,
+          0.11568072540338335,
+          0.15557150380823706,
+          0.27139928882605685,
+          0.2667407431490669,
+          0.32166501691211885
+        ],
+        [
+          0.027842709791662996,
+          0.02298567470352442,
+          0.01085030140023726,
+          0.0020025497487809424,
+          0.0016728433793587385,
+          0.0007061390649778901,
+          0.0001945383947949638,
+          0.00015408136448889908,
+          6.573027825764258e-05,
+          0.29624093520721867,
+          0.2702705078566677,
+          0.16338288003919127,
+          0.03896171397494106,
+          0.03300504303386223,
+          0.015178437258387729,
+          0.0041426776288546446,
+          0.003630982519725343,
+          0.0015442870025989069,
+          0.7274541611012986,
+          0.7263877598893568,
+          0.5976489762022587,
+          0.30343714061552884,
+          0.2753496913932476,
+          0.16507168245317705,
+          0.05338750656809441,
+          0.047403459402295664,
+          0.02479338962415438,
+          0.0767044511552508,
+          0.06234116145205039,
+          0.033425671102923535,
+          0.006186122468236183,
+          0.00485178493760083,
+          0.0023538857816982764,
+          0.0005880576700245482,
+          0.0004848919980414358,
+          0.00022493989953063662,
+          0.49129650801541463,
+          0.4684529803225591,
+          0.34642364965365746,
+          0.1038419435166235,
+          0.08643670044408579,
+          0.04493195357054915,
+          0.013198876000442302,
+          0.011540065351897645,
+          0.005319240496504747,
+          0.851067953043392,
+          0.8488162525030603,
+          0.761302821455095,
+          0.5089477137440066,
+          0.48234412593587367,
+          0.33487442187648325,
+          0.14701893589106724,
+          0.1254102231498159,
+          0.06769697375180732,
+          0.49746085622944397,
+          0.4847391084876247,
+          0.3437948368543991,
+          0.105481166331048,
+          0.08372580744511135,
+          0.04864253639533664,
+          0.013317440564275758,
+          0.010988889199006037,
+          0.0051914546641196775,
+          0.8743715394017673,
+          0.8668432036734766,
+          0.7982430609753435,
+          0.5765024397832883,
+          0.5427895924888028,
+          0.3902275660436254,
+          0.18840535511422096,
+          0.16488889378481988,
+          0.08874360325951228,
+          0.9701163750395034,
+          0.9664434802713056,
+          0.9509970947379359,
+          0.8878009074340816,
+          0.8696127070594888,
+          0.8139280127802913,
+          0.624004090397611,
+          0.6151203732857735,
+          0.4674709726046861
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift DisorderDetectionRate toward High (and away from Low), but only if the same action does not make FalsePositiveBurden more likely to be High. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "MultiplexGenomicPanel",
+        "value": "Expanded"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "DisorderDetectionRate",
+          "safety_outcome": "FalsePositiveBurden",
+          "good_intervention": "MultiplexGenomicPanel",
+          "risky_intervention": "LoweredCutoffThreshold",
+          "weak_intervention": "ParentalEducationProgram",
+          "good_mediator": "AnalyteCoverageScope",
+          "confounder": "GestationalAgeAtBirth"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "MultiplexGenomicPanel",
+            "value": "Expanded"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "MultiplexGenomicPanel",
+              "value": "Standard",
+              "delta_target": -0.2859,
+              "delta_safety": 0.0
+            },
+            {
+              "variable": "MultiplexGenomicPanel",
+              "value": "Expanded",
+              "delta_target": -0.4374,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "LoweredCutoffThreshold",
+              "value": "AggressivelyReduced",
+              "delta_target": -0.5686,
+              "delta_safety": 0.2833,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 1.0424,
+            "E_safety": 1.6288
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

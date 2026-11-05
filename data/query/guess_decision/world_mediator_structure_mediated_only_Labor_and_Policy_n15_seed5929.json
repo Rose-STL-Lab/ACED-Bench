@@ -1,0 +1,617 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 15,
+    "topology": "mediator_structure:mediated_only",
+    "seed": 5929,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "mediated_only"
+  },
+  "story": "A state workforce development agency administers reemployment programs across multiple regional offices. The research team has access to administrative records and participant tracking data, and can request both observational and interventional samples from enrolled populations.",
+  "non_intervenable_variables": [
+    {
+      "name": "ReemploymentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "JobSearchIntensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalUnemploymentRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorJobTenure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IndustryOfDisplacement",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TransportationAccess",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InternetAccess",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DependentChildren",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UnemploymentDuration",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SelfEfficacyBaseline",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LanguageProficiency",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ProgramEnrollment",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the individual was enrolled in the active reemployment program.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ReemploymentStatus",
+      "values": [
+        "Reemployed",
+        "StillSeeking",
+        "DroppedOut"
+      ],
+      "desc": "Current employment outcome category at six-month follow-up.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "JobSearchIntensity",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Weekly frequency and breadth of job applications and networking activities.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LocalUnemploymentRate",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Unemployment rate in the participant's county at program start.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Young",
+        "MiddleAged",
+        "Older"
+      ],
+      "desc": "Age bracket of the participant at time of enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "HighSchoolOrLess",
+        "SomeCollege",
+        "BachelorOrHigher"
+      ],
+      "desc": "Highest level of formal education completed by the participant.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorJobTenure",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Duration of employment in the most recent job before displacement.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "IndustryOfDisplacement",
+      "values": [
+        "Manufacturing",
+        "Services",
+        "Other"
+      ],
+      "desc": "Sector of the participant's most recent employer before job loss.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "values": [
+        "Low",
+        "Middle",
+        "High"
+      ],
+      "desc": "Total household income bracket prior to job displacement.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TransportationAccess",
+      "values": [
+        "Adequate",
+        "Limited"
+      ],
+      "desc": "Whether the participant has reliable transportation for commuting.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InternetAccess",
+      "values": [
+        "Yes",
+        "No"
+      ],
+      "desc": "Whether the participant has regular home internet connectivity.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DependentChildren",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of dependent children living in the participant's household.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UnemploymentDuration",
+      "values": [
+        "Under3Months",
+        "3to6Months",
+        "Over6Months"
+      ],
+      "desc": "Length of time unemployed before entering the study.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SelfEfficacyBaseline",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Participant's self-rated confidence in securing employment at intake.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LanguageProficiency",
+      "values": [
+        "Fluent",
+        "Intermediate",
+        "Basic"
+      ],
+      "desc": "Participant's proficiency in the primary language of the local labor market.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ProgramEnrollment",
+      "JobSearchIntensity"
+    ],
+    [
+      "ReemploymentStatus",
+      "AgeGroup"
+    ],
+    [
+      "JobSearchIntensity",
+      "ReemploymentStatus"
+    ],
+    [
+      "LocalUnemploymentRate",
+      "ProgramEnrollment"
+    ],
+    [
+      "LocalUnemploymentRate",
+      "ReemploymentStatus"
+    ],
+    [
+      "LocalUnemploymentRate",
+      "TransportationAccess"
+    ],
+    [
+      "PriorJobTenure",
+      "EducationLevel"
+    ],
+    [
+      "LanguageProficiency",
+      "TransportationAccess"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "LocalUnemploymentRate",
+      "parents": [],
+      "values": [
+        [
+          0.09413577281242971
+        ],
+        [
+          0.4399318638198469
+        ],
+        [
+          0.4659323633677234
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorJobTenure",
+      "parents": [],
+      "values": [
+        [
+          0.18827434143137206
+        ],
+        [
+          0.11705451712139188
+        ],
+        [
+          0.6946711414472362
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "IndustryOfDisplacement",
+      "parents": [],
+      "values": [
+        [
+          0.4507884417631282
+        ],
+        [
+          0.4490934007650105
+        ],
+        [
+          0.10011815747186127
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HouseholdIncomeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.228436371460857
+        ],
+        [
+          0.5004102129854937
+        ],
+        [
+          0.2711534155536493
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InternetAccess",
+      "parents": [],
+      "values": [
+        [
+          0.8238920512180742
+        ],
+        [
+          0.17610794878192587
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DependentChildren",
+      "parents": [],
+      "values": [
+        [
+          0.25967898274176554
+        ],
+        [
+          0.5369110998539544
+        ],
+        [
+          0.20340991740428022
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UnemploymentDuration",
+      "parents": [],
+      "values": [
+        [
+          0.37164011259354235
+        ],
+        [
+          0.1825241130286239
+        ],
+        [
+          0.4458357743778338
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SelfEfficacyBaseline",
+      "parents": [],
+      "values": [
+        [
+          0.11455126399296969
+        ],
+        [
+          0.7742253713007179
+        ],
+        [
+          0.1112233647063125
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LanguageProficiency",
+      "parents": [],
+      "values": [
+        [
+          0.09820918357015158
+        ],
+        [
+          0.5571639765420915
+        ],
+        [
+          0.34462683988775705
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProgramEnrollment",
+      "parents": [
+        "LocalUnemploymentRate"
+      ],
+      "values": [
+        [
+          0.4211240254734883,
+          0.10369755544466558,
+          0.018066967012070476
+        ],
+        [
+          0.5788759745265117,
+          0.8963024445553345,
+          0.9819330329879294
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [
+        "PriorJobTenure"
+      ],
+      "values": [
+        [
+          0.20598776775516933,
+          0.032978686258977916,
+          0.00300804163592491
+        ],
+        [
+          0.4352033509962617,
+          0.8655040021054524,
+          0.9806284808180785
+        ],
+        [
+          0.358808881248569,
+          0.10151731163556975,
+          0.0163634775459965
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TransportationAccess",
+      "parents": [
+        "LanguageProficiency",
+        "LocalUnemploymentRate"
+      ],
+      "values": [
+        [
+          0.5891247811141335,
+          0.6268851378218415,
+          0.663159405030901,
+          0.12033088204957233,
+          0.1381463355112953,
+          0.15812530453588525,
+          0.01288211543514422,
+          0.015061743750564295,
+          0.017603584116340765
+        ],
+        [
+          0.4108752188858665,
+          0.3731148621781586,
+          0.33684059496909896,
+          0.8796691179504276,
+          0.8618536644887046,
+          0.8418746954641148,
+          0.9871178845648557,
+          0.9849382562494357,
+          0.9823964158836592
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "JobSearchIntensity",
+      "parents": [
+        "ProgramEnrollment"
+      ],
+      "values": [
+        [
+          0.16484272469640196,
+          0.8651828782951096
+        ],
+        [
+          0.2999999515516179,
+          0.11942581991622601
+        ],
+        [
+          0.5351573237519801,
+          0.015391301788664501
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ReemploymentStatus",
+      "parents": [
+        "LocalUnemploymentRate",
+        "JobSearchIntensity"
+      ],
+      "values": [
+        [
+          0.9072156662338469,
+          0.6063195293956087,
+          0.2728509392824732,
+          0.8095750132396701,
+          0.3379347982767123,
+          0.08789853938663769,
+          0.33697770877388356,
+          0.033613727851242343,
+          0.005117345088164533
+        ],
+        [
+          0.08465809509703268,
+          0.2704826310074143,
+          0.3403871801582034,
+          0.15749077478783358,
+          0.3314918484602959,
+          0.23854741109511474,
+          0.32945902301636976,
+          0.1639103608146737,
+          0.06469590920450702
+        ],
+        [
+          0.00812623866912062,
+          0.12319783959697701,
+          0.3867618805593233,
+          0.03293421197249631,
+          0.33057335326299186,
+          0.6735540495182475,
+          0.33356326820974674,
+          0.8024759113340839,
+          0.9301867457073285
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [
+        "ReemploymentStatus"
+      ],
+      "values": [
+        [
+          0.35353119172267916,
+          0.8072329676336826,
+          0.9673720331613858
+        ],
+        [
+          0.27684382957952425,
+          0.05531048262721829,
+          0.00579967332808261
+        ],
+        [
+          0.36962497869779654,
+          0.13745654973909918,
+          0.026828293510531693
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does ProgramEnrollment change ReemploymentStatus? Specifically, does the effect of ProgramEnrollment on ReemploymentStatus flow entirely through JobSearchIntensity, or is there also a separate pathway that does not pass through JobSearchIntensity? Investigate using interventions and explain your conclusion.",
+      "answer": "only_through_M",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "mediated_only",
+        "roles": {
+          "treatment": "ProgramEnrollment",
+          "outcome": "ReemploymentStatus",
+          "mediator": "JobSearchIntensity",
+          "confounder": "LocalUnemploymentRate"
+        },
+        "gold": {
+          "label": "only_through_M",
+          "T": "ProgramEnrollment",
+          "M": "JobSearchIntensity",
+          "O": "ReemploymentStatus",
+          "total_effect": -0.7191,
+          "max_residual_effect": 0.0
+        }
+      }
+    }
+  ]
+}

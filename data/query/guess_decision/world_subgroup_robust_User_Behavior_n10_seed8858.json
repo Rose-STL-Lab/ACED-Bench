@@ -1,0 +1,764 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 8858,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A university behavioral science lab partners with a consumer wearable technology company. The research team has access to participant records from prior deployments and can design new observational or interventional studies as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "DailyWearAdherence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FitnessTrackerExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineActivityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HealthLiteracy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceComfort",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmartphoneUsageFrequency",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DailyWearAdherence",
+      "values": [
+        "Consistent",
+        "Intermittent",
+        "Abandoned"
+      ],
+      "desc": "Degree to which the user wears the fitness tracker daily over 12 weeks",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FitnessTrackerExperience",
+      "values": [
+        "FirstTime",
+        "Experienced"
+      ],
+      "desc": "Whether the user has previously owned and used a wearable fitness device",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GamifiedChallenges",
+      "values": [
+        "None",
+        "Weekly",
+        "Daily"
+      ],
+      "desc": "Frequency of gamified step and activity challenges delivered through the wearable app",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AdaptiveMicroReminders",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Personalized brief nudge notifications timed to individual routine patterns",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SocialLeaderboard",
+      "values": [
+        "None",
+        "FriendsOnly",
+        "Public"
+      ],
+      "desc": "Visibility scope of a ranked leaderboard comparing step counts among users",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineActivityLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported weekly physical activity level at study enrollment",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HealthLiteracy",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "User's measured understanding of health metrics displayed by wearable devices",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeviceComfort",
+      "values": [
+        "Uncomfortable",
+        "Neutral",
+        "Comfortable"
+      ],
+      "desc": "User-reported physical comfort rating of the wrist-worn fitness tracker",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmartphoneUsageFrequency",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Average daily screen-time hours on the paired smartphone",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GoalSettingType",
+      "values": [
+        "Default",
+        "Personalized"
+      ],
+      "desc": "Whether the user's daily step goal was system-default or self-selected at onboarding",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "FitnessTrackerExperience",
+      "DailyWearAdherence"
+    ],
+    [
+      "GamifiedChallenges",
+      "DailyWearAdherence"
+    ],
+    [
+      "AdaptiveMicroReminders",
+      "DailyWearAdherence"
+    ],
+    [
+      "SocialLeaderboard",
+      "DailyWearAdherence"
+    ],
+    [
+      "SocialLeaderboard",
+      "GoalSettingType"
+    ],
+    [
+      "BaselineActivityLevel",
+      "DailyWearAdherence"
+    ],
+    [
+      "BaselineActivityLevel",
+      "DeviceComfort"
+    ],
+    [
+      "SmartphoneUsageFrequency",
+      "AdaptiveMicroReminders"
+    ],
+    [
+      "GoalSettingType",
+      "GamifiedChallenges"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "FitnessTrackerExperience",
+      "parents": [],
+      "values": [
+        [
+          0.6223038586249133
+        ],
+        [
+          0.3776961413750867
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SocialLeaderboard",
+      "parents": [],
+      "values": [
+        [
+          0.18034748961263564
+        ],
+        [
+          0.5997843549177331
+        ],
+        [
+          0.21986815546963137
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineActivityLevel",
+      "parents": [],
+      "values": [
+        [
+          0.31319419249481867
+        ],
+        [
+          0.20893993091324642
+        ],
+        [
+          0.47786587659193486
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HealthLiteracy",
+      "parents": [],
+      "values": [
+        [
+          0.09231254935560546
+        ],
+        [
+          0.9076874506443946
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SmartphoneUsageFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.0967205279322042
+        ],
+        [
+          0.9032794720677958
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GoalSettingType",
+      "parents": [
+        "SocialLeaderboard"
+      ],
+      "values": [
+        [
+          0.5676905627585043,
+          0.1749159479056268,
+          0.0330925606583597
+        ],
+        [
+          0.4323094372414957,
+          0.8250840520943731,
+          0.9669074393416404
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DeviceComfort",
+      "parents": [
+        "BaselineActivityLevel"
+      ],
+      "values": [
+        [
+          0.3107293785307858,
+          0.6963047144061116,
+          0.8847473048475593
+        ],
+        [
+          0.41931351960623015,
+          0.07795520497077665,
+          0.008217775333231689
+        ],
+        [
+          0.2699571018629841,
+          0.2257400806231117,
+          0.10703491981920904
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AdaptiveMicroReminders",
+      "parents": [
+        "SmartphoneUsageFrequency"
+      ],
+      "values": [
+        [
+          0.47262495101917834,
+          0.8171981764515884
+        ],
+        [
+          0.5273750489808217,
+          0.1828018235484117
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GamifiedChallenges",
+      "parents": [
+        "GoalSettingType"
+      ],
+      "values": [
+        [
+          0.35338665679075193,
+          0.19817796661628534
+        ],
+        [
+          0.34090707903719464,
+          0.7627447081641432
+        ],
+        [
+          0.30570626417205343,
+          0.03907732521957133
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DailyWearAdherence",
+      "parents": [
+        "BaselineActivityLevel",
+        "FitnessTrackerExperience",
+        "GamifiedChallenges",
+        "AdaptiveMicroReminders",
+        "SocialLeaderboard"
+      ],
+      "values": [
+        [
+          0.367521258358369,
+          0.42081147644330713,
+          0.1904492426971276,
+          0.7589799980856332,
+          0.8128429366574302,
+          0.6065089478775397,
+          0.4915284780272711,
+          0.5777042506461048,
+          0.2995457644099545,
+          0.8356285887752338,
+          0.8700183440506752,
+          0.7237405533689695,
+          0.6418357623541068,
+          0.6954758435106052,
+          0.44931743206700786,
+          0.8908489991446906,
+          0.9117242736633681,
+          0.808060022166291,
+          0.10681262654808713,
+          0.14472054662621392,
+          0.4401324637985278,
+          0.46313005251500045,
+          0.5413955940649932,
+          0.7966604927413482,
+          0.1864854995034205,
+          0.24322918793518036,
+          0.5646820523490885,
+          0.6039509794133647,
+          0.649694738295272,
+          0.8638943981513737,
+          0.6283811958936821,
+          0.7026813201723819,
+          0.8775963746077354,
+          0.883383630881163,
+          0.9147072247669845,
+          0.9660400810705243,
+          0.19135507856641282,
+          0.2422466795775143,
+          0.07721514621000802,
+          0.6072589903360208,
+          0.6717330966093396,
+          0.3985342718026083,
+          0.3168133663887271,
+          0.37218849428295575,
+          0.14346082741265428,
+          0.7314401271419225,
+          0.7640050428598666,
+          0.5460977749088421,
+          0.4454493736732165,
+          0.5031156227064898,
+          0.24384775608480488,
+          0.8024057321514603,
+          0.8471735396931213,
+          0.6676565300507616,
+          0.0417272100439639,
+          0.05625580610900445,
+          0.23391740052978136,
+          0.25682123436570187,
+          0.3429895436155288,
+          0.6689423603288983,
+          0.073835284979578,
+          0.10677901449133431,
+          0.37167961779047454,
+          0.4014461840063495,
+          0.47640538201760024,
+          0.7595118669156053,
+          0.4329004724395336,
+          0.4979911355031058,
+          0.7922403695292314,
+          0.7946273837796851,
+          0.8369735756555989,
+          0.938618044867252,
+          0.019020337504921263,
+          0.026364703897397618,
+          0.005875651431284264,
+          0.1706847428258535,
+          0.22097927337555365,
+          0.06436422025704439,
+          0.04079736472178199,
+          0.053538066262579155,
+          0.013065361451267979,
+          0.2806124229391773,
+          0.3418735102991286,
+          0.12773974514418182,
+          0.07580005693066832,
+          0.1108102035158301,
+          0.02608424312229376,
+          0.39512159156141385,
+          0.4763871203242471,
+          0.21812430655643858,
+          0.0030054357230602418,
+          0.00422490858669454,
+          0.028765528080359547,
+          0.03346525309068053,
+          0.04522251003843642,
+          0.2215749559492948,
+          0.006229231286368346,
+          0.009132663806669036,
+          0.058400282578805696,
+          0.06522327857394368,
+          0.0932782726274124,
+          0.3460782136498893,
+          0.08155979324697932,
+          0.10538500174008256,
+          0.37820058233761983,
+          0.40528773905052123,
+          0.47872703309149456,
+          0.7712732454297342
+        ],
+        [
+          0.33661200771950756,
+          0.3363949224721918,
+          0.3041017969117693,
+          0.19474694430071068,
+          0.1545811335020037,
+          0.2665913509980576,
+          0.31558525296552253,
+          0.28369524792634276,
+          0.33185798686490703,
+          0.14010860120520782,
+          0.11431895511137433,
+          0.2121837647469388,
+          0.2541896138733097,
+          0.23065647065257536,
+          0.3101864496789878,
+          0.0978962217331919,
+          0.08139914781626924,
+          0.15887598806670378,
+          0.25393017621368136,
+          0.27550482028403045,
+          0.32668947883469235,
+          0.320786550621203,
+          0.29599915605226557,
+          0.17063833424090544,
+          0.30270272234031576,
+          0.3136617380045125,
+          0.29052760427976615,
+          0.2764577725744404,
+          0.25355726979833054,
+          0.11953792941678887,
+          0.26643196401388647,
+          0.21988551649099436,
+          0.1090919420419383,
+          0.1051856074009492,
+          0.07842793860213153,
+          0.03283554987449579,
+          0.30172264787693504,
+          0.33049988391685625,
+          0.23394411451601863,
+          0.27253037576597744,
+          0.24374643337671548,
+          0.3287229412829027,
+          0.3262142651076756,
+          0.31561701887496724,
+          0.278562127380288,
+          0.20574331665913081,
+          0.19061946922307677,
+          0.29950752195364944,
+          0.3228272700298978,
+          0.3061915631852457,
+          0.3193182914542346,
+          0.16547849030018624,
+          0.1307735659542583,
+          0.24472922471812927,
+          0.17964636993227098,
+          0.20435674244072863,
+          0.3186485918634966,
+          0.3353666486531607,
+          0.3180084901575976,
+          0.23945337118778884,
+          0.24193574115986427,
+          0.24484081258802304,
+          0.3262102880712871,
+          0.32636229420872326,
+          0.3228100915464226,
+          0.19004232852866393,
+          0.3171586713169315,
+          0.31461182119022246,
+          0.1699296151699197,
+          0.17258909880803222,
+          0.13875191323825645,
+          0.05789313112113447,
+          0.12757276296494666,
+          0.15198700303013787,
+          0.0735820053686429,
+          0.29246131514029994,
+          0.31829242176899053,
+          0.21031174000687447,
+          0.18126538737910744,
+          0.2014705270716374,
+          0.1088463977181088,
+          0.32969507334384635,
+          0.3239369794786493,
+          0.28192147213560537,
+          0.2401986289909292,
+          0.266788429130762,
+          0.14157774088735203,
+          0.3417604699686933,
+          0.3138778957210977,
+          0.3221487834372365,
+          0.05246909196310329,
+          0.06336033908001289,
+          0.1512320945597575,
+          0.1612389374845824,
+          0.19346291956983006,
+          0.31839786673741677,
+          0.08000889664141575,
+          0.0903756069511674,
+          0.2060597808079516,
+          0.2045771492408164,
+          0.2549163465021211,
+          0.3176444933464454,
+          0.238225397310626,
+          0.25845175800935705,
+          0.31435285049690054,
+          0.3309853363005018,
+          0.30291144402213177,
+          0.18169217322544154
+        ],
+        [
+          0.29586673392212337,
+          0.2427936010845009,
+          0.5054489603911031,
+          0.046273057613656125,
+          0.03257592984056609,
+          0.12689970112440274,
+          0.19288626900720637,
+          0.1386005014275525,
+          0.36859624872513846,
+          0.02426281001955848,
+          0.015662700837950447,
+          0.06407568188409181,
+          0.10397462377258361,
+          0.07386768583681952,
+          0.2404961182540043,
+          0.011254779122117581,
+          0.00687657852036251,
+          0.033063989767005274,
+          0.6392571972382315,
+          0.5797746330897556,
+          0.23317805736678004,
+          0.21608339686379657,
+          0.1626052498827412,
+          0.03270117301774625,
+          0.5108117781562638,
+          0.44310907406030714,
+          0.14479034337114546,
+          0.11959124801219491,
+          0.09674799190639742,
+          0.016567672431837342,
+          0.10518684009243137,
+          0.07743316333662358,
+          0.013311683350326203,
+          0.011430761717887683,
+          0.0068648366308839415,
+          0.0011243690549799133,
+          0.5069222735566521,
+          0.4272534365056295,
+          0.6888407392739734,
+          0.12021063389800175,
+          0.08452047001394498,
+          0.272742786914489,
+          0.3569723685035973,
+          0.312194486842077,
+          0.5779770452070578,
+          0.06281655619894651,
+          0.04537548791705664,
+          0.15439470313750847,
+          0.23172335629688573,
+          0.19069281410826447,
+          0.4368339524609605,
+          0.03211577754835363,
+          0.022052894352620502,
+          0.08761424523110908,
+          0.7786264200237651,
+          0.7393874514502671,
+          0.44743400760672214,
+          0.40781211698113756,
+          0.33900196622687356,
+          0.09160426848331275,
+          0.6842289738605577,
+          0.6483801729206427,
+          0.3021100941382384,
+          0.2721915217849272,
+          0.20078452643597708,
+          0.05044580455573085,
+          0.24994085624353496,
+          0.1873970433066719,
+          0.037830015300848986,
+          0.03278351741228269,
+          0.0242745111061446,
+          0.003488824011613593,
+          0.853406899530132,
+          0.8216482930724646,
+          0.9205423432000728,
+          0.5368539420338466,
+          0.4607283048554558,
+          0.7253240397360812,
+          0.7779372478991106,
+          0.7449914066657833,
+          0.8780882408306232,
+          0.3896925037169763,
+          0.3341895102222222,
+          0.5903387827202128,
+          0.6840013140784025,
+          0.6224013673534079,
+          0.8323380159903543,
+          0.26311793846989295,
+          0.20973498395465523,
+          0.45972691000632493,
+          0.9445254723138365,
+          0.9324147523332926,
+          0.820002377359883,
+          0.8052958094247371,
+          0.7613145703917336,
+          0.46002717731328835,
+          0.9137618720722158,
+          0.9004917292421636,
+          0.7355399366132427,
+          0.73019957218524,
+          0.6518053808704666,
+          0.3362772930036654,
+          0.6802148094423948,
+          0.6361632402505605,
+          0.3074465671654797,
+          0.2637269246489769,
+          0.21836152288637364,
+          0.04703458134482436
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift DailyWearAdherence toward Consistent (and away from Abandoned). The deployment will reach individuals with FitnessTrackerExperience=FirstTime as well as FitnessTrackerExperience=Experienced, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "AdaptiveMicroReminders",
+        "value": "On",
+        "min_improvement": 0.433,
+        "improvement_low": 0.4675,
+        "improvement_high": 0.433
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "DailyWearAdherence",
+          "group": "FitnessTrackerExperience",
+          "intervention_avg": "GamifiedChallenges",
+          "intervention_rob": "AdaptiveMicroReminders",
+          "intervention_bad": "SocialLeaderboard",
+          "confounder": "BaselineActivityLevel"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "AdaptiveMicroReminders",
+            "value": "On",
+            "min_improvement": 0.433,
+            "improvement_low": 0.4675,
+            "improvement_high": 0.433
+          },
+          "avg_best_but_uneven": {
+            "variable": "GamifiedChallenges",
+            "value": "Daily",
+            "min_improvement": 0.2057,
+            "improvement_low": 0.2057,
+            "improvement_high": 0.5778
+          },
+          "harmful_in_subgroup": {
+            "variable": "SocialLeaderboard",
+            "value": "Public",
+            "min_improvement": -0.2559,
+            "improvement_low": -0.2559,
+            "improvement_high": 0.3155
+          },
+          "subgroups": [
+            "FirstTime",
+            "Experienced"
+          ],
+          "group_variable": "FitnessTrackerExperience",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "GamifiedChallenges",
+              "value": "Daily",
+              "improvement_low": 0.2057,
+              "improvement_high": 0.5778,
+              "min_improvement": 0.2057
+            },
+            {
+              "variable": "AdaptiveMicroReminders",
+              "value": "On",
+              "improvement_low": 0.4675,
+              "improvement_high": 0.433,
+              "min_improvement": 0.433
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

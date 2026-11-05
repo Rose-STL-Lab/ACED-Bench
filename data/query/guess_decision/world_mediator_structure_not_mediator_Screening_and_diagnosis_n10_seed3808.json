@@ -1,0 +1,469 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "mediator_structure:not_mediator",
+    "seed": 3808,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "not_mediator"
+  },
+  "story": "A large integrated health system maintains electronic health records for its primary care clinics. The researcher has access to these records and can request both observational extracts and interventional study samples from participating sites.",
+  "non_intervenable_variables": [
+    {
+      "name": "CardiovascularEventOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StatinInitiation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineComorbidityBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmokingStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilyHistoryCVD",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineLDLCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PhysicalActivityLevel",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ScreeningProtocol",
+      "values": [
+        "NoScreening",
+        "ComprehensiveScreening"
+      ],
+      "desc": "Whether the patient received systematic cardiovascular risk screening.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CardiovascularEventOutcome",
+      "values": [
+        "NoEvent",
+        "MinorEvent",
+        "MajorEvent"
+      ],
+      "desc": "Classification of cardiovascular events within five-year follow-up period.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PatientAnxietyLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported anxiety level following risk assessment communication.",
+      "role": "proposed_M",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "StatinInitiation",
+      "values": [
+        "None",
+        "Initiated"
+      ],
+      "desc": "Whether statin therapy was newly prescribed after risk evaluation.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineComorbidityBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Number and severity of pre-existing chronic conditions at enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under50",
+        "50to64",
+        "65andOver"
+      ],
+      "desc": "Patient age category at time of study enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmokingStatus",
+      "values": [
+        "Never",
+        "Former",
+        "Current"
+      ],
+      "desc": "Patient self-reported tobacco smoking history classification.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyHistoryCVD",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Presence of first-degree relative with premature cardiovascular disease.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineLDLCategory",
+      "values": [
+        "Normal",
+        "Borderline",
+        "Elevated"
+      ],
+      "desc": "Low-density lipoprotein cholesterol level category at baseline measurement.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PhysicalActivityLevel",
+      "values": [
+        "Sedentary",
+        "ModeratelyActive",
+        "Active"
+      ],
+      "desc": "Weekly self-reported physical activity intensity and duration category.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ScreeningProtocol",
+      "StatinInitiation"
+    ],
+    [
+      "ScreeningProtocol",
+      "PatientAnxietyLevel"
+    ],
+    [
+      "CardiovascularEventOutcome",
+      "SmokingStatus"
+    ],
+    [
+      "StatinInitiation",
+      "CardiovascularEventOutcome"
+    ],
+    [
+      "BaselineComorbidityBurden",
+      "ScreeningProtocol"
+    ],
+    [
+      "BaselineComorbidityBurden",
+      "CardiovascularEventOutcome"
+    ],
+    [
+      "AgeGroup",
+      "ScreeningProtocol"
+    ],
+    [
+      "FamilyHistoryCVD",
+      "ScreeningProtocol"
+    ],
+    [
+      "FamilyHistoryCVD",
+      "PhysicalActivityLevel"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineComorbidityBurden",
+      "parents": [],
+      "values": [
+        [
+          0.20888216267980078
+        ],
+        [
+          0.6768037826544457
+        ],
+        [
+          0.11431405466575355
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.1874232486244691
+        ],
+        [
+          0.29970820176192564
+        ],
+        [
+          0.5128685496136053
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilyHistoryCVD",
+      "parents": [],
+      "values": [
+        [
+          0.2710672776655277
+        ],
+        [
+          0.7289327223344723
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineLDLCategory",
+      "parents": [],
+      "values": [
+        [
+          0.38736954432909115
+        ],
+        [
+          0.3479072751378826
+        ],
+        [
+          0.2647231805330262
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ScreeningProtocol",
+      "parents": [
+        "BaselineComorbidityBurden",
+        "FamilyHistoryCVD",
+        "AgeGroup"
+      ],
+      "values": [
+        [
+          0.6194292410853535,
+          0.4966244948299576,
+          0.3742256690531911,
+          0.9642294654216269,
+          0.9423277066807639,
+          0.9082912795258824,
+          0.9246006776926028,
+          0.8814188162666948,
+          0.818364588716806,
+          0.9951001661648747,
+          0.9919421141340727,
+          0.9867756770240682,
+          0.9892920270419808,
+          0.9824564970331736,
+          0.9713836650475212,
+          0.9993468689489199,
+          0.9989229489342737,
+          0.9982243690721541
+        ],
+        [
+          0.3805707589146464,
+          0.5033755051700424,
+          0.6257743309468089,
+          0.03577053457837313,
+          0.05767229331923607,
+          0.09170872047411767,
+          0.07539932230739717,
+          0.1185811837333052,
+          0.18163541128319413,
+          0.0048998338351252885,
+          0.008057885865927183,
+          0.013224322975931738,
+          0.01070797295801921,
+          0.017543502966826427,
+          0.028616334952478877,
+          0.0006531310510801483,
+          0.0010770510657262305,
+          0.0017756309278458683
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PhysicalActivityLevel",
+      "parents": [
+        "FamilyHistoryCVD"
+      ],
+      "values": [
+        [
+          0.2849694691701583,
+          0.2685832379364686
+        ],
+        [
+          0.39602513234456216,
+          0.13391295228892716
+        ],
+        [
+          0.3190053984852795,
+          0.5975038097746043
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StatinInitiation",
+      "parents": [
+        "ScreeningProtocol"
+      ],
+      "values": [
+        [
+          0.23263492598786023,
+          0.9822084786746489
+        ],
+        [
+          0.7673650740121398,
+          0.01779152132535113
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAnxietyLevel",
+      "parents": [
+        "ScreeningProtocol"
+      ],
+      "values": [
+        [
+          0.22106502276166407,
+          0.810683057673244
+        ],
+        [
+          0.31181191753896603,
+          0.15683953228221922
+        ],
+        [
+          0.46712305969937,
+          0.032477410044536685
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CardiovascularEventOutcome",
+      "parents": [
+        "BaselineComorbidityBurden",
+        "StatinInitiation"
+      ],
+      "values": [
+        [
+          0.9155344487855858,
+          0.257663970489627,
+          0.810796462711085,
+          0.09295000502320754,
+          0.3469995943875632,
+          0.005066590764458084
+        ],
+        [
+          0.07702150653192792,
+          0.3336592399526609,
+          0.15736729596762628,
+          0.2375822787478773,
+          0.33719422155192413,
+          0.06452687957536289
+        ],
+        [
+          0.0074440446824862614,
+          0.40867678955771203,
+          0.031836241321288795,
+          0.6694677162289152,
+          0.3158061840605126,
+          0.9304065296601791
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SmokingStatus",
+      "parents": [
+        "CardiovascularEventOutcome"
+      ],
+      "values": [
+        [
+          0.37924391752332576,
+          0.2738554561854706,
+          0.1572433601011663
+        ],
+        [
+          0.19747776670177558,
+          0.0626656050071537,
+          0.015812058424916908
+        ],
+        [
+          0.4232783157748986,
+          0.6634789388073757,
+          0.8269445814739167
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "An analyst hypothesizes that PatientAnxietyLevel is the variable through which ScreeningProtocol changes CardiovascularEventOutcome. Investigate the system and decide whether this hypothesis is supported, and explain why.",
+      "answer": "not_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "not_mediator",
+        "roles": {
+          "treatment": "ScreeningProtocol",
+          "outcome": "CardiovascularEventOutcome",
+          "proposed_M": "PatientAnxietyLevel",
+          "true_mediator": "StatinInitiation",
+          "confounder": "BaselineComorbidityBurden"
+        },
+        "gold": {
+          "label": "not_mediator",
+          "T": "ScreeningProtocol",
+          "M_proposed": "PatientAnxietyLevel",
+          "M_true": "StatinInitiation",
+          "O": "CardiovascularEventOutcome",
+          "total_effect": -0.9354,
+          "residual_after_fix_proposed": 0.9354,
+          "do_proposed_effect_on_O": 0.0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,960 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 8151,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A community college system serving multiple campuses maintains detailed student enrollment and academic records. The institutional research office can access historical data and coordinate prospective observational or interventional studies across participating campuses.",
+  "non_intervenable_variables": [
+    {
+      "name": "CoursePassOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineMathPlacement",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HighSchoolMathCredits",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EnrollmentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "YearsSinceLastMathCourse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StudentAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrimaryLanguage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WeeklyWorkHours",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MathAnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorRemedialAttempts",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClassSectionSize",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "CoursePassOutcome",
+      "values": [
+        "PassedWithCOrAbove",
+        "PassedWithCorD",
+        "FailedOrWithdrew"
+      ],
+      "desc": "Final grade classification in the remedial math course at semester end.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AdaptiveSoftwarePlatform",
+      "values": [
+        "None",
+        "SupplementalUse",
+        "PrimaryInstruction"
+      ],
+      "desc": "Level of adaptive learning software integration in course delivery.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerTutoringProgram",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether structured peer tutoring sessions are assigned to the student.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ModularCoursePacing",
+      "values": [
+        "Traditional",
+        "SelfPaced"
+      ],
+      "desc": "Whether the course uses fixed-schedule or modular self-paced progression.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "EmbeddedCorequisiteSupport",
+      "values": [
+        "None",
+        "OneHourWeekly",
+        "TwoHoursWeekly"
+      ],
+      "desc": "Hours per week of corequisite support lab embedded alongside the course.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineMathPlacement",
+      "values": [
+        "UpperRemedial",
+        "MidRemedial",
+        "LowerRemedial"
+      ],
+      "desc": "Student's initial math placement tier based on diagnostic exam score.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HighSchoolMathCredits",
+      "values": [
+        "ThreeOrMore",
+        "Two",
+        "OneOrNone"
+      ],
+      "desc": "Number of math course credits completed during high school.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EnrollmentStatus",
+      "values": [
+        "FullTime",
+        "PartTime"
+      ],
+      "desc": "Whether the student is enrolled full-time or part-time at the institution.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "YearsSinceLastMathCourse",
+      "values": [
+        "LessThanTwo",
+        "TwoToFive",
+        "MoreThanFive"
+      ],
+      "desc": "Time elapsed since the student last completed a math course.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "StudentAgeGroup",
+      "values": [
+        "Under21",
+        "21to30",
+        "Over30"
+      ],
+      "desc": "Age category of the student at the time of enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PrimaryLanguage",
+      "values": [
+        "English",
+        "NonEnglish"
+      ],
+      "desc": "Whether the student's primary spoken language is English.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WeeklyWorkHours",
+      "values": [
+        "None",
+        "Under20",
+        "20OrMore"
+      ],
+      "desc": "Hours per week the student works at paid employment during the semester.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MathAnxietyLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported math anxiety measured by a validated pre-course survey.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorRemedialAttempts",
+      "values": [
+        "Zero",
+        "One",
+        "TwoOrMore"
+      ],
+      "desc": "Number of previous attempts at a remedial math course.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClassSectionSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Number of students enrolled in the student's specific course section.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "AdaptiveSoftwarePlatform",
+      "CoursePassOutcome"
+    ],
+    [
+      "PeerTutoringProgram",
+      "CoursePassOutcome"
+    ],
+    [
+      "ModularCoursePacing",
+      "CoursePassOutcome"
+    ],
+    [
+      "EmbeddedCorequisiteSupport",
+      "CoursePassOutcome"
+    ],
+    [
+      "BaselineMathPlacement",
+      "CoursePassOutcome"
+    ],
+    [
+      "BaselineMathPlacement",
+      "EmbeddedCorequisiteSupport"
+    ],
+    [
+      "BaselineMathPlacement",
+      "MathAnxietyLevel"
+    ],
+    [
+      "PriorRemedialAttempts",
+      "PrimaryLanguage"
+    ],
+    [
+      "ClassSectionSize",
+      "EnrollmentStatus"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "AdaptiveSoftwarePlatform",
+      "parents": [],
+      "values": [
+        [
+          0.23826891219545937
+        ],
+        [
+          0.16471418388870498
+        ],
+        [
+          0.5970169039158357
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PeerTutoringProgram",
+      "parents": [],
+      "values": [
+        [
+          0.4821021276662066
+        ],
+        [
+          0.5178978723337934
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ModularCoursePacing",
+      "parents": [],
+      "values": [
+        [
+          0.7244798514874802
+        ],
+        [
+          0.2755201485125198
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineMathPlacement",
+      "parents": [],
+      "values": [
+        [
+          0.5591147178331047
+        ],
+        [
+          0.34158919302788343
+        ],
+        [
+          0.09929608913901175
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HighSchoolMathCredits",
+      "parents": [],
+      "values": [
+        [
+          0.5166455489037123
+        ],
+        [
+          0.3879116029324925
+        ],
+        [
+          0.09544284816379527
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "YearsSinceLastMathCourse",
+      "parents": [],
+      "values": [
+        [
+          0.12782067200266
+        ],
+        [
+          0.3282864202179981
+        ],
+        [
+          0.5438929077793418
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StudentAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.3423357433410439
+        ],
+        [
+          0.5097519176003686
+        ],
+        [
+          0.14791233905858742
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WeeklyWorkHours",
+      "parents": [],
+      "values": [
+        [
+          0.20682442765510345
+        ],
+        [
+          0.3168639776023612
+        ],
+        [
+          0.4763115947425354
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorRemedialAttempts",
+      "parents": [],
+      "values": [
+        [
+          0.09670297428774202
+        ],
+        [
+          0.4470704026693451
+        ],
+        [
+          0.4562266230429128
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClassSectionSize",
+      "parents": [],
+      "values": [
+        [
+          0.7138850159453088
+        ],
+        [
+          0.1097041635868759
+        ],
+        [
+          0.1764108204678153
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmbeddedCorequisiteSupport",
+      "parents": [
+        "BaselineMathPlacement"
+      ],
+      "values": [
+        [
+          0.2918599626678156,
+          0.43101096958457735,
+          0.5364963169769578
+        ],
+        [
+          0.4129304694953317,
+          0.4581290067520221,
+          0.428413621837085
+        ],
+        [
+          0.29520956783685265,
+          0.11086002366340052,
+          0.03509006118595724
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MathAnxietyLevel",
+      "parents": [
+        "BaselineMathPlacement"
+      ],
+      "values": [
+        [
+          0.33393007701533833,
+          0.009991491258815514,
+          0.00018657609767212604
+        ],
+        [
+          0.22520255169239273,
+          0.4742149013542446,
+          0.6232008026039253
+        ],
+        [
+          0.44086737129226894,
+          0.5157936073869399,
+          0.37661262129840256
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PrimaryLanguage",
+      "parents": [
+        "PriorRemedialAttempts"
+      ],
+      "values": [
+        [
+          0.518373880941758,
+          0.06867955975582488,
+          0.005027300213714205
+        ],
+        [
+          0.48162611905824215,
+          0.9313204402441752,
+          0.9949726997862858
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EnrollmentStatus",
+      "parents": [
+        "ClassSectionSize"
+      ],
+      "values": [
+        [
+          0.36410532291166453,
+          0.4139808900007345,
+          0.46568517732752235
+        ],
+        [
+          0.6358946770883355,
+          0.5860191099992655,
+          0.5343148226724777
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CoursePassOutcome",
+      "parents": [
+        "BaselineMathPlacement",
+        "ModularCoursePacing",
+        "PeerTutoringProgram",
+        "AdaptiveSoftwarePlatform",
+        "EmbeddedCorequisiteSupport"
+      ],
+      "values": [
+        [
+          0.159487674228739,
+          0.18516243674703312,
+          0.2099568206336524,
+          0.25840872715552304,
+          0.2947884712106088,
+          0.3126113990286038,
+          0.3443670148619104,
+          0.3887787514211962,
+          0.39514466119908837,
+          0.8122510720532121,
+          0.8296031668162301,
+          0.8517264236464752,
+          0.8660038286584559,
+          0.8826253597116709,
+          0.8815216029560042,
+          0.9002055583962305,
+          0.9106201105656114,
+          0.9170294448031754,
+          0.9085483307432709,
+          0.9135422544766799,
+          0.9200972365467843,
+          0.9338714114378404,
+          0.9406292765315903,
+          0.9446107943374024,
+          0.9484014695450704,
+          0.9556892662456193,
+          0.9604015169641056,
+          0.9908245934110089,
+          0.9909530946649477,
+          0.9921835528201141,
+          0.9933992584346517,
+          0.9939255906252616,
+          0.9945710064936756,
+          0.9948888477214954,
+          0.9954421694986553,
+          0.9957913512960175,
+          0.06735691378134459,
+          0.08111081551096996,
+          0.08457812403261007,
+          0.12274547294929365,
+          0.14246440339239833,
+          0.15157392512823895,
+          0.16574134147224084,
+          0.18619957945536014,
+          0.20676859640428347,
+          0.6674127202936831,
+          0.7029276054052903,
+          0.7390249708823433,
+          0.7557523799074971,
+          0.7891763660947815,
+          0.8091515543257446,
+          0.8129066088006952,
+          0.8320479330145256,
+          0.8438899599675749,
+          0.840195858221673,
+          0.8514987495802167,
+          0.8623779934212692,
+          0.8803507361415517,
+          0.8913066433964247,
+          0.903454950550193,
+          0.9095730404821069,
+          0.9180651765694354,
+          0.9280582039438598,
+          0.9824585509232959,
+          0.9850441755868123,
+          0.9844464262097111,
+          0.9882554687883116,
+          0.9894202419590852,
+          0.990560468672652,
+          0.9906403611492851,
+          0.9919971439161426,
+          0.992243407594504,
+          0.004946361131345795,
+          0.006060227266065364,
+          0.006894925033756541,
+          0.010955031878753145,
+          0.013761392565433668,
+          0.013771992949171063,
+          0.01688135991545497,
+          0.020017650584582443,
+          0.02264515347316757,
+          0.23204948045267676,
+          0.24935657843147463,
+          0.2823390657520588,
+          0.3364831617886308,
+          0.38767273198427893,
+          0.41501438416936576,
+          0.4385690869869784,
+          0.46121115423600795,
+          0.4997499712897095,
+          0.48236845177334636,
+          0.49006401064750704,
+          0.5425191146537449,
+          0.5858659664676418,
+          0.6266383636772446,
+          0.6464960091685491,
+          0.6807093562162012,
+          0.7093656134590387,
+          0.7097793884078527,
+          0.9272972529230544,
+          0.9361140194069895,
+          0.9412873301062404,
+          0.9521497857885808,
+          0.956721208085884,
+          0.9616802374773827,
+          0.9627062835482659,
+          0.9647189603564424,
+          0.9662050473217227
+        ],
+        [
+          0.3065073414022345,
+          0.2912788908131579,
+          0.30915429844135545,
+          0.32829389664704856,
+          0.33546440540247974,
+          0.32116999909086086,
+          0.3401522405813006,
+          0.31678300750544247,
+          0.34554170549367563,
+          0.15619145763587938,
+          0.14534657375894866,
+          0.127117706851615,
+          0.11846601400151953,
+          0.10485502907333218,
+          0.10705485803169912,
+          0.09031664675786817,
+          0.0815543744006835,
+          0.07667600146388065,
+          0.08337315590526478,
+          0.08016364126758985,
+          0.07425043435231546,
+          0.06220905104127562,
+          0.056307297711276585,
+          0.052557074837726786,
+          0.049251868317740026,
+          0.04236967801848816,
+          0.03809976689895947,
+          0.009081151808291492,
+          0.00896602545395628,
+          0.007757656394446647,
+          0.006556509582084158,
+          0.006039087574748644,
+          0.005399605666477667,
+          0.005085131195139536,
+          0.004537459738974571,
+          0.004189593589830518,
+          0.22361243169135275,
+          0.24112580482171833,
+          0.24822156565677309,
+          0.27122671080010763,
+          0.26986341631405486,
+          0.2950877317821842,
+          0.2845690783939271,
+          0.29473921053566465,
+          0.3120572679354357,
+          0.24812594591162787,
+          0.22890784077792048,
+          0.20065109634437855,
+          0.19523727530951515,
+          0.17480386650289723,
+          0.1569832660079202,
+          0.15731023708358183,
+          0.1424332123138272,
+          0.1357497158578906,
+          0.13531525357861382,
+          0.1277827046822644,
+          0.1217638222878334,
+          0.10744144801609459,
+          0.09916097576621113,
+          0.08809748225311473,
+          0.08298473957497608,
+          0.07564367742482457,
+          0.06669290115889674,
+          0.01723450689589344,
+          0.01472976103961877,
+          0.015340294275055798,
+          0.011599889077535763,
+          0.010457351038782904,
+          0.009341074475099269,
+          0.009276112350516676,
+          0.007930708534198354,
+          0.007696746268392411,
+          0.06869043468659408,
+          0.07208236551191802,
+          0.07838771961367846,
+          0.10301127263816728,
+          0.10597964920596091,
+          0.11668164184561464,
+          0.12217313145605255,
+          0.12795484875752447,
+          0.13798734855533787,
+          0.3195211484065029,
+          0.3306481854729402,
+          0.33354185370819683,
+          0.3282824260683321,
+          0.31461657440669794,
+          0.3170918819895608,
+          0.312031600120541,
+          0.32749864664762907,
+          0.3069924094586421,
+          0.30786163921555726,
+          0.3135508850631035,
+          0.2917300042779053,
+          0.2805987079548672,
+          0.2617460209232462,
+          0.2556558774679737,
+          0.23260336363724993,
+          0.21850653984675986,
+          0.2226564937540243,
+          0.06774115987770496,
+          0.059957646331906,
+          0.055634078327482475,
+          0.045508799731640875,
+          0.04142019697148456,
+          0.036747770593300824,
+          0.035787995458851224,
+          0.034152360576342515,
+          0.032775885554617426
+        ],
+        [
+          0.5340049843690264,
+          0.523558672439809,
+          0.4808888809249921,
+          0.41329737619742835,
+          0.3697471233869114,
+          0.36621860188053534,
+          0.315480744556789,
+          0.29443824107336136,
+          0.2593136333072361,
+          0.031557470310908546,
+          0.02505025942482114,
+          0.021155869501909747,
+          0.015530157340024489,
+          0.012519611214996819,
+          0.011423539012296481,
+          0.009477794845901286,
+          0.007825515033705162,
+          0.006294553732943996,
+          0.008078513351464393,
+          0.0062941042557302955,
+          0.00565232910090016,
+          0.003919537520884092,
+          0.0030634257571331342,
+          0.0028321308248706943,
+          0.002346662137189607,
+          0.0019410557358923528,
+          0.0014987161369350085,
+          9.425478069946388e-05,
+          8.087988109593559e-05,
+          5.879078543933689e-05,
+          4.4231983264069805e-05,
+          3.5321799989771546e-05,
+          2.938783984662018e-05,
+          2.6021083364852687e-05,
+          2.0370762370167937e-05,
+          1.905511415207108e-05,
+          0.7090306545273027,
+          0.6777633796673117,
+          0.6672003103106168,
+          0.6060278162505988,
+          0.5876721802935468,
+          0.5533383430895767,
+          0.5496895801338321,
+          0.5190612100089752,
+          0.4811741356602807,
+          0.08446133379468893,
+          0.06816455381678913,
+          0.06032393277327809,
+          0.049010344782987735,
+          0.03601976740232137,
+          0.03386517966633511,
+          0.02978315411572287,
+          0.02551885467164709,
+          0.02036032417453453,
+          0.024488888199713295,
+          0.020718545737518818,
+          0.015858184290897383,
+          0.012207815842353661,
+          0.009532380837364166,
+          0.008447567196692287,
+          0.007442219942917025,
+          0.006291146005739933,
+          0.005248894897243468,
+          0.0003069421808107626,
+          0.000226063373568855,
+          0.00021327951523304194,
+          0.00014464213415263226,
+          0.0001224070021319348,
+          9.845685224870955e-05,
+          8.352650019817022e-05,
+          7.214754965898701e-05,
+          5.9846137103446546e-05,
+          0.9263632041820601,
+          0.9218574072220166,
+          0.9147173553525649,
+          0.8860336954830795,
+          0.8802589582286053,
+          0.8695463652052143,
+          0.8609455086284925,
+          0.852027500657893,
+          0.8393674979714946,
+          0.4484293711408203,
+          0.41999523609558503,
+          0.38411908053974425,
+          0.33523441214303706,
+          0.2977106936090232,
+          0.26789373384107346,
+          0.2493993128924806,
+          0.21129019911636304,
+          0.19325761925164844,
+          0.20976990901109638,
+          0.19638510428938938,
+          0.1657508810683498,
+          0.13353532557749107,
+          0.11161561539950919,
+          0.09784811336347715,
+          0.08668728014654883,
+          0.07212784669420153,
+          0.06756411783812293,
+          0.004961587199240533,
+          0.003928334261104462,
+          0.0030785915662769644,
+          0.0023414144797782393,
+          0.001858594942631423,
+          0.0015719919293165345,
+          0.0015057209928828882,
+          0.0011286790672150446,
+          0.001019067123659895
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts CoursePassOutcome toward PassedWithCOrAbove (and away from FailedOrWithdrew). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes CoursePassOutcome.",
+      "answer": [
+        {
+          "variable": "ModularCoursePacing",
+          "value": "SelfPaced",
+          "improvement": 0.4849
+        },
+        {
+          "variable": "PeerTutoringProgram",
+          "value": "Yes",
+          "improvement": 0.3663
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "CoursePassOutcome",
+          "intervention_A": "AdaptiveSoftwarePlatform",
+          "intervention_B": "PeerTutoringProgram",
+          "intervention_C": "ModularCoursePacing",
+          "intervention_D": "EmbeddedCorequisiteSupport",
+          "confounder": "BaselineMathPlacement"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "ModularCoursePacing",
+              "value": "SelfPaced",
+              "improvement": 0.4849
+            },
+            {
+              "variable": "PeerTutoringProgram",
+              "value": "Yes",
+              "improvement": 0.3663
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "ModularCoursePacing",
+              "value": "Traditional",
+              "improvement": -0.1844
+            },
+            {
+              "variable": "ModularCoursePacing",
+              "value": "SelfPaced",
+              "improvement": 0.4849
+            },
+            {
+              "variable": "PeerTutoringProgram",
+              "value": "No",
+              "improvement": -0.3935
+            },
+            {
+              "variable": "PeerTutoringProgram",
+              "value": "Yes",
+              "improvement": 0.3663
+            },
+            {
+              "variable": "AdaptiveSoftwarePlatform",
+              "value": "None",
+              "improvement": -0.1301
+            },
+            {
+              "variable": "AdaptiveSoftwarePlatform",
+              "value": "SupplementalUse",
+              "improvement": -0.0191
+            },
+            {
+              "variable": "AdaptiveSoftwarePlatform",
+              "value": "PrimaryInstruction",
+              "improvement": 0.0572
+            },
+            {
+              "variable": "EmbeddedCorequisiteSupport",
+              "value": "None",
+              "improvement": -0.0233
+            },
+            {
+              "variable": "EmbeddedCorequisiteSupport",
+              "value": "OneHourWeekly",
+              "improvement": 0.0065
+            },
+            {
+              "variable": "EmbeddedCorequisiteSupport",
+              "value": "TwoHoursWeekly",
+              "improvement": 0.0301
+            }
+          ],
+          "threshold": 0.2118,
+          "baseline_E_target": 0.5496
+        }
+      }
+    }
+  ]
+}

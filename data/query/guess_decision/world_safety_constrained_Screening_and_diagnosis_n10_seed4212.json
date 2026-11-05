@@ -1,0 +1,619 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 4212,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A large integrated primary care network conducts routine behavioral health screening across its clinics. The research team has access to electronic health records and administrative data and can request both observational and interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "ScreeningDetectionRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FalsePositiveBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClinicianAdherenceToProtocol",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineSymptomSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClinicPatientVolume",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ScreeningDetectionRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of true depression or anxiety cases correctly identified at screening.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FalsePositiveBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Volume of patients incorrectly flagged positive requiring unnecessary follow-up evaluation.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CollaborativeScreeningWorkflow",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Degree of integrated nurse-led PHQ-9 and GAD-7 administration embedded in visit workflow.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AggressiveCutoffLowering",
+      "values": [
+        "None",
+        "MildLowering",
+        "HeavyLowering"
+      ],
+      "desc": "Extent to which PHQ-9 and GAD-7 positive-screen thresholds are reduced below standard.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientSelfReferralPrompt",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether patients receive a waiting-room pamphlet encouraging self-initiated screening requests.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ClinicianAdherenceToProtocol",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Percentage of eligible visits where clinicians complete the full screening instrument.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineSymptomSeverity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Patient population's average pre-screening depression and anxiety symptom level.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClinicPatientVolume",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Average number of patient encounters per clinician per day at the site.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ElectronicHealthRecordAlerts",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether the EHR displays automated reminders for overdue mental-health screening.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ScreeningLanguageAvailability",
+      "values": [
+        "EnglishOnly",
+        "Multilingual"
+      ],
+      "desc": "Number of validated language versions of PHQ-9 and GAD-7 offered at the clinic.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "CollaborativeScreeningWorkflow",
+      "ClinicianAdherenceToProtocol"
+    ],
+    [
+      "AggressiveCutoffLowering",
+      "ScreeningDetectionRate"
+    ],
+    [
+      "AggressiveCutoffLowering",
+      "FalsePositiveBurden"
+    ],
+    [
+      "PatientSelfReferralPrompt",
+      "ScreeningDetectionRate"
+    ],
+    [
+      "PatientSelfReferralPrompt",
+      "ScreeningLanguageAvailability"
+    ],
+    [
+      "ClinicianAdherenceToProtocol",
+      "ScreeningDetectionRate"
+    ],
+    [
+      "BaselineSymptomSeverity",
+      "ScreeningDetectionRate"
+    ],
+    [
+      "BaselineSymptomSeverity",
+      "FalsePositiveBurden"
+    ],
+    [
+      "ElectronicHealthRecordAlerts",
+      "ScreeningLanguageAvailability"
+    ],
+    [
+      "ElectronicHealthRecordAlerts",
+      "AggressiveCutoffLowering"
+    ],
+    [
+      "ScreeningLanguageAvailability",
+      "AggressiveCutoffLowering"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "CollaborativeScreeningWorkflow",
+      "parents": [],
+      "values": [
+        [
+          0.537422355899964
+        ],
+        [
+          0.14702128169596582
+        ],
+        [
+          0.3155563624040702
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientSelfReferralPrompt",
+      "parents": [],
+      "values": [
+        [
+          0.7113787902229943
+        ],
+        [
+          0.2886212097770056
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineSymptomSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.56323749240415
+        ],
+        [
+          0.24603263769894007
+        ],
+        [
+          0.19072986989691
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClinicPatientVolume",
+      "parents": [],
+      "values": [
+        [
+          0.1520452534502972
+        ],
+        [
+          0.36663122958578576
+        ],
+        [
+          0.481323516963917
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ElectronicHealthRecordAlerts",
+      "parents": [],
+      "values": [
+        [
+          0.7140119294662887
+        ],
+        [
+          0.28598807053371134
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ClinicianAdherenceToProtocol",
+      "parents": [
+        "CollaborativeScreeningWorkflow"
+      ],
+      "values": [
+        [
+          0.16006512898023484,
+          0.7188536487762786,
+          0.910105169761542
+        ],
+        [
+          0.29526878359612246,
+          0.21754098839179242,
+          0.08239634806331114
+        ],
+        [
+          0.5446660874236428,
+          0.06360536283192898,
+          0.007498482175146918
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ScreeningLanguageAvailability",
+      "parents": [
+        "PatientSelfReferralPrompt",
+        "ElectronicHealthRecordAlerts"
+      ],
+      "values": [
+        [
+          0.4938807720003817,
+          0.3943007163479504,
+          0.253128859709961,
+          0.18440467839733066
+        ],
+        [
+          0.5061192279996183,
+          0.6056992836520497,
+          0.746871140290039,
+          0.8155953216026693
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AggressiveCutoffLowering",
+      "parents": [
+        "ScreeningLanguageAvailability",
+        "ElectronicHealthRecordAlerts"
+      ],
+      "values": [
+        [
+          0.287660187058413,
+          0.5181145715074391,
+          0.05240221598902428,
+          0.07051018010877912
+        ],
+        [
+          0.4220300338373548,
+          0.07087202883958793,
+          0.07804686166197095,
+          0.009791361252331187
+        ],
+        [
+          0.2903097791042323,
+          0.41101339965297295,
+          0.8695509223490048,
+          0.9196984586388898
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ScreeningDetectionRate",
+      "parents": [
+        "BaselineSymptomSeverity",
+        "ClinicianAdherenceToProtocol",
+        "AggressiveCutoffLowering",
+        "PatientSelfReferralPrompt"
+      ],
+      "values": [
+        [
+          0.8287549152401944,
+          0.8896991759952971,
+          0.9534329797642861,
+          0.974261644994628,
+          0.9854105471227446,
+          0.9916882325518344,
+          0.3760270841950847,
+          0.5473654007004115,
+          0.7800062646348825,
+          0.8635988857617383,
+          0.9321243875214642,
+          0.958149130922784,
+          0.05413909665209276,
+          0.11821668092479526,
+          0.35629354256546175,
+          0.5515582662387948,
+          0.7383763451597687,
+          0.8390813970727922,
+          0.685517205375474,
+          0.8035352357398006,
+          0.9139039022435352,
+          0.950547110350223,
+          0.9749071907457371,
+          0.9839804377131847,
+          0.18492489471256535,
+          0.33757121783445054,
+          0.6361944573459435,
+          0.7704500069520179,
+          0.8766835618901591,
+          0.9240859551157724,
+          0.020358719447948443,
+          0.046556552942176296,
+          0.18506570966352462,
+          0.34750445043994077,
+          0.5731828687431234,
+          0.7239694731677285,
+          0.1905968288600285,
+          0.32341487943109987,
+          0.6370377148630604,
+          0.7648378614984446,
+          0.8878079059639438,
+          0.9303730435154882,
+          0.013309757150828765,
+          0.03495470692639934,
+          0.15027430843099812,
+          0.260958341781632,
+          0.5050297591643584,
+          0.6581174642416989,
+          0.0008668210783424143,
+          0.002285558696321913,
+          0.013561979520053901,
+          0.03326804308762693,
+          0.09990881589120552,
+          0.21522422474820724
+        ],
+        [
+          0.1439845145382555,
+          0.09956168793787434,
+          0.04455766097562373,
+          0.024995905686348924,
+          0.014408637092289036,
+          0.008248383720609551,
+          0.33475233395689147,
+          0.28951586077157926,
+          0.17961013559303377,
+          0.12087272093614755,
+          0.06361359265556764,
+          0.040203600175741844,
+          0.2000813673831974,
+          0.2649713676642827,
+          0.3404730218225117,
+          0.2901054083623321,
+          0.20580185062105,
+          0.13733007791726765,
+          0.23473723154204437,
+          0.1642419247129974,
+          0.07997063822860032,
+          0.047045179407465706,
+          0.024487073707594967,
+          0.01579534765102822,
+          0.3124786775630181,
+          0.33669933241788313,
+          0.2600301591568309,
+          0.1868511956865426,
+          0.10975506496962387,
+          0.07093343784508577,
+          0.12568318513590188,
+          0.1837405835272729,
+          0.310613390647629,
+          0.32772440698624405,
+          0.27996978451897536,
+          0.21043342435779153,
+          0.2994912400919855,
+          0.3413303807095308,
+          0.2597465650269859,
+          0.18782357029471064,
+          0.0991500116409294,
+          0.06477932027568932,
+          0.11605763378760535,
+          0.1737970849613498,
+          0.2850663732799127,
+          0.3369344897250483,
+          0.3025176079323729,
+          0.2519273965115939,
+          0.029294262396521713,
+          0.046623770801606707,
+          0.1091791335772033,
+          0.16027352837619338,
+          0.2503821628328408,
+          0.3265709299667144
+        ],
+        [
+          0.027260570221549995,
+          0.010739136066828584,
+          0.0020093592600901548,
+          0.0007424493190232069,
+          0.00018081578496640055,
+          6.338372755600404e-05,
+          0.28922058184802385,
+          0.16311873852800926,
+          0.040383599772083785,
+          0.015528393302114115,
+          0.004262019822968198,
+          0.0016472689014742031,
+          0.7457795359647098,
+          0.6168119514109219,
+          0.30323343561202654,
+          0.15833632539887316,
+          0.055821804219181446,
+          0.023588525009940242,
+          0.07974556308248171,
+          0.032222839547202106,
+          0.006125459527864385,
+          0.0024077102423111217,
+          0.0006057355466681575,
+          0.00022421463578703476,
+          0.5025964277244165,
+          0.3257294497476664,
+          0.10377538349722562,
+          0.042698797361439375,
+          0.013561373140217273,
+          0.004980607039141923,
+          0.8539580954161498,
+          0.7697028635305507,
+          0.5043208996888464,
+          0.3247711425738151,
+          0.1468473467379012,
+          0.06559710247447995,
+          0.509911931047986,
+          0.3352547398593694,
+          0.10321572010995377,
+          0.04733856820684484,
+          0.013042082395126683,
+          0.004847636208822376,
+          0.8706326090615659,
+          0.7912482081122509,
+          0.5646593182890892,
+          0.40210716849331973,
+          0.19245263290326864,
+          0.08995513924670717,
+          0.9698389165251359,
+          0.9510906705020713,
+          0.8772588869027428,
+          0.8064584285361797,
+          0.6497090212759536,
+          0.4582048452850784
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FalsePositiveBurden",
+      "parents": [
+        "BaselineSymptomSeverity",
+        "AggressiveCutoffLowering"
+      ],
+      "values": [
+        [
+          0.5804367996614348,
+          0.2783333983511289,
+          0.056652031322525186,
+          0.3931346349929739,
+          0.14122484575985494,
+          0.023633850055741562,
+          0.0675471845428596,
+          0.012296551477878148,
+          0.0014995036368345741
+        ],
+        [
+          0.2780083628921901,
+          0.32928014466000355,
+          0.19658563211348198,
+          0.33106006456648895,
+          0.28687505264021695,
+          0.13452375142597525,
+          0.21920156681017305,
+          0.10208380931586546,
+          0.03826442645301613
+        ],
+        [
+          0.1415548374463751,
+          0.3923864569888675,
+          0.7467623365639928,
+          0.27580530044053714,
+          0.5719001015999282,
+          0.8418423985182831,
+          0.7132512486469673,
+          0.8856196392062564,
+          0.9602360699101492
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift ScreeningDetectionRate toward High (and away from Low), but only if the same action does not make FalsePositiveBurden more likely to be High. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "CollaborativeScreeningWorkflow",
+        "value": "Full"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "ScreeningDetectionRate",
+          "safety_outcome": "FalsePositiveBurden",
+          "good_intervention": "CollaborativeScreeningWorkflow",
+          "risky_intervention": "AggressiveCutoffLowering",
+          "weak_intervention": "PatientSelfReferralPrompt",
+          "good_mediator": "ClinicianAdherenceToProtocol",
+          "confounder": "BaselineSymptomSeverity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "CollaborativeScreeningWorkflow",
+            "value": "Full"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "CollaborativeScreeningWorkflow",
+              "value": "Full",
+              "delta_target": -0.2579,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [],
+          "baselines": {
+            "E_target": 0.4039,
+            "E_safety": 1.5405
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

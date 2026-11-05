@@ -1,0 +1,810 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "satisficing",
+    "seed": 23202,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A researcher is based at a large academic medical center with access to detailed surgical records spanning multiple departments. The institution permits both retrospective chart reviews and prospective observational or interventional data collection.",
+  "non_intervenable_variables": [
+    {
+      "name": "SsiOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DiabetesStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SurgeryDuration",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WoundContaminationClass",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AsaPhysicalStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "SsiOutcome",
+      "values": [
+        "NoInfection",
+        "SuperficialSSI",
+        "DeepOrOrganSSI"
+      ],
+      "desc": "Classification of surgical site infection severity within 30 days postoperatively.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PreopSkinAntiseptic",
+      "values": [
+        "PovidoneIodine",
+        "ChlorhexidineAlcohol"
+      ],
+      "desc": "Type of antiseptic solution applied to the surgical site before incision.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PerioperativeAntibioticTiming",
+      "values": [
+        "NoProtocol",
+        "Within60Min",
+        "Within30Min"
+      ],
+      "desc": "Timing window for administering prophylactic antibiotics before surgical incision.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "WoundClosureTechnique",
+      "values": [
+        "StandardSuture",
+        "AntimicrobialSuture",
+        "NegativePressureClosure"
+      ],
+      "desc": "Method and material used to close the surgical incision at end of procedure.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PostopDressingProtocol",
+      "values": [
+        "StandardGauze",
+        "SilverImpregnatedDressing"
+      ],
+      "desc": "Type of wound dressing applied to the surgical site after closure.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DiabetesStatus",
+      "values": [
+        "None",
+        "Controlled",
+        "Uncontrolled"
+      ],
+      "desc": "Patient's diabetes mellitus diagnosis and glycemic control classification at admission.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndex",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Patient's body mass index category recorded at preoperative assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgeryDuration",
+      "values": [
+        "Short",
+        "Moderate",
+        "Prolonged"
+      ],
+      "desc": "Total operative time from incision to closure categorized by duration.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WoundContaminationClass",
+      "values": [
+        "Clean",
+        "CleanContaminated",
+        "ContaminatedOrDirty"
+      ],
+      "desc": "CDC wound classification assigned based on intraoperative contamination level.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AsaPhysicalStatus",
+      "values": [
+        "ClassI-II",
+        "ClassIII",
+        "ClassIV-V"
+      ],
+      "desc": "American Society of Anesthesiologists physical status score assigned preoperatively.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SsiOutcome",
+      "WoundContaminationClass"
+    ],
+    [
+      "PreopSkinAntiseptic",
+      "SsiOutcome"
+    ],
+    [
+      "PerioperativeAntibioticTiming",
+      "SsiOutcome"
+    ],
+    [
+      "PerioperativeAntibioticTiming",
+      "WoundClosureTechnique"
+    ],
+    [
+      "WoundClosureTechnique",
+      "SsiOutcome"
+    ],
+    [
+      "PostopDressingProtocol",
+      "SsiOutcome"
+    ],
+    [
+      "PostopDressingProtocol",
+      "BodyMassIndex"
+    ],
+    [
+      "DiabetesStatus",
+      "SsiOutcome"
+    ],
+    [
+      "DiabetesStatus",
+      "WoundContaminationClass"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PreopSkinAntiseptic",
+      "parents": [],
+      "values": [
+        [
+          0.3075734878681928
+        ],
+        [
+          0.6924265121318073
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PerioperativeAntibioticTiming",
+      "parents": [],
+      "values": [
+        [
+          0.5298992399351866
+        ],
+        [
+          0.0963129890340074
+        ],
+        [
+          0.373787771030806
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostopDressingProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.17509990662035899
+        ],
+        [
+          0.824900093379641
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DiabetesStatus",
+      "parents": [],
+      "values": [
+        [
+          0.24870746816225253
+        ],
+        [
+          0.44525009112337277
+        ],
+        [
+          0.3060424407143748
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgeryDuration",
+      "parents": [],
+      "values": [
+        [
+          0.5110486438062086
+        ],
+        [
+          0.12948234783965196
+        ],
+        [
+          0.3594690083541394
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AsaPhysicalStatus",
+      "parents": [],
+      "values": [
+        [
+          0.09820315576084325
+        ],
+        [
+          0.20188135693990808
+        ],
+        [
+          0.6999154872992487
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WoundClosureTechnique",
+      "parents": [
+        "PerioperativeAntibioticTiming"
+      ],
+      "values": [
+        [
+          0.2809762998058552,
+          0.09867456247592883,
+          0.018318881987902224
+        ],
+        [
+          0.33814061418010394,
+          0.784772164603154,
+          0.9628265974030634
+        ],
+        [
+          0.38088308601404086,
+          0.11655327292091708,
+          0.018854520609034472
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndex",
+      "parents": [
+        "PostopDressingProtocol"
+      ],
+      "values": [
+        [
+          0.28997173732522635,
+          0.41778961445869595
+        ],
+        [
+          0.2512127672437045,
+          0.2930357914379153
+        ],
+        [
+          0.45881549543106914,
+          0.2891745941033886
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SsiOutcome",
+      "parents": [
+        "DiabetesStatus",
+        "PerioperativeAntibioticTiming",
+        "PostopDressingProtocol",
+        "WoundClosureTechnique",
+        "PreopSkinAntiseptic"
+      ],
+      "values": [
+        [
+          0.15542518187670548,
+          0.20985461731713914,
+          0.2594108596197892,
+          0.3223758008538296,
+          0.3365387379029685,
+          0.39512336115783686,
+          0.8029231027267335,
+          0.8423442351887482,
+          0.8633140375562636,
+          0.8851475610253265,
+          0.8960420198635143,
+          0.91939997706257,
+          0.7152382985227033,
+          0.758475346056441,
+          0.7990920027416902,
+          0.83081786110577,
+          0.847926374298002,
+          0.872474559077932,
+          0.9676049670205283,
+          0.9730078170034825,
+          0.9788874182199825,
+          0.9810242187766997,
+          0.9826120813715262,
+          0.9859426620029694,
+          0.9129851706014963,
+          0.9232989658086429,
+          0.93733047506715,
+          0.946208226863557,
+          0.9486479111528298,
+          0.956687234379401,
+          0.9895619892490063,
+          0.9916407189520888,
+          0.9933545520890907,
+          0.9944696668229359,
+          0.9951122700332553,
+          0.9957540346823477,
+          0.06661207411641998,
+          0.09138881540325423,
+          0.11647476213601933,
+          0.1523084647666854,
+          0.16868714707790766,
+          0.20033221652881955,
+          0.6605302295606587,
+          0.7286563966460851,
+          0.7730405043611616,
+          0.8157095033226485,
+          0.8078736138135759,
+          0.8567883647916437,
+          0.5360148029084082,
+          0.6036927103500412,
+          0.6515148584458856,
+          0.717840295109338,
+          0.7202202731224296,
+          0.7685309144246426,
+          0.9423658271454018,
+          0.9496540199144761,
+          0.9623447089737316,
+          0.9657748190546768,
+          0.9693956121974105,
+          0.9757345378252932,
+          0.8452543253157249,
+          0.8633241809764001,
+          0.8810225701388207,
+          0.9023376794921072,
+          0.9182586413054947,
+          0.9277647170343427,
+          0.9813401272070954,
+          0.9858063765703288,
+          0.9879812510207671,
+          0.9899186378749011,
+          0.9905406027663555,
+          0.9924448088187396,
+          0.005036027858497184,
+          0.0071476993764723554,
+          0.01041990063101803,
+          0.014800302118166853,
+          0.016667892056109607,
+          0.02237679812894528,
+          0.228744542931137,
+          0.2800511488189664,
+          0.34285672247705207,
+          0.4123375477524273,
+          0.41263317439251346,
+          0.4909300599102591,
+          0.11939651066682622,
+          0.1583902782573168,
+          0.2098429734055806,
+          0.24971428520552333,
+          0.2822366298742545,
+          0.3373544141347442,
+          0.7671056897934566,
+          0.8173123727943331,
+          0.8400760237182955,
+          0.8680571903104355,
+          0.8802243607755084,
+          0.8935006607552286,
+          0.4617826622664109,
+          0.5479881554010598,
+          0.6017319526188012,
+          0.6507099535461303,
+          0.6730219129814585,
+          0.7097589374381845,
+          0.9268162957158483,
+          0.942684654064117,
+          0.9498949796510462,
+          0.9579950330188458,
+          0.9619883509373606,
+          0.968774260532116
+        ],
+        [
+          0.30136937995661434,
+          0.31405756907992183,
+          0.31344058560329013,
+          0.3297349967440186,
+          0.3444955937166476,
+          0.33205158872009605,
+          0.1658120011551495,
+          0.1364595546538402,
+          0.1211877752102317,
+          0.103941137035297,
+          0.09455731186571353,
+          0.07410859653673378,
+          0.21537120338076501,
+          0.19209178753025577,
+          0.16433681534084954,
+          0.14477419804997904,
+          0.1295452159072579,
+          0.1115864951510252,
+          0.031417100002144024,
+          0.0262998100947063,
+          0.02066132544230975,
+          0.01863679602884661,
+          0.01709516223841956,
+          0.013849510086690477,
+          0.07973429999054134,
+          0.0713508662081522,
+          0.05912919542700586,
+          0.051321545460999374,
+          0.04899571210457441,
+          0.0417235964835746,
+          0.010338577233094632,
+          0.00829140692307927,
+          0.006602347777916573,
+          0.00549918335579817,
+          0.004861318109358327,
+          0.004226920079700032,
+          0.22120627046841623,
+          0.2535473548467244,
+          0.26790334251459885,
+          0.2970952060016987,
+          0.2854148049768535,
+          0.3094298842397347,
+          0.2520888791079215,
+          0.2100020411102105,
+          0.18297368309638404,
+          0.15384751947087397,
+          0.16222333775317907,
+          0.12276987076878255,
+          0.3036152488675065,
+          0.27832476660509503,
+          0.24623400095556147,
+          0.2146385456463118,
+          0.2183289634704062,
+          0.18399454607349716,
+          0.05460651821781911,
+          0.048089809008225064,
+          0.03608782871283454,
+          0.03316477483793601,
+          0.02965470314328785,
+          0.02363301906732155,
+          0.13071520384366683,
+          0.12018787738643655,
+          0.10667437123087976,
+          0.08937240701175617,
+          0.07467937141079799,
+          0.06714330206197466,
+          0.018335244990799564,
+          0.013977483162873929,
+          0.011869546255649017,
+          0.009977199903005425,
+          0.009369324353490978,
+          0.007493025986161361,
+          0.07229283484373653,
+          0.08148686792191119,
+          0.09480688878964086,
+          0.10889155516284976,
+          0.11793241275163802,
+          0.13400038317384486,
+          0.3197094788821822,
+          0.3294693077678246,
+          0.3347839196953701,
+          0.32753389986741316,
+          0.3300413358273704,
+          0.3201333367896471,
+          0.2632598680984569,
+          0.29465282946935806,
+          0.3113960621386484,
+          0.32397775742397544,
+          0.33301662945592414,
+          0.328420972995786,
+          0.18784249161234662,
+          0.15087466768502417,
+          0.13757771524474377,
+          0.11664771484100891,
+          0.10571768356678983,
+          0.09683092983195117,
+          0.3140575169836057,
+          0.28763111938560854,
+          0.26978898454016625,
+          0.24969495560983285,
+          0.24078480721869658,
+          0.22617112240618217,
+          0.06835229394394342,
+          0.05415272848305511,
+          0.04764520928533408,
+          0.040309159966552134,
+          0.03655118727197048,
+          0.03027901320276034
+        ],
+        [
+          0.5432054381666801,
+          0.476087813602939,
+          0.4271485547769206,
+          0.3478892024021518,
+          0.31896566838038376,
+          0.27282505012206704,
+          0.03126489611811689,
+          0.0211962101574115,
+          0.015498187233504627,
+          0.010911301939376472,
+          0.009400668270772093,
+          0.006491426400696311,
+          0.06939049809653174,
+          0.049432866413303314,
+          0.036571181917460324,
+          0.024407940844250964,
+          0.02252840979474022,
+          0.015938945771042747,
+          0.000977932977327639,
+          0.0006923729018112387,
+          0.0004512563377077355,
+          0.0003389851944536656,
+          0.00029275639005424555,
+          0.0002078279103402522,
+          0.00728052940796232,
+          0.005350167983204919,
+          0.003540329505844148,
+          0.0024702276754438018,
+          0.0023563767425959503,
+          0.0015891691370243882,
+          9.943351789918919e-05,
+          6.787412483192921e-05,
+          4.310013299266784e-05,
+          3.114982126591951e-05,
+          2.6411857386408654e-05,
+          1.9045237952320325e-05,
+          0.7121816554151638,
+          0.6550638297500213,
+          0.6156218953493817,
+          0.5505963292316158,
+          0.5458980479452389,
+          0.4902378992314457,
+          0.08738089133141981,
+          0.061341562243704524,
+          0.04398581254245444,
+          0.03044297720647755,
+          0.029903048433244962,
+          0.02044176443957388,
+          0.1603699482240853,
+          0.11798252304486358,
+          0.1022511405985529,
+          0.06752115924435025,
+          0.06145076340716404,
+          0.04747453950186009,
+          0.003027654636778892,
+          0.002256171077299021,
+          0.0015674623134339758,
+          0.0010604061073873202,
+          0.0009496846593014815,
+          0.0006324431073853466,
+          0.024030470840608158,
+          0.016487941637163384,
+          0.012303058630299572,
+          0.008289913496136704,
+          0.007061987283707352,
+          0.00509198090368254,
+          0.00032462780210505194,
+          0.0002161402667974622,
+          0.0001492027235839551,
+          0.0001041622220933902,
+          9.007288015354629e-05,
+          6.216519509897316e-05,
+          0.9226711372977664,
+          0.9113654327016165,
+          0.8947732105793411,
+          0.8763081427189834,
+          0.8653996951922523,
+          0.8436228186972098,
+          0.45154597818668074,
+          0.39047954341320906,
+          0.32235935782757785,
+          0.2601285523801596,
+          0.25732548978011616,
+          0.18893660330009374,
+          0.6173436212347169,
+          0.5469568922733252,
+          0.478760964455771,
+          0.4263079573705013,
+          0.3847467406698213,
+          0.33422461286946975,
+          0.045051818594196845,
+          0.03181295952064285,
+          0.02234626103696069,
+          0.015295094848555593,
+          0.01405795565770172,
+          0.009668409412820413,
+          0.22415982074998334,
+          0.16438072521333164,
+          0.12847906284103255,
+          0.09959509084403702,
+          0.08619327979984481,
+          0.06406994015563326,
+          0.004831410340208264,
+          0.0031626174528278962,
+          0.0024598110636196054,
+          0.001695807014602231,
+          0.0014604617906689118,
+          0.0009467262651236182
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WoundContaminationClass",
+      "parents": [
+        "SsiOutcome",
+        "DiabetesStatus"
+      ],
+      "values": [
+        [
+          0.3651029462909366,
+          0.8878935100538613,
+          0.989361201673528,
+          0.23829567963118878,
+          0.8114377251691763,
+          0.9805760167613355,
+          0.1454406219208533,
+          0.7004304329742661,
+          0.9647942907569964
+        ],
+        [
+          0.3207208362648476,
+          0.033320111738681504,
+          0.0015861131741498303,
+          0.38362300572478963,
+          0.05580555089345192,
+          0.0028809598191467155,
+          0.42909241276189636,
+          0.0882803099717453,
+          0.00519478163237363
+        ],
+        [
+          0.31417621744421576,
+          0.07878637820745718,
+          0.009052685152322082,
+          0.37808131464402156,
+          0.1327567239373719,
+          0.016543023419517702,
+          0.4254669653172503,
+          0.2112892570539887,
+          0.030010927610629852
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts SsiOutcome toward NoInfection (and away from DeepOrOrganSSI). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes SsiOutcome.",
+      "answer": [
+        {
+          "variable": "PerioperativeAntibioticTiming",
+          "value": "Within30Min",
+          "improvement": 0.3032
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "SsiOutcome",
+          "intervention_A": "PreopSkinAntiseptic",
+          "intervention_B": "PerioperativeAntibioticTiming",
+          "intervention_C": "WoundClosureTechnique",
+          "intervention_D": "PostopDressingProtocol",
+          "confounder": "DiabetesStatus"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "PerioperativeAntibioticTiming",
+              "value": "Within30Min",
+              "improvement": 0.3032
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "PerioperativeAntibioticTiming",
+              "value": "NoProtocol",
+              "improvement": -0.2492
+            },
+            {
+              "variable": "PerioperativeAntibioticTiming",
+              "value": "Within60Min",
+              "improvement": 0.1945
+            },
+            {
+              "variable": "PerioperativeAntibioticTiming",
+              "value": "Within30Min",
+              "improvement": 0.3032
+            },
+            {
+              "variable": "PostopDressingProtocol",
+              "value": "StandardGauze",
+              "improvement": -0.5607
+            },
+            {
+              "variable": "PostopDressingProtocol",
+              "value": "SilverImpregnatedDressing",
+              "improvement": 0.119
+            },
+            {
+              "variable": "WoundClosureTechnique",
+              "value": "StandardSuture",
+              "improvement": -0.0869
+            },
+            {
+              "variable": "WoundClosureTechnique",
+              "value": "AntimicrobialSuture",
+              "improvement": 0.0062
+            },
+            {
+              "variable": "WoundClosureTechnique",
+              "value": "NegativePressureClosure",
+              "improvement": 0.0569
+            },
+            {
+              "variable": "PreopSkinAntiseptic",
+              "value": "PovidoneIodine",
+              "improvement": -0.0331
+            },
+            {
+              "variable": "PreopSkinAntiseptic",
+              "value": "ChlorhexidineAlcohol",
+              "improvement": 0.0147
+            }
+          ],
+          "threshold": 0.2488,
+          "baseline_E_target": 0.3571
+        }
+      }
+    }
+  ]
+}

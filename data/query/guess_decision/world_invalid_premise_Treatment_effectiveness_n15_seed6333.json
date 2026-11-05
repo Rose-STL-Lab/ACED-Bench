@@ -1,0 +1,672 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "invalid_premise",
+    "seed": 6333,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": null
+  },
+  "story": "A bariatric surgery center within a large academic medical system maintains detailed patient records spanning preoperative assessments through long-term follow-up. The research team can access these records and request new observational or interventional data collection.",
+  "non_intervenable_variables": [
+    {
+      "name": "ExcessWeightLossCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineBmi",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DailyCalorieAdherence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DiabetesStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BiologicalSex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SleepApneaSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmokingHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorWeightLossAttempts",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PostOpComplicationGrade",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ExcessWeightLossCategory",
+      "values": [
+        "Excellent",
+        "Moderate",
+        "Poor"
+      ],
+      "desc": "Classification of percent excess weight lost at 12 months post-surgery.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineBmi",
+      "values": [
+        "Class1Obesity",
+        "Class2Obesity",
+        "Class3Obesity"
+      ],
+      "desc": "Pre-operative BMI classification at program enrollment.",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PostSurgeryDietaryCoaching",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of assigned dietitian-led coaching sessions after bariatric surgery.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DailyCalorieAdherence",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Patient adherence to prescribed daily calorie targets during recovery.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "DiabetesStatus",
+      "values": [
+        "No",
+        "Prediabetes",
+        "Yes"
+      ],
+      "desc": "Pre-operative type 2 diabetes diagnosis status at enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAge",
+      "values": [
+        "Under40",
+        "40to55",
+        "Over55"
+      ],
+      "desc": "Age group of the patient at time of bariatric surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BiologicalSex",
+      "values": [
+        "Female",
+        "Male"
+      ],
+      "desc": "Biological sex recorded in the patient medical chart.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgeryType",
+      "values": [
+        "SleeveGastrectomy",
+        "GastricBypass"
+      ],
+      "desc": "Type of bariatric surgical procedure performed.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "StructuredExerciseProgram",
+      "values": [
+        "None",
+        "Moderate",
+        "Intensive"
+      ],
+      "desc": "Level of assigned structured physical exercise program post-surgery.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PsychologicalCounselingFrequency",
+      "values": [
+        "None",
+        "Biweekly",
+        "Weekly"
+      ],
+      "desc": "Frequency of scheduled behavioral health counseling sessions.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SleepApneaSeverity",
+      "values": [
+        "None",
+        "Mild",
+        "Severe"
+      ],
+      "desc": "Pre-operative obstructive sleep apnea severity classification.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmokingHistory",
+      "values": [
+        "Never",
+        "Former",
+        "Current"
+      ],
+      "desc": "Patient smoking history documented at program intake.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "values": [
+        "Low",
+        "Middle",
+        "High"
+      ],
+      "desc": "Self-reported household income bracket at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorWeightLossAttempts",
+      "values": [
+        "None",
+        "OneToTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of documented medically supervised weight-loss attempts before surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PostOpComplicationGrade",
+      "values": [
+        "None",
+        "Minor",
+        "Major"
+      ],
+      "desc": "Clavien-Dindo classification of surgical complications within 30 days.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "BaselineBmi",
+      "ExcessWeightLossCategory"
+    ],
+    [
+      "PostSurgeryDietaryCoaching",
+      "DailyCalorieAdherence"
+    ],
+    [
+      "DailyCalorieAdherence",
+      "ExcessWeightLossCategory"
+    ],
+    [
+      "DiabetesStatus",
+      "ExcessWeightLossCategory"
+    ],
+    [
+      "BiologicalSex",
+      "SurgeryType"
+    ],
+    [
+      "StructuredExerciseProgram",
+      "SurgeryType"
+    ],
+    [
+      "SmokingHistory",
+      "StructuredExerciseProgram"
+    ],
+    [
+      "HouseholdIncomeLevel",
+      "SmokingHistory"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineBmi",
+      "parents": [],
+      "values": [
+        [
+          0.5590028139020726
+        ],
+        [
+          0.2101071196273755
+        ],
+        [
+          0.23089006647055185
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostSurgeryDietaryCoaching",
+      "parents": [],
+      "values": [
+        [
+          0.6401895726791946
+        ],
+        [
+          0.1468844628524313
+        ],
+        [
+          0.21292596446837395
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiabetesStatus",
+      "parents": [],
+      "values": [
+        [
+          0.2402468754643635
+        ],
+        [
+          0.5809027040819913
+        ],
+        [
+          0.17885042045364521
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAge",
+      "parents": [],
+      "values": [
+        [
+          0.09475570907546713
+        ],
+        [
+          0.7022194901857066
+        ],
+        [
+          0.20302480073882626
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BiologicalSex",
+      "parents": [],
+      "values": [
+        [
+          0.24044683910121728
+        ],
+        [
+          0.7595531608987828
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PsychologicalCounselingFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.09371726843171845
+        ],
+        [
+          0.6445786439227784
+        ],
+        [
+          0.2617040876455032
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SleepApneaSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.1993014086951125
+        ],
+        [
+          0.3761348990842903
+        ],
+        [
+          0.42456369222059726
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HouseholdIncomeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.17734327947026862
+        ],
+        [
+          0.4329958338588046
+        ],
+        [
+          0.38966088667092685
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorWeightLossAttempts",
+      "parents": [],
+      "values": [
+        [
+          0.6220278979257472
+        ],
+        [
+          0.10114766534968662
+        ],
+        [
+          0.27682443672456614
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostOpComplicationGrade",
+      "parents": [],
+      "values": [
+        [
+          0.36724116612582125
+        ],
+        [
+          0.09758610510391895
+        ],
+        [
+          0.5351727287702599
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DailyCalorieAdherence",
+      "parents": [
+        "PostSurgeryDietaryCoaching"
+      ],
+      "values": [
+        [
+          0.16051430960581395,
+          0.33630253396681126,
+          0.870822592975327
+        ],
+        [
+          0.2873277350251996,
+          0.333869434589663,
+          0.11374845959046095
+        ],
+        [
+          0.5521579553689865,
+          0.32982803144352574,
+          0.015428947434212035
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SmokingHistory",
+      "parents": [
+        "HouseholdIncomeLevel"
+      ],
+      "values": [
+        [
+          0.22822721023413844,
+          0.5407176296920668,
+          0.7121792818996812
+        ],
+        [
+          0.38644159501783615,
+          0.012812644282337596,
+          0.00023616164743705872
+        ],
+        [
+          0.38533119474802546,
+          0.44646972602559565,
+          0.28758455645288167
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ExcessWeightLossCategory",
+      "parents": [
+        "BaselineBmi",
+        "DiabetesStatus",
+        "DailyCalorieAdherence"
+      ],
+      "values": [
+        [
+          0.9278901544065936,
+          0.652593150359787,
+          0.39100898365380404,
+          0.891020926880047,
+          0.538639142021571,
+          0.27996783816112836,
+          0.7133955006024539,
+          0.21177825434652667,
+          0.06754354091741213,
+          0.8607471919584009,
+          0.47584017222657016,
+          0.2145495839991357,
+          0.8075150758438935,
+          0.33676171320153997,
+          0.12629451112079698,
+          0.5366153416926116,
+          0.08819948785215566,
+          0.02316981311679564,
+          0.4785037205572903,
+          0.0643450589851841,
+          0.015407460092948225,
+          0.3321235933922062,
+          0.03326880860285491,
+          0.007768391205933563,
+          0.09156786712739785,
+          0.005047097313606414,
+          0.0010414541726520257
+        ],
+        [
+          0.06703554247513688,
+          0.25341037454457965,
+          0.3452265547997117,
+          0.09760667418067527,
+          0.29928241297374397,
+          0.32371143880174363,
+          0.22216821291471195,
+          0.3142365704967137,
+          0.21669058714670977,
+          0.12328338623990365,
+          0.3124626632318553,
+          0.32107995243527443,
+          0.15943130408194556,
+          0.3313558270444944,
+          0.27419317091303336,
+          0.2978481634484872,
+          0.24090958895235595,
+          0.14269890253753706,
+          0.31357481267178294,
+          0.21680038374761681,
+          0.11469259556064242,
+          0.33028257331326927,
+          0.17133858879546224,
+          0.08417620478132973,
+          0.24004387222005324,
+          0.06697831777780545,
+          0.03276474696608071
+        ],
+        [
+          0.005074303118269573,
+          0.09399647509563325,
+          0.2637644615464843,
+          0.01137239893927768,
+          0.1620784450046849,
+          0.3963207230371281,
+          0.06443628648283413,
+          0.4739851751567596,
+          0.715765871935878,
+          0.01596942180169543,
+          0.21169716454157453,
+          0.4643704635655898,
+          0.033053620074160975,
+          0.3318824597539656,
+          0.5995123179661697,
+          0.16553649485890123,
+          0.6708909231954885,
+          0.8341312843456673,
+          0.20792146677092685,
+          0.718854557267199,
+          0.8698999443464094,
+          0.3375938332945246,
+          0.7953926026016829,
+          0.9080554040127367,
+          0.6683882606525489,
+          0.9279745849085881,
+          0.9661937988612673
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StructuredExerciseProgram",
+      "parents": [
+        "SmokingHistory"
+      ],
+      "values": [
+        [
+          0.38814779679420147,
+          0.2369525400713967,
+          0.11910686026449582
+        ],
+        [
+          0.2770785448564405,
+          0.47942180373140003,
+          0.6830363702546096
+        ],
+        [
+          0.33477365834935796,
+          0.28362565619720326,
+          0.19785676948089465
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgeryType",
+      "parents": [
+        "StructuredExerciseProgram",
+        "BiologicalSex"
+      ],
+      "values": [
+        [
+          0.5201736160689356,
+          0.4580938529354055,
+          0.1688578701553966,
+          0.13675583147265039,
+          0.036677483972337326,
+          0.02883287751842721
+        ],
+        [
+          0.4798263839310644,
+          0.5419061470645945,
+          0.8311421298446033,
+          0.8632441685273496,
+          0.9633225160276626,
+          0.9711671224815728
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting BaselineBmi as a way to shift ExcessWeightLossCategory toward Excellent (and away from Poor). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift ExcessWeightLossCategory toward Excellent.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "PostSurgeryDietaryCoaching",
+          "value": "Weekly"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": null,
+        "roles": {
+          "target": "ExcessWeightLossCategory",
+          "non_intervenable_x": "BaselineBmi",
+          "intervenable_alt": "PostSurgeryDietaryCoaching",
+          "alt_mediator": "DailyCalorieAdherence",
+          "confounder": "DiabetesStatus"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "BaselineBmi",
+          "non_intervenable_predictive_gap": 0.879,
+          "alternative": {
+            "variable": "PostSurgeryDietaryCoaching",
+            "value": "Weekly"
+          },
+          "alternative_effect": -0.4841,
+          "acceptable_alternatives": [
+            {
+              "variable": "PostSurgeryDietaryCoaching",
+              "value": "Weekly",
+              "improvement": 0.4841
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

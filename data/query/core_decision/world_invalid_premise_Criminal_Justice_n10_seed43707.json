@@ -1,0 +1,532 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 10,
+    "topology": "invalid_premise:non_intervenable_proxy",
+    "seed": 43707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "non_intervenable_proxy"
+  },
+  "story": "A county probation department maintains detailed administrative records on individuals under community supervision. The research team has access to these records and can request both observational extracts and interventional study samples through the department.",
+  "non_intervenable_variables": [
+    {
+      "name": "RecidivismOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorOffenseCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ProbationerEngagementLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OffenseSeverityAtSentencing",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmploymentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeAtSupervisionStart",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingStability",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "RecidivismOutcome",
+      "values": [
+        "None",
+        "TechnicalViolation",
+        "NewArrest"
+      ],
+      "desc": "Whether probationer had no recidivism, a technical violation, or a new arrest within 12 months.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorOffenseCount",
+      "values": [
+        "Zero",
+        "OneToThree",
+        "FourOrMore"
+      ],
+      "desc": "Number of prior criminal convictions recorded before current probation sentence.",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SupervisionContactFrequency",
+      "values": [
+        "Monthly",
+        "Biweekly",
+        "Weekly"
+      ],
+      "desc": "Scheduled frequency of face-to-face meetings between probationer and supervising officer.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProbationerEngagementLevel",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Degree to which the probationer actively participates in assigned supervision activities.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "OffenseSeverityAtSentencing",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Classified severity of the index offense at the time of sentencing.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "values": [
+        "None",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Documented history of substance use disorders prior to probation intake.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmploymentStatus",
+      "values": [
+        "Employed",
+        "PartTime",
+        "Unemployed"
+      ],
+      "desc": "Probationer's employment status at the start of the supervision period.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MandatedTreatmentReferral",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Extent of court-mandated behavioral health treatment referrals assigned at sentencing.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeAtSupervisionStart",
+      "values": [
+        "Under25",
+        "TwentyFiveToForty",
+        "OverForty"
+      ],
+      "desc": "Age category of the probationer at the beginning of the supervision term.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingStability",
+      "values": [
+        "Stable",
+        "Unstable"
+      ],
+      "desc": "Whether the probationer has consistent housing throughout the supervision period.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PriorOffenseCount",
+      "RecidivismOutcome"
+    ],
+    [
+      "SupervisionContactFrequency",
+      "ProbationerEngagementLevel"
+    ],
+    [
+      "SupervisionContactFrequency",
+      "EmploymentStatus"
+    ],
+    [
+      "ProbationerEngagementLevel",
+      "RecidivismOutcome"
+    ],
+    [
+      "OffenseSeverityAtSentencing",
+      "RecidivismOutcome"
+    ],
+    [
+      "OffenseSeverityAtSentencing",
+      "HousingStability"
+    ],
+    [
+      "EmploymentStatus",
+      "AgeAtSupervisionStart"
+    ],
+    [
+      "EmploymentStatus",
+      "HousingStability"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PriorOffenseCount",
+      "parents": [],
+      "values": [
+        [
+          0.18352539854086014
+        ],
+        [
+          0.7196831186943964
+        ],
+        [
+          0.09679148276474332
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SupervisionContactFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.1365988280524216
+        ],
+        [
+          0.2989275069710997
+        ],
+        [
+          0.5644736649764787
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OffenseSeverityAtSentencing",
+      "parents": [],
+      "values": [
+        [
+          0.6086994928604342
+        ],
+        [
+          0.29607335021617265
+        ],
+        [
+          0.09522715692339319
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubstanceUseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.10179646774245385
+        ],
+        [
+          0.1311513389794677
+        ],
+        [
+          0.7670521932780785
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MandatedTreatmentReferral",
+      "parents": [],
+      "values": [
+        [
+          0.18066001171952623
+        ],
+        [
+          0.5401127583536435
+        ],
+        [
+          0.27922722992683047
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProbationerEngagementLevel",
+      "parents": [
+        "SupervisionContactFrequency"
+      ],
+      "values": [
+        [
+          0.15698773202581282,
+          0.3236838817308179,
+          0.8642976326189775
+        ],
+        [
+          0.30071865752399773,
+          0.32654724684744,
+          0.1199026886398956
+        ],
+        [
+          0.5422936104501894,
+          0.34976887142174207,
+          0.015799678741127005
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmploymentStatus",
+      "parents": [
+        "SupervisionContactFrequency"
+      ],
+      "values": [
+        [
+          0.2759200166545948,
+          0.05278644132018776,
+          0.005807651747526539
+        ],
+        [
+          0.43363613040820054,
+          0.27543042590957345,
+          0.10060912505524319
+        ],
+        [
+          0.29044385293720465,
+          0.6717831327702388,
+          0.8935832231972302
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RecidivismOutcome",
+      "parents": [
+        "PriorOffenseCount",
+        "OffenseSeverityAtSentencing",
+        "ProbationerEngagementLevel"
+      ],
+      "values": [
+        [
+          0.9257922277951377,
+          0.6551504169442595,
+          0.40413768448958587,
+          0.8941966898801467,
+          0.5541202982724441,
+          0.27577658480303513,
+          0.711367516894877,
+          0.20869824374841908,
+          0.06549446027833236,
+          0.8754259213495402,
+          0.46788440564696326,
+          0.22053690110698684,
+          0.8080823293253777,
+          0.33171573159154877,
+          0.12025062742778336,
+          0.5255521856684944,
+          0.09362099768521599,
+          0.02268004969138895,
+          0.4763750122917291,
+          0.06290216971771485,
+          0.01537012656011038,
+          0.33107660863089944,
+          0.033146874931634,
+          0.008099524754793662,
+          0.08560960382148149,
+          0.00498713817036139,
+          0.001049888041452973
+        ],
+        [
+          0.06882897000667793,
+          0.2477573839377718,
+          0.3316030546025062,
+          0.09488405084426944,
+          0.2931193241117055,
+          0.3220878590072294,
+          0.21910463433669847,
+          0.3135489702514822,
+          0.22857667155754785,
+          0.1098462408124862,
+          0.31750216860116703,
+          0.3152125139410896,
+          0.16025792967998947,
+          0.3404886473731909,
+          0.279969287832904,
+          0.3118147397131722,
+          0.24187826311320912,
+          0.14167628430771237,
+          0.3125910307933621,
+          0.21538159731456064,
+          0.11195836194882296,
+          0.3382273030501489,
+          0.16559967617796026,
+          0.08773502076137474,
+          0.22939469586131128,
+          0.06881153340445434,
+          0.03179250099212043
+        ],
+        [
+          0.00537880219818436,
+          0.09709219911796882,
+          0.26425926090790797,
+          0.010919259275583822,
+          0.1527603776158504,
+          0.40213555618973545,
+          0.06952784876842455,
+          0.47775278600009874,
+          0.7059288681641199,
+          0.014727837837973653,
+          0.21461342575186976,
+          0.4642505849519235,
+          0.03165974099463277,
+          0.32779562103526033,
+          0.5997800847393128,
+          0.16263307461833348,
+          0.6645007392015748,
+          0.8356436660008988,
+          0.21103395691490862,
+          0.7217162329677245,
+          0.8726715114910667,
+          0.33069608831895164,
+          0.8012534488904057,
+          0.9041654544838316,
+          0.6849957003172072,
+          0.9262013284251842,
+          0.9671576109664266
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeAtSupervisionStart",
+      "parents": [
+        "EmploymentStatus"
+      ],
+      "values": [
+        [
+          0.31962891506454244,
+          0.06310258797186219,
+          0.006909328659117119
+        ],
+        [
+          0.23772056095962038,
+          0.6055643038568185,
+          0.8555420452931352
+        ],
+        [
+          0.4426505239758371,
+          0.33133310817131945,
+          0.13754862604774762
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HousingStability",
+      "parents": [
+        "EmploymentStatus",
+        "OffenseSeverityAtSentencing"
+      ],
+      "values": [
+        [
+          0.4868085823365323,
+          0.10588531587131372,
+          0.014569087734273591,
+          0.6450162819164849,
+          0.18489996302233425,
+          0.02753983904954611,
+          0.7768122238103682,
+          0.30290249088544935,
+          0.05145537516055159
+        ],
+        [
+          0.5131914176634678,
+          0.8941146841286863,
+          0.9854309122657264,
+          0.35498371808351525,
+          0.8151000369776658,
+          0.9724601609504538,
+          0.2231877761896319,
+          0.6970975091145506,
+          0.9485446248394483
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting PriorOffenseCount as a way to shift RecidivismOutcome toward None (and away from NewArrest). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift RecidivismOutcome toward None.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "SupervisionContactFrequency",
+          "value": "Weekly"
+        },
+        "invalid_reason": "non_intervenable_proxy"
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "non_intervenable_proxy",
+        "roles": {
+          "target": "RecidivismOutcome",
+          "non_intervenable_x": "PriorOffenseCount",
+          "intervenable_alt": "SupervisionContactFrequency",
+          "alt_mediator": "ProbationerEngagementLevel",
+          "confounder": "OffenseSeverityAtSentencing"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "PriorOffenseCount",
+          "non_intervenable_predictive_gap": 0.8713,
+          "alternative": {
+            "variable": "SupervisionContactFrequency",
+            "value": "Weekly"
+          },
+          "alternative_effect": -0.2443,
+          "acceptable_alternatives": [
+            {
+              "variable": "SupervisionContactFrequency",
+              "value": "Weekly",
+              "improvement": 0.2443
+            }
+          ],
+          "accept_threshold": 0.1,
+          "invalid_reason": "non_intervenable_proxy"
+        }
+      }
+    }
+  ]
+}

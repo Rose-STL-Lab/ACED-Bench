@@ -1,0 +1,462 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "invalid_premise:valid_proposed_intervention",
+    "seed": 9402,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "valid_proposed_intervention"
+  },
+  "story": "A researcher works within a large academic medical center's surgical department. She has access to perioperative patient records and can request both observational data extracts and prospective interventional study samples from the institution.",
+  "non_intervenable_variables": [
+    {
+      "name": "SurgicalSiteInfectionGrade",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SkinBacterialBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DiabetesStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OperationDuration",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WoundClassification",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ASAPhysicalStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "SurgicalSiteInfectionGrade",
+      "values": [
+        "None",
+        "Superficial",
+        "DeepOrOrgan"
+      ],
+      "desc": "Classification of postoperative surgical site complication severity.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PreopChlorhexidineBathing",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether patient received preoperative chlorhexidine skin antisepsis bathing protocol.",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NegativePressureWoundTherapy",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether closed-incision negative pressure wound therapy was applied postoperatively.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SkinBacterialBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Quantified bacterial colony count on perioperative skin surface cultures.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "DiabetesStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has a documented diagnosis of diabetes mellitus.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OperationDuration",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Total elapsed time from incision to wound closure in categories.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WoundClassification",
+      "values": [
+        "Clean",
+        "CleanContaminated",
+        "Contaminated"
+      ],
+      "desc": "CDC wound classification assigned at time of surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Patient body mass index grouped into standard clinical categories.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PerioperativeAntibioticTiming",
+      "values": [
+        "Timely",
+        "Late"
+      ],
+      "desc": "Whether prophylactic antibiotics were administered within recommended preincision window.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ASAPhysicalStatus",
+      "values": [
+        "ClassI-II",
+        "ClassIII-IV"
+      ],
+      "desc": "American Society of Anesthesiologists physical status classification grouping.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PreopChlorhexidineBathing",
+      "SkinBacterialBurden"
+    ],
+    [
+      "NegativePressureWoundTherapy",
+      "SurgicalSiteInfectionGrade"
+    ],
+    [
+      "SkinBacterialBurden",
+      "SurgicalSiteInfectionGrade"
+    ],
+    [
+      "SkinBacterialBurden",
+      "ASAPhysicalStatus"
+    ],
+    [
+      "DiabetesStatus",
+      "SurgicalSiteInfectionGrade"
+    ],
+    [
+      "DiabetesStatus",
+      "WoundClassification"
+    ],
+    [
+      "OperationDuration",
+      "PreopChlorhexidineBathing"
+    ],
+    [
+      "WoundClassification",
+      "ASAPhysicalStatus"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "NegativePressureWoundTherapy",
+      "parents": [],
+      "values": [
+        [
+          0.20690011808183825
+        ],
+        [
+          0.7930998819181617
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DiabetesStatus",
+      "parents": [],
+      "values": [
+        [
+          0.2669502259258243
+        ],
+        [
+          0.7330497740741757
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OperationDuration",
+      "parents": [],
+      "values": [
+        [
+          0.09102526017552387
+        ],
+        [
+          0.09102526017552387
+        ],
+        [
+          0.8179494796489524
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [],
+      "values": [
+        [
+          0.6273653740435162
+        ],
+        [
+          0.17146057195703618
+        ],
+        [
+          0.20117405399944768
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerioperativeAntibioticTiming",
+      "parents": [],
+      "values": [
+        [
+          0.3217814123997529
+        ],
+        [
+          0.6782185876002471
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "WoundClassification",
+      "parents": [
+        "DiabetesStatus"
+      ],
+      "values": [
+        [
+          0.3497983573334228,
+          0.06415799338326296
+        ],
+        [
+          0.31427106013553074,
+          0.013561279388347417
+        ],
+        [
+          0.33593058253104646,
+          0.9222807272283895
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreopChlorhexidineBathing",
+      "parents": [
+        "OperationDuration"
+      ],
+      "values": [
+        [
+          0.41545825293711636,
+          0.4982746546534758,
+          0.5811858328637701
+        ],
+        [
+          0.5845417470628836,
+          0.5017253453465241,
+          0.4188141671362299
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SkinBacterialBurden",
+      "parents": [
+        "PreopChlorhexidineBathing"
+      ],
+      "values": [
+        [
+          0.16189825784554723,
+          0.8665629545225109
+        ],
+        [
+          0.29799726852181235,
+          0.11839654228037856
+        ],
+        [
+          0.5401044736326405,
+          0.015040503197110507
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgicalSiteInfectionGrade",
+      "parents": [
+        "DiabetesStatus",
+        "SkinBacterialBurden",
+        "NegativePressureWoundTherapy"
+      ],
+      "values": [
+        [
+          0.8731214665066106,
+          0.8141591441218745,
+          0.5009136423176962,
+          0.34246288247932066,
+          0.23756511920190543,
+          0.11669925960932,
+          0.5760252075890434,
+          0.38638313943621033,
+          0.1067561140129296,
+          0.04475402411671819,
+          0.028638029536717947,
+          0.010663937581904625
+        ],
+        [
+          0.11311198677959791,
+          0.15447306162540805,
+          0.3191087901054068,
+          0.33844416501295616,
+          0.32819147746786026,
+          0.2736245374782923,
+          0.2843624927584587,
+          0.34500523641263986,
+          0.25364772732064494,
+          0.17647567591065738,
+          0.14427197567840225,
+          0.09621173280453967
+        ],
+        [
+          0.013766546713791563,
+          0.03136779425271744,
+          0.17997756757689692,
+          0.3190929525077232,
+          0.43424340333023437,
+          0.6096762029123877,
+          0.13961229965249794,
+          0.26861162415114986,
+          0.6395961586664255,
+          0.7787702999726244,
+          0.8270899947848798,
+          0.8931243296135557
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ASAPhysicalStatus",
+      "parents": [
+        "SkinBacterialBurden",
+        "WoundClassification"
+      ],
+      "values": [
+        [
+          0.5387867148237175,
+          0.6204847912741394,
+          0.6958797416912061,
+          0.1245830034036676,
+          0.16609204276888342,
+          0.21798738202146406,
+          0.017041497605264952,
+          0.023689048743685423,
+          0.032843037036860416
+        ],
+        [
+          0.46121328517628235,
+          0.3795152087258607,
+          0.3041202583087939,
+          0.8754169965963323,
+          0.8339079572311165,
+          0.7820126179785358,
+          0.982958502394735,
+          0.9763109512563145,
+          0.9671569629631396
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting PreopChlorhexidineBathing=Yes as a way to shift SurgicalSiteInfectionGrade toward None (and away from DeepOrOrgan). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift SurgicalSiteInfectionGrade toward None.",
+      "answer": {
+        "is_valid_intervention": true,
+        "invalid_reason": null,
+        "proposed_intervention": {
+          "variable": "PreopChlorhexidineBathing",
+          "value": "Yes"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "valid_proposed_intervention",
+        "roles": {
+          "target": "SurgicalSiteInfectionGrade",
+          "proposed_intervention": "PreopChlorhexidineBathing",
+          "intervenable_alt": "NegativePressureWoundTherapy",
+          "alt_mediator": "SkinBacterialBurden",
+          "confounder": "DiabetesStatus"
+        },
+        "gold": {
+          "is_valid_intervention": true,
+          "valid_reason": "proposed_intervention_meaningfully_improves_target",
+          "proposed_intervention": {
+            "variable": "PreopChlorhexidineBathing",
+            "value": "Yes"
+          },
+          "proposed_effect": -0.4053,
+          "acceptable_alternatives": [
+            {
+              "variable": "PreopChlorhexidineBathing",
+              "value": "Yes",
+              "improvement": 0.4053
+            },
+            {
+              "variable": "NegativePressureWoundTherapy",
+              "value": "No",
+              "improvement": 0.169
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

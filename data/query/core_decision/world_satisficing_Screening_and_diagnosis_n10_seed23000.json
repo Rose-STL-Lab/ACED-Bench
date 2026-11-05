@@ -1,0 +1,816 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "satisficing",
+    "seed": 23000,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A university-affiliated memory disorders clinic maintains detailed records on all patients referred for cognitive evaluation. The research team has access to these clinical records and can request additional observational or interventional data collection as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "DiagnosticAccuracy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineCognitiveReserve",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HearingImpairment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrimaryLanguageConcordance",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DepressiveSymptomSeverity",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DiagnosticAccuracy",
+      "values": [
+        "CorrectClassification",
+        "PartialMisclassification",
+        "GrossMisclassification"
+      ],
+      "desc": "Concordance between screening classification and gold-standard clinical diagnosis.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ScreeningToolType",
+      "values": [
+        "StandardMMSE",
+        "MoCA",
+        "ExtendedNeuropsychBattery"
+      ],
+      "desc": "Primary cognitive screening instrument administered during evaluation.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "InformantCollateralInterview",
+      "values": [
+        "None",
+        "StructuredInterview"
+      ],
+      "desc": "Whether a structured interview with a knowledgeable informant is conducted.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalCognitiveAssessment",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Use of a tablet-based computerized cognitive testing platform.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MultisessionTestingProtocol",
+      "values": [
+        "SingleSession",
+        "TwoSessions",
+        "ThreeSessions"
+      ],
+      "desc": "Number of separate assessment sessions over which cognitive testing is spread.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineCognitiveReserve",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Estimated cognitive reserve based on education, occupation, and literacy.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under70",
+        "70to80",
+        "Over80"
+      ],
+      "desc": "Patient age bracket at time of cognitive assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HearingImpairment",
+      "values": [
+        "None",
+        "Mild",
+        "Moderate"
+      ],
+      "desc": "Degree of measured hearing loss in the patient.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PrimaryLanguageConcordance",
+      "values": [
+        "Concordant",
+        "Discordant"
+      ],
+      "desc": "Whether the test language matches the patient's primary spoken language.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DepressiveSymptomSeverity",
+      "values": [
+        "Minimal",
+        "Mild",
+        "ModerateOrGreater"
+      ],
+      "desc": "Severity of current depressive symptoms measured by standardized scale.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ScreeningToolType",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "InformantCollateralInterview",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "DigitalCognitiveAssessment",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "MultisessionTestingProtocol",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "MultisessionTestingProtocol",
+      "AgeGroup"
+    ],
+    [
+      "BaselineCognitiveReserve",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "BaselineCognitiveReserve",
+      "DigitalCognitiveAssessment"
+    ],
+    [
+      "AgeGroup",
+      "ScreeningToolType"
+    ],
+    [
+      "HearingImpairment",
+      "DepressiveSymptomSeverity"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "InformantCollateralInterview",
+      "parents": [],
+      "values": [
+        [
+          0.49036717975633987
+        ],
+        [
+          0.5096328202436601
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MultisessionTestingProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.251931039689647
+        ],
+        [
+          0.580508503873177
+        ],
+        [
+          0.16756045643717613
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineCognitiveReserve",
+      "parents": [],
+      "values": [
+        [
+          0.2130255036605997
+        ],
+        [
+          0.6936154590570032
+        ],
+        [
+          0.09335903728239706
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HearingImpairment",
+      "parents": [],
+      "values": [
+        [
+          0.46866766411308175
+        ],
+        [
+          0.27546464458723297
+        ],
+        [
+          0.2558676912996853
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PrimaryLanguageConcordance",
+      "parents": [],
+      "values": [
+        [
+          0.40652889426514255
+        ],
+        [
+          0.5934711057348575
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [
+        "MultisessionTestingProtocol"
+      ],
+      "values": [
+        [
+          0.3405779208308671,
+          0.5809274315732228,
+          0.7853032740472395
+        ],
+        [
+          0.31134677199553223,
+          0.22529199545322168,
+          0.12919844450183485
+        ],
+        [
+          0.3480753071736007,
+          0.19378057297355558,
+          0.0854982814509257
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DigitalCognitiveAssessment",
+      "parents": [
+        "BaselineCognitiveReserve"
+      ],
+      "values": [
+        [
+          0.4367390564679362,
+          0.983026152474589,
+          0.9997688773780912
+        ],
+        [
+          0.5632609435320639,
+          0.016973847525411038,
+          0.0002311226219087247
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DepressiveSymptomSeverity",
+      "parents": [
+        "HearingImpairment"
+      ],
+      "values": [
+        [
+          0.2793234393582414,
+          0.016046479138461654,
+          0.0005591787863168547
+        ],
+        [
+          0.41913094739479634,
+          0.8032259720364705,
+          0.9337364507961785
+        ],
+        [
+          0.30154561324696233,
+          0.1807275488250679,
+          0.0657043704175046
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ScreeningToolType",
+      "parents": [
+        "AgeGroup"
+      ],
+      "values": [
+        [
+          0.4025814253363506,
+          0.6080559457975165,
+          0.6746691335019104
+        ],
+        [
+          0.2839079558870774,
+          0.019917633781446464,
+          0.0010264916440425964
+        ],
+        [
+          0.31351061877657205,
+          0.3720264204210371,
+          0.324304374854047
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiagnosticAccuracy",
+      "parents": [
+        "BaselineCognitiveReserve",
+        "ScreeningToolType",
+        "MultisessionTestingProtocol",
+        "DigitalCognitiveAssessment",
+        "InformantCollateralInterview"
+      ],
+      "values": [
+        [
+          0.15375901282925597,
+          0.1990853166232673,
+          0.3349354023666773,
+          0.3930627773417323,
+          0.5946058576259711,
+          0.658590183069722,
+          0.7611775138575729,
+          0.7878228094562613,
+          0.8164558724817118,
+          0.846012423955488,
+          0.8995442340576609,
+          0.9135651697201722,
+          0.7084526046587215,
+          0.7525290386343335,
+          0.841366955738807,
+          0.8637961509081343,
+          0.9195010271887135,
+          0.9289434685262,
+          0.9570113024725341,
+          0.9665839736748372,
+          0.9672444224268268,
+          0.9743828451075012,
+          0.9834483554821818,
+          0.9857629092457293,
+          0.9114421290846172,
+          0.924623503024775,
+          0.9521445493155573,
+          0.9585504431199704,
+          0.9745018537208372,
+          0.9799220388248203,
+          0.9867310027564532,
+          0.9896110136949678,
+          0.990487391032663,
+          0.9920039843832603,
+          0.9947046125392666,
+          0.9955866023748597,
+          0.06587019936388902,
+          0.08737282581207736,
+          0.16830136592753775,
+          0.21574720515996526,
+          0.3798836402568479,
+          0.4471546146083236,
+          0.595307432430824,
+          0.6502138920462904,
+          0.6760528033231579,
+          0.7212085357347232,
+          0.8193018179111049,
+          0.8349070346582466,
+          0.5466194669856119,
+          0.596674045118637,
+          0.7149137889777091,
+          0.7691116748886064,
+          0.8666799905743308,
+          0.8820631780876624,
+          0.9197527708778593,
+          0.939688157528098,
+          0.9391809221007866,
+          0.953326756864568,
+          0.9676945499547337,
+          0.9726195414096538,
+          0.8297687018200959,
+          0.8557768075048535,
+          0.9140370173767981,
+          0.9208458605478238,
+          0.958619271608076,
+          0.9661938893266431,
+          0.9753656716277352,
+          0.9796866053426908,
+          0.9816102030474808,
+          0.9848521524895273,
+          0.9908635396992723,
+          0.9918158758379633,
+          0.005190615632579784,
+          0.007055979365777741,
+          0.01711429630142556,
+          0.023453260269774644,
+          0.05578806989537837,
+          0.07609793754979347,
+          0.15989592857222212,
+          0.19448189256488296,
+          0.2220153668896563,
+          0.267741955636947,
+          0.4113657235430293,
+          0.4858887615192134,
+          0.11998892449132889,
+          0.14923128881423536,
+          0.28109533136005416,
+          0.33780792946220856,
+          0.5186727157529852,
+          0.5893436083405015,
+          0.6958616915195207,
+          0.7500751686523341,
+          0.7772902353437438,
+          0.8017493147594554,
+          0.8835161588012836,
+          0.8957473145221065,
+          0.45347570798188697,
+          0.5257339937040894,
+          0.6645484824639968,
+          0.7242005973601774,
+          0.8191128804955788,
+          0.8577639122961336,
+          0.9046845405241356,
+          0.927054069441859,
+          0.9279843895019584,
+          0.9442098282757888,
+          0.9623256492684708,
+          0.9674339417243085
+        ],
+        [
+          0.28355057991926913,
+          0.3059977595437826,
+          0.3291333448331489,
+          0.3482171557963897,
+          0.27481251206264146,
+          0.24144554384761088,
+          0.18878641278745203,
+          0.17445079429862662,
+          0.15533863188517,
+          0.13330403480856473,
+          0.09138807995398918,
+          0.079452509854923,
+          0.22260344209777005,
+          0.1968012048738022,
+          0.13558489798277742,
+          0.12007251009419283,
+          0.07482324336470028,
+          0.06670626539635413,
+          0.041205096974471014,
+          0.03227942319962992,
+          0.03178806854612604,
+          0.024953231729716703,
+          0.01625386446561005,
+          0.014019457785330983,
+          0.08108909440185295,
+          0.06962481874318284,
+          0.04561643532515237,
+          0.03987364918713062,
+          0.024955814804013297,
+          0.01968726001865432,
+          0.013105878926225294,
+          0.010281897267079282,
+          0.009427246293579526,
+          0.007932407918756162,
+          0.0052691505841741424,
+          0.004393749968049254,
+          0.22322310937206394,
+          0.2350182519979351,
+          0.3037988106959713,
+          0.3121848800691076,
+          0.3307713567257792,
+          0.31742959522970426,
+          0.27556411446085455,
+          0.2527733021362795,
+          0.2425512559274004,
+          0.218380844135405,
+          0.15295061655984257,
+          0.14449889846285188,
+          0.2927832116765545,
+          0.2689764175172906,
+          0.22252398932932066,
+          0.18362904653903803,
+          0.115887610619058,
+          0.10536983891871375,
+          0.07467861896652403,
+          0.05673373067609909,
+          0.057410784300134236,
+          0.04458956091466615,
+          0.03138750821895285,
+          0.026701367368787168,
+          0.14716933731949305,
+          0.12709470863187355,
+          0.07886542217792439,
+          0.07390092253302707,
+          0.03961856536808304,
+          0.03260452994326109,
+          0.02410716604099736,
+          0.01993803138946054,
+          0.018075688478584526,
+          0.014928739216782961,
+          0.009050758887824757,
+          0.00811829920873506,
+          0.06562948712928932,
+          0.08330336291024214,
+          0.12586269269468467,
+          0.13946209036003443,
+          0.20236688707157596,
+          0.2212807214966178,
+          0.29712912760251625,
+          0.3220135468531776,
+          0.32715626808666565,
+          0.33865641484479,
+          0.3311708109036378,
+          0.30740315936272655,
+          0.2721141415892065,
+          0.2975369511402375,
+          0.32744900845732794,
+          0.33547999234339687,
+          0.3136128482044004,
+          0.27851192851368795,
+          0.23013429414856848,
+          0.197779474162265,
+          0.1782517925270072,
+          0.16566715764293952,
+          0.1027479125614744,
+          0.09404055312791265,
+          0.3296100761320827,
+          0.3049916071449108,
+          0.24731844093205432,
+          0.21288094033706098,
+          0.15355787784794203,
+          0.12450516340742457,
+          0.08699288762366221,
+          0.06732028560703252,
+          0.06723901937506295,
+          0.052487754565384646,
+          0.03634465064807802,
+          0.031544499573344216
+        ],
+        [
+          0.5626904072514749,
+          0.49491692383295,
+          0.3359312528001738,
+          0.258720066861878,
+          0.13058163031138756,
+          0.09996427308266705,
+          0.05003607335497504,
+          0.03772639624511216,
+          0.02820549563311818,
+          0.020683541235947303,
+          0.009067685988349977,
+          0.006982320424904706,
+          0.06894395324350854,
+          0.05066975649186425,
+          0.02304814627841543,
+          0.016131338997672755,
+          0.005675729446586211,
+          0.0043502660774458485,
+          0.0017836005529949881,
+          0.0011366031255328629,
+          0.000967509027046955,
+          0.0006639231627820737,
+          0.0002977800522082484,
+          0.00021763296893965997,
+          0.007468776513529888,
+          0.005751678232041968,
+          0.0022390153592901966,
+          0.00157590769289908,
+          0.0005423314751496084,
+          0.00039070115652535287,
+          0.00016311831732145684,
+          0.00010708903795282546,
+          8.53626737573792e-05,
+          6.360769798345576e-05,
+          2.6236876559265345e-05,
+          1.9647657091044692e-05,
+          0.710906691264047,
+          0.6776089221899875,
+          0.5278998233764909,
+          0.4720679147709272,
+          0.289345003017373,
+          0.23541579016197203,
+          0.12912845310832155,
+          0.09701280581743,
+          0.08139594074944186,
+          0.0604106201298717,
+          0.027747565529052592,
+          0.020594066878901467,
+          0.1605973213378336,
+          0.13434953736407246,
+          0.06256222169297027,
+          0.04725927857235549,
+          0.01743239880661122,
+          0.012566982993623773,
+          0.005568610155616637,
+          0.0035781117958029957,
+          0.0034082935990790153,
+          0.002083682220765797,
+          0.0009179418263134512,
+          0.0006790912215591078,
+          0.023061960860411096,
+          0.017128483863272946,
+          0.007097560445277482,
+          0.00525321691914898,
+          0.001762163023840982,
+          0.0012015807300958822,
+          0.000527162331267493,
+          0.0003753632678487756,
+          0.00031410847393469857,
+          0.0002191082936896905,
+          8.570141290286626e-05,
+          6.58249533015547e-05,
+          0.9291798972381309,
+          0.9096406577239801,
+          0.8570230110038898,
+          0.8370846493701909,
+          0.7418450430330457,
+          0.7026213409535887,
+          0.5429749438252617,
+          0.48350456058193936,
+          0.4508283650236781,
+          0.393601629518263,
+          0.25746346555333294,
+          0.20670807911806005,
+          0.6078969339194645,
+          0.5532317600455272,
+          0.3914556601826178,
+          0.32671207819439463,
+          0.16771443604261435,
+          0.13214446314581074,
+          0.0740040143319107,
+          0.05214535718540088,
+          0.04445797212924902,
+          0.03258352759760508,
+          0.013735928637241988,
+          0.010212132349980786,
+          0.2169142158860302,
+          0.1692743991509999,
+          0.08813307660394892,
+          0.06291846230276155,
+          0.027329241656479132,
+          0.017730924296441915,
+          0.008322571852202258,
+          0.0056256449511086,
+          0.004776591122978618,
+          0.003302417158826574,
+          0.0013297000834510463,
+          0.0010215587023471406
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts DiagnosticAccuracy toward CorrectClassification (and away from GrossMisclassification). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes DiagnosticAccuracy.",
+      "answer": [
+        {
+          "variable": "ScreeningToolType",
+          "value": "MoCA",
+          "improvement": 0.2924
+        },
+        {
+          "variable": "ScreeningToolType",
+          "value": "ExtendedNeuropsychBattery",
+          "improvement": 0.4639
+        },
+        {
+          "variable": "MultisessionTestingProtocol",
+          "value": "ThreeSessions",
+          "improvement": 0.3452
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "DiagnosticAccuracy",
+          "intervention_A": "ScreeningToolType",
+          "intervention_B": "InformantCollateralInterview",
+          "intervention_C": "DigitalCognitiveAssessment",
+          "intervention_D": "MultisessionTestingProtocol",
+          "confounder": "BaselineCognitiveReserve"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "ScreeningToolType",
+              "value": "MoCA",
+              "improvement": 0.2924
+            },
+            {
+              "variable": "ScreeningToolType",
+              "value": "ExtendedNeuropsychBattery",
+              "improvement": 0.4639
+            },
+            {
+              "variable": "MultisessionTestingProtocol",
+              "value": "ThreeSessions",
+              "improvement": 0.3452
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "ScreeningToolType",
+              "value": "StandardMMSE",
+              "improvement": -0.381
+            },
+            {
+              "variable": "ScreeningToolType",
+              "value": "MoCA",
+              "improvement": 0.2924
+            },
+            {
+              "variable": "ScreeningToolType",
+              "value": "ExtendedNeuropsychBattery",
+              "improvement": 0.4639
+            },
+            {
+              "variable": "MultisessionTestingProtocol",
+              "value": "SingleSession",
+              "improvement": -0.4431
+            },
+            {
+              "variable": "MultisessionTestingProtocol",
+              "value": "TwoSessions",
+              "improvement": 0.0926
+            },
+            {
+              "variable": "MultisessionTestingProtocol",
+              "value": "ThreeSessions",
+              "improvement": 0.3452
+            },
+            {
+              "variable": "DigitalCognitiveAssessment",
+              "value": "No",
+              "improvement": -0.0196
+            },
+            {
+              "variable": "DigitalCognitiveAssessment",
+              "value": "Yes",
+              "improvement": 0.1615
+            },
+            {
+              "variable": "InformantCollateralInterview",
+              "value": "None",
+              "improvement": -0.0277
+            },
+            {
+              "variable": "InformantCollateralInterview",
+              "value": "StructuredInterview",
+              "improvement": 0.0266
+            }
+          ],
+          "threshold": 0.227,
+          "baseline_E_target": 0.5455
+        }
+      }
+    }
+  ]
+}

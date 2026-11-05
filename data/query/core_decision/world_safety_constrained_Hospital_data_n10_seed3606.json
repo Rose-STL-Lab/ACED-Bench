@@ -1,0 +1,561 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 3606,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A large urban teaching hospital's emergency department maintains detailed operational and clinical records. The research team has institutional access to these records and can request both observational extracts and prospective interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "DoorToProviderTime",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TriageMisclassification",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TriageCompletionSpeed",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAcuity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EDCensus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ShiftType",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DoorToProviderTime",
+      "values": [
+        "Under30Min",
+        "30to60Min",
+        "Over60Min"
+      ],
+      "desc": "Elapsed minutes from ED arrival to first provider evaluation.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "TriageMisclassification",
+      "values": [
+        "None",
+        "Minor",
+        "Major"
+      ],
+      "desc": "Degree of discrepancy between assigned and chart-reviewed acuity level.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "NurseTriageProtocol",
+      "values": [
+        "Standard",
+        "StructuredESI"
+      ],
+      "desc": "Whether nurses follow a structured ESI-based rapid assessment protocol.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RapidTrackDiversion",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether low-acuity patients are diverted to a separate fast-track area.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalCheckInKiosk",
+      "values": [
+        "None",
+        "Available"
+      ],
+      "desc": "Availability of self-service kiosks for patient demographic data entry.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TriageCompletionSpeed",
+      "values": [
+        "Fast",
+        "Moderate",
+        "Slow"
+      ],
+      "desc": "Time taken to complete the full triage assessment after patient registration.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PatientAcuity",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Clinical severity of the patient's presenting complaint at ED arrival.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EDCensus",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of patients currently occupying the emergency department.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ShiftType",
+      "values": [
+        "Day",
+        "Night"
+      ],
+      "desc": "Whether the patient presents during a daytime or nighttime staffing shift.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TriageStaffingLevel",
+      "values": [
+        "Minimal",
+        "Full"
+      ],
+      "desc": "Number of triage nurses scheduled relative to the department's staffing plan.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "DoorToProviderTime",
+      "EDCensus"
+    ],
+    [
+      "TriageMisclassification",
+      "TriageStaffingLevel"
+    ],
+    [
+      "NurseTriageProtocol",
+      "TriageCompletionSpeed"
+    ],
+    [
+      "RapidTrackDiversion",
+      "DoorToProviderTime"
+    ],
+    [
+      "RapidTrackDiversion",
+      "TriageMisclassification"
+    ],
+    [
+      "DigitalCheckInKiosk",
+      "DoorToProviderTime"
+    ],
+    [
+      "DigitalCheckInKiosk",
+      "ShiftType"
+    ],
+    [
+      "TriageCompletionSpeed",
+      "DoorToProviderTime"
+    ],
+    [
+      "PatientAcuity",
+      "DoorToProviderTime"
+    ],
+    [
+      "PatientAcuity",
+      "TriageMisclassification"
+    ],
+    [
+      "ShiftType",
+      "TriageStaffingLevel"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "NurseTriageProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.4402998673794401
+        ],
+        [
+          0.5597001326205598
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RapidTrackDiversion",
+      "parents": [],
+      "values": [
+        [
+          0.7291202379898195
+        ],
+        [
+          0.27087976201018055
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DigitalCheckInKiosk",
+      "parents": [],
+      "values": [
+        [
+          0.340023669447623
+        ],
+        [
+          0.6599763305523769
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAcuity",
+      "parents": [],
+      "values": [
+        [
+          0.09652657465823768
+        ],
+        [
+          0.6341863153401034
+        ],
+        [
+          0.2692871100016589
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TriageCompletionSpeed",
+      "parents": [
+        "NurseTriageProtocol"
+      ],
+      "values": [
+        [
+          0.17241812950474172,
+          0.9108956255680094
+        ],
+        [
+          0.30007445034282854,
+          0.08172965556539435
+        ],
+        [
+          0.5275074201524298,
+          0.007374718866596209
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ShiftType",
+      "parents": [
+        "DigitalCheckInKiosk"
+      ],
+      "values": [
+        [
+          0.5254547147801202,
+          0.915479368656958
+        ],
+        [
+          0.4745452852198798,
+          0.08452063134304187
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TriageMisclassification",
+      "parents": [
+        "PatientAcuity",
+        "RapidTrackDiversion"
+      ],
+      "values": [
+        [
+          0.5799579505102256,
+          0.057704818330595084,
+          0.40140183885000813,
+          0.021465004379245013,
+          0.06660080273204404,
+          0.0015771107947451207
+        ],
+        [
+          0.2751376360154178,
+          0.2087012615209693,
+          0.32386358424557565,
+          0.13421300509444978,
+          0.2230702837983606,
+          0.04062696072663951
+        ],
+        [
+          0.14490441347435654,
+          0.7335939201484356,
+          0.2747345769044162,
+          0.8443219905263052,
+          0.7103289134695954,
+          0.9577959284786155
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DoorToProviderTime",
+      "parents": [
+        "PatientAcuity",
+        "TriageCompletionSpeed",
+        "RapidTrackDiversion",
+        "DigitalCheckInKiosk"
+      ],
+      "values": [
+        [
+          0.8242472786302438,
+          0.8909108481338207,
+          0.9872431402017825,
+          0.9913711348964734,
+          0.3676263241243131,
+          0.5299389317936803,
+          0.9364610975209178,
+          0.9613495935322455,
+          0.056956924177533355,
+          0.12255995972510915,
+          0.7393491269364281,
+          0.8383501216475931,
+          0.6841410763673875,
+          0.7999187403311774,
+          0.9763641302718332,
+          0.9851005878083646,
+          0.191891376052991,
+          0.3189803023499067,
+          0.8833532239979982,
+          0.9247765255813669,
+          0.01944009740533389,
+          0.04485972816110497,
+          0.5670468493996959,
+          0.7196750927559247,
+          0.1993007774342161,
+          0.338110190377871,
+          0.8779993110622053,
+          0.9230658237236785,
+          0.012569253343843822,
+          0.03200379526386576,
+          0.5050854944064139,
+          0.6661881345582513,
+          0.000963651723248375,
+          0.0024069685763842075,
+          0.10582039407757517,
+          0.21764112400224395
+        ],
+        [
+          0.15006958940661516,
+          0.09824423101275358,
+          0.012579845092820747,
+          0.00855902277412218,
+          0.32382140122950676,
+          0.3134124609979925,
+          0.05946196189966759,
+          0.03709592519065949,
+          0.20465814186351644,
+          0.27855170332532897,
+          0.20580451854789256,
+          0.13952892761667807,
+          0.2400822497291034,
+          0.16629972050901506,
+          0.023057681750472982,
+          0.014666246946032574,
+          0.3004196891152544,
+          0.3457636107817728,
+          0.10421479498458201,
+          0.0701814476040789,
+          0.12959658447165454,
+          0.17709507631152033,
+          0.29245145080191165,
+          0.21059417203311673,
+          0.3035480743581789,
+          0.3350624352050528,
+          0.10915197001957294,
+          0.07163316953490745,
+          0.11091200904831292,
+          0.1646545614906551,
+          0.3050168399174148,
+          0.24255686666805348,
+          0.030606477672428953,
+          0.046969495491935714,
+          0.25279106079371444,
+          0.3243644987371203
+        ],
+        [
+          0.025683131963140992,
+          0.010844920853425618,
+          0.00017701470539672313,
+          6.984232940419534e-05,
+          0.3085522746461801,
+          0.15664860720832713,
+          0.0040769405794145695,
+          0.0015544812770948307,
+          0.7383849339589501,
+          0.5988883369495619,
+          0.054846354515679346,
+          0.02212095073572892,
+          0.07577667390350909,
+          0.03378153915980745,
+          0.0005781879776939221,
+          0.0002331652456028529,
+          0.5076889348317546,
+          0.3352560868683205,
+          0.012431981017419722,
+          0.005042026814554213,
+          0.8509633181230115,
+          0.7780451955273748,
+          0.1405016997983924,
+          0.06973073521095877,
+          0.49715114820760503,
+          0.32682737441707627,
+          0.012848718918221818,
+          0.005301006741414183,
+          0.8765187376078433,
+          0.8033416432454792,
+          0.1898976656761712,
+          0.09125499877369536,
+          0.9684298706043226,
+          0.95062353593168,
+          0.6413885451287105,
+          0.4579943772606357
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TriageStaffingLevel",
+      "parents": [
+        "TriageMisclassification",
+        "ShiftType"
+      ],
+      "values": [
+        [
+          0.4307184329306967,
+          0.07310467175798671,
+          0.9846039263351246,
+          0.8695628522740257,
+          0.999815037862804,
+          0.9982284842143228
+        ],
+        [
+          0.5692815670693033,
+          0.9268953282420133,
+          0.015396073664875448,
+          0.1304371477259743,
+          0.00018496213719595262,
+          0.001771515785677277
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EDCensus",
+      "parents": [
+        "DoorToProviderTime"
+      ],
+      "values": [
+        [
+          0.42391414153956536,
+          0.48292107740938933,
+          0.3883588343270262
+        ],
+        [
+          0.2817201899133317,
+          0.49352016702995793,
+          0.6103101710333931
+        ],
+        [
+          0.294365668547103,
+          0.023558755560652806,
+          0.0013309946395806496
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift DoorToProviderTime toward Under30Min (and away from Over60Min), but only if the same action does not make TriageMisclassification more likely to be Major. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "NurseTriageProtocol",
+        "value": "StructuredESI"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "DoorToProviderTime",
+          "safety_outcome": "TriageMisclassification",
+          "good_intervention": "NurseTriageProtocol",
+          "risky_intervention": "RapidTrackDiversion",
+          "weak_intervention": "DigitalCheckInKiosk",
+          "good_mediator": "TriageCompletionSpeed",
+          "confounder": "PatientAcuity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "NurseTriageProtocol",
+            "value": "StructuredESI"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "NurseTriageProtocol",
+              "value": "StructuredESI",
+              "delta_target": -0.3145,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "RapidTrackDiversion",
+              "value": "On",
+              "delta_target": -0.5274,
+              "delta_safety": 0.5786,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.7414,
+            "E_safety": 1.266
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

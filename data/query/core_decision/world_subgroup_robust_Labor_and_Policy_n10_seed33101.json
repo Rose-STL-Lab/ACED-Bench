@@ -1,0 +1,573 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 33101,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A state labor department maintains detailed records on businesses and workers across multiple jurisdictions. The researcher has access to these administrative records and can request observational or interventional samples from participating firms and municipalities.",
+  "non_intervenable_variables": [
+    {
+      "name": "EmploymentChange",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IndustryType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalCostOfLiving",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FirmSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrePolicyWageLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UnionPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalUnemploymentRate",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "EmploymentChange",
+      "values": [
+        "Stable",
+        "ModestDecline",
+        "SteepDecline"
+      ],
+      "desc": "Net change in low-wage employment level over the study period.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "IndustryType",
+      "values": [
+        "FoodService",
+        "Retail"
+      ],
+      "desc": "Primary industry sector of the employing establishment.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LargeStepwiseHike",
+      "values": [
+        "None",
+        "Moderate",
+        "Large"
+      ],
+      "desc": "One-time legislated minimum-wage increase of varying magnitude.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "GradualIndexedIncrease",
+      "values": [
+        "None",
+        "Phased"
+      ],
+      "desc": "Multi-year scheduled minimum-wage increase tied to inflation index.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TippedWageElimination",
+      "values": [
+        "None",
+        "Full"
+      ],
+      "desc": "Policy removing the separate sub-minimum wage for tipped workers.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LocalCostOfLiving",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Regional cost-of-living index category for the jurisdiction.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FirmSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Number of employees at the establishment at baseline.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PrePolicyWageLevel",
+      "values": [
+        "AtMinimum",
+        "SlightlyAbove"
+      ],
+      "desc": "Average hourly wage of workers relative to current minimum before policy change.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UnionPresence",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a collective bargaining agreement covers workers at the establishment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LocalUnemploymentRate",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "County-level unemployment rate category at the start of the study.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "IndustryType",
+      "EmploymentChange"
+    ],
+    [
+      "IndustryType",
+      "GradualIndexedIncrease"
+    ],
+    [
+      "LargeStepwiseHike",
+      "EmploymentChange"
+    ],
+    [
+      "LargeStepwiseHike",
+      "GradualIndexedIncrease"
+    ],
+    [
+      "LargeStepwiseHike",
+      "PrePolicyWageLevel"
+    ],
+    [
+      "GradualIndexedIncrease",
+      "EmploymentChange"
+    ],
+    [
+      "TippedWageElimination",
+      "EmploymentChange"
+    ],
+    [
+      "LocalCostOfLiving",
+      "EmploymentChange"
+    ],
+    [
+      "PrePolicyWageLevel",
+      "UnionPresence"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "IndustryType",
+      "parents": [],
+      "values": [
+        [
+          0.8591501398345734
+        ],
+        [
+          0.1408498601654266
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LargeStepwiseHike",
+      "parents": [],
+      "values": [
+        [
+          0.17066873263884494
+        ],
+        [
+          0.2723878381344449
+        ],
+        [
+          0.5569434292267103
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TippedWageElimination",
+      "parents": [],
+      "values": [
+        [
+          0.09384989096196289
+        ],
+        [
+          0.9061501090380372
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LocalCostOfLiving",
+      "parents": [],
+      "values": [
+        [
+          0.16898122559358633
+        ],
+        [
+          0.8310187744064137
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FirmSize",
+      "parents": [],
+      "values": [
+        [
+          0.40557906117197196
+        ],
+        [
+          0.49249209207806394
+        ],
+        [
+          0.10192884674996426
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LocalUnemploymentRate",
+      "parents": [],
+      "values": [
+        [
+          0.37572214570158685
+        ],
+        [
+          0.6242778542984132
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GradualIndexedIncrease",
+      "parents": [
+        "LargeStepwiseHike",
+        "IndustryType"
+      ],
+      "values": [
+        [
+          0.5404896506830842,
+          0.21939915272836807,
+          0.5712805827749864,
+          0.24151206400521769,
+          0.6015293772680788,
+          0.2650968130764539
+        ],
+        [
+          0.4595103493169157,
+          0.7806008472716319,
+          0.4287194172250136,
+          0.7584879359947823,
+          0.39847062273192124,
+          0.7349031869235462
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PrePolicyWageLevel",
+      "parents": [
+        "LargeStepwiseHike"
+      ],
+      "values": [
+        [
+          0.5208881985825323,
+          0.33989267935276274,
+          0.1960532905038895
+        ],
+        [
+          0.4791118014174676,
+          0.6601073206472372,
+          0.8039467094961105
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EmploymentChange",
+      "parents": [
+        "LocalCostOfLiving",
+        "IndustryType",
+        "LargeStepwiseHike",
+        "GradualIndexedIncrease",
+        "TippedWageElimination"
+      ],
+      "values": [
+        [
+          0.351469098108041,
+          0.18876739724972433,
+          0.752725962514236,
+          0.6060225539171016,
+          0.510529266809664,
+          0.299132807306202,
+          0.836238399046877,
+          0.7278725057688066,
+          0.642631886522343,
+          0.4392750074041237,
+          0.8934609478758295,
+          0.8033132657670384,
+          0.10316305002361396,
+          0.4264733449906969,
+          0.46148325905647897,
+          0.8075520497869034,
+          0.19125514971936397,
+          0.5820637558153743,
+          0.6144747922286773,
+          0.8636251783097466,
+          0.6412787075505935,
+          0.8770994456285843,
+          0.8950682043323502,
+          0.9658039889686224,
+          0.019592513618024863,
+          0.006078879465378518,
+          0.15975416668496914,
+          0.06221770761001244,
+          0.03880304902297115,
+          0.01326992630100239,
+          0.25487899468798364,
+          0.12201295140334839,
+          0.07872496280091627,
+          0.029303185466224103,
+          0.40881609508613076,
+          0.20952704934443322,
+          0.002809242141398206,
+          0.027753846942212286,
+          0.03251084041436493,
+          0.2037525285173735,
+          0.0061466207952735035,
+          0.05476949177714846,
+          0.06476004793154846,
+          0.347632257572242,
+          0.07675073554780762,
+          0.3624444160719065,
+          0.4085494861554604,
+          0.7583083469136365
+        ],
+        [
+          0.33985173077935515,
+          0.3120021217787884,
+          0.19839714916602105,
+          0.27369204321051493,
+          0.30578080211600084,
+          0.3367043476718471,
+          0.14115637604468112,
+          0.2111441590260508,
+          0.2510812529129827,
+          0.32385843051992685,
+          0.09638521891587172,
+          0.16316426669518738,
+          0.26394815306480385,
+          0.32317929190524597,
+          0.33365942421503497,
+          0.1586636117998603,
+          0.31853164647149407,
+          0.27718257983385824,
+          0.26065237778681544,
+          0.12106761431106326,
+          0.2617915443783653,
+          0.1094117473929505,
+          0.09490575970850533,
+          0.03314799947921974,
+          0.13793526740719955,
+          0.07532241021143515,
+          0.29789371098478257,
+          0.20745689985255578,
+          0.1790241125653125,
+          0.11282452337961354,
+          0.33537912671370534,
+          0.2784465452351013,
+          0.23504513792908008,
+          0.15859175388218663,
+          0.3225413332613971,
+          0.3196223689174735,
+          0.05333914331860639,
+          0.1600822897792871,
+          0.16470835203065295,
+          0.30916507078637945,
+          0.0722480184871554,
+          0.1956365450859348,
+          0.22358706711299026,
+          0.3267490966740648,
+          0.22672547299417292,
+          0.3311600114937587,
+          0.326193933185883,
+          0.1946856200527684
+        ],
+        [
+          0.3086791711126039,
+          0.4992304809714873,
+          0.0488768883197429,
+          0.12028540287238358,
+          0.18368993107433512,
+          0.36416284502195095,
+          0.02260522490844187,
+          0.060983335205142625,
+          0.10628686056467433,
+          0.23686656207594958,
+          0.01015383320829882,
+          0.03352246753777414,
+          0.6328887969115822,
+          0.2503473631040571,
+          0.2048573167284861,
+          0.03378433841323623,
+          0.490213203809142,
+          0.14075366435076755,
+          0.12487282998450734,
+          0.015307207379190196,
+          0.09692974807104127,
+          0.013488806978465027,
+          0.010026035959144525,
+          0.0010480115521579966,
+          0.8424722189747755,
+          0.9185987103231864,
+          0.5423521223302483,
+          0.7303253925374318,
+          0.7821728384117164,
+          0.873905550319384,
+          0.40974187859831096,
+          0.5995405033615502,
+          0.6862298992700037,
+          0.8121050606515892,
+          0.2686425716524721,
+          0.4708505817380933,
+          0.9438516145399953,
+          0.8121638632785007,
+          0.8027808075549822,
+          0.4870824006962469,
+          0.9216053607175712,
+          0.7495939631369168,
+          0.7116528849554612,
+          0.3256186457536933,
+          0.6965237914580195,
+          0.30639557243433485,
+          0.2652565806586567,
+          0.047006033033595115
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UnionPresence",
+      "parents": [
+        "PrePolicyWageLevel"
+      ],
+      "values": [
+        [
+          0.4565772475414622,
+          0.358173289659262
+        ],
+        [
+          0.5434227524585378,
+          0.6418267103407381
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift EmploymentChange toward Stable (and away from SteepDecline). The deployment will reach individuals with IndustryType=FoodService as well as IndustryType=Retail, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "GradualIndexedIncrease",
+        "value": "Phased",
+        "min_improvement": 0.1451,
+        "improvement_low": 0.2851,
+        "improvement_high": 0.1451
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "EmploymentChange",
+          "group": "IndustryType",
+          "intervention_avg": "LargeStepwiseHike",
+          "intervention_rob": "GradualIndexedIncrease",
+          "intervention_bad": "TippedWageElimination",
+          "confounder": "LocalCostOfLiving"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "GradualIndexedIncrease",
+            "value": "Phased",
+            "min_improvement": 0.1451,
+            "improvement_low": 0.2851,
+            "improvement_high": 0.1451
+          },
+          "avg_best_but_uneven": {
+            "variable": "LargeStepwiseHike",
+            "value": "Large",
+            "min_improvement": 0.0806,
+            "improvement_low": 0.0806,
+            "improvement_high": 0.3044
+          },
+          "harmful_in_subgroup": {
+            "variable": "TippedWageElimination",
+            "value": "Full",
+            "min_improvement": -0.0225,
+            "improvement_low": -0.0225,
+            "improvement_high": 0.0481
+          },
+          "subgroups": [
+            "FoodService",
+            "Retail"
+          ],
+          "group_variable": "IndustryType",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "GradualIndexedIncrease",
+              "value": "Phased",
+              "improvement_low": 0.2851,
+              "improvement_high": 0.1451,
+              "min_improvement": 0.1451
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

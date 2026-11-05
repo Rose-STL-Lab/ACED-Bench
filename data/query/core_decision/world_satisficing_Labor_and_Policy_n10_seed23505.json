@@ -1,0 +1,798 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 10,
+    "topology": "satisficing",
+    "seed": 23505,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A state department of labor and human services maintains administrative records on household tax filings and benefit program participation. The researcher has access to these records and can request observational or interventional samples from the dataset.",
+  "non_intervenable_variables": [
+    {
+      "name": "PovertyStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineEarningsLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HouseholdSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NumberOfQualifyingChildren",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FilingStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UrbanRuralResidence",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PovertyStatus",
+      "values": [
+        "AbovePoverty",
+        "NearPoverty",
+        "BelowPoverty"
+      ],
+      "desc": "Household income position relative to the federal poverty line.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "StateEitcSupplement",
+      "values": [
+        "None",
+        "Moderate",
+        "Generous"
+      ],
+      "desc": "State-level supplement added on top of the federal EITC benefit.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FilingAssistanceProgram",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Availability of free tax-filing assistance for EITC-eligible filers.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AdvancePeriodicPayment",
+      "values": [
+        "Off",
+        "Monthly",
+        "Biweekly"
+      ],
+      "desc": "Frequency at which EITC benefits are distributed throughout the year.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ChildlessCreditExpansion",
+      "values": [
+        "Standard",
+        "Expanded"
+      ],
+      "desc": "Whether the EITC maximum credit for childless workers is expanded.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineEarningsLevel",
+      "values": [
+        "VeryLow",
+        "Low",
+        "Moderate"
+      ],
+      "desc": "Pre-intervention annual earned income category of the household.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HouseholdSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Number of persons residing in the household grouped into categories.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NumberOfQualifyingChildren",
+      "values": [
+        "Zero",
+        "One",
+        "TwoOrMore"
+      ],
+      "desc": "Count of dependent children meeting EITC qualifying-child criteria.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FilingStatus",
+      "values": [
+        "Single",
+        "MarriedFilingJointly"
+      ],
+      "desc": "Federal income tax filing status of the household head.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UrbanRuralResidence",
+      "values": [
+        "Urban",
+        "Suburban",
+        "Rural"
+      ],
+      "desc": "Geographic classification of the household's residential location.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "StateEitcSupplement",
+      "PovertyStatus"
+    ],
+    [
+      "StateEitcSupplement",
+      "FilingStatus"
+    ],
+    [
+      "FilingAssistanceProgram",
+      "PovertyStatus"
+    ],
+    [
+      "FilingAssistanceProgram",
+      "NumberOfQualifyingChildren"
+    ],
+    [
+      "AdvancePeriodicPayment",
+      "PovertyStatus"
+    ],
+    [
+      "AdvancePeriodicPayment",
+      "NumberOfQualifyingChildren"
+    ],
+    [
+      "ChildlessCreditExpansion",
+      "PovertyStatus"
+    ],
+    [
+      "BaselineEarningsLevel",
+      "PovertyStatus"
+    ],
+    [
+      "HouseholdSize",
+      "AdvancePeriodicPayment"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "StateEitcSupplement",
+      "parents": [],
+      "values": [
+        [
+          0.10097857537439578
+        ],
+        [
+          0.5614720694616923
+        ],
+        [
+          0.337549355163912
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FilingAssistanceProgram",
+      "parents": [],
+      "values": [
+        [
+          0.5386277225122063
+        ],
+        [
+          0.46137227748779375
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ChildlessCreditExpansion",
+      "parents": [],
+      "values": [
+        [
+          0.8767669153263896
+        ],
+        [
+          0.12323308467361038
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineEarningsLevel",
+      "parents": [],
+      "values": [
+        [
+          0.1948774316982513
+        ],
+        [
+          0.4487079870260006
+        ],
+        [
+          0.35641458127574804
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HouseholdSize",
+      "parents": [],
+      "values": [
+        [
+          0.5454206581631975
+        ],
+        [
+          0.09951816955411374
+        ],
+        [
+          0.35506117228268874
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UrbanRuralResidence",
+      "parents": [],
+      "values": [
+        [
+          0.23364880192202123
+        ],
+        [
+          0.3762081381383729
+        ],
+        [
+          0.3901430599396059
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FilingStatus",
+      "parents": [
+        "StateEitcSupplement"
+      ],
+      "values": [
+        [
+          0.4533327522044918,
+          0.0932547234599169,
+          0.012594260690856382
+        ],
+        [
+          0.5466672477955081,
+          0.9067452765400831,
+          0.9874057393091435
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AdvancePeriodicPayment",
+      "parents": [
+        "HouseholdSize"
+      ],
+      "values": [
+        [
+          0.34167870454003946,
+          0.06211493703666176,
+          0.004236321559523672
+        ],
+        [
+          0.35251103959228436,
+          0.03762495491320205,
+          0.001506586200185513
+        ],
+        [
+          0.3058102558676762,
+          0.9002601080501361,
+          0.9942570922402909
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PovertyStatus",
+      "parents": [
+        "BaselineEarningsLevel",
+        "ChildlessCreditExpansion",
+        "StateEitcSupplement",
+        "FilingAssistanceProgram",
+        "AdvancePeriodicPayment"
+      ],
+      "values": [
+        [
+          0.16376134068454656,
+          0.1936490639497995,
+          0.21362750246470238,
+          0.3473210037561795,
+          0.3801897650112059,
+          0.4080527825553412,
+          0.5749716987671071,
+          0.6307027717569409,
+          0.6462619573669429,
+          0.7586444560879063,
+          0.7880757437938367,
+          0.8018857998441075,
+          0.8144593570431204,
+          0.8260159841228829,
+          0.839799953709543,
+          0.8977544845408817,
+          0.9104997039531271,
+          0.915742429402656,
+          0.9100213880713444,
+          0.9177924416468791,
+          0.927903854957255,
+          0.9531725601096731,
+          0.9567754077671051,
+          0.9581268113707677,
+          0.9757543779826454,
+          0.9777961259007574,
+          0.9798468360858793,
+          0.987207265948151,
+          0.98875645282933,
+          0.9888053811090594,
+          0.9903333809391629,
+          0.9917184571725086,
+          0.9917847959982935,
+          0.9950168582580321,
+          0.9952922805256383,
+          0.9959300473504467,
+          0.06413507746785617,
+          0.07825557128055369,
+          0.09131025474773895,
+          0.17093749126099275,
+          0.18261055648947405,
+          0.209125087734838,
+          0.3903964860552228,
+          0.4265609096251091,
+          0.4547427014144023,
+          0.5748407365462289,
+          0.6286501941718093,
+          0.6533670793134176,
+          0.6691528963270366,
+          0.7049249739267349,
+          0.7152167062279206,
+          0.8178167498572864,
+          0.8381304751038375,
+          0.8431528259796346,
+          0.8447409366480876,
+          0.8529645019429437,
+          0.8620668757011329,
+          0.9049894574838241,
+          0.9209142536498313,
+          0.9310144640973371,
+          0.9575387436803574,
+          0.9602747047039613,
+          0.96401993358208,
+          0.9772554265527529,
+          0.9806889452707056,
+          0.9797058548898646,
+          0.9831114826148464,
+          0.9844222859038834,
+          0.9849510566311418,
+          0.9908372168590293,
+          0.9921452185033387,
+          0.9921249211538573,
+          0.005250372192764225,
+          0.006020819665962605,
+          0.007583900985180685,
+          0.016697750911878986,
+          0.020073615495811367,
+          0.023064073044512575,
+          0.05724446250922579,
+          0.07122064504380063,
+          0.0804344393605926,
+          0.15087212920707804,
+          0.184860898923161,
+          0.19513720679022165,
+          0.21975314713487992,
+          0.2529404834316509,
+          0.2799913288440464,
+          0.4196103372902607,
+          0.4591882895856396,
+          0.4717099484828952,
+          0.4816218633996402,
+          0.5176296957564205,
+          0.5200067240481075,
+          0.6665877700469219,
+          0.7085212799355775,
+          0.7098969894878441,
+          0.8328729557871855,
+          0.8444248455486794,
+          0.8645551723145881,
+          0.9062533393777,
+          0.9119752043775639,
+          0.9229460636829261,
+          0.9300559026163177,
+          0.9356319364138105,
+          0.9414902712402713,
+          0.9633879896667044,
+          0.9654798552044208,
+          0.9707733962056889
+        ],
+        [
+          0.28515953690706075,
+          0.2989353174239258,
+          0.31271219146932133,
+          0.32957925623188983,
+          0.32382312329385327,
+          0.3200889119579407,
+          0.2848336921414056,
+          0.2566705247529249,
+          0.2542394723447748,
+          0.1903730283490239,
+          0.17040088309280288,
+          0.16246485006550693,
+          0.1555985048701851,
+          0.14927285838090593,
+          0.1373305882424074,
+          0.09200685885278047,
+          0.08199936058815792,
+          0.07800084989195465,
+          0.08218803970295,
+          0.07544860026961875,
+          0.06677134795683225,
+          0.044637837758200495,
+          0.04142454873814692,
+          0.04024356684361597,
+          0.023682213317719393,
+          0.021737590734958262,
+          0.01975312777771296,
+          0.01263008346137282,
+          0.011117277791413934,
+          0.01108003028297096,
+          0.009574274074076948,
+          0.008208228191127055,
+          0.008147625597654997,
+          0.0049557820785487575,
+          0.004686762659339315,
+          0.004051319886157728,
+          0.22248865099563583,
+          0.22437504233770536,
+          0.24238024247456902,
+          0.30508042848102906,
+          0.30944307048154224,
+          0.3250727645152509,
+          0.3135340060862014,
+          0.3136767441884943,
+          0.32120940205186505,
+          0.2882121805394038,
+          0.2640834291959396,
+          0.24701626196599757,
+          0.2443226485553746,
+          0.22472754457458738,
+          0.22332554139298116,
+          0.15132019429190574,
+          0.13867027977696622,
+          0.1369356820223993,
+          0.13247358085745908,
+          0.1270386718014626,
+          0.12133749505376723,
+          0.08702512653186435,
+          0.07303310001677994,
+          0.0638994834206806,
+          0.04072861300033972,
+          0.038225854961611336,
+          0.034758371878160554,
+          0.02221897695661362,
+          0.018911450873130193,
+          0.019921352726421322,
+          0.01657297240601789,
+          0.015321524760307723,
+          0.014845573934679794,
+          0.009075146506920309,
+          0.00778560455890471,
+          0.007812844024788376,
+          0.06630474528361656,
+          0.07100750790024199,
+          0.08237574551272936,
+          0.12162376143140302,
+          0.1267881367656684,
+          0.14214126982829925,
+          0.20078666007673127,
+          0.21194168634526286,
+          0.22503877412820616,
+          0.2849739186171829,
+          0.3025980458582268,
+          0.31342705068636045,
+          0.3322336509756887,
+          0.3212936636953897,
+          0.3184908850166567,
+          0.33018221290598887,
+          0.3229127925098268,
+          0.3223666665417362,
+          0.3075088433501656,
+          0.2982100848292185,
+          0.31143213007830084,
+          0.24673381854223556,
+          0.22079734871238132,
+          0.22197537396088432,
+          0.1420208625046489,
+          0.1342382956831187,
+          0.11742353046558655,
+          0.08556032132237153,
+          0.08124434493459347,
+          0.07130478601303407,
+          0.0650722723206152,
+          0.060570707274631416,
+          0.055215941875685376,
+          0.035251530245823406,
+          0.0333934510915733,
+          0.028305837850292993
+        ],
+        [
+          0.5510791224083927,
+          0.5074156186262747,
+          0.47366030606597637,
+          0.32309974001193065,
+          0.2959871116949409,
+          0.271858305486718,
+          0.1401946090914874,
+          0.11262670349013423,
+          0.09949857028828224,
+          0.05098251556306985,
+          0.04152337311336043,
+          0.03564935009038562,
+          0.029942138086694547,
+          0.024711157496211184,
+          0.0228694580480497,
+          0.01023865660633778,
+          0.007500935458714881,
+          0.006256720705389293,
+          0.007790572225705799,
+          0.006758958083502163,
+          0.005324797085912807,
+          0.002189602132126413,
+          0.0018000434947478914,
+          0.0016296217856163443,
+          0.0005634086996352766,
+          0.00046628336428425717,
+          0.00040003613640777607,
+          0.00016265059047609312,
+          0.00012626937925605105,
+          0.00011458860796953976,
+          9.234498676019463e-05,
+          7.33146363642057e-05,
+          6.75784040515692e-05,
+          2.735966341907583e-05,
+          2.0956815022313585e-05,
+          1.8632763395681573e-05,
+          0.7133762715365081,
+          0.697369386381741,
+          0.6663095027776921,
+          0.5239820802579782,
+          0.5079463730289837,
+          0.46580214774991124,
+          0.2960695078585757,
+          0.2597623461863966,
+          0.22404789653373275,
+          0.1369470829143673,
+          0.10726637663225111,
+          0.09961665872058487,
+          0.08652445511758886,
+          0.07034748149867764,
+          0.06145775237909842,
+          0.03086305585080793,
+          0.02319924511919624,
+          0.019911491997966126,
+          0.022785482494453453,
+          0.01999682625559387,
+          0.01659562924509992,
+          0.0079854159843115,
+          0.0060526463333887455,
+          0.0050860524819822004,
+          0.0017326433193029232,
+          0.0014994403344274244,
+          0.001221694539759414,
+          0.0005255964906334435,
+          0.00039960385616425305,
+          0.00037279238371411234,
+          0.00031554497913576423,
+          0.0002561893358087976,
+          0.00020336943417849062,
+          8.763663405064883e-05,
+          6.917693775652655e-05,
+          6.223482135432682e-05,
+          0.9284448825236191,
+          0.9229716724337953,
+          0.91004035350209,
+          0.861678487656718,
+          0.8531382477385202,
+          0.8347946571271881,
+          0.7419688774140429,
+          0.7168376686109366,
+          0.6945267865112011,
+          0.5641539521757389,
+          0.5125410552186122,
+          0.49143574252341776,
+          0.4480132018894313,
+          0.4257658528729594,
+          0.40151778613929684,
+          0.25020744980375037,
+          0.21789891790453347,
+          0.20592338497536875,
+          0.21086929325019418,
+          0.18416021941436103,
+          0.16856114587359164,
+          0.08667841141084243,
+          0.07068137135204124,
+          0.06812763655127159,
+          0.025106181708165635,
+          0.021336858768201985,
+          0.018021297219825188,
+          0.00818633929992861,
+          0.006780450687842714,
+          0.005749150304039912,
+          0.004871825063067142,
+          0.0037973563115581187,
+          0.003293786884043274,
+          0.001360480087472439,
+          0.001126693704005773,
+          0.0009207659440180631
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NumberOfQualifyingChildren",
+      "parents": [
+        "AdvancePeriodicPayment",
+        "FilingAssistanceProgram"
+      ],
+      "values": [
+        [
+          0.31343566962379826,
+          0.4666008522069531,
+          0.0157344996782222,
+          0.030698382796958423,
+          0.0005585898914560812,
+          0.0011444731689298467
+        ],
+        [
+          0.31738041950945006,
+          0.467277982452232,
+          0.43559650957742124,
+          0.8405141509402896,
+          0.422789572356185,
+          0.8567120782908921
+        ],
+        [
+          0.36918391086675173,
+          0.06612116534081479,
+          0.5486689907443565,
+          0.12878746626275187,
+          0.5766518377523588,
+          0.14214344854017802
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts PovertyStatus toward AbovePoverty (and away from BelowPoverty). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes PovertyStatus.",
+      "answer": [
+        {
+          "variable": "ChildlessCreditExpansion",
+          "value": "Expanded",
+          "improvement": 0.6649
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "PovertyStatus",
+          "intervention_A": "StateEitcSupplement",
+          "intervention_B": "FilingAssistanceProgram",
+          "intervention_C": "AdvancePeriodicPayment",
+          "intervention_D": "ChildlessCreditExpansion",
+          "confounder": "BaselineEarningsLevel"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "ChildlessCreditExpansion",
+              "value": "Expanded",
+              "improvement": 0.6649
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "ChildlessCreditExpansion",
+              "value": "Standard",
+              "improvement": -0.0935
+            },
+            {
+              "variable": "ChildlessCreditExpansion",
+              "value": "Expanded",
+              "improvement": 0.6649
+            },
+            {
+              "variable": "StateEitcSupplement",
+              "value": "None",
+              "improvement": -0.6433
+            },
+            {
+              "variable": "StateEitcSupplement",
+              "value": "Moderate",
+              "improvement": -0.0603
+            },
+            {
+              "variable": "StateEitcSupplement",
+              "value": "Generous",
+              "improvement": 0.2927
+            },
+            {
+              "variable": "FilingAssistanceProgram",
+              "value": "No",
+              "improvement": -0.1144
+            },
+            {
+              "variable": "FilingAssistanceProgram",
+              "value": "Yes",
+              "improvement": 0.1335
+            },
+            {
+              "variable": "AdvancePeriodicPayment",
+              "value": "Off",
+              "improvement": -0.0587
+            },
+            {
+              "variable": "AdvancePeriodicPayment",
+              "value": "Monthly",
+              "improvement": -0.0084
+            },
+            {
+              "variable": "AdvancePeriodicPayment",
+              "value": "Biweekly",
+              "improvement": 0.0214
+            }
+          ],
+          "threshold": 0.4788,
+          "baseline_E_target": 0.735
+        }
+      }
+    }
+  ]
+}

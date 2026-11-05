@@ -1,0 +1,528 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "mediator_structure:which_mediator",
+    "seed": 7242,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "which_mediator"
+  },
+  "story": "A researcher is based at a large university-affiliated maternity hospital. She has access to detailed patient records from recent deliveries and can request both observational and interventional data collection from the department.",
+  "non_intervenable_variables": [
+    {
+      "name": "PostpartumHemorrhageSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LaborDurationCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MaternalAnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IntrapartumFeverStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrepregnancyBmi",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MaternalAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "Parity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GestationalAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "EpiduralAnalgesia",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether epidural analgesia was administered during labor.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PostpartumHemorrhageSeverity",
+      "values": [
+        "None",
+        "Mild",
+        "Severe"
+      ],
+      "desc": "Classified severity of blood loss within 24 hours after delivery.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LaborDurationCategory",
+      "values": [
+        "Short",
+        "Moderate",
+        "Prolonged"
+      ],
+      "desc": "Total duration of active labor categorized into three ordinal groups.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MaternalAnxietyLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported maternal anxiety score during the intrapartum period.",
+      "role": "decoy_M1",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "IntrapartumFeverStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether maternal temperature exceeded 38 degrees Celsius during labor.",
+      "role": "decoy_M2",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PrepregnancyBmi",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Body mass index category recorded before conception or at first prenatal visit.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MaternalAge",
+      "values": [
+        "Under30",
+        "30to35",
+        "Over35"
+      ],
+      "desc": "Maternal age group at the time of delivery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "Parity",
+      "values": [
+        "Nulliparous",
+        "Multiparous"
+      ],
+      "desc": "Whether the mother has had a previous delivery beyond 20 weeks gestation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GestationalAgeGroup",
+      "values": [
+        "EarlyTerm",
+        "FullTerm",
+        "LateTerm"
+      ],
+      "desc": "Gestational age at delivery grouped into clinical term categories.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OxytocinAugmentation",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether synthetic oxytocin was used to augment uterine contractions.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "EpiduralAnalgesia",
+      "LaborDurationCategory"
+    ],
+    [
+      "EpiduralAnalgesia",
+      "MaternalAnxietyLevel"
+    ],
+    [
+      "PostpartumHemorrhageSeverity",
+      "GestationalAgeGroup"
+    ],
+    [
+      "LaborDurationCategory",
+      "PostpartumHemorrhageSeverity"
+    ],
+    [
+      "LaborDurationCategory",
+      "GestationalAgeGroup"
+    ],
+    [
+      "IntrapartumFeverStatus",
+      "PostpartumHemorrhageSeverity"
+    ],
+    [
+      "PrepregnancyBmi",
+      "EpiduralAnalgesia"
+    ],
+    [
+      "PrepregnancyBmi",
+      "PostpartumHemorrhageSeverity"
+    ],
+    [
+      "Parity",
+      "EpiduralAnalgesia"
+    ],
+    [
+      "Parity",
+      "GestationalAgeGroup"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "IntrapartumFeverStatus",
+      "parents": [],
+      "values": [
+        [
+          0.20558375363490725
+        ],
+        [
+          0.7944162463650928
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PrepregnancyBmi",
+      "parents": [],
+      "values": [
+        [
+          0.4646178057804891
+        ],
+        [
+          0.4408372998090543
+        ],
+        [
+          0.09454489441045656
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MaternalAge",
+      "parents": [],
+      "values": [
+        [
+          0.14132847328729278
+        ],
+        [
+          0.2861458610622047
+        ],
+        [
+          0.5725256656505026
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "Parity",
+      "parents": [],
+      "values": [
+        [
+          0.15765987070919488
+        ],
+        [
+          0.8423401292908052
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OxytocinAugmentation",
+      "parents": [],
+      "values": [
+        [
+          0.43038841067540645
+        ],
+        [
+          0.5696115893245935
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EpiduralAnalgesia",
+      "parents": [
+        "PrepregnancyBmi",
+        "Parity"
+      ],
+      "values": [
+        [
+          0.5954312068265972,
+          0.3256553243443597,
+          0.3809570267885541,
+          0.16800201884142477,
+          0.20465663554154723,
+          0.07785845716178152
+        ],
+        [
+          0.40456879317340266,
+          0.6743446756556404,
+          0.619042973211446,
+          0.8319979811585752,
+          0.7953433644584528,
+          0.9221415428382186
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LaborDurationCategory",
+      "parents": [
+        "EpiduralAnalgesia"
+      ],
+      "values": [
+        [
+          0.16125595154070357,
+          0.8719956771645132
+        ],
+        [
+          0.305270223337221,
+          0.11272543788096896
+        ],
+        [
+          0.5334738251220754,
+          0.015278884954517919
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MaternalAnxietyLevel",
+      "parents": [
+        "EpiduralAnalgesia"
+      ],
+      "values": [
+        [
+          0.20295679863532134,
+          0.7642796502141441
+        ],
+        [
+          0.3260643309208873,
+          0.18817754646727947
+        ],
+        [
+          0.4709788704437913,
+          0.04754280331857647
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostpartumHemorrhageSeverity",
+      "parents": [
+        "PrepregnancyBmi",
+        "LaborDurationCategory",
+        "IntrapartumFeverStatus"
+      ],
+      "values": [
+        [
+          0.9676496834106695,
+          0.8382146586073677,
+          0.8374415096079524,
+          0.40807254629844286,
+          0.5916480097579844,
+          0.11685846944993189,
+          0.927996420501776,
+          0.6480873792873133,
+          0.6548484538041791,
+          0.15895175781620735,
+          0.34047627912907014,
+          0.03381084487082583,
+          0.6633241069183409,
+          0.16609041823477821,
+          0.1620532077058555,
+          0.011672184676643814,
+          0.03186100322322869,
+          0.0015648980690557244
+        ],
+        [
+          0.03128110481592557,
+          0.13834004862550198,
+          0.13856385958787568,
+          0.32054169503072116,
+          0.28082924492129296,
+          0.27453363254297763,
+          0.06718406777353021,
+          0.2562816514639261,
+          0.25209966267667,
+          0.3115642836421298,
+          0.3317765619653762,
+          0.16419815851653502,
+          0.2473171685784547,
+          0.28974007668598944,
+          0.2979903044997674,
+          0.10184542974660941,
+          0.15625499993589212,
+          0.03697234116310441
+        ],
+        [
+          0.0010692117734049727,
+          0.023445292767130463,
+          0.023994630804171916,
+          0.271385758670836,
+          0.1275227453207227,
+          0.6086078980070905,
+          0.004819511724693628,
+          0.0956309692487607,
+          0.09305188351915084,
+          0.5294839585416629,
+          0.3277471589055536,
+          0.8019909966126393,
+          0.0893587245032045,
+          0.5441695050792323,
+          0.5399564877943771,
+          0.8864823855767469,
+          0.8118839968408793,
+          0.9614627607678398
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GestationalAgeGroup",
+      "parents": [
+        "Parity",
+        "LaborDurationCategory",
+        "PostpartumHemorrhageSeverity"
+      ],
+      "values": [
+        [
+          0.4484541726712591,
+          0.8636101653058518,
+          0.9793737422556141,
+          0.05888417254188659,
+          0.37448982138313264,
+          0.8510707005535529,
+          0.0025277674169301373,
+          0.023793220206693777,
+          0.18989555393842228,
+          0.6250808894765242,
+          0.9170318585747542,
+          0.9864393916620414,
+          0.4522192860284726,
+          0.8818228590017816,
+          0.9850468752614471,
+          0.03666253318497146,
+          0.2677981211179758,
+          0.7784389499015861
+        ],
+        [
+          0.2841438132335168,
+          0.0568900758056469,
+          0.006707579898790424,
+          0.931029444397116,
+          0.6156069145307882,
+          0.14545469442601147,
+          0.9973478486546412,
+          0.9760260283213489,
+          0.8098817334162699,
+          0.02632943103446321,
+          0.004015950103756357,
+          0.0004491308871189606,
+          0.4753341720915546,
+          0.09636735553127232,
+          0.011191907657016867,
+          0.961650209477581,
+          0.7302991897256776,
+          0.22070719075197037
+        ],
+        [
+          0.2674020140952241,
+          0.07949975888850118,
+          0.013918677845595587,
+          0.010086383060997357,
+          0.009903264086079106,
+          0.0034746050204354367,
+          0.0001243839284287263,
+          0.0001807514719572428,
+          0.00022271264530800673,
+          0.34858967948901265,
+          0.07895219132148931,
+          0.013111477450839525,
+          0.07244654187997276,
+          0.021809785466946077,
+          0.0037612170815359398,
+          0.001687257337447629,
+          0.001902689156346533,
+          0.0008538593464435388
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "Among the variables [LaborDurationCategory, MaternalAnxietyLevel, IntrapartumFeverStatus], which one is on the actual causal pathway from EpiduralAnalgesia to PostpartumHemorrhageSeverity? Identify the single variable and explain how you ruled out the others.",
+      "answer": "which_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "which_mediator",
+        "roles": {
+          "treatment": "EpiduralAnalgesia",
+          "outcome": "PostpartumHemorrhageSeverity",
+          "true_mediator": "LaborDurationCategory",
+          "decoy_M1": "MaternalAnxietyLevel",
+          "decoy_M2": "IntrapartumFeverStatus",
+          "confounder": "PrepregnancyBmi"
+        },
+        "gold": {
+          "label": "which_mediator",
+          "T": "EpiduralAnalgesia",
+          "O": "PostpartumHemorrhageSeverity",
+          "true_mediator": "LaborDurationCategory",
+          "candidates": [
+            "LaborDurationCategory",
+            "MaternalAnxietyLevel",
+            "IntrapartumFeverStatus"
+          ],
+          "candidate_do_effects": {
+            "LaborDurationCategory": 1.1453,
+            "MaternalAnxietyLevel": 0.0,
+            "IntrapartumFeverStatus": 0.4944
+          },
+          "total_effect": -0.7238
+        }
+      }
+    }
+  ]
+}

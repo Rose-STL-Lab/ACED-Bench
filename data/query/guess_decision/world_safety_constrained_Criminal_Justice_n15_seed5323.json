@@ -1,0 +1,797 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 5323,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A metropolitan police department partners with a university research team, granting access to administrative records, survey data, and program logs across its patrol districts. The researcher can request both observational and interventional samples from participating neighborhoods.",
+  "non_intervenable_variables": [
+    {
+      "name": "ResidentTrustInPolice",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerSafetyIncidents",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerceivedProceduralFairness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NeighborhoodCrimeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MedianHouseholdIncome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ResidentDemographicDiversity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LanguageBarrierPrevalence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerTenureInNeighborhood",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalMediaCoverageOfPolice",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ResidentTrustInPolice",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Surveyed level of resident trust toward local police officers.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "OfficerSafetyIncidents",
+      "values": [
+        "None",
+        "Few",
+        "Many"
+      ],
+      "desc": "Count category of safety incidents involving officers during patrol duties.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "NeighborhoodLiaisonProgram",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Extent of assigned civilian-police liaison officers in each neighborhood.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProactiveFootPatrolIntensity",
+      "values": [
+        "None",
+        "Moderate",
+        "Heavy"
+      ],
+      "desc": "Frequency of officer-initiated foot patrols through residential blocks.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OnlineFeedbackPortal",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Availability of a web-based portal for residents to submit policing feedback.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PerceivedProceduralFairness",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Resident-reported perception of fairness in police encounters and procedures.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "NeighborhoodCrimeLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Recorded crime rate category for the neighborhood over the prior year.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunityMeetingFrequency",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "How often police-hosted community meetings are scheduled in the area.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MedianHouseholdIncome",
+      "values": [
+        "Low",
+        "Middle",
+        "High"
+      ],
+      "desc": "Census-derived median household income bracket for the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerCulturalCompetencyTraining",
+      "values": [
+        "None",
+        "Basic",
+        "Advanced"
+      ],
+      "desc": "Level of cultural competency training completed by assigned officers.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ResidentDemographicDiversity",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Degree of racial and ethnic diversity among neighborhood residents.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LanguageBarrierPrevalence",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Proportion of residents with limited English proficiency in the area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "YouthProgramAvailability",
+      "values": [
+        "None",
+        "Some",
+        "Extensive"
+      ],
+      "desc": "Range of police-sponsored youth engagement programs offered locally.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerTenureInNeighborhood",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Average duration officers have been assigned to the same neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LocalMediaCoverageOfPolice",
+      "values": [
+        "Positive",
+        "Neutral",
+        "Negative"
+      ],
+      "desc": "Prevailing tone of local media stories about the police department.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "NeighborhoodLiaisonProgram",
+      "PerceivedProceduralFairness"
+    ],
+    [
+      "NeighborhoodLiaisonProgram",
+      "YouthProgramAvailability"
+    ],
+    [
+      "ProactiveFootPatrolIntensity",
+      "ResidentTrustInPolice"
+    ],
+    [
+      "ProactiveFootPatrolIntensity",
+      "OfficerSafetyIncidents"
+    ],
+    [
+      "OnlineFeedbackPortal",
+      "ResidentTrustInPolice"
+    ],
+    [
+      "OnlineFeedbackPortal",
+      "OfficerTenureInNeighborhood"
+    ],
+    [
+      "PerceivedProceduralFairness",
+      "ResidentTrustInPolice"
+    ],
+    [
+      "NeighborhoodCrimeLevel",
+      "ResidentTrustInPolice"
+    ],
+    [
+      "NeighborhoodCrimeLevel",
+      "OfficerSafetyIncidents"
+    ],
+    [
+      "LanguageBarrierPrevalence",
+      "OnlineFeedbackPortal"
+    ],
+    [
+      "YouthProgramAvailability",
+      "LanguageBarrierPrevalence"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "NeighborhoodLiaisonProgram",
+      "parents": [],
+      "values": [
+        [
+          0.3595386382984153
+        ],
+        [
+          0.24507959805837803
+        ],
+        [
+          0.39538176364320676
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProactiveFootPatrolIntensity",
+      "parents": [],
+      "values": [
+        [
+          0.1190727777661507
+        ],
+        [
+          0.7872007069284872
+        ],
+        [
+          0.09372651530536215
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NeighborhoodCrimeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.18633028634078108
+        ],
+        [
+          0.2750684613179425
+        ],
+        [
+          0.5386012523412764
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CommunityMeetingFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.13001226173939626
+        ],
+        [
+          0.3673983705351538
+        ],
+        [
+          0.5025893677254499
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MedianHouseholdIncome",
+      "parents": [],
+      "values": [
+        [
+          0.20417320277318587
+        ],
+        [
+          0.6675188225858474
+        ],
+        [
+          0.12830797464096674
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerCulturalCompetencyTraining",
+      "parents": [],
+      "values": [
+        [
+          0.1627596764577221
+        ],
+        [
+          0.1962305299356717
+        ],
+        [
+          0.6410097936066063
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ResidentDemographicDiversity",
+      "parents": [],
+      "values": [
+        [
+          0.4095484551896578
+        ],
+        [
+          0.3769125420595126
+        ],
+        [
+          0.21353900275082963
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LocalMediaCoverageOfPolice",
+      "parents": [],
+      "values": [
+        [
+          0.20898055860367523
+        ],
+        [
+          0.09875317846032779
+        ],
+        [
+          0.692266262935997
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerceivedProceduralFairness",
+      "parents": [
+        "NeighborhoodLiaisonProgram"
+      ],
+      "values": [
+        [
+          0.1707039060848644,
+          0.7094083905484848,
+          0.9155910855339422
+        ],
+        [
+          0.30427673305040825,
+          0.22345964415062572,
+          0.07731713578668101
+        ],
+        [
+          0.5250193608647273,
+          0.06713196530088948,
+          0.0070917786793768004
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "YouthProgramAvailability",
+      "parents": [
+        "NeighborhoodLiaisonProgram"
+      ],
+      "values": [
+        [
+          0.4168679685117339,
+          0.06082248289058498,
+          0.003966815516744337
+        ],
+        [
+          0.2606156346914825,
+          0.0985710402301925,
+          0.016665197038077048
+        ],
+        [
+          0.32251639679678357,
+          0.8406064768792226,
+          0.9793679874451785
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerSafetyIncidents",
+      "parents": [
+        "NeighborhoodCrimeLevel",
+        "ProactiveFootPatrolIntensity"
+      ],
+      "values": [
+        [
+          0.5761563146072896,
+          0.26117270649000707,
+          0.0525806540815381,
+          0.39688708639642645,
+          0.1429414858279993,
+          0.02447715999207575,
+          0.06654308868248242,
+          0.014049592488994131,
+          0.0015420284001195891
+        ],
+        [
+          0.2879760032352695,
+          0.32336822057515274,
+          0.1905915750323591,
+          0.3259720659677151,
+          0.2890361157936007,
+          0.14032310286781335,
+          0.21948892797241334,
+          0.10993465566807716,
+          0.038538055477476615
+        ],
+        [
+          0.13586768215744094,
+          0.41545907293484025,
+          0.7568277708861028,
+          0.27714084763585856,
+          0.5680223983784001,
+          0.8351997371401109,
+          0.7139679833451041,
+          0.8760157518429287,
+          0.9599199161224037
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LanguageBarrierPrevalence",
+      "parents": [
+        "YouthProgramAvailability"
+      ],
+      "values": [
+        [
+          0.4162048011679921,
+          0.06615167800390741,
+          0.00419503408396815
+        ],
+        [
+          0.29183567518671355,
+          0.08440661331840973,
+          0.009740369212325956
+        ],
+        [
+          0.2919595236452943,
+          0.8494417086776828,
+          0.9860645967037059
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OnlineFeedbackPortal",
+      "parents": [
+        "LanguageBarrierPrevalence"
+      ],
+      "values": [
+        [
+          0.47813896201680617,
+          0.9302939042547878,
+          0.9948823315648766
+        ],
+        [
+          0.5218610379831938,
+          0.06970609574521226,
+          0.005117668435123485
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ResidentTrustInPolice",
+      "parents": [
+        "NeighborhoodCrimeLevel",
+        "PerceivedProceduralFairness",
+        "ProactiveFootPatrolIntensity",
+        "OnlineFeedbackPortal"
+      ],
+      "values": [
+        [
+          0.8226211330030841,
+          0.8842594008647511,
+          0.956589582372261,
+          0.9738195125139316,
+          0.9859973712519845,
+          0.9922687356039875,
+          0.36320620636125855,
+          0.5367097487927383,
+          0.7847090675462182,
+          0.8613989876303595,
+          0.9313411869541248,
+          0.9595587819545673,
+          0.056565192509492615,
+          0.1223193155839182,
+          0.366069139315204,
+          0.5441376342572192,
+          0.7470469937430004,
+          0.836183814447375,
+          0.69852901662216,
+          0.803713471597909,
+          0.9114688108468694,
+          0.9498701187882197,
+          0.974600004811413,
+          0.9851135669325584,
+          0.18633809739562024,
+          0.33398185727422497,
+          0.6347843048929666,
+          0.7630142216643266,
+          0.8859435399281717,
+          0.9274279186311528,
+          0.019469202678513226,
+          0.044996943958386666,
+          0.18970029597054264,
+          0.3371373124240879,
+          0.561132499903955,
+          0.7101147716582523,
+          0.17868178250064704,
+          0.340773648759832,
+          0.631123877217863,
+          0.7666198366623596,
+          0.8759197362447455,
+          0.925675782429989,
+          0.012785989073961073,
+          0.03205435721508119,
+          0.134714103980928,
+          0.2813577241247106,
+          0.5093116584420906,
+          0.6508579325171898,
+          0.0008450753939338021,
+          0.0024387217174220155,
+          0.013900458752106729,
+          0.03508069400045031,
+          0.10247354157795173,
+          0.2105286307144405
+        ],
+        [
+          0.1489197825070393,
+          0.10468351629514447,
+          0.04142242249732193,
+          0.02547633873907002,
+          0.01380818286049205,
+          0.007666520079409223,
+          0.3466811433071512,
+          0.30701399739749813,
+          0.1755575544988265,
+          0.12281586415177861,
+          0.06461193053166282,
+          0.03886619712237395,
+          0.19814230103802005,
+          0.27802697850947494,
+          0.33222513506811263,
+          0.2988560906887589,
+          0.2003681982887612,
+          0.13988573044635516,
+          0.22334357420150527,
+          0.16194241713213928,
+          0.08186201976106156,
+          0.0476920190349996,
+          0.02479046511187615,
+          0.014651250199077374,
+          0.3072966677469888,
+          0.3282726731798362,
+          0.257252759745742,
+          0.19069451315237923,
+          0.10079061084998356,
+          0.0677496093767611,
+          0.13111547834623896,
+          0.18597184465494404,
+          0.29515495602327263,
+          0.33523058348271156,
+          0.29491753102032653,
+          0.2228065673946622,
+          0.31123908067691336,
+          0.3159425120654631,
+          0.2571136892832011,
+          0.1872002267335319,
+          0.11102813707818815,
+          0.06929166675962017,
+          0.11112057216310617,
+          0.15016692293664616,
+          0.295078845811785,
+          0.3209146568936999,
+          0.31315484799918497,
+          0.2582078911622321,
+          0.02707652582728416,
+          0.046986624070605484,
+          0.1100884310761788,
+          0.1675035225924991,
+          0.27245384159956754,
+          0.30563452045118095
+        ],
+        [
+          0.02845908448987643,
+          0.011057082840104647,
+          0.001987995130417082,
+          0.0007041487469983115,
+          0.00019444588752337176,
+          6.474431660327412e-05,
+          0.29011265033159034,
+          0.15627625380976354,
+          0.03973337795495545,
+          0.015785148217861877,
+          0.004046882514212354,
+          0.0015750209230587253,
+          0.7452925064524873,
+          0.5996537059066069,
+          0.3017057256166833,
+          0.15700627505402198,
+          0.05258480796823836,
+          0.023930455106269816,
+          0.07812740917633472,
+          0.03434411126995169,
+          0.006669169392069175,
+          0.002437862176780651,
+          0.0006095300767110314,
+          0.0002351828683642262,
+          0.5063652348573909,
+          0.3377454695459388,
+          0.10796293536129152,
+          0.046291265183294,
+          0.013265849221844608,
+          0.004822471992086089,
+          0.8494153189752478,
+          0.7690312113866692,
+          0.5151447480061847,
+          0.32763210409320054,
+          0.14394996907571858,
+          0.06707866094708545,
+          0.5100791368224395,
+          0.34328383917470495,
+          0.11176243349893589,
+          0.04617993660410861,
+          0.01305212667706641,
+          0.005032550810390798,
+          0.8760934387629327,
+          0.8177787198482727,
+          0.570207050207287,
+          0.39772761898158954,
+          0.1775334935587244,
+          0.09093417632057821,
+          0.972078398778782,
+          0.9505746542119725,
+          0.8760111101717145,
+          0.7974157834070505,
+          0.6250726168224807,
+          0.48383684883437855
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerTenureInNeighborhood",
+      "parents": [
+        "OnlineFeedbackPortal"
+      ],
+      "values": [
+        [
+          0.37061821943292617,
+          0.07818874954051387
+        ],
+        [
+          0.23872751798353817,
+          0.4607941296238814
+        ],
+        [
+          0.3906542625835357,
+          0.4610171208356047
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift ResidentTrustInPolice toward High (and away from Low), but only if the same action does not make OfficerSafetyIncidents more likely to be Many. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "NeighborhoodLiaisonProgram",
+        "value": "Full"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "ResidentTrustInPolice",
+          "safety_outcome": "OfficerSafetyIncidents",
+          "good_intervention": "NeighborhoodLiaisonProgram",
+          "risky_intervention": "ProactiveFootPatrolIntensity",
+          "weak_intervention": "OnlineFeedbackPortal",
+          "good_mediator": "PerceivedProceduralFairness",
+          "confounder": "NeighborhoodCrimeLevel"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "NeighborhoodLiaisonProgram",
+            "value": "Full"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "NeighborhoodLiaisonProgram",
+              "value": "Full",
+              "delta_target": -0.3056,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "ProactiveFootPatrolIntensity",
+              "value": "Heavy",
+              "delta_target": -0.3647,
+              "delta_safety": 0.2809,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.7027,
+            "E_safety": 1.5895
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

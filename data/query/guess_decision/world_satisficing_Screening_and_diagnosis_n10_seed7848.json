@@ -1,0 +1,681 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "satisficing",
+    "seed": 7848,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A large academic urology department within a university medical center maintains comprehensive patient records. The research team can access existing clinical databases and request new observational or interventional data collection as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "DiagnosticAccuracyOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselinePsaLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilyHistoryProstateCancer",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ProstateVolume",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EthnicityRiskCategory",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DiagnosticAccuracyOutcome",
+      "values": [
+        "CorrectClassification",
+        "Overdiagnosis",
+        "MissedCancer"
+      ],
+      "desc": "Classification of final diagnostic concordance with true disease status.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PsaDensityCalculation",
+      "values": [
+        "NotUsed",
+        "Used"
+      ],
+      "desc": "Whether PSA density (PSA divided by prostate volume) is computed.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MriBeforeBiopsy",
+      "values": [
+        "NoPrebiopsy",
+        "MriGuided"
+      ],
+      "desc": "Whether multiparametric MRI is performed prior to prostate biopsy.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FreeTotalPsaRatio",
+      "values": [
+        "NotOrdered",
+        "Ordered"
+      ],
+      "desc": "Whether free-to-total PSA percentage is measured in serum.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RiskCalculatorUse",
+      "values": [
+        "None",
+        "SimpleModel",
+        "MultivariateModel"
+      ],
+      "desc": "Type of validated prostate cancer risk calculator applied at screening.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under55",
+        "55to69",
+        "70plus"
+      ],
+      "desc": "Patient age bracket at time of PSA screening.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselinePsaLevel",
+      "values": [
+        "Below4",
+        "4to10",
+        "Above10"
+      ],
+      "desc": "Initial serum PSA concentration range in ng/mL.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyHistoryProstateCancer",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a first-degree relative was diagnosed with prostate cancer.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ProstateVolume",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Estimated prostate gland volume category measured by ultrasound.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EthnicityRiskCategory",
+      "values": [
+        "AverageRisk",
+        "HigherRisk"
+      ],
+      "desc": "Self-reported ethnicity grouped by known population-level incidence rates.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "DiagnosticAccuracyOutcome",
+      "BaselinePsaLevel"
+    ],
+    [
+      "PsaDensityCalculation",
+      "DiagnosticAccuracyOutcome"
+    ],
+    [
+      "MriBeforeBiopsy",
+      "DiagnosticAccuracyOutcome"
+    ],
+    [
+      "MriBeforeBiopsy",
+      "FamilyHistoryProstateCancer"
+    ],
+    [
+      "FreeTotalPsaRatio",
+      "DiagnosticAccuracyOutcome"
+    ],
+    [
+      "RiskCalculatorUse",
+      "DiagnosticAccuracyOutcome"
+    ],
+    [
+      "RiskCalculatorUse",
+      "EthnicityRiskCategory"
+    ],
+    [
+      "AgeGroup",
+      "DiagnosticAccuracyOutcome"
+    ],
+    [
+      "ProstateVolume",
+      "RiskCalculatorUse"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PsaDensityCalculation",
+      "parents": [],
+      "values": [
+        [
+          0.3062321680048039
+        ],
+        [
+          0.6937678319951961
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MriBeforeBiopsy",
+      "parents": [],
+      "values": [
+        [
+          0.5471487840936294
+        ],
+        [
+          0.4528512159063706
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FreeTotalPsaRatio",
+      "parents": [],
+      "values": [
+        [
+          0.4128042000475585
+        ],
+        [
+          0.5871957999524414
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.2251857047280358
+        ],
+        [
+          0.16487666304992352
+        ],
+        [
+          0.6099376322220408
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProstateVolume",
+      "parents": [],
+      "values": [
+        [
+          0.2167843484017429
+        ],
+        [
+          0.39232456748721156
+        ],
+        [
+          0.3908910841110454
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilyHistoryProstateCancer",
+      "parents": [
+        "MriBeforeBiopsy"
+      ],
+      "values": [
+        [
+          0.4906503405905965,
+          0.716767264354174
+        ],
+        [
+          0.5093496594094035,
+          0.28323273564582596
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RiskCalculatorUse",
+      "parents": [
+        "ProstateVolume"
+      ],
+      "values": [
+        [
+          0.3726222605386177,
+          0.08356104840550138,
+          0.010548028718766462
+        ],
+        [
+          0.2863413394794504,
+          0.16286619187165685,
+          0.05214469970008651
+        ],
+        [
+          0.34103639998193197,
+          0.7535727597228419,
+          0.9373072715811471
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiagnosticAccuracyOutcome",
+      "parents": [
+        "AgeGroup",
+        "MriBeforeBiopsy",
+        "FreeTotalPsaRatio",
+        "RiskCalculatorUse",
+        "PsaDensityCalculation"
+      ],
+      "values": [
+        [
+          0.1607193357803807,
+          0.20402280729914898,
+          0.2553117242548293,
+          0.31817813446786,
+          0.33949000929518625,
+          0.4010347609803915,
+          0.8195932886430242,
+          0.833132891672732,
+          0.8679096029760853,
+          0.8923019570591243,
+          0.8956829890456134,
+          0.9131187378794395,
+          0.9085300429765801,
+          0.9238200948175705,
+          0.940048004572437,
+          0.9487994558526394,
+          0.9474822274164314,
+          0.9597063990023106,
+          0.9898919808235008,
+          0.9920228363539546,
+          0.9931106287001265,
+          0.9945043958139056,
+          0.99480017400867,
+          0.995681386154473,
+          0.0657106535844631,
+          0.08471041800408913,
+          0.12395499438378667,
+          0.14723627256187494,
+          0.16604120043586,
+          0.21059712098915778,
+          0.6617427044535377,
+          0.7227268888221204,
+          0.7596998341660653,
+          0.8030040336685196,
+          0.8142885997786555,
+          0.8491080170813429,
+          0.8304129741444785,
+          0.8542276698617804,
+          0.8806756429811321,
+          0.9035690278039306,
+          0.9155596485649351,
+          0.9218458185064969,
+          0.9825449788888374,
+          0.98516055676189,
+          0.9879639500237718,
+          0.9900414392624817,
+          0.9910347668542084,
+          0.9924109501239003,
+          0.004726935677369007,
+          0.007419210167883071,
+          0.010611234210983056,
+          0.014061780926144215,
+          0.01598123288082104,
+          0.024432001847478946,
+          0.2208959213035001,
+          0.2843774484621166,
+          0.3357777723714385,
+          0.4019882911835834,
+          0.4254999384545382,
+          0.48553862932076586,
+          0.4805865853753436,
+          0.5408237520535754,
+          0.6002301197418984,
+          0.6443936221867904,
+          0.6850702936571189,
+          0.7117435539193576,
+          0.9288590523811552,
+          0.9434356077736437,
+          0.9535299221799508,
+          0.9604985220868313,
+          0.9622414813584244,
+          0.9704734919574032
+        ],
+        [
+          0.2974832252730908,
+          0.31247863333453374,
+          0.3232690399707184,
+          0.3205568706893494,
+          0.3355567049515364,
+          0.3294236103992197,
+          0.15045597606830477,
+          0.14398132827347038,
+          0.11614672112545976,
+          0.0971327122057405,
+          0.09412059289629497,
+          0.08027435524370306,
+          0.0841566338901445,
+          0.07098312590753038,
+          0.05633273399691883,
+          0.04870931399489702,
+          0.05019399091905392,
+          0.03860116556011942,
+          0.010014380445789155,
+          0.007913153502281275,
+          0.00684401797650544,
+          0.005464866019203702,
+          0.005173232269191381,
+          0.004299336356281228,
+          0.21542340320260706,
+          0.23190367734925274,
+          0.26616886161195225,
+          0.2932601992912132,
+          0.31406441255051587,
+          0.3121377674971691,
+          0.25354079867855267,
+          0.21326037815878787,
+          0.1926366862592863,
+          0.1638128084135866,
+          0.15781800565522686,
+          0.12932921981010623,
+          0.14518877207145775,
+          0.12822211752707977,
+          0.1072525025336473,
+          0.08817052280025746,
+          0.07729327019031063,
+          0.07296954536502008,
+          0.017148623887087107,
+          0.014631889582343433,
+          0.01189379679285842,
+          0.009862212276036396,
+          0.008884263846798031,
+          0.0075309722055591725,
+          0.06414396121747547,
+          0.0832343031603301,
+          0.09849371652524387,
+          0.11308389025635779,
+          0.12324368581913768,
+          0.1366753328113071,
+          0.3187663435376563,
+          0.3255624307275362,
+          0.34626097303988695,
+          0.3286517583117606,
+          0.31361847592000225,
+          0.31610400150293194,
+          0.31271334665610784,
+          0.2872483915164992,
+          0.26568805853174793,
+          0.2557018553734868,
+          0.23110214482238067,
+          0.22252819541409297,
+          0.06634272796265486,
+          0.05340525235964768,
+          0.044286732730297804,
+          0.037913897270486586,
+          0.0363938141133463,
+          0.02859209901416745
+        ],
+        [
+          0.5417974389465285,
+          0.48349855936631725,
+          0.4214192357744524,
+          0.3612649948427907,
+          0.3249532857532774,
+          0.2695416286203889,
+          0.029950735288671093,
+          0.022885780053797763,
+          0.015943675898454968,
+          0.01056533073513506,
+          0.01019641805809161,
+          0.006606906876857513,
+          0.0073133231332752745,
+          0.005196779274899095,
+          0.0036192614306442324,
+          0.0024912301524637015,
+          0.0023237816645146864,
+          0.0016924354375700205,
+          9.363873070996483e-05,
+          6.401014376405698e-05,
+          4.535332336812214e-05,
+          3.073816689087484e-05,
+          2.6593722138645154e-05,
+          1.9277489245850967e-05,
+          0.7188659432129298,
+          0.683385904646658,
+          0.609876144004261,
+          0.5595035281469118,
+          0.5198943870136241,
+          0.4772651115136733,
+          0.08471649686790972,
+          0.06401273301909154,
+          0.04766347957464837,
+          0.03318315791789367,
+          0.027893394566117648,
+          0.021562763108550945,
+          0.02439825378406381,
+          0.01755021261113973,
+          0.01207185448522059,
+          0.00826044939581192,
+          0.007147081244754232,
+          0.0051846361284829424,
+          0.00030639722407564473,
+          0.00020755365576661158,
+          0.00014225318336981552,
+          9.63484614819431e-05,
+          8.09692989935461e-05,
+          5.8077670540411065e-05,
+          0.9311291031051556,
+          0.9093464866717869,
+          0.8908950492637732,
+          0.8728543288174979,
+          0.8607750813000412,
+          0.838892665341214,
+          0.4603377351588436,
+          0.3900601208103472,
+          0.3179612545886744,
+          0.26935995050465605,
+          0.2608815856254596,
+          0.19835736917630212,
+          0.20670006796854856,
+          0.17192785642992534,
+          0.13408182172635374,
+          0.09990452243972271,
+          0.08382756152050035,
+          0.06572825066654947,
+          0.0047982196561899585,
+          0.0031591398667088033,
+          0.002183345089751315,
+          0.0015875806426820407,
+          0.0013647045282292188,
+          0.0009344090284293435
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EthnicityRiskCategory",
+      "parents": [
+        "RiskCalculatorUse"
+      ],
+      "values": [
+        [
+          0.5873601568032542,
+          0.10808820945141412,
+          0.010212253447676194
+        ],
+        [
+          0.4126398431967458,
+          0.8919117905485858,
+          0.9897877465523238
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselinePsaLevel",
+      "parents": [
+        "DiagnosticAccuracyOutcome"
+      ],
+      "values": [
+        [
+          0.39671920021010926,
+          0.20431323421020456,
+          0.0812766866534293
+        ],
+        [
+          0.3252689561641289,
+          0.28417374609669643,
+          0.1917703681873732
+        ],
+        [
+          0.2780118436257618,
+          0.511513019693099,
+          0.7269529451591975
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts DiagnosticAccuracyOutcome toward CorrectClassification (and away from MissedCancer). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes DiagnosticAccuracyOutcome.",
+      "answer": [
+        {
+          "variable": "MriBeforeBiopsy",
+          "value": "MriGuided",
+          "improvement": 0.4614
+        },
+        {
+          "variable": "FreeTotalPsaRatio",
+          "value": "Ordered",
+          "improvement": 0.2749
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "DiagnosticAccuracyOutcome",
+          "intervention_A": "PsaDensityCalculation",
+          "intervention_B": "MriBeforeBiopsy",
+          "intervention_C": "FreeTotalPsaRatio",
+          "intervention_D": "RiskCalculatorUse",
+          "confounder": "AgeGroup"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "MriBeforeBiopsy",
+              "value": "MriGuided",
+              "improvement": 0.4614
+            },
+            {
+              "variable": "FreeTotalPsaRatio",
+              "value": "Ordered",
+              "improvement": 0.2749
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "MriBeforeBiopsy",
+              "value": "NoPrebiopsy",
+              "improvement": -0.3819
+            },
+            {
+              "variable": "MriBeforeBiopsy",
+              "value": "MriGuided",
+              "improvement": 0.4614
+            },
+            {
+              "variable": "FreeTotalPsaRatio",
+              "value": "NotOrdered",
+              "improvement": -0.3911
+            },
+            {
+              "variable": "FreeTotalPsaRatio",
+              "value": "Ordered",
+              "improvement": 0.2749
+            },
+            {
+              "variable": "RiskCalculatorUse",
+              "value": "None",
+              "improvement": -0.1503
+            },
+            {
+              "variable": "RiskCalculatorUse",
+              "value": "SimpleModel",
+              "improvement": -0.0392
+            },
+            {
+              "variable": "RiskCalculatorUse",
+              "value": "MultivariateModel",
+              "improvement": 0.0318
+            },
+            {
+              "variable": "PsaDensityCalculation",
+              "value": "NotUsed",
+              "improvement": -0.0347
+            },
+            {
+              "variable": "PsaDensityCalculation",
+              "value": "Used",
+              "improvement": 0.0153
+            }
+          ],
+          "threshold": 0.1534,
+          "baseline_E_target": 0.5938
+        }
+      }
+    }
+  ]
+}

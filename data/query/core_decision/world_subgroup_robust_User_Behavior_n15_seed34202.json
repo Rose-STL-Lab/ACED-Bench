@@ -1,0 +1,924 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 15,
+    "topology": "subgroup_robust",
+    "seed": 34202,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A large streaming entertainment platform maintains detailed logs of user interactions and system configurations. The platform's research team has access to historical records and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "WatchSatisfaction",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ViewerExperienceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BrowsingTimeOfDay",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubscriptionTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ContentLanguagePreference",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorWatchVolume",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FollowedCreatorCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NetworkConnectionQuality",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GeographicRegion",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SessionDuration",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "WatchSatisfaction",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Self-reported satisfaction with recommended videos in a session.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ViewerExperienceLevel",
+      "values": [
+        "NewUser",
+        "EstablishedUser"
+      ],
+      "desc": "Whether the viewer joined the platform within the last 30 days.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TrendBoostAlgorithm",
+      "values": [
+        "Off",
+        "Moderate",
+        "Full"
+      ],
+      "desc": "Degree to which trending content is prioritized in the recommendation feed.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DiversityBlendAlgorithm",
+      "values": [
+        "Off",
+        "Light",
+        "Full"
+      ],
+      "desc": "Level of topic-diversity mixing applied to the recommendation slate.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ClickOptimizedRanking",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether recommendations are ranked purely by predicted click-through rate.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BrowsingTimeOfDay",
+      "values": [
+        "Daytime",
+        "Evening",
+        "LateNight"
+      ],
+      "desc": "Time-of-day window during which the viewing session takes place.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeviceType",
+      "values": [
+        "Mobile",
+        "Desktop",
+        "SmartTV"
+      ],
+      "desc": "Primary device used by the viewer during the session.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubscriptionTier",
+      "values": [
+        "Free",
+        "Premium"
+      ],
+      "desc": "Whether the viewer holds a paid subscription on the platform.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ContentLanguagePreference",
+      "values": [
+        "SingleLanguage",
+        "MultiLanguage"
+      ],
+      "desc": "Number of content languages the viewer has selected in their profile.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorWatchVolume",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Total hours of video watched in the 14 days before the study session.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FollowedCreatorCount",
+      "values": [
+        "Few",
+        "Many"
+      ],
+      "desc": "Number of content creators the viewer actively follows on the platform.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NetworkConnectionQuality",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Estimated bandwidth quality of the viewer's internet connection during the session.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under25",
+        "TwentyFiveToFortyFive",
+        "Over45"
+      ],
+      "desc": "Age bracket of the viewer based on account registration data.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GeographicRegion",
+      "values": [
+        "NorthAmerica",
+        "Europe",
+        "AsiaPacific"
+      ],
+      "desc": "Broad geographic region inferred from the viewer's IP address.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SessionDuration",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Total length of the viewing session measured in minutes.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ViewerExperienceLevel",
+      "WatchSatisfaction"
+    ],
+    [
+      "ViewerExperienceLevel",
+      "PriorWatchVolume"
+    ],
+    [
+      "TrendBoostAlgorithm",
+      "WatchSatisfaction"
+    ],
+    [
+      "TrendBoostAlgorithm",
+      "DiversityBlendAlgorithm"
+    ],
+    [
+      "DiversityBlendAlgorithm",
+      "WatchSatisfaction"
+    ],
+    [
+      "ClickOptimizedRanking",
+      "WatchSatisfaction"
+    ],
+    [
+      "ClickOptimizedRanking",
+      "FollowedCreatorCount"
+    ],
+    [
+      "BrowsingTimeOfDay",
+      "WatchSatisfaction"
+    ],
+    [
+      "SessionDuration",
+      "SubscriptionTier"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ViewerExperienceLevel",
+      "parents": [],
+      "values": [
+        [
+          0.4545209987176752
+        ],
+        [
+          0.5454790012823247
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TrendBoostAlgorithm",
+      "parents": [],
+      "values": [
+        [
+          0.09807503540445568
+        ],
+        [
+          0.7829815692628416
+        ],
+        [
+          0.1189433953327027
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClickOptimizedRanking",
+      "parents": [],
+      "values": [
+        [
+          0.852200910306155
+        ],
+        [
+          0.147799089693845
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BrowsingTimeOfDay",
+      "parents": [],
+      "values": [
+        [
+          0.3447999048659911
+        ],
+        [
+          0.2787231224708303
+        ],
+        [
+          0.3764769726631786
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DeviceType",
+      "parents": [],
+      "values": [
+        [
+          0.4085909361057195
+        ],
+        [
+          0.21022174685205894
+        ],
+        [
+          0.3811873170422216
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ContentLanguagePreference",
+      "parents": [],
+      "values": [
+        [
+          0.2829295097769614
+        ],
+        [
+          0.7170704902230386
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NetworkConnectionQuality",
+      "parents": [],
+      "values": [
+        [
+          0.6877803940758755
+        ],
+        [
+          0.3122196059241245
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.558691031042436
+        ],
+        [
+          0.10032465072206848
+        ],
+        [
+          0.34098431823549563
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GeographicRegion",
+      "parents": [],
+      "values": [
+        [
+          0.16802333118441434
+        ],
+        [
+          0.2403013406472932
+        ],
+        [
+          0.5916753281682925
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SessionDuration",
+      "parents": [],
+      "values": [
+        [
+          0.11343140577746501
+        ],
+        [
+          0.45632739061462463
+        ],
+        [
+          0.43024120360791035
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorWatchVolume",
+      "parents": [
+        "ViewerExperienceLevel"
+      ],
+      "values": [
+        [
+          0.4184950615868806,
+          0.008453328472672427
+        ],
+        [
+          0.2516596815965766,
+          0.07635069598462071
+        ],
+        [
+          0.3298452568165429,
+          0.9151959755427069
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiversityBlendAlgorithm",
+      "parents": [
+        "TrendBoostAlgorithm"
+      ],
+      "values": [
+        [
+          0.31947781198626296,
+          0.04888117741925452,
+          0.0035995115963153744
+        ],
+        [
+          0.3579302310420302,
+          0.8548306081529008,
+          0.9825682109064874
+        ],
+        [
+          0.32259195697170673,
+          0.09628821442784466,
+          0.013832277497197185
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FollowedCreatorCount",
+      "parents": [
+        "ClickOptimizedRanking"
+      ],
+      "values": [
+        [
+          0.46512565608977025,
+          0.7358446923915893
+        ],
+        [
+          0.5348743439102298,
+          0.2641553076084106
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SubscriptionTier",
+      "parents": [
+        "SessionDuration"
+      ],
+      "values": [
+        [
+          0.43738707501448765,
+          0.8107273745973363,
+          0.9593501160250051
+        ],
+        [
+          0.5626129249855123,
+          0.18927262540266365,
+          0.040649883974994895
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "WatchSatisfaction",
+      "parents": [
+        "BrowsingTimeOfDay",
+        "ViewerExperienceLevel",
+        "TrendBoostAlgorithm",
+        "DiversityBlendAlgorithm",
+        "ClickOptimizedRanking"
+      ],
+      "values": [
+        [
+          0.35751927324429933,
+          0.17668790065965484,
+          0.46453034646830105,
+          0.2639235019865769,
+          0.7734421616351917,
+          0.6014376450091746,
+          0.5027915689310503,
+          0.2898488093142975,
+          0.6123948936145033,
+          0.39319719828093685,
+          0.8386723057990428,
+          0.7099406163878126,
+          0.6351557899364794,
+          0.44930670817280016,
+          0.7135376523826984,
+          0.5387116636228458,
+          0.8918462014926085,
+          0.8042963613591292,
+          0.10027247275758801,
+          0.4281570805863864,
+          0.16079537287652745,
+          0.5297773503468113,
+          0.4770327276713275,
+          0.7972478994007814,
+          0.19475423934236494,
+          0.578377547425915,
+          0.2568814198461137,
+          0.6594351012253336,
+          0.6138505690845966,
+          0.8682618917257066,
+          0.649371991660232,
+          0.8785653158362815,
+          0.7155586034900416,
+          0.9081539598269853,
+          0.8859647820478284,
+          0.9661967069563685,
+          0.1891176804156447,
+          0.07738947905312267,
+          0.2552464047206493,
+          0.11983859262239574,
+          0.6117876140042494,
+          0.395323434636336,
+          0.2970973982025586,
+          0.1422514060844468,
+          0.4052567183678571,
+          0.21430908695236983,
+          0.710746824928682,
+          0.5383319411335302,
+          0.4445038910183136,
+          0.2395212019270402,
+          0.5474440822695151,
+          0.3414163268922299,
+          0.8080164729143376,
+          0.6647809642635718,
+          0.0391474703631932,
+          0.2337285551660064,
+          0.06428636572643232,
+          0.338926606783268,
+          0.26679774988117244,
+          0.6628123752908269,
+          0.07289727299721578,
+          0.36186259927857045,
+          0.11671559987598303,
+          0.4846232378288963,
+          0.40179771735666425,
+          0.7557743650300054,
+          0.4341249185652269,
+          0.7837865590609763,
+          0.5569499240860101,
+          0.8290255593040068,
+          0.8083902037355085,
+          0.9379049551202044,
+          0.018007222355532978,
+          0.005796670943755083,
+          0.031160114101878425,
+          0.010864818505099377,
+          0.1617425698997232,
+          0.06660288281148911,
+          0.039549006782132023,
+          0.012987967384871832,
+          0.0637506689297719,
+          0.02421399715177939,
+          0.25621596565500065,
+          0.12259248481755444,
+          0.0775923642905287,
+          0.02563953319152396,
+          0.12462857186402927,
+          0.04848037406468845,
+          0.3972571848276195,
+          0.21837840477417708,
+          0.0027544386580426643,
+          0.027004511412428777,
+          0.0048800638470015145,
+          0.044222621439109815,
+          0.032836645732136675,
+          0.21709577473788533,
+          0.006186840371088026,
+          0.0542631388045489,
+          0.011290659390776746,
+          0.08698375223499738,
+          0.06639737489891562,
+          0.3212358442533843,
+          0.07787359806810501,
+          0.3496567588561095,
+          0.12102066354779357,
+          0.4714114249473761,
+          0.3915165701867208,
+          0.7615044152453284
+        ],
+        [
+          0.32751192882404734,
+          0.30823881186349456,
+          0.3289141510771107,
+          0.34066168784774997,
+          0.18315069754738036,
+          0.2734880002307345,
+          0.3059156710605564,
+          0.33674989290014373,
+          0.268401551794029,
+          0.32694228717437734,
+          0.13874584334655873,
+          0.22504114309877646,
+          0.2583057661699826,
+          0.3105641115227052,
+          0.22032590443993216,
+          0.30427134162183744,
+          0.0971131846196444,
+          0.1633178175235375,
+          0.2547896818907362,
+          0.3358431015881306,
+          0.28797078431265705,
+          0.3055714220769173,
+          0.31177502635274357,
+          0.16914849000783105,
+          0.30178916164772746,
+          0.28201750428045663,
+          0.33357025141445285,
+          0.25183198507388943,
+          0.2660465424396804,
+          0.11551139255629704,
+          0.2498407653610637,
+          0.10796231621734315,
+          0.22060964292688975,
+          0.08477895048170903,
+          0.10246823758475244,
+          0.03269400428881379,
+          0.3062801493180668,
+          0.2317290446781902,
+          0.3350924739231411,
+          0.27292663290779123,
+          0.26743310250603036,
+          0.3371023232959865,
+          0.33032612187528665,
+          0.2883137133893968,
+          0.33049232111465926,
+          0.3045364867442626,
+          0.22504848353765083,
+          0.2902514389927685,
+          0.32259147512350317,
+          0.32293410991172544,
+          0.2907339848600367,
+          0.3362858407854625,
+          0.1575814536055949,
+          0.24618379085760753,
+          0.1790069128767938,
+          0.3268722985405669,
+          0.20352717711162394,
+          0.3260868046082041,
+          0.3188411322326894,
+          0.24443810512570638,
+          0.22036102816332476,
+          0.3250894119539814,
+          0.2810687656214639,
+          0.3079516914128322,
+          0.3287645433012602,
+          0.19741520675145668,
+          0.32467017787076785,
+          0.1782923334451098,
+          0.28543542859859233,
+          0.14757500441184737,
+          0.15959754373388974,
+          0.058535036633929026,
+          0.12669274525083185,
+          0.07172215425470903,
+          0.15136325530112713,
+          0.0967685876377708,
+          0.30870503938418165,
+          0.22401424271669368,
+          0.17653211858182094,
+          0.10781739370238728,
+          0.21132990572433744,
+          0.13709537651544298,
+          0.3322328177261717,
+          0.2727270841195541,
+          0.2347486930420358,
+          0.14146500025591002,
+          0.27317233478127995,
+          0.19039811636829246,
+          0.3298508127978918,
+          0.29786197606491943,
+          0.0478511635370995,
+          0.1578122340947435,
+          0.06791448181641134,
+          0.18626363049279127,
+          0.1580237530596649,
+          0.32663026327669864,
+          0.07528799653181836,
+          0.20996137991193783,
+          0.10090742581420464,
+          0.24171573845302718,
+          0.21408224787293115,
+          0.34479272376827763,
+          0.22004536944290273,
+          0.3448371384216763,
+          0.2560122567897789,
+          0.30872877985618885,
+          0.3420535823252024,
+          0.1912647589650629
+        ],
+        [
+          0.3149687979316534,
+          0.5150732874768507,
+          0.20655550245458837,
+          0.3954148101656731,
+          0.04340714081742772,
+          0.12507435476009077,
+          0.19129276000839346,
+          0.37340129778555886,
+          0.11920355459146766,
+          0.27986051454468586,
+          0.022581850854398507,
+          0.06501824051341094,
+          0.10653844389353807,
+          0.24012918030449476,
+          0.0661364431773694,
+          0.15701699475531675,
+          0.011040613887747066,
+          0.03238582111733338,
+          0.6449378453516759,
+          0.23599981782548293,
+          0.5512338428108156,
+          0.16465122757627138,
+          0.21119224597592892,
+          0.03360361059138773,
+          0.5034565990099076,
+          0.13960494829362843,
+          0.40954832873943336,
+          0.08873291370077703,
+          0.12010288847572297,
+          0.01622671571799647,
+          0.10078724297870434,
+          0.013472367946375444,
+          0.06383175358306871,
+          0.00706708969130557,
+          0.011566980367419105,
+          0.0011092887548176135,
+          0.5046021702662884,
+          0.6908814762686871,
+          0.40966112135620947,
+          0.6072347744698131,
+          0.12077928348972017,
+          0.2675742420676776,
+          0.3725764799221548,
+          0.5694348805261563,
+          0.2642509605174838,
+          0.48115442630336763,
+          0.06420469153366705,
+          0.1714166198737012,
+          0.2329046338581832,
+          0.4375446881612342,
+          0.16182193287044802,
+          0.32229783232230774,
+          0.034402073480067574,
+          0.08903524487882071,
+          0.781845616760013,
+          0.4393991462934267,
+          0.7321864571619437,
+          0.3349865886085279,
+          0.4143611178861382,
+          0.09274951958346657,
+          0.7067416988394595,
+          0.31304798876744805,
+          0.6022156345025531,
+          0.20742507075827163,
+          0.26943773934207566,
+          0.04681042821853787,
+          0.2412049035640052,
+          0.03792110749391395,
+          0.15761464731539762,
+          0.023399436284145758,
+          0.03201225253060163,
+          0.0035600082458666763,
+          0.8553000323936352,
+          0.9224811748015359,
+          0.8174766305969945,
+          0.8923665938571297,
+          0.5295523907160952,
+          0.7093828744718171,
+          0.7839188746360469,
+          0.8791946389127409,
+          0.7249194253458908,
+          0.8386906263327777,
+          0.41155121661882765,
+          0.6046804310628915,
+          0.6876589426674355,
+          0.8328954665525661,
+          0.6021990933546907,
+          0.761121509567019,
+          0.27289200237448863,
+          0.4837596191609036,
+          0.9493943978048579,
+          0.8151832544928278,
+          0.9272054543365871,
+          0.7695137480680989,
+          0.8091396012081984,
+          0.45627396198541614,
+          0.9185251630970935,
+          0.7357754812835132,
+          0.8878019147950186,
+          0.6713005093119754,
+          0.7195203772281533,
+          0.3339714319783381,
+          0.7020810324889923,
+          0.3055061027222143,
+          0.6229670796624276,
+          0.21985979519643517,
+          0.2664298474880768,
+          0.04723082578960864
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift WatchSatisfaction toward High (and away from Low). The deployment will reach individuals with ViewerExperienceLevel=NewUser as well as ViewerExperienceLevel=EstablishedUser, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "DiversityBlendAlgorithm",
+        "value": "Full",
+        "min_improvement": 0.4101,
+        "improvement_low": 0.4101,
+        "improvement_high": 0.4161
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "WatchSatisfaction",
+          "group": "ViewerExperienceLevel",
+          "intervention_avg": "TrendBoostAlgorithm",
+          "intervention_rob": "DiversityBlendAlgorithm",
+          "intervention_bad": "ClickOptimizedRanking",
+          "confounder": "BrowsingTimeOfDay"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "DiversityBlendAlgorithm",
+            "value": "Full",
+            "min_improvement": 0.4101,
+            "improvement_low": 0.4101,
+            "improvement_high": 0.4161
+          },
+          "avg_best_but_uneven": {
+            "variable": "TrendBoostAlgorithm",
+            "value": "Full",
+            "min_improvement": 0.1557,
+            "improvement_low": 0.1557,
+            "improvement_high": 0.552
+          },
+          "harmful_in_subgroup": {
+            "variable": "ClickOptimizedRanking",
+            "value": "On",
+            "min_improvement": -0.2491,
+            "improvement_low": -0.2491,
+            "improvement_high": 0.4696
+          },
+          "subgroups": [
+            "NewUser",
+            "EstablishedUser"
+          ],
+          "group_variable": "ViewerExperienceLevel",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "TrendBoostAlgorithm",
+              "value": "Full",
+              "improvement_low": 0.1557,
+              "improvement_high": 0.552,
+              "min_improvement": 0.1557
+            },
+            {
+              "variable": "DiversityBlendAlgorithm",
+              "value": "Full",
+              "improvement_low": 0.4101,
+              "improvement_high": 0.4161,
+              "min_improvement": 0.4101
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

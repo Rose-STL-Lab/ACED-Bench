@@ -1,0 +1,494 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "mediator_structure:which_mediator",
+    "seed": 4010,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "which_mediator"
+  },
+  "story": "A researcher is embedded within a large academic medical center's intensive care unit network. The researcher has access to detailed patient and staffing records and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "CentralLineInfectionStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SkinBacterialBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NurseDocumentationCompliance",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientMobilityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ICUAcuitySeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CatheterDwellDays",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ImmunosuppressionStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ChlorhexidineBathingProtocol",
+      "values": [
+        "NoProtocol",
+        "DailyBathing"
+      ],
+      "desc": "Whether daily chlorhexidine gluconate bathing is administered to ICU patients.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CentralLineInfectionStatus",
+      "values": [
+        "NoInfection",
+        "Infection"
+      ],
+      "desc": "Presence or absence of a central line-associated bloodstream infection.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SkinBacterialBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Quantified bacterial colony count on skin near catheter insertion site.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "NurseDocumentationCompliance",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Degree of completeness in nursing documentation of line care activities.",
+      "role": "decoy_M1",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PatientMobilityLevel",
+      "values": [
+        "Immobile",
+        "Limited",
+        "Ambulatory"
+      ],
+      "desc": "Patient's physical mobility status during ICU stay.",
+      "role": "decoy_M2",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ICUAcuitySeverity",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Illness severity score classification at ICU admission.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CatheterDwellDays",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Duration in days that the central venous catheter has been in place.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Under50",
+        "50to70",
+        "Over70"
+      ],
+      "desc": "Age category of the hospitalized patient at time of admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ImmunosuppressionStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is currently receiving immunosuppressive therapy.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "values": [
+        "Favorable",
+        "Unfavorable"
+      ],
+      "desc": "Staffing ratio of registered nurses to patients on the ICU unit.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ChlorhexidineBathingProtocol",
+      "SkinBacterialBurden"
+    ],
+    [
+      "ChlorhexidineBathingProtocol",
+      "NurseDocumentationCompliance"
+    ],
+    [
+      "CentralLineInfectionStatus",
+      "NurseToPatientRatio"
+    ],
+    [
+      "SkinBacterialBurden",
+      "CentralLineInfectionStatus"
+    ],
+    [
+      "SkinBacterialBurden",
+      "PatientAgeGroup"
+    ],
+    [
+      "PatientMobilityLevel",
+      "CentralLineInfectionStatus"
+    ],
+    [
+      "ICUAcuitySeverity",
+      "ChlorhexidineBathingProtocol"
+    ],
+    [
+      "ICUAcuitySeverity",
+      "CentralLineInfectionStatus"
+    ],
+    [
+      "ICUAcuitySeverity",
+      "ImmunosuppressionStatus"
+    ],
+    [
+      "ImmunosuppressionStatus",
+      "NurseToPatientRatio"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PatientMobilityLevel",
+      "parents": [],
+      "values": [
+        [
+          0.8066007506339613
+        ],
+        [
+          0.09669962468301929
+        ],
+        [
+          0.09669962468301929
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ICUAcuitySeverity",
+      "parents": [],
+      "values": [
+        [
+          0.23230559680998528
+        ],
+        [
+          0.3997695074547038
+        ],
+        [
+          0.36792489573531095
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CatheterDwellDays",
+      "parents": [],
+      "values": [
+        [
+          0.2576157194394389
+        ],
+        [
+          0.5101314951261231
+        ],
+        [
+          0.23225278543443792
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ChlorhexidineBathingProtocol",
+      "parents": [
+        "ICUAcuitySeverity"
+      ],
+      "values": [
+        [
+          0.575753372839531,
+          0.7544575171441578,
+          0.8743184719322233
+        ],
+        [
+          0.4242466271604691,
+          0.24554248285584235,
+          0.12568152806777663
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ImmunosuppressionStatus",
+      "parents": [
+        "ICUAcuitySeverity"
+      ],
+      "values": [
+        [
+          0.4561657547534121,
+          0.48748197713175406,
+          0.5188967824513504
+        ],
+        [
+          0.543834245246588,
+          0.5125180228682459,
+          0.4811032175486496
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SkinBacterialBurden",
+      "parents": [
+        "ChlorhexidineBathingProtocol"
+      ],
+      "values": [
+        [
+          0.15777431839366887,
+          0.8663577729579557
+        ],
+        [
+          0.2964637482522739,
+          0.1182368977919201
+        ],
+        [
+          0.5457619333540572,
+          0.015405329250124278
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NurseDocumentationCompliance",
+      "parents": [
+        "ChlorhexidineBathingProtocol"
+      ],
+      "values": [
+        [
+          0.21432656463862984,
+          0.7644965108331508
+        ],
+        [
+          0.32261322420117483,
+          0.1878501730060932
+        ],
+        [
+          0.4630602111601952,
+          0.047653316160755986
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CentralLineInfectionStatus",
+      "parents": [
+        "ICUAcuitySeverity",
+        "SkinBacterialBurden",
+        "PatientMobilityLevel"
+      ],
+      "values": [
+        [
+          0.9989130595903254,
+          0.9918542768491836,
+          0.9729933592454569,
+          0.9742305452477884,
+          0.8338557517710627,
+          0.5936957355656578,
+          0.8243440941861868,
+          0.41462377596436045,
+          0.16687004345497924,
+          0.9945737064758239,
+          0.9636552919504824,
+          0.8845125665088985,
+          0.883141160023531,
+          0.49584484243393867,
+          0.23288647370745735,
+          0.5180594647307428,
+          0.12248646404006705,
+          0.0404843677406016,
+          0.8781388284884781,
+          0.5096131080290628,
+          0.23511728035707774,
+          0.23421902438133513,
+          0.03843844048593592,
+          0.01258176168008846,
+          0.04131554999444142,
+          0.0058037191523371045,
+          0.0016620627407166388
+        ],
+        [
+          0.0010869404096746907,
+          0.00814572315081643,
+          0.02700664075454301,
+          0.02576945475221165,
+          0.1661442482289372,
+          0.40630426443434214,
+          0.17565590581381307,
+          0.5853762240356395,
+          0.8331299565450206,
+          0.005426293524176205,
+          0.03634470804951771,
+          0.11548743349110144,
+          0.11685883997646886,
+          0.5041551575660612,
+          0.7671135262925426,
+          0.4819405352692572,
+          0.8775135359599329,
+          0.9595156322593985,
+          0.12186117151152191,
+          0.4903868919709371,
+          0.7648827196429222,
+          0.7657809756186649,
+          0.9615615595140641,
+          0.9874182383199115,
+          0.9586844500055585,
+          0.9941962808476629,
+          0.9983379372592833
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [
+        "SkinBacterialBurden"
+      ],
+      "values": [
+        [
+          0.36293880237068465,
+          0.7326921464528952,
+          0.9096070550770291
+        ],
+        [
+          0.40763054703353163,
+          0.24254606232293477,
+          0.08874949366735109
+        ],
+        [
+          0.2294306505957837,
+          0.02476179122417003,
+          0.0016434512556198263
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NurseToPatientRatio",
+      "parents": [
+        "CentralLineInfectionStatus",
+        "ImmunosuppressionStatus"
+      ],
+      "values": [
+        [
+          0.47212356444027914,
+          0.11164315470698398,
+          0.6235961084866749,
+          0.18883402914100372
+        ],
+        [
+          0.5278764355597209,
+          0.8883568452930161,
+          0.3764038915133251,
+          0.8111659708589963
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "Among the variables [SkinBacterialBurden, NurseDocumentationCompliance, PatientMobilityLevel], which one is on the actual causal pathway from ChlorhexidineBathingProtocol to CentralLineInfectionStatus? Identify the single variable and explain how you ruled out the others.",
+      "answer": "which_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "which_mediator",
+        "roles": {
+          "treatment": "ChlorhexidineBathingProtocol",
+          "outcome": "CentralLineInfectionStatus",
+          "true_mediator": "SkinBacterialBurden",
+          "decoy_M1": "NurseDocumentationCompliance",
+          "decoy_M2": "PatientMobilityLevel",
+          "confounder": "ICUAcuitySeverity"
+        },
+        "gold": {
+          "label": "which_mediator",
+          "T": "ChlorhexidineBathingProtocol",
+          "O": "CentralLineInfectionStatus",
+          "true_mediator": "SkinBacterialBurden",
+          "candidates": [
+            "SkinBacterialBurden",
+            "NurseDocumentationCompliance",
+            "PatientMobilityLevel"
+          ],
+          "candidate_do_effects": {
+            "SkinBacterialBurden": 0.5572,
+            "NurseDocumentationCompliance": 0.0,
+            "PatientMobilityLevel": 0.3186
+          },
+          "total_effect": -0.351
+        }
+      }
+    }
+  ]
+}

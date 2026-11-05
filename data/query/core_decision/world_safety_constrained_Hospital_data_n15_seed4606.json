@@ -1,0 +1,777 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 4606,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A researcher is based at a large urban teaching hospital's obstetrics department. She has access to detailed patient records and can request both observational data extracts and prospective interventional study samples from the department.",
+  "non_intervenable_variables": [
+    {
+      "name": "DeliveryMode",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PostpartumHemorrhage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CervicalDilationProgress",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MaternalAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "Parity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GestationalAgeAtAdmission",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrenatalVisitCompliance",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreexistingHypertension",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DeliveryMode",
+      "values": [
+        "SpontaneousVaginal",
+        "AssistedVaginal",
+        "CesareanSection"
+      ],
+      "desc": "Final mode of delivery recorded at birth.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PostpartumHemorrhage",
+      "values": [
+        "None",
+        "Minor",
+        "Major"
+      ],
+      "desc": "Severity of blood loss exceeding 500 mL within 24 hours postpartum.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ContinuousLaborSupport",
+      "values": [
+        "None",
+        "Intermittent",
+        "Continuous"
+      ],
+      "desc": "Level of dedicated doula or midwife presence during active labor.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OxytocinAugmentation",
+      "values": [
+        "None",
+        "LowDose",
+        "HighDose"
+      ],
+      "desc": "Dosage tier of synthetic oxytocin administered to augment contractions.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HydrotherapyDuringLabor",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the laboring patient used warm water immersion during first stage.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CervicalDilationProgress",
+      "values": [
+        "Normal",
+        "Slow",
+        "Arrested"
+      ],
+      "desc": "Rate of cervical dilation measured during active labor phase.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MaternalAge",
+      "values": [
+        "Under30",
+        "30to35",
+        "Over35"
+      ],
+      "desc": "Age group of the birthing patient at time of admission.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "Parity",
+      "values": [
+        "Nulliparous",
+        "Multiparous"
+      ],
+      "desc": "Whether the patient has previously delivered a viable pregnancy.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GestationalAgeAtAdmission",
+      "values": [
+        "EarlyTerm",
+        "FullTerm",
+        "LateTerm"
+      ],
+      "desc": "Gestational age category in weeks at labor admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EpiduralAnalgesia",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether epidural pain relief was administered during labor.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PrenatalVisitCompliance",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Proportion of recommended prenatal visits attended before delivery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MembraneRuptureMethod",
+      "values": [
+        "Spontaneous",
+        "Artificial"
+      ],
+      "desc": "Whether rupture of membranes occurred naturally or via amniotomy.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndex",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Pre-pregnancy body mass index category of the patient.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AmbulationDuringLabor",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient walked or changed positions during active labor.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PreexistingHypertension",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Documented chronic or gestational hypertension diagnosis before labor onset.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ContinuousLaborSupport",
+      "CervicalDilationProgress"
+    ],
+    [
+      "OxytocinAugmentation",
+      "DeliveryMode"
+    ],
+    [
+      "OxytocinAugmentation",
+      "PostpartumHemorrhage"
+    ],
+    [
+      "HydrotherapyDuringLabor",
+      "DeliveryMode"
+    ],
+    [
+      "CervicalDilationProgress",
+      "DeliveryMode"
+    ],
+    [
+      "CervicalDilationProgress",
+      "PrenatalVisitCompliance"
+    ],
+    [
+      "CervicalDilationProgress",
+      "MembraneRuptureMethod"
+    ],
+    [
+      "MaternalAge",
+      "DeliveryMode"
+    ],
+    [
+      "MaternalAge",
+      "PostpartumHemorrhage"
+    ],
+    [
+      "Parity",
+      "PreexistingHypertension"
+    ],
+    [
+      "BodyMassIndex",
+      "PreexistingHypertension"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ContinuousLaborSupport",
+      "parents": [],
+      "values": [
+        [
+          0.5015892231572469
+        ],
+        [
+          0.1565035001589057
+        ],
+        [
+          0.3419072766838474
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OxytocinAugmentation",
+      "parents": [],
+      "values": [
+        [
+          0.34162128080192555
+        ],
+        [
+          0.11335733041817071
+        ],
+        [
+          0.5450213887799038
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HydrotherapyDuringLabor",
+      "parents": [],
+      "values": [
+        [
+          0.8983821356071905
+        ],
+        [
+          0.10161786439280945
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MaternalAge",
+      "parents": [],
+      "values": [
+        [
+          0.3548751104859138
+        ],
+        [
+          0.20229581008523953
+        ],
+        [
+          0.4428290794288467
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "Parity",
+      "parents": [],
+      "values": [
+        [
+          0.5031312037869886
+        ],
+        [
+          0.49686879621301133
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GestationalAgeAtAdmission",
+      "parents": [],
+      "values": [
+        [
+          0.314564553371132
+        ],
+        [
+          0.5649793292292807
+        ],
+        [
+          0.12045611739958724
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EpiduralAnalgesia",
+      "parents": [],
+      "values": [
+        [
+          0.3676245278671187
+        ],
+        [
+          0.6323754721328813
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BodyMassIndex",
+      "parents": [],
+      "values": [
+        [
+          0.7391851196509801
+        ],
+        [
+          0.09645125734931942
+        ],
+        [
+          0.16436362299970056
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AmbulationDuringLabor",
+      "parents": [],
+      "values": [
+        [
+          0.7882983007362897
+        ],
+        [
+          0.2117016992637103
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CervicalDilationProgress",
+      "parents": [
+        "ContinuousLaborSupport"
+      ],
+      "values": [
+        [
+          0.16428188969023985,
+          0.7092400154001408,
+          0.9081259808439164
+        ],
+        [
+          0.31396725370270356,
+          0.22270774578477995,
+          0.08450263351733958
+        ],
+        [
+          0.5217508566070566,
+          0.06805223881507924,
+          0.007371385638744016
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostpartumHemorrhage",
+      "parents": [
+        "MaternalAge",
+        "OxytocinAugmentation"
+      ],
+      "values": [
+        [
+          0.5730052011822854,
+          0.28171727092716997,
+          0.05357562186585205,
+          0.399480737278917,
+          0.14154484798728886,
+          0.02214385272271162,
+          0.06344389294582836,
+          0.014172943846923972,
+          0.0014974101388043684
+        ],
+        [
+          0.28967806291101683,
+          0.3306430882130996,
+          0.20062416466913666,
+          0.3367277185536282,
+          0.279792101507301,
+          0.14336059790366856,
+          0.21477714370871037,
+          0.11537976598914866,
+          0.037621176382034174
+        ],
+        [
+          0.1373167359066978,
+          0.38763964085973035,
+          0.7458002134650114,
+          0.26379154416745487,
+          0.5786630505054101,
+          0.8344955493736198,
+          0.7217789633454612,
+          0.8704472901639274,
+          0.9608814134791615
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreexistingHypertension",
+      "parents": [
+        "BodyMassIndex",
+        "Parity"
+      ],
+      "values": [
+        [
+          0.48350749337365934,
+          0.5307562004650186,
+          0.20848609665143353,
+          0.2414217048658877,
+          0.06899977919726388,
+          0.08218810178894707
+        ],
+        [
+          0.5164925066263406,
+          0.46924379953498147,
+          0.7915139033485665,
+          0.7585782951341123,
+          0.931000220802736,
+          0.917811898211053
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DeliveryMode",
+      "parents": [
+        "MaternalAge",
+        "CervicalDilationProgress",
+        "OxytocinAugmentation",
+        "HydrotherapyDuringLabor"
+      ],
+      "values": [
+        [
+          0.8136890626245837,
+          0.889227852980154,
+          0.9537378781000833,
+          0.9711790131684149,
+          0.9872545553868837,
+          0.9918840808342905,
+          0.37735708674734864,
+          0.5308737155101052,
+          0.7803170203018936,
+          0.8717811624675343,
+          0.9327979133955402,
+          0.959505445181082,
+          0.05404481357366612,
+          0.11679242360288337,
+          0.36082150059512197,
+          0.5333714119555137,
+          0.7499088826447287,
+          0.8369174343452647,
+          0.6829276872434937,
+          0.8040790354302961,
+          0.9189902550344169,
+          0.9498466759443593,
+          0.9757868271175499,
+          0.9843114583190784,
+          0.18247734303034524,
+          0.34328953884741,
+          0.6328783089269893,
+          0.7558141466909739,
+          0.8811658840410617,
+          0.9262796720027892,
+          0.01896598587839209,
+          0.04593285310176911,
+          0.18759739797587788,
+          0.3349394322846744,
+          0.5824116402199834,
+          0.7294043709339738,
+          0.18915017775374057,
+          0.33578914783405855,
+          0.6509326047052302,
+          0.768512428210478,
+          0.8767061117446234,
+          0.9281014550400114,
+          0.012560775692043577,
+          0.03376650788482939,
+          0.14070841325530806,
+          0.27987698918825354,
+          0.5143708940831688,
+          0.6550058329621208,
+          0.0008632871022356867,
+          0.002360544537559348,
+          0.01318578390384186,
+          0.03183597443789495,
+          0.10794552664759008,
+          0.21822903004284327
+        ],
+        [
+          0.1582885843359215,
+          0.09999002422378014,
+          0.044344489003980615,
+          0.028033039784398465,
+          0.01256218804174691,
+          0.008051383621868262,
+          0.33371964802081977,
+          0.30242169372224875,
+          0.1778960924717741,
+          0.11267738364385758,
+          0.06294912596796477,
+          0.03895017911776696,
+          0.1929028776993932,
+          0.2811500478579602,
+          0.3355700143924491,
+          0.29932731505356336,
+          0.19705576783458686,
+          0.1405584552669651,
+          0.2429458980133305,
+          0.1621723190115378,
+          0.07486358014504997,
+          0.0476615089945441,
+          0.023631360715460674,
+          0.01546347095723882,
+          0.3227652847760227,
+          0.3280501259882667,
+          0.2608768592634553,
+          0.19454016217097794,
+          0.10624965515949314,
+          0.06871987770216073,
+          0.13023942462804666,
+          0.19057042592400789,
+          0.30114851196595355,
+          0.32799010207301954,
+          0.27539955617532824,
+          0.20439692851097985,
+          0.29425018036273326,
+          0.3429580228967745,
+          0.2448127486634744,
+          0.18372312526495388,
+          0.10945265865348641,
+          0.06694280181847509,
+          0.10271980183564336,
+          0.15767255322990523,
+          0.2706243031190015,
+          0.3249635619246052,
+          0.3028664609743885,
+          0.2508375709975754,
+          0.027656667541656053,
+          0.0488717132481811,
+          0.10930944403096188,
+          0.16822702721816302,
+          0.2568949190790425,
+          0.30724959886723696
+        ],
+        [
+          0.028022353039494765,
+          0.010782122796065797,
+          0.0019176328959361292,
+          0.0007879470471867097,
+          0.00018325657136950986,
+          6.453554384116849e-05,
+          0.2889232652318315,
+          0.16670459076764607,
+          0.04178688722633228,
+          0.01554145388860809,
+          0.004252960636495185,
+          0.0015443757011509673,
+          0.7530523087269407,
+          0.6020575285391565,
+          0.30360848501242893,
+          0.16730127299092284,
+          0.05303534952068458,
+          0.022524110387770226,
+          0.0741264147431758,
+          0.03374864555816614,
+          0.006146164820533244,
+          0.0024918150610965745,
+          0.0005818121669895396,
+          0.00022507072368288666,
+          0.4947573721936321,
+          0.3286603351643233,
+          0.10624483180955535,
+          0.049645691138048204,
+          0.012584460799445217,
+          0.005000450295050086,
+          0.8507945894935612,
+          0.7634967209742229,
+          0.5112540900581686,
+          0.337070465642306,
+          0.14218880360468836,
+          0.06619870055504638,
+          0.5165996418835261,
+          0.32125282926916704,
+          0.10425464663129538,
+          0.047764446524568106,
+          0.01384122960189022,
+          0.004955743141513502,
+          0.884719422472313,
+          0.8085609388852654,
+          0.5886672836256905,
+          0.3951594488871412,
+          0.1827626449424426,
+          0.09415659604030396,
+          0.9714800453561082,
+          0.9487677422142596,
+          0.8775047720651963,
+          0.7999369983439419,
+          0.6351595542733675,
+          0.47452137108991976
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PrenatalVisitCompliance",
+      "parents": [
+        "CervicalDilationProgress"
+      ],
+      "values": [
+        [
+          0.3488775862484132,
+          0.3907536700117438,
+          0.2694588880280657
+        ],
+        [
+          0.35135539222607376,
+          0.012970945203610234,
+          0.0002948194129966651
+        ],
+        [
+          0.299767021525513,
+          0.5962753847846458,
+          0.7302462925589377
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MembraneRuptureMethod",
+      "parents": [
+        "CervicalDilationProgress"
+      ],
+      "values": [
+        [
+          0.4167975596287397,
+          0.1533096774925967,
+          0.043863570348689734
+        ],
+        [
+          0.5832024403712603,
+          0.8466903225074034,
+          0.9561364296513102
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift DeliveryMode toward SpontaneousVaginal (and away from CesareanSection), but only if the same action does not make PostpartumHemorrhage more likely to be Major. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "ContinuousLaborSupport",
+        "value": "Continuous"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "DeliveryMode",
+          "safety_outcome": "PostpartumHemorrhage",
+          "good_intervention": "ContinuousLaborSupport",
+          "risky_intervention": "OxytocinAugmentation",
+          "weak_intervention": "HydrotherapyDuringLabor",
+          "good_mediator": "CervicalDilationProgress",
+          "confounder": "MaternalAge"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "ContinuousLaborSupport",
+            "value": "Continuous"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "ContinuousLaborSupport",
+              "value": "Continuous",
+              "delta_target": -0.3161,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "OxytocinAugmentation",
+              "value": "HighDose",
+              "delta_target": -0.3202,
+              "delta_safety": 0.2852,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.6691,
+            "E_safety": 1.5497
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

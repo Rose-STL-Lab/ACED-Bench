@@ -1,0 +1,1123 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 24505,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A state department of labor maintains comprehensive records on employment, wages, business characteristics, and regional economic indicators across its jurisdictions. The research team can access these administrative records and request observational or interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "LowWageEmploymentLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RegionalEconomicStrength",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IndustryComposition",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CostOfLivingTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LaborForceParticipationRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UnionizationRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrevalenceOfInformalWork",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FirmSizeDistribution",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorMinimumWageLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AutomationAdoptionStage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WorkerEducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "LowWageEmploymentLevel",
+      "values": [
+        "Stable",
+        "ModerateDecline",
+        "SteepDecline"
+      ],
+      "desc": "Change in employment count among workers earning near the minimum wage.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MinimumWageIncrease",
+      "values": [
+        "NoIncrease",
+        "ModerateIncrease",
+        "LargeIncrease"
+      ],
+      "desc": "Mandated percentage increase in the statutory minimum hourly wage.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SmallBusinessTaxCredit",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Tax credit offered to small businesses to offset higher labor costs.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PhasedImplementationSchedule",
+      "values": [
+        "Immediate",
+        "TwoYear",
+        "FiveYear"
+      ],
+      "desc": "Timeline over which the minimum wage increase is gradually enacted.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SubminimumYouthWageProvision",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a lower training wage is permitted for workers under age twenty.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RegionalEconomicStrength",
+      "values": [
+        "Weak",
+        "Moderate",
+        "Strong"
+      ],
+      "desc": "Baseline economic health of the region measured by GDP growth and unemployment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "IndustryComposition",
+      "values": [
+        "ServiceDominated",
+        "Mixed",
+        "ManufacturingDominated"
+      ],
+      "desc": "Dominant industry sector in the local economy by share of employment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CostOfLivingTier",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Local cost of living category based on housing and consumer price indices.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LaborForceParticipationRate",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Proportion of working-age population actively employed or seeking work.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UnionizationRate",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Share of the local workforce belonging to a labor union.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PrevalenceOfInformalWork",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Estimated share of workers employed in unreported or off-the-books jobs.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FirmSizeDistribution",
+      "values": [
+        "MostlySmall",
+        "Mixed",
+        "MostlyLarge"
+      ],
+      "desc": "Distribution of employer establishments by number of employees.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorMinimumWageLevel",
+      "values": [
+        "BelowFederal",
+        "AtFederal",
+        "AboveFederal"
+      ],
+      "desc": "Existing statutory minimum wage relative to the federal minimum before the study.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AutomationAdoptionStage",
+      "values": [
+        "Early",
+        "Moderate",
+        "Advanced"
+      ],
+      "desc": "Degree to which local employers have adopted labor-replacing automation technology.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WorkerEducationLevel",
+      "values": [
+        "MostlyNoCollege",
+        "Mixed",
+        "MostlyCollege"
+      ],
+      "desc": "Predominant educational attainment among the low-wage workforce in the region.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "LowWageEmploymentLevel",
+      "AutomationAdoptionStage"
+    ],
+    [
+      "MinimumWageIncrease",
+      "LowWageEmploymentLevel"
+    ],
+    [
+      "SmallBusinessTaxCredit",
+      "LowWageEmploymentLevel"
+    ],
+    [
+      "SmallBusinessTaxCredit",
+      "SubminimumYouthWageProvision"
+    ],
+    [
+      "PhasedImplementationSchedule",
+      "LowWageEmploymentLevel"
+    ],
+    [
+      "SubminimumYouthWageProvision",
+      "LowWageEmploymentLevel"
+    ],
+    [
+      "RegionalEconomicStrength",
+      "LowWageEmploymentLevel"
+    ],
+    [
+      "IndustryComposition",
+      "PhasedImplementationSchedule"
+    ],
+    [
+      "UnionizationRate",
+      "IndustryComposition"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MinimumWageIncrease",
+      "parents": [],
+      "values": [
+        [
+          0.098291582711728
+        ],
+        [
+          0.23560629162856547
+        ],
+        [
+          0.6661021256597065
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SmallBusinessTaxCredit",
+      "parents": [],
+      "values": [
+        [
+          0.7090599687353288
+        ],
+        [
+          0.17619919094130804
+        ],
+        [
+          0.11474084032336317
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RegionalEconomicStrength",
+      "parents": [],
+      "values": [
+        [
+          0.5581876775654803
+        ],
+        [
+          0.3448419238308301
+        ],
+        [
+          0.09697039860368958
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CostOfLivingTier",
+      "parents": [],
+      "values": [
+        [
+          0.3982273662309038
+        ],
+        [
+          0.09320137991895286
+        ],
+        [
+          0.5085712538501432
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LaborForceParticipationRate",
+      "parents": [],
+      "values": [
+        [
+          0.6632706719582424
+        ],
+        [
+          0.3367293280417576
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "UnionizationRate",
+      "parents": [],
+      "values": [
+        [
+          0.6212145755703835
+        ],
+        [
+          0.2806341982878244
+        ],
+        [
+          0.09815122614179202
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PrevalenceOfInformalWork",
+      "parents": [],
+      "values": [
+        [
+          0.4772396336323192
+        ],
+        [
+          0.5227603663676809
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FirmSizeDistribution",
+      "parents": [],
+      "values": [
+        [
+          0.5766633811056466
+        ],
+        [
+          0.14661403065232714
+        ],
+        [
+          0.27672258824202633
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorMinimumWageLevel",
+      "parents": [],
+      "values": [
+        [
+          0.4307928102544906
+        ],
+        [
+          0.2867628668559291
+        ],
+        [
+          0.2824443228895804
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WorkerEducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.45052800070027776
+        ],
+        [
+          0.09986978324589385
+        ],
+        [
+          0.44960221605382833
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubminimumYouthWageProvision",
+      "parents": [
+        "SmallBusinessTaxCredit"
+      ],
+      "values": [
+        [
+          0.44744949275463275,
+          0.6358018159042129,
+          0.7900718606580912
+        ],
+        [
+          0.5525505072453674,
+          0.364198184095787,
+          0.20992813934190868
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "IndustryComposition",
+      "parents": [
+        "UnionizationRate"
+      ],
+      "values": [
+        [
+          0.23706626922172694,
+          0.16303876197049091,
+          0.0870355826132167
+        ],
+        [
+          0.48827352620875475,
+          0.7486077675615294,
+          0.8909028504622429
+        ],
+        [
+          0.27466020456951834,
+          0.08835347046797967,
+          0.022061566924540272
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PhasedImplementationSchedule",
+      "parents": [
+        "IndustryComposition"
+      ],
+      "values": [
+        [
+          0.4026287985069882,
+          0.014437413691084987,
+          0.00021909754001417137
+        ],
+        [
+          0.3796176802511243,
+          0.9455088116428928,
+          0.9966628368563418
+        ],
+        [
+          0.21775352124188746,
+          0.04005377466602217,
+          0.0031180656036440147
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LowWageEmploymentLevel",
+      "parents": [
+        "RegionalEconomicStrength",
+        "SubminimumYouthWageProvision",
+        "MinimumWageIncrease",
+        "SmallBusinessTaxCredit",
+        "PhasedImplementationSchedule"
+      ],
+      "values": [
+        [
+          0.15232233440843768,
+          0.18256194916829374,
+          0.2135692731612868,
+          0.26541814397068403,
+          0.2874759733866744,
+          0.3022320150219002,
+          0.3437519701486367,
+          0.3658148289804378,
+          0.39765791008688794,
+          0.594744362315316,
+          0.6299294925094051,
+          0.634789931447743,
+          0.7045160592926064,
+          0.7116600484123321,
+          0.7441559686530478,
+          0.7497601473256497,
+          0.7729073939220927,
+          0.7983393848217336,
+          0.8107455042341872,
+          0.8272952193190379,
+          0.838896749419942,
+          0.8594624732954057,
+          0.8891100049860625,
+          0.8932996599884366,
+          0.9001906470599865,
+          0.9058041028203537,
+          0.914343697633118,
+          0.9091646086239955,
+          0.9147601789951652,
+          0.9224203999003315,
+          0.9397944082886351,
+          0.9440125963322802,
+          0.9489593003436352,
+          0.9491538675418991,
+          0.9571737297813255,
+          0.9566034297364606,
+          0.976033896468878,
+          0.9785904401338962,
+          0.9795185746763148,
+          0.9828219287819624,
+          0.9855582718633928,
+          0.9863774755103517,
+          0.9870430530011467,
+          0.9882975792276295,
+          0.9897665234781235,
+          0.9898812584532389,
+          0.991326786983866,
+          0.9919247190759921,
+          0.9930629191133674,
+          0.9940611161642924,
+          0.9940859874151942,
+          0.9945862333090726,
+          0.9953418374945484,
+          0.9958022531254237,
+          0.05955992997083352,
+          0.07852032447908674,
+          0.0829806345746347,
+          0.11170266912908415,
+          0.13549781809741823,
+          0.15716874264334496,
+          0.16762231679166703,
+          0.20158326767290713,
+          0.21092975741201256,
+          0.3764569264559117,
+          0.41774372083877503,
+          0.4618846068149092,
+          0.4966096064718214,
+          0.5609298286266281,
+          0.5853568740634165,
+          0.574527412147936,
+          0.611643668628768,
+          0.6370288771380225,
+          0.6781554423978967,
+          0.706316077591119,
+          0.7254802657702617,
+          0.7678326541836631,
+          0.7969431610675158,
+          0.812305919900361,
+          0.8109852123716474,
+          0.8290228894262158,
+          0.8494781897714323,
+          0.8326924317926494,
+          0.8509911527402901,
+          0.8638626842922715,
+          0.8863055672670488,
+          0.8999908604962447,
+          0.9043125313054365,
+          0.9096515248605891,
+          0.922012545612889,
+          0.9220885780974191,
+          0.9564764004601121,
+          0.961600426996371,
+          0.9637926959190721,
+          0.9709276096062144,
+          0.9746704416264302,
+          0.9768303421875044,
+          0.9779039957789296,
+          0.9794439250088955,
+          0.9807541918434701,
+          0.981417798690854,
+          0.984485311196881,
+          0.9856464067664255,
+          0.9878393291669895,
+          0.9889848044685621,
+          0.9898331469661809,
+          0.9909645883199565,
+          0.9914436791929687,
+          0.9921277170045811,
+          0.004959125099551031,
+          0.006204909095309343,
+          0.006899341792471907,
+          0.01002982228007013,
+          0.01267445769955472,
+          0.015638347649545185,
+          0.016802120395101875,
+          0.019864243130356746,
+          0.0228225844002006,
+          0.06000033370668153,
+          0.07331861528357866,
+          0.07522833328679371,
+          0.10865572510908601,
+          0.12335182838926757,
+          0.13499348519972626,
+          0.15580363178209342,
+          0.18576699751254588,
+          0.18816072988091592,
+          0.23140551338124965,
+          0.26113399557214445,
+          0.27515513143277154,
+          0.3303196026677157,
+          0.36348886683666193,
+          0.41722841043628783,
+          0.419409508850315,
+          0.46130947932424754,
+          0.5022784138702878,
+          0.46515115753706143,
+          0.5153581032979897,
+          0.5234959563097339,
+          0.5928355472961763,
+          0.6243491673434175,
+          0.6549414103573461,
+          0.6560898070059358,
+          0.6972622634715937,
+          0.7209155810353496,
+          0.8299509632791641,
+          0.8466645309539474,
+          0.8570664750348851,
+          0.8796224526355002,
+          0.8919997728331591,
+          0.903618274119063,
+          0.8995720904487279,
+          0.9207787908894788,
+          0.921764563383475,
+          0.9318209440049178,
+          0.9406696756767269,
+          0.9414680683263644,
+          0.9483791495049227,
+          0.956273418668754,
+          0.9623602668128661,
+          0.9594461951157447,
+          0.9664976372119226,
+          0.9683397846483776
+        ],
+        [
+          0.3066331072673498,
+          0.2990041604657599,
+          0.30853856193919493,
+          0.3209539709045368,
+          0.346769099572739,
+          0.34689844008468235,
+          0.3328852814938754,
+          0.34389089823218166,
+          0.32117174223608613,
+          0.274566579163832,
+          0.2616473347247981,
+          0.26178126724641604,
+          0.22276017442104654,
+          0.22459698535555214,
+          0.20386027213882146,
+          0.19794886037655954,
+          0.1866587104085812,
+          0.16450586109979307,
+          0.15843005217886438,
+          0.1464456524814323,
+          0.13852879506775467,
+          0.12493824319172742,
+          0.09918793169900623,
+          0.09564053006082077,
+          0.09035533656685416,
+          0.08621408258704392,
+          0.07885563857178646,
+          0.08292103644368,
+          0.07904729992489842,
+          0.07191429369314933,
+          0.05642776049151313,
+          0.05302613852837852,
+          0.04845995290917296,
+          0.048480848443935805,
+          0.0409721669689056,
+          0.0417141889263964,
+          0.02343933896549611,
+          0.020988966178582907,
+          0.020086087735781116,
+          0.01690458336034876,
+          0.01422934222750458,
+          0.013437548476177539,
+          0.012793392717519093,
+          0.01156922843420373,
+          0.010122375085862938,
+          0.010020531892464256,
+          0.008597438239565654,
+          0.008010622284121393,
+          0.006895180549704722,
+          0.005903617121813337,
+          0.005882106574493679,
+          0.005384846432460197,
+          0.004635741003690661,
+          0.004179694593970625,
+          0.2146123480067457,
+          0.21884684548739658,
+          0.23443370092344315,
+          0.26282871217270537,
+          0.27830052256469545,
+          0.29476514963397366,
+          0.2877566161606896,
+          0.30597569695092647,
+          0.32202614782077466,
+          0.32709145709422166,
+          0.3327628701827732,
+          0.3033072272581234,
+          0.3075693622515861,
+          0.2897354194591285,
+          0.2705711822861028,
+          0.294250056387838,
+          0.27172980634564864,
+          0.260746112050341,
+          0.23543278564563946,
+          0.22229305789971038,
+          0.20995940847957162,
+          0.18505964891628918,
+          0.16799175496215388,
+          0.1571353886298481,
+          0.1601497821413416,
+          0.1465665038845693,
+          0.13003797452892182,
+          0.14237497010453762,
+          0.13081092775988667,
+          0.11939364600079286,
+          0.10253432901867583,
+          0.09116150180924033,
+          0.08791949202591906,
+          0.08339418611990985,
+          0.07223095841967238,
+          0.07272833791146556,
+          0.04171626012795674,
+          0.036856498678154805,
+          0.03503746790851831,
+          0.028220215017778365,
+          0.024649350149723713,
+          0.02260685959092651,
+          0.021593462696006673,
+          0.020148793627667087,
+          0.018901212422518986,
+          0.018254404921772053,
+          0.015278381186227792,
+          0.014145952618633715,
+          0.01201803668976356,
+          0.010893378270735513,
+          0.010064977632377221,
+          0.00894572897162933,
+          0.008482399968731198,
+          0.007814121614494693,
+          0.0680148184042084,
+          0.07573296009687486,
+          0.08200042544605578,
+          0.09107352500530326,
+          0.11074769360961689,
+          0.11592104377166663,
+          0.11413874291255977,
+          0.13752438484911958,
+          0.1412254467981303,
+          0.21359310248351243,
+          0.2355832629062612,
+          0.23745867882876068,
+          0.25501035153576995,
+          0.28908448588771335,
+          0.28762371611939475,
+          0.2793944025582323,
+          0.2926478596455263,
+          0.3072691243606548,
+          0.3139297367429893,
+          0.33028377725536495,
+          0.32948885287621726,
+          0.334214181144644,
+          0.3306919166986658,
+          0.32529988543662985,
+          0.3304858401540727,
+          0.3223292663199374,
+          0.29744015825556813,
+          0.32440871523010845,
+          0.3044558810263622,
+          0.3033270889380225,
+          0.27982656805775363,
+          0.26159056794215874,
+          0.25120072806060983,
+          0.2544847328085983,
+          0.22731097486363577,
+          0.21300967661968193,
+          0.14459713932602802,
+          0.13216627877264547,
+          0.12416962932160205,
+          0.1080679636686127,
+          0.09679979572809466,
+          0.08729692418646298,
+          0.09205187792416215,
+          0.07278762891705928,
+          0.07251827810938513,
+          0.06328326570718404,
+          0.055447500593310425,
+          0.05512790467867081,
+          0.04914641731212054,
+          0.041767700425550815,
+          0.036075838505302965,
+          0.03903804824453101,
+          0.03230261325742797,
+          0.030625581784861942
+        ],
+        [
+          0.5410445583242124,
+          0.5184338903659463,
+          0.47789216489951825,
+          0.4136278851247792,
+          0.36575492704058654,
+          0.3508695448934174,
+          0.32336274835748785,
+          0.29029427278738046,
+          0.28117034767702587,
+          0.13068905852085205,
+          0.10842317276579676,
+          0.10342880130584084,
+          0.07272376628634697,
+          0.06374296623211573,
+          0.05198375920813078,
+          0.05229099229779066,
+          0.040433895669326064,
+          0.03715475407847325,
+          0.030824443586948438,
+          0.02625912819952968,
+          0.022574455512303332,
+          0.015599283512866791,
+          0.011702063314931385,
+          0.011059809950742664,
+          0.009454016373159273,
+          0.007981814592602249,
+          0.006800663795095463,
+          0.007914354932324605,
+          0.006192521079936601,
+          0.005665306406519133,
+          0.003777831219851759,
+          0.002961265139341471,
+          0.0025807467471917938,
+          0.002365284014165017,
+          0.0018541032497689646,
+          0.001682381337143047,
+          0.0005267645656260264,
+          0.00042059368752092537,
+          0.00039533758790398016,
+          0.0002734878576888751,
+          0.00021238590910247575,
+          0.00018497601347090812,
+          0.00016355428133415568,
+          0.00013319233816673655,
+          0.00011110143601374501,
+          9.820965429678687e-05,
+          7.57747765683224e-05,
+          6.46586398864447e-05,
+          4.1900336927791977e-05,
+          3.5266713894219216e-05,
+          3.190601031212762e-05,
+          2.892025846720877e-05,
+          2.242150176080446e-05,
+          1.8052280605641444e-05,
+          0.7258277220224207,
+          0.7026328300335167,
+          0.682585664501922,
+          0.6254686186982106,
+          0.5862016593378863,
+          0.5480661077226814,
+          0.5446210670476433,
+          0.49244103537616646,
+          0.46704409476721287,
+          0.29645161644986673,
+          0.24949340897845174,
+          0.2348081659269674,
+          0.19582103127659248,
+          0.14933475191424334,
+          0.14407194365048073,
+          0.131222531464226,
+          0.11662652502558346,
+          0.10222501081163647,
+          0.08641177195646366,
+          0.07139086450917059,
+          0.06456032575016656,
+          0.0471076969000477,
+          0.03506508397033031,
+          0.03055869146979087,
+          0.028865005487010972,
+          0.024410606689214923,
+          0.020483835699645944,
+          0.02493259810281305,
+          0.018197919499823193,
+          0.016743669706935554,
+          0.01116010371427537,
+          0.008847637694514918,
+          0.007767976668644288,
+          0.006954289019500887,
+          0.005756495967438423,
+          0.005183083991115275,
+          0.001807339411931202,
+          0.0015430743254741864,
+          0.001169836172409649,
+          0.0008521753760074749,
+          0.0006802082238459023,
+          0.0005627982215690963,
+          0.0005025415250638876,
+          0.00040728136343742984,
+          0.0003445957340107712,
+          0.0003277963873740027,
+          0.00023630761689113342,
+          0.00020764061494076835,
+          0.00014263414324700182,
+          0.00012181726070258811,
+          0.00010187540144176202,
+          8.968270841416072e-05,
+          7.392083830006754e-05,
+          5.816138092428223e-05,
+          0.9270260564962406,
+          0.9180621308078158,
+          0.9111002327614722,
+          0.8988966527146265,
+          0.8765778486908283,
+          0.8684406085787882,
+          0.8690591366923385,
+          0.8426113720205237,
+          0.8359519688016692,
+          0.726406563809806,
+          0.6910981218101601,
+          0.6873129878844457,
+          0.636333923355144,
+          0.5875636857230192,
+          0.5773827986808789,
+          0.5648019656596743,
+          0.5215851428419277,
+          0.5045701457584293,
+          0.4546647498757611,
+          0.40858222717249065,
+          0.39535601569101125,
+          0.3354662161876403,
+          0.30581921646467225,
+          0.2574717041270823,
+          0.25010465099561235,
+          0.21636125435581496,
+          0.200281427874144,
+          0.2104401272328302,
+          0.18018601567564807,
+          0.17317695475224348,
+          0.1273378846460701,
+          0.1140602647144238,
+          0.09385786158204401,
+          0.08942546018546584,
+          0.07542676166477039,
+          0.0660747423449685,
+          0.025451897394808028,
+          0.02116919027340713,
+          0.018763895643512916,
+          0.012309583695887142,
+          0.011200431438746175,
+          0.009084801694473992,
+          0.008376031627110028,
+          0.006433580193462029,
+          0.005717158507140006,
+          0.004895790287898185,
+          0.003882823729962776,
+          0.0034040269949646394,
+          0.0024744331829568045,
+          0.001958880905695228,
+          0.0015638946818309768,
+          0.0015157566397244779,
+          0.0011997495306493178,
+          0.0010346335667605379
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AutomationAdoptionStage",
+      "parents": [
+        "LowWageEmploymentLevel"
+      ],
+      "values": [
+        [
+          0.37616218206099744,
+          0.8250924910276917,
+          0.9726977991281357
+        ],
+        [
+          0.3036081543546555,
+          0.06856665627303289,
+          0.008322624592300003
+        ],
+        [
+          0.32022966358434707,
+          0.1063408526992756,
+          0.018979576279564318
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts LowWageEmploymentLevel toward Stable (and away from SteepDecline). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes LowWageEmploymentLevel.",
+      "answer": [
+        {
+          "variable": "SubminimumYouthWageProvision",
+          "value": "Yes",
+          "improvement": 0.2355
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "LowWageEmploymentLevel",
+          "intervention_A": "MinimumWageIncrease",
+          "intervention_B": "SmallBusinessTaxCredit",
+          "intervention_C": "PhasedImplementationSchedule",
+          "intervention_D": "SubminimumYouthWageProvision",
+          "confounder": "RegionalEconomicStrength"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "SubminimumYouthWageProvision",
+              "value": "Yes",
+              "improvement": 0.2355
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "SubminimumYouthWageProvision",
+              "value": "No",
+              "improvement": -0.2328
+            },
+            {
+              "variable": "SubminimumYouthWageProvision",
+              "value": "Yes",
+              "improvement": 0.2355
+            },
+            {
+              "variable": "MinimumWageIncrease",
+              "value": "NoIncrease",
+              "improvement": -0.5292
+            },
+            {
+              "variable": "MinimumWageIncrease",
+              "value": "ModerateIncrease",
+              "improvement": -0.0786
+            },
+            {
+              "variable": "MinimumWageIncrease",
+              "value": "LargeIncrease",
+              "improvement": 0.1059
+            },
+            {
+              "variable": "SmallBusinessTaxCredit",
+              "value": "None",
+              "improvement": 0.0032
+            },
+            {
+              "variable": "SmallBusinessTaxCredit",
+              "value": "Partial",
+              "improvement": -0.005
+            },
+            {
+              "variable": "SmallBusinessTaxCredit",
+              "value": "Full",
+              "improvement": -0.0121
+            },
+            {
+              "variable": "PhasedImplementationSchedule",
+              "value": "Immediate",
+              "improvement": -0.0225
+            },
+            {
+              "variable": "PhasedImplementationSchedule",
+              "value": "TwoYear",
+              "improvement": 0.0012
+            },
+            {
+              "variable": "PhasedImplementationSchedule",
+              "value": "FiveYear",
+              "improvement": 0.015
+            }
+          ],
+          "threshold": 0.1707,
+          "baseline_E_target": 0.2697
+        }
+      }
+    }
+  ]
+}

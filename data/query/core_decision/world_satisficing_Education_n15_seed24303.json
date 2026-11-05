@@ -1,0 +1,1141 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 24303,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A large urban public school district maintains detailed student-level administrative records spanning multiple academic years. The district's research office can fulfill requests for both observational data extracts and structured interventional pilot programs across its schools.",
+  "non_intervenable_variables": [
+    {
+      "name": "GraduationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorGpa",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GradeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EnglishLearnerStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SpecialEducationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorDisciplinaryIncidents",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SchoolSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ParentalEducation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StudentEmploymentHours",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineAbsenceRate",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "GraduationStatus",
+      "values": [
+        "OnTimeGraduate",
+        "DelayedGraduate",
+        "DroppedOut"
+      ],
+      "desc": "Whether the student graduated on time, late, or left school.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MentoringProgram",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of assigned one-on-one mentoring sessions with an adult.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AttendanceMonitoring",
+      "values": [
+        "None",
+        "Passive",
+        "ActiveFollowUp"
+      ],
+      "desc": "Level of systematic tracking and follow-up on student absences.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CreditRecoveryAccess",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the student is enrolled in an online credit recovery course option.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyEngagementOutreach",
+      "values": [
+        "None",
+        "Quarterly",
+        "Monthly"
+      ],
+      "desc": "Frequency of structured school-initiated contact with the student's household.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Estimated annual household income bracket of the student's family.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorGpa",
+      "values": [
+        "AboveThree",
+        "TwoToThree",
+        "BelowTwo"
+      ],
+      "desc": "Student's cumulative grade point average at the end of ninth grade.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GradeLevel",
+      "values": [
+        "Sophomore",
+        "Junior",
+        "Senior"
+      ],
+      "desc": "Current enrolled grade level of the student at study entry.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EnglishLearnerStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the student is classified as an English language learner.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SpecialEducationStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the student has an active individualized education program on file.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorDisciplinaryIncidents",
+      "values": [
+        "None",
+        "OneToTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of recorded disciplinary referrals before study enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SchoolSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Total student enrollment count category of the high school attended.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ParentalEducation",
+      "values": [
+        "CollegeDegree",
+        "HighSchoolDiploma",
+        "NoHighSchool"
+      ],
+      "desc": "Highest level of formal education completed by the student's primary guardian.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "StudentEmploymentHours",
+      "values": [
+        "None",
+        "PartTime",
+        "NearFullTime"
+      ],
+      "desc": "Weekly hours the student spends in paid employment outside school.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineAbsenceRate",
+      "values": [
+        "Low",
+        "Moderate",
+        "Chronic"
+      ],
+      "desc": "Proportion of school days missed in the semester before study entry.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "MentoringProgram",
+      "GraduationStatus"
+    ],
+    [
+      "MentoringProgram",
+      "AttendanceMonitoring"
+    ],
+    [
+      "AttendanceMonitoring",
+      "GraduationStatus"
+    ],
+    [
+      "AttendanceMonitoring",
+      "SpecialEducationStatus"
+    ],
+    [
+      "CreditRecoveryAccess",
+      "GraduationStatus"
+    ],
+    [
+      "FamilyEngagementOutreach",
+      "GraduationStatus"
+    ],
+    [
+      "HouseholdIncomeLevel",
+      "GraduationStatus"
+    ],
+    [
+      "SchoolSize",
+      "PriorGpa"
+    ],
+    [
+      "BaselineAbsenceRate",
+      "CreditRecoveryAccess"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MentoringProgram",
+      "parents": [],
+      "values": [
+        [
+          0.42126407963529927
+        ],
+        [
+          0.37041487492160685
+        ],
+        [
+          0.2083210454430939
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilyEngagementOutreach",
+      "parents": [],
+      "values": [
+        [
+          0.1288871064785963
+        ],
+        [
+          0.6570147166727494
+        ],
+        [
+          0.21409817684865426
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HouseholdIncomeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.48236432156984305
+        ],
+        [
+          0.2802048660286457
+        ],
+        [
+          0.2374308124015113
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GradeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.4382813065278365
+        ],
+        [
+          0.3156675450799854
+        ],
+        [
+          0.246051148392178
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EnglishLearnerStatus",
+      "parents": [],
+      "values": [
+        [
+          0.7906124527127683
+        ],
+        [
+          0.2093875472872318
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorDisciplinaryIncidents",
+      "parents": [],
+      "values": [
+        [
+          0.22719300566835313
+        ],
+        [
+          0.6293987382767593
+        ],
+        [
+          0.1434082560548875
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SchoolSize",
+      "parents": [],
+      "values": [
+        [
+          0.540020982024965
+        ],
+        [
+          0.2513160182213475
+        ],
+        [
+          0.20866299975368738
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ParentalEducation",
+      "parents": [],
+      "values": [
+        [
+          0.09983586690445373
+        ],
+        [
+          0.481981107963646
+        ],
+        [
+          0.41818302513190014
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StudentEmploymentHours",
+      "parents": [],
+      "values": [
+        [
+          0.5955766471956702
+        ],
+        [
+          0.29293702225838547
+        ],
+        [
+          0.11148633054594438
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineAbsenceRate",
+      "parents": [],
+      "values": [
+        [
+          0.38730961129891545
+        ],
+        [
+          0.3164269056428107
+        ],
+        [
+          0.2962634830582738
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AttendanceMonitoring",
+      "parents": [
+        "MentoringProgram"
+      ],
+      "values": [
+        [
+          0.25832387379813426,
+          0.19999363232431266,
+          0.09039190880267411
+        ],
+        [
+          0.33747140555131605,
+          0.7215784055834266,
+          0.9007242201705912
+        ],
+        [
+          0.40420472065054974,
+          0.0784279620922607,
+          0.008883871026734646
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorGpa",
+      "parents": [
+        "SchoolSize"
+      ],
+      "values": [
+        [
+          0.3813506900213985,
+          0.19410975706908423,
+          0.08290105554770563
+        ],
+        [
+          0.2901581985348212,
+          0.4595736427491558,
+          0.6107524882859194
+        ],
+        [
+          0.32849111144378024,
+          0.34631660018176,
+          0.30634645616637496
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CreditRecoveryAccess",
+      "parents": [
+        "BaselineAbsenceRate"
+      ],
+      "values": [
+        [
+          0.6040727297038931,
+          0.23777868484432338,
+          0.05995929363459734
+        ],
+        [
+          0.39592727029610686,
+          0.7622213151556766,
+          0.9400407063654026
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SpecialEducationStatus",
+      "parents": [
+        "AttendanceMonitoring"
+      ],
+      "values": [
+        [
+          0.5462117047283929,
+          0.9743371388229316,
+          0.9991656719345009
+        ],
+        [
+          0.45378829527160713,
+          0.025662861177068327,
+          0.0008343280654990569
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GraduationStatus",
+      "parents": [
+        "HouseholdIncomeLevel",
+        "MentoringProgram",
+        "CreditRecoveryAccess",
+        "FamilyEngagementOutreach",
+        "AttendanceMonitoring"
+      ],
+      "values": [
+        [
+          0.16520030582786585,
+          0.1900973110820434,
+          0.21056705494341008,
+          0.25937221973396957,
+          0.2909201883625735,
+          0.30715444406387155,
+          0.3401471341460083,
+          0.38585302932510446,
+          0.38994370739501943,
+          0.813373085537829,
+          0.8191062457143364,
+          0.834267258686905,
+          0.8664651854763828,
+          0.88890518856565,
+          0.8937583078063116,
+          0.8948132124527856,
+          0.9128353372119037,
+          0.9085552591065988,
+          0.7111288153072003,
+          0.743079621637072,
+          0.7479293229867804,
+          0.7899306167157001,
+          0.8114613781526296,
+          0.8316112911952047,
+          0.8465158025245699,
+          0.8630633073617222,
+          0.8642304270037784,
+          0.9682659092209294,
+          0.9722476500536014,
+          0.9744121328194953,
+          0.9779863885995332,
+          0.9798636215808124,
+          0.9816825499399598,
+          0.9836826080597312,
+          0.9851836021790332,
+          0.985992597876186,
+          0.9144359857307242,
+          0.9196152209511244,
+          0.9260871432412106,
+          0.935039977252209,
+          0.9478979850704401,
+          0.9490855854373071,
+          0.9500241756242332,
+          0.9546289000249935,
+          0.956037521336561,
+          0.9897197830186414,
+          0.9912705077434593,
+          0.9921030037062962,
+          0.9935543140042963,
+          0.9938540309623779,
+          0.9945810939926479,
+          0.9948749561466037,
+          0.9953442705181755,
+          0.9955446762143276,
+          0.06287582623012958,
+          0.0774655144606875,
+          0.08887678842353801,
+          0.11317039078070998,
+          0.13347368869921897,
+          0.15773801869377638,
+          0.16565474773510244,
+          0.1953422307006615,
+          0.21511249944770414,
+          0.6753153744135784,
+          0.7054579733727798,
+          0.7191932276082877,
+          0.7578350105674432,
+          0.7886549214908662,
+          0.8068583888847861,
+          0.821950930003441,
+          0.8321731179277236,
+          0.8510098188476426,
+          0.5449449729201702,
+          0.5797609558582694,
+          0.5777800271174305,
+          0.6450056391952984,
+          0.685042402727737,
+          0.7102611871188056,
+          0.7308260384097724,
+          0.7383096901751713,
+          0.7664266579110354,
+          0.9438629929279649,
+          0.948260135391771,
+          0.9534776131941538,
+          0.9591668597710123,
+          0.9621213150256123,
+          0.9654557822246964,
+          0.9699041041576602,
+          0.9711158894256489,
+          0.9740139227096547,
+          0.8355453611012124,
+          0.8586931382116574,
+          0.8593843022742715,
+          0.8853762525748838,
+          0.8989326865225703,
+          0.9058815497534934,
+          0.9101609710567834,
+          0.9192017088029953,
+          0.9208402549522762,
+          0.98168460300946,
+          0.983618853814012,
+          0.98559808814679,
+          0.9884991516942397,
+          0.9893888582529132,
+          0.9896666528630357,
+          0.9908339776397738,
+          0.9916530457823132,
+          0.9922866754336654,
+          0.004860166166791813,
+          0.005943746703934752,
+          0.007172089632450086,
+          0.010457974650676298,
+          0.01262122726620782,
+          0.014764611670792545,
+          0.015905054353981634,
+          0.019975430462620118,
+          0.023569536008648355,
+          0.23145924196107676,
+          0.2539987094012096,
+          0.25898875178037967,
+          0.34261967005720223,
+          0.38729999006128674,
+          0.40484099209737734,
+          0.4244308865488276,
+          0.4728799584750964,
+          0.484815884003455,
+          0.11685858288417503,
+          0.1439653200244163,
+          0.16787352450179222,
+          0.2039601771897919,
+          0.23160885191168007,
+          0.2612964218436404,
+          0.2773216190885976,
+          0.30886617378018705,
+          0.3480861732850524,
+          0.7608829234609946,
+          0.7954506386206303,
+          0.8181976490851202,
+          0.8360188024461341,
+          0.8621314306231663,
+          0.8692628226285356,
+          0.8741010469732637,
+          0.8909532496288037,
+          0.8975463846402371,
+          0.45589274536753627,
+          0.5144765396499575,
+          0.5427355611104686,
+          0.5915684181690373,
+          0.6120689323589596,
+          0.6643503537822486,
+          0.6587693792333865,
+          0.6868830798002348,
+          0.7202066252384196,
+          0.9313546592020809,
+          0.9340642921556955,
+          0.9429757616846897,
+          0.952344079772641,
+          0.9554746511504064,
+          0.9576908392906611,
+          0.960450127017738,
+          0.9659150491767927,
+          0.9665341482665994
+        ],
+        [
+          0.29568904269449797,
+          0.2952642180124942,
+          0.30109839957265644,
+          0.3360956038497198,
+          0.3261778410536688,
+          0.33638692350147903,
+          0.3374941226032291,
+          0.33755392300617476,
+          0.3356530276061974,
+          0.15556257738770773,
+          0.1558455766396994,
+          0.1423379847517459,
+          0.11667319567752674,
+          0.09945178017911192,
+          0.09503178105255786,
+          0.09498512226346048,
+          0.07970011664480624,
+          0.08445657743533386,
+          0.21831868367324472,
+          0.2040093929542349,
+          0.2043966124803819,
+          0.17422585978163455,
+          0.15884908260495142,
+          0.14407897792367416,
+          0.13140407695351033,
+          0.11951915256738524,
+          0.1187393325409203,
+          0.030737167882369697,
+          0.026941896460246372,
+          0.024938573214923085,
+          0.021514956610005333,
+          0.019746733033058555,
+          0.017963354756668246,
+          0.01603212355484001,
+          0.014580558889899297,
+          0.013811093861530555,
+          0.07798629477747533,
+          0.07419117488947609,
+          0.06840482108325874,
+          0.06135633209623484,
+          0.04913472066743874,
+          0.04819589246837537,
+          0.04758802224902524,
+          0.043485448314175196,
+          0.04234869935371775,
+          0.010181832204191941,
+          0.008652133477137109,
+          0.007833634725948493,
+          0.006399842441587319,
+          0.006108078530973371,
+          0.0053890633517409536,
+          0.005098846286300339,
+          0.004634190646808122,
+          0.004436957712814973,
+          0.22333493743330216,
+          0.22529788495395764,
+          0.2394710269956245,
+          0.2623460243283408,
+          0.28565961554325026,
+          0.2895306654326414,
+          0.2876827599171964,
+          0.3157011493841464,
+          0.3302415052772123,
+          0.24182998648186405,
+          0.22234116512897534,
+          0.21764759176075638,
+          0.19459332454009634,
+          0.17417210901389374,
+          0.16002792181748626,
+          0.14794620002969636,
+          0.1430445993563463,
+          0.12720691164767486,
+          0.2846044993766722,
+          0.274791408934993,
+          0.2890206011977068,
+          0.25363310533923916,
+          0.2358591021234528,
+          0.22199004366770878,
+          0.20546111944776074,
+          0.2068954730100276,
+          0.18806470831423366,
+          0.05285838538536426,
+          0.04922613808240599,
+          0.0443898957105172,
+          0.039233096829211944,
+          0.03661761783880258,
+          0.033427716752349526,
+          0.029219807907890277,
+          0.02810271529717102,
+          0.025345127041787416,
+          0.14079413906284693,
+          0.1220669228338005,
+          0.12430901373346398,
+          0.10306280972143846,
+          0.09200725386121156,
+          0.08594366253510374,
+          0.08221201621376109,
+          0.07527186203388671,
+          0.07388322658551909,
+          0.017984105410802958,
+          0.01613324004177533,
+          0.014194356009932872,
+          0.011362921140812854,
+          0.010491476023427121,
+          0.010239194885709488,
+          0.00907810653048888,
+          0.008274496825465785,
+          0.007650808629014319,
+          0.06661887982200332,
+          0.07420230883681767,
+          0.0835907108760582,
+          0.09860562591945243,
+          0.10239649092727429,
+          0.11008770374688671,
+          0.11162125896574075,
+          0.12856130523493847,
+          0.14153186846009655,
+          0.3070426674572554,
+          0.32404101447308015,
+          0.33662167294386264,
+          0.32721211450521914,
+          0.3183682742596442,
+          0.3357528780513583,
+          0.33428963247410803,
+          0.30025228765370926,
+          0.3224460818772626,
+          0.272326615313659,
+          0.28065207768963635,
+          0.2881607425640137,
+          0.31173423258794575,
+          0.33466580068548174,
+          0.3292192445134899,
+          0.3334328158357452,
+          0.33364091305950694,
+          0.3215515213813293,
+          0.19662549412811323,
+          0.16588234041965685,
+          0.14975636389856115,
+          0.1408685858617962,
+          0.11997350803239495,
+          0.11482881218310535,
+          0.11215811778799248,
+          0.09731990890965388,
+          0.09238026917253597,
+          0.31751018809876985,
+          0.2923357720938381,
+          0.29714687516042215,
+          0.2736364997273543,
+          0.2755406550156178,
+          0.2388383397222043,
+          0.25628929385358973,
+          0.23624584911281443,
+          0.21544997333320168,
+          0.06397267448801904,
+          0.06203829559810201,
+          0.05391182008527981,
+          0.045424512108970506,
+          0.04265725716563753,
+          0.04065929955299278,
+          0.038088769356022914,
+          0.032850605085106996,
+          0.03242064520679512
+        ],
+        [
+          0.5391106514776363,
+          0.5146384709054624,
+          0.48833454548393346,
+          0.4045321764163106,
+          0.38290197058375774,
+          0.3564586324346495,
+          0.3223587432507626,
+          0.2765930476687208,
+          0.2744032649987831,
+          0.031064337074463287,
+          0.025048177645964127,
+          0.02339475656134919,
+          0.016861618846090276,
+          0.011643031255238105,
+          0.011209911141130619,
+          0.010201665283753871,
+          0.007464546143289999,
+          0.006988163458067265,
+          0.07055250101955493,
+          0.05291098540869308,
+          0.04767406453283779,
+          0.035843523502665384,
+          0.029689539242418923,
+          0.02430973088112096,
+          0.022080120521919797,
+          0.01741754007089251,
+          0.0170302404553013,
+          0.0009969228967009254,
+          0.0008104534861524692,
+          0.0006492939655815032,
+          0.0004986547904612765,
+          0.00038964538612895703,
+          0.00035409530337199394,
+          0.00028526838542895295,
+          0.0002358389310674282,
+          0.00019630826228335686,
+          0.007577719491800531,
+          0.006193604159399446,
+          0.005508035675530687,
+          0.0036036906515562127,
+          0.002967294262121287,
+          0.0027185220943174867,
+          0.0023878021267415657,
+          0.0018856516608314119,
+          0.0016137793097212058,
+          9.838477716677894e-05,
+          7.735877940369051e-05,
+          6.336156775539469e-05,
+          4.584355411642282e-05,
+          3.7890506648751224e-05,
+          2.9842655611191634e-05,
+          2.6197567095848223e-05,
+          2.1538835016433595e-05,
+          1.8366072857395315e-05,
+          0.7137892363365683,
+          0.6972366005853549,
+          0.6716521845808374,
+          0.6244835848909492,
+          0.5808666957575308,
+          0.5527313158735823,
+          0.5466624923477011,
+          0.48895661991519196,
+          0.4546459952750836,
+          0.08285463910455756,
+          0.07220086149824481,
+          0.06315918063095588,
+          0.047571664892460605,
+          0.03717296949524,
+          0.03311368929772772,
+          0.030102869966862608,
+          0.024782282715930117,
+          0.021783269504682592,
+          0.1704505277031577,
+          0.14544763520673756,
+          0.13319937168486276,
+          0.10136125546546232,
+          0.07909849514881015,
+          0.06774876921348556,
+          0.06371284214246688,
+          0.05479483681480106,
+          0.04550863377473097,
+          0.0032786216866706828,
+          0.002513726525822777,
+          0.002132491095328948,
+          0.0016000433997757602,
+          0.00126106713558503,
+          0.0011165010229542195,
+          0.0008760879344494033,
+          0.0007813952771801036,
+          0.0006409502485577845,
+          0.023660499835940797,
+          0.019239938954541992,
+          0.016306683992264454,
+          0.01156093770367769,
+          0.009060059616218114,
+          0.008174787711402755,
+          0.007627012729455539,
+          0.005526429163117828,
+          0.005276518462204758,
+          0.0003312915797370675,
+          0.00024790614421258214,
+          0.00020755584327707529,
+          0.0001379271649473347,
+          0.00011966572365975832,
+          9.415225125496367e-05,
+          8.791582973732082e-05,
+          7.245739222105014e-05,
+          6.251593732033392e-05,
+          0.9285209540112048,
+          0.9198539444592477,
+          0.9092371994914918,
+          0.8909363994298712,
+          0.884982281806518,
+          0.8751476845823207,
+          0.8724736866802777,
+          0.8514632643024413,
+          0.8348985955312551,
+          0.46149809058166785,
+          0.42196027612571024,
+          0.4043895752757577,
+          0.33016821543757857,
+          0.29433173567906895,
+          0.2594061298512644,
+          0.24127948097706434,
+          0.22686775387119446,
+          0.1927380341192824,
+          0.610814801802166,
+          0.5753826022859474,
+          0.543965732934194,
+          0.4843055902222624,
+          0.4337253474028381,
+          0.4094843336428697,
+          0.3892455650756573,
+          0.35749291316030607,
+          0.3303623053336182,
+          0.04249158241089226,
+          0.038667020959713,
+          0.03204598701631849,
+          0.023112611692069792,
+          0.017895061344438683,
+          0.015908365188359204,
+          0.013740835238743929,
+          0.011726841461542528,
+          0.010073346187226788,
+          0.22659706653369385,
+          0.19318768825620447,
+          0.1601175637291092,
+          0.13479508210360844,
+          0.11239041262542254,
+          0.09681130649554699,
+          0.08494132691302378,
+          0.07687107108695082,
+          0.06434340142837881,
+          0.004672666309899889,
+          0.0038974122462022928,
+          0.0031124182300305545,
+          0.0022314081183886125,
+          0.0018680916839561,
+          0.0016498611563461117,
+          0.0014611036262390485,
+          0.0012343457381003347,
+          0.001045206526605546
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts GraduationStatus toward OnTimeGraduate (and away from DroppedOut). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes GraduationStatus.",
+      "answer": [
+        {
+          "variable": "MentoringProgram",
+          "value": "Monthly",
+          "improvement": 0.172
+        },
+        {
+          "variable": "MentoringProgram",
+          "value": "Weekly",
+          "improvement": 0.3081
+        },
+        {
+          "variable": "CreditRecoveryAccess",
+          "value": "Yes",
+          "improvement": 0.2052
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "GraduationStatus",
+          "intervention_A": "MentoringProgram",
+          "intervention_B": "AttendanceMonitoring",
+          "intervention_C": "CreditRecoveryAccess",
+          "intervention_D": "FamilyEngagementOutreach",
+          "confounder": "HouseholdIncomeLevel"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "MentoringProgram",
+              "value": "Monthly",
+              "improvement": 0.172
+            },
+            {
+              "variable": "MentoringProgram",
+              "value": "Weekly",
+              "improvement": 0.3081
+            },
+            {
+              "variable": "CreditRecoveryAccess",
+              "value": "Yes",
+              "improvement": 0.2052
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "MentoringProgram",
+              "value": "None",
+              "improvement": -0.3035
+            },
+            {
+              "variable": "MentoringProgram",
+              "value": "Monthly",
+              "improvement": 0.172
+            },
+            {
+              "variable": "MentoringProgram",
+              "value": "Weekly",
+              "improvement": 0.3081
+            },
+            {
+              "variable": "CreditRecoveryAccess",
+              "value": "No",
+              "improvement": -0.4224
+            },
+            {
+              "variable": "CreditRecoveryAccess",
+              "value": "Yes",
+              "improvement": 0.2052
+            },
+            {
+              "variable": "FamilyEngagementOutreach",
+              "value": "None",
+              "improvement": -0.0923
+            },
+            {
+              "variable": "FamilyEngagementOutreach",
+              "value": "Quarterly",
+              "improvement": -0.0
+            },
+            {
+              "variable": "FamilyEngagementOutreach",
+              "value": "Monthly",
+              "improvement": 0.0556
+            },
+            {
+              "variable": "AttendanceMonitoring",
+              "value": "None",
+              "improvement": -0.0257
+            },
+            {
+              "variable": "AttendanceMonitoring",
+              "value": "Passive",
+              "improvement": 0.0018
+            },
+            {
+              "variable": "AttendanceMonitoring",
+              "value": "ActiveFollowUp",
+              "improvement": 0.0185
+            }
+          ],
+          "threshold": 0.1138,
+          "baseline_E_target": 0.3784
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,592 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "mediator_structure:mediated_only",
+    "seed": 14707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "mediated_only"
+  },
+  "story": "A state-level forensic science laboratory network serves multiple jurisdictions. The research team has access to operational records across all affiliated labs and can request both observational data extracts and interventional pilot studies.",
+  "non_intervenable_variables": [
+    {
+      "name": "BacklogClearanceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CaseProcessingThroughput",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreExistingBacklogSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabStaffCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnnualLabBudget",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EvidenceSubmissionRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnalystExperienceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabAccreditationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EvidenceTypeComposition",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabFacilityAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "JurisdictionPopulation",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "LabInfoSystemUpgrade",
+      "values": [
+        "NoUpgrade",
+        "FullUpgrade"
+      ],
+      "desc": "Whether the crime lab received a new laboratory information management system.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BacklogClearanceLevel",
+      "values": [
+        "SubstantialReduction",
+        "ModerateReduction",
+        "MinimalReduction"
+      ],
+      "desc": "Degree to which the unprocessed forensic evidence inventory decreased over 12 months.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CaseProcessingThroughput",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Average number of forensic cases completed per analyst per month.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PreExistingBacklogSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Volume of untested evidence kits and submissions at study baseline.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LabStaffCount",
+      "values": [
+        "BelowAverage",
+        "Average",
+        "AboveAverage"
+      ],
+      "desc": "Total number of certified forensic analysts employed at the laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnnualLabBudget",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Total fiscal year operating budget allocated to the forensic laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EvidenceSubmissionRate",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Monthly volume of new forensic evidence items submitted by law enforcement agencies.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnalystExperienceLevel",
+      "values": [
+        "Junior",
+        "MidCareer",
+        "Senior"
+      ],
+      "desc": "Median years of forensic casework experience among laboratory analysts.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LabAccreditationStatus",
+      "values": [
+        "NotAccredited",
+        "Accredited"
+      ],
+      "desc": "Whether the laboratory holds current national forensic accreditation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EvidenceTypeComposition",
+      "values": [
+        "MostlyDNA",
+        "Mixed",
+        "MostlyNonDNA"
+      ],
+      "desc": "Predominant category of forensic evidence in the laboratory caseload.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OutsourcingUsage",
+      "values": [
+        "None",
+        "Partial"
+      ],
+      "desc": "Whether any forensic testing is contracted to external private laboratories.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LabFacilityAge",
+      "values": [
+        "Modern",
+        "Aging",
+        "Outdated"
+      ],
+      "desc": "Age classification of the physical laboratory building and core instrumentation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "JurisdictionPopulation",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Population size of the geographic jurisdiction served by the forensic laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "QualityControlProtocol",
+      "values": [
+        "Basic",
+        "Enhanced"
+      ],
+      "desc": "Rigor level of internal quality assurance and proficiency testing procedures.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalEvidenceIntegration",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether digital evidence tracking barcoding is used for chain-of-custody management.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "LabInfoSystemUpgrade",
+      "CaseProcessingThroughput"
+    ],
+    [
+      "LabInfoSystemUpgrade",
+      "AnnualLabBudget"
+    ],
+    [
+      "BacklogClearanceLevel",
+      "AnalystExperienceLevel"
+    ],
+    [
+      "CaseProcessingThroughput",
+      "BacklogClearanceLevel"
+    ],
+    [
+      "PreExistingBacklogSize",
+      "LabInfoSystemUpgrade"
+    ],
+    [
+      "PreExistingBacklogSize",
+      "BacklogClearanceLevel"
+    ],
+    [
+      "AnalystExperienceLevel",
+      "AnnualLabBudget"
+    ],
+    [
+      "QualityControlProtocol",
+      "DigitalEvidenceIntegration"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PreExistingBacklogSize",
+      "parents": [],
+      "values": [
+        [
+          0.12068200669573183
+        ],
+        [
+          0.09562162594912808
+        ],
+        [
+          0.78369636735514
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LabStaffCount",
+      "parents": [],
+      "values": [
+        [
+          0.6624508974034261
+        ],
+        [
+          0.1938442377314282
+        ],
+        [
+          0.1437048648651457
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EvidenceSubmissionRate",
+      "parents": [],
+      "values": [
+        [
+          0.2016499559234387
+        ],
+        [
+          0.3787605880113545
+        ],
+        [
+          0.4195894560652068
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LabAccreditationStatus",
+      "parents": [],
+      "values": [
+        [
+          0.0953501344045114
+        ],
+        [
+          0.9046498655954887
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EvidenceTypeComposition",
+      "parents": [],
+      "values": [
+        [
+          0.697607671718069
+        ],
+        [
+          0.09661792364140992
+        ],
+        [
+          0.2057744046405211
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OutsourcingUsage",
+      "parents": [],
+      "values": [
+        [
+          0.4365551821681474
+        ],
+        [
+          0.5634448178318526
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LabFacilityAge",
+      "parents": [],
+      "values": [
+        [
+          0.09803213424120083
+        ],
+        [
+          0.3535087456883461
+        ],
+        [
+          0.5484591200704529
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "JurisdictionPopulation",
+      "parents": [],
+      "values": [
+        [
+          0.5477294101124527
+        ],
+        [
+          0.3530900351453762
+        ],
+        [
+          0.09918055474217105
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "QualityControlProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.5680265776542944
+        ],
+        [
+          0.43197342234570557
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LabInfoSystemUpgrade",
+      "parents": [
+        "PreExistingBacklogSize"
+      ],
+      "values": [
+        [
+          0.5317606538852535,
+          0.9678206471775812,
+          0.998746084617935
+        ],
+        [
+          0.4682393461147466,
+          0.03217935282241882,
+          0.0012539153820650263
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DigitalEvidenceIntegration",
+      "parents": [
+        "QualityControlProtocol"
+      ],
+      "values": [
+        [
+          0.44010608335328005,
+          0.027402815454684124
+        ],
+        [
+          0.55989391664672,
+          0.972597184545316
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CaseProcessingThroughput",
+      "parents": [
+        "LabInfoSystemUpgrade"
+      ],
+      "values": [
+        [
+          0.1699954685663931,
+          0.8675484466943737
+        ],
+        [
+          0.28619660485598264,
+          0.11659463482133127
+        ],
+        [
+          0.5438079265776242,
+          0.01585691848429501
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BacklogClearanceLevel",
+      "parents": [
+        "PreExistingBacklogSize",
+        "CaseProcessingThroughput"
+      ],
+      "values": [
+        [
+          0.9081108372718969,
+          0.5931007644716739,
+          0.2634793616059173,
+          0.8071259396961242,
+          0.3347556994102974,
+          0.08939135055115242,
+          0.32501741791512595,
+          0.03144817257142839,
+          0.005061593546949398
+        ],
+        [
+          0.08461746911344295,
+          0.2825089885798566,
+          0.32243346879121926,
+          0.16190837567277755,
+          0.32365786897519994,
+          0.2523540618133999,
+          0.33753633808552075,
+          0.16729596123461155,
+          0.0655345901997218
+        ],
+        [
+          0.007271693614660188,
+          0.12439024694846947,
+          0.41408716960286357,
+          0.030965684631098264,
+          0.3415864316145026,
+          0.6582545876354476,
+          0.3374462439993533,
+          0.80125586619396,
+          0.9294038162533288
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnalystExperienceLevel",
+      "parents": [
+        "BacklogClearanceLevel"
+      ],
+      "values": [
+        [
+          0.22094356142063723,
+          0.03803333062947003,
+          0.0022338763647693437
+        ],
+        [
+          0.476389720335144,
+          0.02133440904527684,
+          0.00032599475994473683
+        ],
+        [
+          0.3026667182442188,
+          0.9406322603252532,
+          0.997440128875286
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnnualLabBudget",
+      "parents": [
+        "AnalystExperienceLevel",
+        "LabInfoSystemUpgrade"
+      ],
+      "values": [
+        [
+          0.35251377936019496,
+          0.01708201295855988,
+          0.4319965071565154,
+          0.017324534965431352,
+          0.4749880901649312,
+          0.01752860874465309
+        ],
+        [
+          0.2955044232329539,
+          0.0064852568372496784,
+          0.14109426916191117,
+          0.002562659880052758,
+          0.06044398789148557,
+          0.001010224930518006
+        ],
+        [
+          0.3519817974068512,
+          0.9764327302041905,
+          0.42690922368157347,
+          0.9801128051545158,
+          0.46456792194358315,
+          0.9814611663248289
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does LabInfoSystemUpgrade change BacklogClearanceLevel? Specifically, does the effect of LabInfoSystemUpgrade on BacklogClearanceLevel flow entirely through CaseProcessingThroughput, or is there also a separate pathway that does not pass through CaseProcessingThroughput? Investigate using interventions and explain your conclusion.",
+      "answer": "only_through_M",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "mediated_only",
+        "roles": {
+          "treatment": "LabInfoSystemUpgrade",
+          "outcome": "BacklogClearanceLevel",
+          "mediator": "CaseProcessingThroughput",
+          "confounder": "PreExistingBacklogSize"
+        },
+        "gold": {
+          "label": "only_through_M",
+          "T": "LabInfoSystemUpgrade",
+          "M": "CaseProcessingThroughput",
+          "O": "BacklogClearanceLevel",
+          "total_effect": -0.6344,
+          "max_residual_effect": 0.0
+        }
+      }
+    }
+  ]
+}

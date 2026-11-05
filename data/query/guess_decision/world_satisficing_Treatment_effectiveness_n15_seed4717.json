@@ -1,0 +1,947 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 4717,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A nephrology department within a large academic medical center maintains comprehensive patient registries. The research team has access to clinical records and can request both observational and interventional study samples from the patient population.",
+  "non_intervenable_variables": [
+    {
+      "name": "EgfrDeclineCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineCkdStage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DiabetesStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineProteinuria",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HypertensionSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RasBlockadeUse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmokingHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CardiovascularComorbidity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineHemoglobin",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "EgfrDeclineCategory",
+      "values": [
+        "Stable",
+        "ModerateDecline",
+        "RapidDecline"
+      ],
+      "desc": "Annualized rate of eGFR loss categorized into three ordinal tiers.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SgltTwoInhibitorUse",
+      "values": [
+        "None",
+        "LowDose",
+        "StandardDose"
+      ],
+      "desc": "Prescribed SGLT2 inhibitor dosage level for the patient.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DietarySodiumRestriction",
+      "values": [
+        "Unrestricted",
+        "Moderate",
+        "Strict"
+      ],
+      "desc": "Degree of daily dietary sodium intake limitation assigned.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NephrologistVisitFrequency",
+      "values": [
+        "Quarterly",
+        "Monthly"
+      ],
+      "desc": "Scheduled frequency of outpatient nephrology clinic appointments.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PhosphateBinderTherapy",
+      "values": [
+        "None",
+        "StandardRegimen"
+      ],
+      "desc": "Whether an oral phosphate binder regimen is prescribed.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineCkdStage",
+      "values": [
+        "Stage3a",
+        "Stage3b",
+        "Stage4"
+      ],
+      "desc": "CKD stage at enrollment based on initial eGFR measurement.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under50",
+        "50to65",
+        "Over65"
+      ],
+      "desc": "Patient age bracket at time of study enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DiabetesStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Presence or absence of a type 2 diabetes mellitus diagnosis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineProteinuria",
+      "values": [
+        "Normal",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Urine albumin-to-creatinine ratio category at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HypertensionSeverity",
+      "values": [
+        "Controlled",
+        "Uncontrolled"
+      ],
+      "desc": "Blood pressure control status per clinic measurements.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RasBlockadeUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is on an ACE inhibitor or ARB.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmokingHistory",
+      "values": [
+        "Never",
+        "Former",
+        "Current"
+      ],
+      "desc": "Patient self-reported lifetime tobacco smoking category.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "BMI classification at study baseline.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CardiovascularComorbidity",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Documented history of heart failure or ischemic heart disease.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineHemoglobin",
+      "values": [
+        "Normal",
+        "MildAnemia",
+        "ModerateAnemia"
+      ],
+      "desc": "Hemoglobin level category from enrollment blood panel.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SgltTwoInhibitorUse",
+      "EgfrDeclineCategory"
+    ],
+    [
+      "DietarySodiumRestriction",
+      "EgfrDeclineCategory"
+    ],
+    [
+      "NephrologistVisitFrequency",
+      "EgfrDeclineCategory"
+    ],
+    [
+      "PhosphateBinderTherapy",
+      "EgfrDeclineCategory"
+    ],
+    [
+      "BaselineCkdStage",
+      "EgfrDeclineCategory"
+    ],
+    [
+      "DiabetesStatus",
+      "DietarySodiumRestriction"
+    ],
+    [
+      "RasBlockadeUse",
+      "PhosphateBinderTherapy"
+    ],
+    [
+      "BodyMassIndexCategory",
+      "SgltTwoInhibitorUse"
+    ],
+    [
+      "BaselineHemoglobin",
+      "NephrologistVisitFrequency"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineCkdStage",
+      "parents": [],
+      "values": [
+        [
+          0.28537394726544235
+        ],
+        [
+          0.38964199510055086
+        ],
+        [
+          0.3249840576340068
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.5864863716784803
+        ],
+        [
+          0.14221022822852264
+        ],
+        [
+          0.271303400092997
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiabetesStatus",
+      "parents": [],
+      "values": [
+        [
+          0.3348155400439979
+        ],
+        [
+          0.6651844599560022
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineProteinuria",
+      "parents": [],
+      "values": [
+        [
+          0.13506826565030033
+        ],
+        [
+          0.2603993179027578
+        ],
+        [
+          0.604532416446942
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HypertensionSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.5240532388247989
+        ],
+        [
+          0.4759467611752011
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RasBlockadeUse",
+      "parents": [],
+      "values": [
+        [
+          0.37276201518623187
+        ],
+        [
+          0.6272379848137681
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SmokingHistory",
+      "parents": [],
+      "values": [
+        [
+          0.2948950232423745
+        ],
+        [
+          0.24532025829784768
+        ],
+        [
+          0.4597847184597779
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [],
+      "values": [
+        [
+          0.3102098447358994
+        ],
+        [
+          0.5188135267338643
+        ],
+        [
+          0.17097662853023637
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CardiovascularComorbidity",
+      "parents": [],
+      "values": [
+        [
+          0.3418017758146004
+        ],
+        [
+          0.6581982241853996
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineHemoglobin",
+      "parents": [],
+      "values": [
+        [
+          0.40025479032590366
+        ],
+        [
+          0.29172479582033944
+        ],
+        [
+          0.30802041385375695
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DietarySodiumRestriction",
+      "parents": [
+        "DiabetesStatus"
+      ],
+      "values": [
+        [
+          0.4260649178264241,
+          0.5364989010193519
+        ],
+        [
+          0.33332430246246636,
+          0.4577839653535299
+        ],
+        [
+          0.2406107797111094,
+          0.005717133627118169
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PhosphateBinderTherapy",
+      "parents": [
+        "RasBlockadeUse"
+      ],
+      "values": [
+        [
+          0.44253557960493023,
+          0.7610644302739775
+        ],
+        [
+          0.5574644203950698,
+          0.2389355697260225
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SgltTwoInhibitorUse",
+      "parents": [
+        "BodyMassIndexCategory"
+      ],
+      "values": [
+        [
+          0.35383127292678285,
+          0.3700516738723415,
+          0.3029263789394795
+        ],
+        [
+          0.22295642470909838,
+          0.016443055109028732,
+          0.0009491909645925594
+        ],
+        [
+          0.4232123023641188,
+          0.6135052710186298,
+          0.696124430095928
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NephrologistVisitFrequency",
+      "parents": [
+        "BaselineHemoglobin"
+      ],
+      "values": [
+        [
+          0.49198452599234854,
+          0.9688345766809154,
+          0.9989988796156771
+        ],
+        [
+          0.5080154740076515,
+          0.031165423319084527,
+          0.0010011203843229277
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EgfrDeclineCategory",
+      "parents": [
+        "BaselineCkdStage",
+        "SgltTwoInhibitorUse",
+        "NephrologistVisitFrequency",
+        "DietarySodiumRestriction",
+        "PhosphateBinderTherapy"
+      ],
+      "values": [
+        [
+          0.15789173779566876,
+          0.19803414921431206,
+          0.2733184886429742,
+          0.3126232809299425,
+          0.3363176185460235,
+          0.40546529587817876,
+          0.8161658704086051,
+          0.8399318660998752,
+          0.8746014073610525,
+          0.8932607747342199,
+          0.8957918092980383,
+          0.9128235315774483,
+          0.70122591322497,
+          0.7581687654201833,
+          0.799012036423971,
+          0.8271425650102125,
+          0.8406162297228763,
+          0.8678541218923201,
+          0.969135246878524,
+          0.9740535426449906,
+          0.9767875399598709,
+          0.9824650155684567,
+          0.983355572793799,
+          0.9853934854431537,
+          0.9074453540427405,
+          0.9196251901432992,
+          0.9403569153932111,
+          0.9474220332783402,
+          0.9513035821155621,
+          0.959199426015827,
+          0.9904597231612884,
+          0.9920449710893322,
+          0.993715661984178,
+          0.9943925189683709,
+          0.9946933941252819,
+          0.995880990858427,
+          0.061964302616391055,
+          0.08724738070307095,
+          0.11967780387278847,
+          0.15166222661228718,
+          0.17378916249144527,
+          0.21046977397555014,
+          0.6757660265764124,
+          0.7215590926938917,
+          0.7695666041950341,
+          0.8157977565337289,
+          0.8073919884172687,
+          0.8371591863795083,
+          0.5248542756458003,
+          0.5996863181202302,
+          0.6467047731597902,
+          0.7080029985340275,
+          0.7301059805137382,
+          0.7678690368746616,
+          0.9368197851903272,
+          0.9540392847115609,
+          0.9616292587541717,
+          0.9691579131290367,
+          0.9671914244984964,
+          0.9740983958547296,
+          0.8404491852479717,
+          0.8557277868913981,
+          0.8884524123951345,
+          0.9055990113149963,
+          0.9071767173114585,
+          0.9197139834394555,
+          0.9814593653818957,
+          0.9852939652174929,
+          0.9875622200612716,
+          0.9893479890457263,
+          0.9908051996664068,
+          0.9928013798020116,
+          0.005246037002063694,
+          0.007301018576076435,
+          0.010223496506255677,
+          0.014901627591698746,
+          0.01715204073604416,
+          0.023508638568398292,
+          0.23575329646307572,
+          0.2923205523975476,
+          0.3490422587853032,
+          0.4002859425435434,
+          0.4337040224452076,
+          0.497272666102457,
+          0.12187970653954919,
+          0.15519952873935935,
+          0.20049255096198665,
+          0.25725047263869827,
+          0.27548763336663723,
+          0.33616777893620037,
+          0.7811229643641806,
+          0.8029664575283197,
+          0.846513378856599,
+          0.8675885545834743,
+          0.878053212033647,
+          0.8965407091603784,
+          0.4841711251756562,
+          0.5284751197914709,
+          0.5776062512042334,
+          0.6572773535465413,
+          0.6688878951095368,
+          0.7272239422891879,
+          0.9309464418511392,
+          0.939916511640338,
+          0.9507737713556117,
+          0.9588050652167359,
+          0.9619024177240706,
+          0.9667409977104069
+        ],
+        [
+          0.30216876299971407,
+          0.31533087510589025,
+          0.32783589406193997,
+          0.32567334914172386,
+          0.3222639225444722,
+          0.3239609535894769,
+          0.15269806065791414,
+          0.1366447669144885,
+          0.11118301685232065,
+          0.09564880867831045,
+          0.09447171638163085,
+          0.08017437247016757,
+          0.22907720139693952,
+          0.19006640950122455,
+          0.16461044016949253,
+          0.14694456123257307,
+          0.13757918677613382,
+          0.11662657836443346,
+          0.029863818168325864,
+          0.025239900846151485,
+          0.022732032014048477,
+          0.0171971087060279,
+          0.016361834218415517,
+          0.014390945793780904,
+          0.08506210582799649,
+          0.07477648963868148,
+          0.05597952915824231,
+          0.049934304163177984,
+          0.046536917112085116,
+          0.03908300033756732,
+          0.00945121836392392,
+          0.007890401662391466,
+          0.006241077640592593,
+          0.005575332281747728,
+          0.005280727390119129,
+          0.0041004392321608235,
+          0.20359454707402436,
+          0.23826724760687748,
+          0.28057207279663465,
+          0.28912298929270036,
+          0.2962807999352124,
+          0.30565697484167953,
+          0.2436536459689177,
+          0.21809494735726115,
+          0.18655481231503931,
+          0.15356790261232864,
+          0.1616712489006208,
+          0.14095960786763376,
+          0.3140141891160627,
+          0.27103687319436187,
+          0.2597749381301892,
+          0.22411596670433223,
+          0.20721350602903865,
+          0.18810431133326086,
+          0.05983487981409091,
+          0.043768130506142214,
+          0.03680101016501345,
+          0.029766508336140737,
+          0.0318275630644569,
+          0.025238611112034643,
+          0.13629055357050324,
+          0.12787237003765445,
+          0.09957495891806789,
+          0.08620874141880104,
+          0.08484774714840626,
+          0.07519108323834074,
+          0.018236239053275875,
+          0.014489614074624665,
+          0.012296355453685452,
+          0.010550759221264257,
+          0.009102844882629156,
+          0.007139443917476827,
+          0.06869843283560122,
+          0.08220034591858436,
+          0.100153091459986,
+          0.11494840642716449,
+          0.12359865526137429,
+          0.1441635808612662,
+          0.3141356118240285,
+          0.31964252947765187,
+          0.32972811546209474,
+          0.33184791876741027,
+          0.313590824916354,
+          0.31433854642962555,
+          0.2674562940038832,
+          0.30427973451138246,
+          0.31273189089495873,
+          0.3252509272457323,
+          0.3280507791698244,
+          0.33262010678538806,
+          0.17668137717789692,
+          0.16670628422636344,
+          0.13198537193471688,
+          0.11690711529557045,
+          0.10827773749927243,
+          0.09374226216436829,
+          0.3127245276929544,
+          0.2983787482572687,
+          0.28582448298308427,
+          0.2459500571520997,
+          0.24194345206207835,
+          0.20576328096515398,
+          0.0641897454918891,
+          0.056818700287997105,
+          0.04676041030721322,
+          0.039621836000437456,
+          0.03667535606840236,
+          0.03224819405512624
+        ],
+        [
+          0.5399394992046171,
+          0.4866349756797977,
+          0.3988456172950858,
+          0.3617033699283337,
+          0.3414184589095043,
+          0.2705737505323444,
+          0.031136068933480733,
+          0.023423366985636282,
+          0.014215575786626721,
+          0.011090416587469577,
+          0.009736474320330743,
+          0.007002095952384102,
+          0.06969688537809043,
+          0.0517648250785921,
+          0.036377523406536535,
+          0.025912873757214246,
+          0.02180458350098985,
+          0.015519299743246283,
+          0.0010009349531501187,
+          0.00070655650885803,
+          0.00048042802608067053,
+          0.000337875725515324,
+          0.00028259298778529206,
+          0.00021556876306542697,
+          0.007492540129263003,
+          0.005598320218019295,
+          0.0036635554485465074,
+          0.002643662558481948,
+          0.0021595007723527334,
+          0.001717573646605759,
+          8.905847478763862e-05,
+          6.46272482764557e-05,
+          4.326037522926045e-05,
+          3.214874988134036e-05,
+          2.5878484599021367e-05,
+          1.856990941216518e-05,
+          0.7344411503095846,
+          0.6744853716900516,
+          0.599750123330577,
+          0.5592147840950126,
+          0.5299300375733423,
+          0.4838732511827703,
+          0.08058032745466988,
+          0.06034595994884702,
+          0.043878583489926584,
+          0.030634340853942385,
+          0.03093676268211058,
+          0.02188120575285796,
+          0.16113153523813692,
+          0.1292768086854078,
+          0.09352028871002062,
+          0.06788103476164041,
+          0.06268051345722328,
+          0.04402665179207766,
+          0.0033453349955819573,
+          0.0021925847822969777,
+          0.0015697310808147646,
+          0.0010755785348226965,
+          0.0009810124370465557,
+          0.0006629930332357061,
+          0.023260261181524973,
+          0.016399843070947495,
+          0.011972628686797687,
+          0.008192247266202553,
+          0.00797553554013508,
+          0.005094933322203677,
+          0.00030439556482844975,
+          0.00021642070788245403,
+          0.00014142448504280732,
+          0.00010125173300944165,
+          9.19554509640602e-05,
+          5.917628051153199e-05,
+          0.9260555301623351,
+          0.9104986355053393,
+          0.8896234120337583,
+          0.8701499659811367,
+          0.8592493040025815,
+          0.8323277805703354,
+          0.4501110917128957,
+          0.38803691812480057,
+          0.321229625752602,
+          0.26786613868904635,
+          0.2527051526384385,
+          0.1883887874679173,
+          0.6106639994565677,
+          0.5405207367492583,
+          0.4867755581430546,
+          0.4174986001155695,
+          0.39646158746353827,
+          0.33121211427841163,
+          0.04219565845792242,
+          0.03032725824531679,
+          0.021501249208684025,
+          0.015504330120955378,
+          0.013669050467080758,
+          0.009717028675253305,
+          0.20310434713138942,
+          0.1731461319512604,
+          0.13656926581268233,
+          0.09677258930135908,
+          0.08916865282838467,
+          0.0670127767456582,
+          0.004863812656971682,
+          0.003264788071664907,
+          0.0024658183371751596,
+          0.0015730987828264933,
+          0.0014222262075271916,
+          0.001010808234466897
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts EgfrDeclineCategory toward Stable (and away from RapidDecline). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes EgfrDeclineCategory.",
+      "answer": [
+        {
+          "variable": "SgltTwoInhibitorUse",
+          "value": "StandardDose",
+          "improvement": 0.4224
+        },
+        {
+          "variable": "NephrologistVisitFrequency",
+          "value": "Monthly",
+          "improvement": 0.4395
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "EgfrDeclineCategory",
+          "intervention_A": "SgltTwoInhibitorUse",
+          "intervention_B": "DietarySodiumRestriction",
+          "intervention_C": "NephrologistVisitFrequency",
+          "intervention_D": "PhosphateBinderTherapy",
+          "confounder": "BaselineCkdStage"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "SgltTwoInhibitorUse",
+              "value": "StandardDose",
+              "improvement": 0.4224
+            },
+            {
+              "variable": "NephrologistVisitFrequency",
+              "value": "Monthly",
+              "improvement": 0.4395
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "SgltTwoInhibitorUse",
+              "value": "None",
+              "improvement": -0.6937
+            },
+            {
+              "variable": "SgltTwoInhibitorUse",
+              "value": "LowDose",
+              "improvement": 0.0655
+            },
+            {
+              "variable": "SgltTwoInhibitorUse",
+              "value": "StandardDose",
+              "improvement": 0.4224
+            },
+            {
+              "variable": "NephrologistVisitFrequency",
+              "value": "Quarterly",
+              "improvement": -0.1188
+            },
+            {
+              "variable": "NephrologistVisitFrequency",
+              "value": "Monthly",
+              "improvement": 0.4395
+            },
+            {
+              "variable": "DietarySodiumRestriction",
+              "value": "Unrestricted",
+              "improvement": -0.0596
+            },
+            {
+              "variable": "DietarySodiumRestriction",
+              "value": "Moderate",
+              "improvement": 0.0485
+            },
+            {
+              "variable": "DietarySodiumRestriction",
+              "value": "Strict",
+              "improvement": 0.1141
+            },
+            {
+              "variable": "PhosphateBinderTherapy",
+              "value": "None",
+              "improvement": -0.0172
+            },
+            {
+              "variable": "PhosphateBinderTherapy",
+              "value": "StandardRegimen",
+              "improvement": 0.0308
+            }
+          ],
+          "threshold": 0.2682,
+          "baseline_E_target": 0.6412
+        }
+      }
+    }
+  ]
+}

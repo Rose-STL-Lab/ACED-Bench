@@ -1,0 +1,473 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 10,
+    "topology": "invalid_premise:wrong_side_intervention",
+    "seed": 9003,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "wrong_side_intervention"
+  },
+  "story": "A mid-sized public university maintains comprehensive student records spanning admissions, enrollment, financial services, and student affairs. The institutional research office can access these records and request observational or interventional samples from current student cohorts.",
+  "non_intervenable_variables": [
+    {
+      "name": "DegreeCompletion",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AcademicSelfEfficacy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilyIncomeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HighSchoolGPA",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CampusEmploymentHours",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FinancialAidPackage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EnglishLanguageBackground",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CreditLoadPerSemester",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DegreeCompletion",
+      "values": [
+        "Completed",
+        "NotCompleted"
+      ],
+      "desc": "Whether the student earned a bachelor's degree within six years",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "DegreeAuditStatus",
+      "values": [
+        "Incomplete",
+        "NearComplete",
+        "FullyCleared"
+      ],
+      "desc": "Administrative readout showing proportion of degree requirements checked off",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerMentoringProgram",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of structured meetings with an upper-class peer mentor",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AcademicSelfEfficacy",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Student's self-reported confidence in completing college-level coursework",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FamilyIncomeLevel",
+      "values": [
+        "Low",
+        "Middle",
+        "High"
+      ],
+      "desc": "Household income bracket during the student's enrollment period",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HighSchoolGPA",
+      "values": [
+        "AboveThreeFive",
+        "ThreeToThreeFive",
+        "BelowThree"
+      ],
+      "desc": "Cumulative grade point average at high school graduation",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CampusEmploymentHours",
+      "values": [
+        "None",
+        "PartTime",
+        "FullTime"
+      ],
+      "desc": "Weekly hours the student works in on-campus or off-campus jobs",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FinancialAidPackage",
+      "values": [
+        "FullGrant",
+        "MixedAid",
+        "MostlyLoans"
+      ],
+      "desc": "Composition of the student's financial aid in grants versus loans",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EnglishLanguageBackground",
+      "values": [
+        "NativeSpeaker",
+        "NonNativeSpeaker"
+      ],
+      "desc": "Whether English is the student's first language spoken at home",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CreditLoadPerSemester",
+      "values": [
+        "FullTime",
+        "ThreeQuarter",
+        "HalfTime"
+      ],
+      "desc": "Number of enrolled credit hours relative to full-time status each term",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "DegreeCompletion",
+      "DegreeAuditStatus"
+    ],
+    [
+      "DegreeCompletion",
+      "HighSchoolGPA"
+    ],
+    [
+      "PeerMentoringProgram",
+      "AcademicSelfEfficacy"
+    ],
+    [
+      "AcademicSelfEfficacy",
+      "DegreeCompletion"
+    ],
+    [
+      "FamilyIncomeLevel",
+      "DegreeCompletion"
+    ],
+    [
+      "FamilyIncomeLevel",
+      "PeerMentoringProgram"
+    ],
+    [
+      "HighSchoolGPA",
+      "CreditLoadPerSemester"
+    ],
+    [
+      "FinancialAidPackage",
+      "HighSchoolGPA"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "FamilyIncomeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.3628851767805089
+        ],
+        [
+          0.19277862701170076
+        ],
+        [
+          0.44433619620779025
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CampusEmploymentHours",
+      "parents": [],
+      "values": [
+        [
+          0.2708327794305614
+        ],
+        [
+          0.1680317378006883
+        ],
+        [
+          0.5611354827687502
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FinancialAidPackage",
+      "parents": [],
+      "values": [
+        [
+          0.23644602404666815
+        ],
+        [
+          0.5086814515212386
+        ],
+        [
+          0.25487252443209335
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EnglishLanguageBackground",
+      "parents": [],
+      "values": [
+        [
+          0.3355197795763417
+        ],
+        [
+          0.6644802204236583
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PeerMentoringProgram",
+      "parents": [
+        "FamilyIncomeLevel"
+      ],
+      "values": [
+        [
+          0.3563876158096019,
+          0.12892571596829333,
+          0.0372212937450422
+        ],
+        [
+          0.28512514591819055,
+          0.31983542598820475,
+          0.28632058724522325
+        ],
+        [
+          0.3584872382722076,
+          0.5512388580435019,
+          0.6764581190097345
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AcademicSelfEfficacy",
+      "parents": [
+        "PeerMentoringProgram"
+      ],
+      "values": [
+        [
+          0.156156623364445,
+          0.3227094373096346,
+          0.8650549464339153
+        ],
+        [
+          0.2990932939693406,
+          0.3444666302957538,
+          0.1192212131369399
+        ],
+        [
+          0.5447500826662144,
+          0.33282393239461167,
+          0.0157238404291448
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DegreeCompletion",
+      "parents": [
+        "FamilyIncomeLevel",
+        "AcademicSelfEfficacy"
+      ],
+      "values": [
+        [
+          0.9822390296507183,
+          0.6799229712927823,
+          0.3197612544795143,
+          0.9608705996592712,
+          0.49858070129575777,
+          0.16330091303958988,
+          0.7758234439296243,
+          0.11467364123609032,
+          0.025266845153217646
+        ],
+        [
+          0.017760970349281768,
+          0.32007702870721766,
+          0.6802387455204857,
+          0.039129400340728676,
+          0.5014192987042423,
+          0.8366990869604101,
+          0.22417655607037573,
+          0.8853263587639096,
+          0.9747331548467825
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DegreeAuditStatus",
+      "parents": [
+        "DegreeCompletion"
+      ],
+      "values": [
+        [
+          0.5952787244331472,
+          0.015978382527953066
+        ],
+        [
+          0.27612407285484286,
+          0.11569490790374902
+        ],
+        [
+          0.12859720271200994,
+          0.8683267095682979
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HighSchoolGPA",
+      "parents": [
+        "DegreeCompletion",
+        "FinancialAidPackage"
+      ],
+      "values": [
+        [
+          0.32798992773611485,
+          0.2039303695005228,
+          0.0894214045289093,
+          0.27610350060410666,
+          0.29286347126077045,
+          0.2765664874917351
+        ],
+        [
+          0.3685275159515056,
+          0.19585795594780508,
+          0.073409234862215,
+          0.7033031553157097,
+          0.6376549825091973,
+          0.5147187688298787
+        ],
+        [
+          0.30348255631237964,
+          0.6002116745516722,
+          0.8371693606088758,
+          0.02059334408018359,
+          0.06948154623003235,
+          0.20871474367838624
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CreditLoadPerSemester",
+      "parents": [
+        "HighSchoolGPA"
+      ],
+      "values": [
+        [
+          0.39638948615292036,
+          0.4379846645140074,
+          0.37918381333154094
+        ],
+        [
+          0.32892837881167686,
+          0.10558227536713781,
+          0.026554296318083533
+        ],
+        [
+          0.27468213503540284,
+          0.45643306011885476,
+          0.5942618903503756
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting DegreeAuditStatus=FullyCleared as a way to shift DegreeCompletion toward Completed (and away from NotCompleted). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift DegreeCompletion toward Completed.",
+      "answer": {
+        "is_valid_intervention": false,
+        "invalid_reason": "wrong_side_intervention",
+        "alternative": {
+          "variable": "PeerMentoringProgram",
+          "value": "Weekly"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "wrong_side_intervention",
+        "roles": {
+          "target": "DegreeCompletion",
+          "proposed_intervention": "DegreeAuditStatus",
+          "intervenable_alt": "PeerMentoringProgram",
+          "alt_mediator": "AcademicSelfEfficacy",
+          "confounder": "FamilyIncomeLevel"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "alternative": {
+            "variable": "PeerMentoringProgram",
+            "value": "Weekly"
+          },
+          "alternative_effect": -0.1735,
+          "acceptable_alternatives": [
+            {
+              "variable": "PeerMentoringProgram",
+              "value": "Weekly",
+              "improvement": 0.1735
+            }
+          ],
+          "accept_threshold": 0.1,
+          "invalid_reason": "wrong_side_intervention",
+          "proposed_intervention": {
+            "variable": "DegreeAuditStatus",
+            "value": "FullyCleared"
+          },
+          "proposed_predictive_gap": 0.7749,
+          "proposed_do_effect": 0.0
+        }
+      }
+    }
+  ]
+}

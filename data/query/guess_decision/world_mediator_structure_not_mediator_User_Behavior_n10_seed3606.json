@@ -1,0 +1,448 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "mediator_structure:not_mediator",
+    "seed": 3606,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "not_mediator"
+  },
+  "story": "A mobile analytics division within a mid-sized consumer technology company maintains detailed behavioral logs from its user base. The research team can access historical records and design new observational or interventional data collection efforts as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "AppReengagementLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerceivedNotificationRelevance",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NotificationCuriosity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineAppUsageFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceOperatingSystem",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NotificationPermissionScope",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TimeOfDayDelivered",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UserAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorNotificationDismissRate",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "NotificationRichMedia",
+      "values": [
+        "TextOnly",
+        "TextWithImage"
+      ],
+      "desc": "Whether the push notification includes an embedded image or only text.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AppReengagementLevel",
+      "values": [
+        "FullSession",
+        "BriefVisit",
+        "NoReturn"
+      ],
+      "desc": "Depth of user return activity within 24 hours of notification receipt.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PerceivedNotificationRelevance",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "User-reported rating of how relevant the notification content felt.",
+      "role": "proposed_M",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "NotificationCuriosity",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Degree of curiosity aroused by the notification as self-reported by user.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineAppUsageFrequency",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Rare"
+      ],
+      "desc": "How often the user opened the app in the 30 days before the study.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeviceOperatingSystem",
+      "values": [
+        "iOS",
+        "Android"
+      ],
+      "desc": "Mobile operating system on the user's primary device.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NotificationPermissionScope",
+      "values": [
+        "AllCategories",
+        "LimitedCategories"
+      ],
+      "desc": "Range of notification categories the user has opted into receiving.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TimeOfDayDelivered",
+      "values": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "desc": "Part of the day when the notification was delivered to the user.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UserAgeGroup",
+      "values": [
+        "Under30",
+        "Over30"
+      ],
+      "desc": "Age bracket of the user at the time of study enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorNotificationDismissRate",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Proportion of past notifications the user dismissed without opening.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "NotificationRichMedia",
+      "NotificationCuriosity"
+    ],
+    [
+      "NotificationRichMedia",
+      "PerceivedNotificationRelevance"
+    ],
+    [
+      "NotificationRichMedia",
+      "UserAgeGroup"
+    ],
+    [
+      "NotificationRichMedia",
+      "TimeOfDayDelivered"
+    ],
+    [
+      "NotificationCuriosity",
+      "AppReengagementLevel"
+    ],
+    [
+      "NotificationCuriosity",
+      "PriorNotificationDismissRate"
+    ],
+    [
+      "BaselineAppUsageFrequency",
+      "NotificationRichMedia"
+    ],
+    [
+      "BaselineAppUsageFrequency",
+      "AppReengagementLevel"
+    ],
+    [
+      "UserAgeGroup",
+      "PriorNotificationDismissRate"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineAppUsageFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.3913401446838378
+        ],
+        [
+          0.18946953674461575
+        ],
+        [
+          0.4191903185715465
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DeviceOperatingSystem",
+      "parents": [],
+      "values": [
+        [
+          0.7510814893973123
+        ],
+        [
+          0.2489185106026877
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NotificationPermissionScope",
+      "parents": [],
+      "values": [
+        [
+          0.2459279792248245
+        ],
+        [
+          0.7540720207751754
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NotificationRichMedia",
+      "parents": [
+        "BaselineAppUsageFrequency"
+      ],
+      "values": [
+        [
+          0.5108343052124099,
+          0.5577017180115998,
+          0.6035635343510519
+        ],
+        [
+          0.48916569478759014,
+          0.4422982819884001,
+          0.39643646564894813
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NotificationCuriosity",
+      "parents": [
+        "NotificationRichMedia"
+      ],
+      "values": [
+        [
+          0.16606995956339826,
+          0.8660395009533436
+        ],
+        [
+          0.30330406613410216,
+          0.1184398145843197
+        ],
+        [
+          0.5306259743024996,
+          0.015520684462336854
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerceivedNotificationRelevance",
+      "parents": [
+        "NotificationRichMedia"
+      ],
+      "values": [
+        [
+          0.2135194049850419,
+          0.8074235521883111
+        ],
+        [
+          0.3212423665298743,
+          0.16066324673919324
+        ],
+        [
+          0.46523822848508384,
+          0.03191320107249567
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UserAgeGroup",
+      "parents": [
+        "NotificationRichMedia"
+      ],
+      "values": [
+        [
+          0.39623491619967294,
+          0.09113614475629919
+        ],
+        [
+          0.6037650838003271,
+          0.9088638552437008
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TimeOfDayDelivered",
+      "parents": [
+        "NotificationRichMedia"
+      ],
+      "values": [
+        [
+          0.2962720238823906,
+          0.4847708531845099
+        ],
+        [
+          0.403711313212536,
+          0.3856663364755148
+        ],
+        [
+          0.3000166629050734,
+          0.12956281033997544
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AppReengagementLevel",
+      "parents": [
+        "BaselineAppUsageFrequency",
+        "NotificationCuriosity"
+      ],
+      "values": [
+        [
+          0.9034656855190141,
+          0.6098686100032592,
+          0.26769904435239317,
+          0.802405812802763,
+          0.33957944923558886,
+          0.08665526494352366,
+          0.3311819943729339,
+          0.030986058044026512,
+          0.005401878051978494
+        ],
+        [
+          0.08859258414245057,
+          0.2724236190031012,
+          0.3341698248837412,
+          0.16433713452885454,
+          0.3252306805982409,
+          0.2554532269669741,
+          0.3326911023929394,
+          0.15826142151483005,
+          0.07475770171799175
+        ],
+        [
+          0.00794173033853547,
+          0.1177077709936395,
+          0.3981311307638655,
+          0.03325705266838249,
+          0.3351898701661702,
+          0.6578915080895024,
+          0.3361269032341267,
+          0.8107525204411434,
+          0.9198404202300297
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorNotificationDismissRate",
+      "parents": [
+        "NotificationCuriosity",
+        "UserAgeGroup"
+      ],
+      "values": [
+        [
+          0.5494407811660759,
+          0.8904246622334888,
+          0.05289574701621922,
+          0.2712259410473682,
+          0.0025513349514259013,
+          0.01675915766785956
+        ],
+        [
+          0.45055921883392414,
+          0.10957533776651111,
+          0.9471042529837808,
+          0.7287740589526318,
+          0.9974486650485742,
+          0.9832408423321405
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "An analyst hypothesizes that PerceivedNotificationRelevance is the variable through which NotificationRichMedia changes AppReengagementLevel. Investigate the system and decide whether this hypothesis is supported, and explain why.",
+      "answer": "not_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "not_mediator",
+        "roles": {
+          "treatment": "NotificationRichMedia",
+          "outcome": "AppReengagementLevel",
+          "proposed_M": "PerceivedNotificationRelevance",
+          "true_mediator": "NotificationCuriosity",
+          "confounder": "BaselineAppUsageFrequency"
+        },
+        "gold": {
+          "label": "not_mediator",
+          "T": "NotificationRichMedia",
+          "M_proposed": "PerceivedNotificationRelevance",
+          "M_true": "NotificationCuriosity",
+          "O": "AppReengagementLevel",
+          "total_effect": -0.65,
+          "residual_after_fix_proposed": 0.65,
+          "do_proposed_effect_on_O": 0.0
+        }
+      }
+    }
+  ]
+}

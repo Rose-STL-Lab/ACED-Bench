@@ -1,0 +1,817 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "satisficing",
+    "seed": 5424,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A large integrated health system operates primary care clinics across urban and suburban locations. The research team has access to patient records and can request both observational data extracts and prospective interventional samples from participating clinic sites.",
+  "non_intervenable_variables": [
+    {
+      "name": "UndiagnosedDiabetesDetection",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineMetabolicRisk",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InsuranceCoverage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorScreeningHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClinicSettingType",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "UndiagnosedDiabetesDetection",
+      "values": [
+        "TimelyDetection",
+        "DelayedDetection",
+        "Undetected"
+      ],
+      "desc": "Whether previously undiagnosed diabetes was identified and confirmed in the patient.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PointOfCareHbA1cTesting",
+      "values": [
+        "None",
+        "SingleTest",
+        "RepeatedTest"
+      ],
+      "desc": "Use of rapid in-clinic HbA1c assay during routine primary care visits.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RiskScorePreScreening",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Administration of a validated diabetes risk questionnaire before laboratory testing.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunityOutreachScreening",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Glycemic screening events held in community pharmacies or health fairs.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FastingGlucoseRetestProtocol",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Structured protocol requiring a confirmatory fasting plasma glucose within two weeks.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineMetabolicRisk",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Patient composite metabolic risk level based on BMI, waist circumference, and family history.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under40",
+        "40to59",
+        "60plus"
+      ],
+      "desc": "Patient age category at time of screening encounter.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InsuranceCoverage",
+      "values": [
+        "Uninsured",
+        "PublicInsurance",
+        "PrivateInsurance"
+      ],
+      "desc": "Type of health insurance the patient holds at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorScreeningHistory",
+      "values": [
+        "NoPrior",
+        "PriorNormal",
+        "PriorBorderline"
+      ],
+      "desc": "Patient history of any previous glycemic screening and its most recent result.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClinicSettingType",
+      "values": [
+        "Urban",
+        "Rural"
+      ],
+      "desc": "Geographic classification of the primary care clinic where screening occurs.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PointOfCareHbA1cTesting",
+      "UndiagnosedDiabetesDetection"
+    ],
+    [
+      "PointOfCareHbA1cTesting",
+      "ClinicSettingType"
+    ],
+    [
+      "PointOfCareHbA1cTesting",
+      "PriorScreeningHistory"
+    ],
+    [
+      "RiskScorePreScreening",
+      "UndiagnosedDiabetesDetection"
+    ],
+    [
+      "CommunityOutreachScreening",
+      "UndiagnosedDiabetesDetection"
+    ],
+    [
+      "CommunityOutreachScreening",
+      "AgeGroup"
+    ],
+    [
+      "FastingGlucoseRetestProtocol",
+      "UndiagnosedDiabetesDetection"
+    ],
+    [
+      "BaselineMetabolicRisk",
+      "UndiagnosedDiabetesDetection"
+    ],
+    [
+      "BaselineMetabolicRisk",
+      "AgeGroup"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PointOfCareHbA1cTesting",
+      "parents": [],
+      "values": [
+        [
+          0.155911717401126
+        ],
+        [
+          0.7217385895454572
+        ],
+        [
+          0.12234969305341682
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RiskScorePreScreening",
+      "parents": [],
+      "values": [
+        [
+          0.6800538402682393
+        ],
+        [
+          0.3199461597317607
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CommunityOutreachScreening",
+      "parents": [],
+      "values": [
+        [
+          0.543558260429407
+        ],
+        [
+          0.2166740211766861
+        ],
+        [
+          0.2397677183939068
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FastingGlucoseRetestProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.5496144961519509
+        ],
+        [
+          0.45038550384804915
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineMetabolicRisk",
+      "parents": [],
+      "values": [
+        [
+          0.2502022845423747
+        ],
+        [
+          0.37555386872397845
+        ],
+        [
+          0.37424384673364697
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InsuranceCoverage",
+      "parents": [],
+      "values": [
+        [
+          0.4706771377441324
+        ],
+        [
+          0.3649789824551658
+        ],
+        [
+          0.16434387980070178
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClinicSettingType",
+      "parents": [
+        "PointOfCareHbA1cTesting"
+      ],
+      "values": [
+        [
+          0.5326446262833239,
+          0.1525608786099003,
+          0.02765040350584024
+        ],
+        [
+          0.46735537371667607,
+          0.8474391213900997,
+          0.9723495964941596
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorScreeningHistory",
+      "parents": [
+        "PointOfCareHbA1cTesting"
+      ],
+      "values": [
+        [
+          0.2740434881722498,
+          0.3118858292318524,
+          0.3522617809977139
+        ],
+        [
+          0.3679626400803902,
+          0.35775540034047093,
+          0.3451933320786552
+        ],
+        [
+          0.3579938717473599,
+          0.3303587704276767,
+          0.30254488692363096
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UndiagnosedDiabetesDetection",
+      "parents": [
+        "BaselineMetabolicRisk",
+        "RiskScorePreScreening",
+        "CommunityOutreachScreening",
+        "PointOfCareHbA1cTesting",
+        "FastingGlucoseRetestProtocol"
+      ],
+      "values": [
+        [
+          0.1540329322801993,
+          0.2034559288854162,
+          0.24800718811430883,
+          0.3183012313552063,
+          0.34621598243206836,
+          0.41995396132736756,
+          0.586669481407813,
+          0.6349706785917186,
+          0.7050076525819691,
+          0.7570593782356444,
+          0.7499512510135287,
+          0.7857095037098222,
+          0.8089093531933538,
+          0.8359826470054448,
+          0.8659603879000906,
+          0.8913788511425252,
+          0.8928708389027864,
+          0.9107838601872286,
+          0.9091696495071944,
+          0.9243004071728647,
+          0.9338272007661921,
+          0.9475305348864081,
+          0.9531218700366134,
+          0.9567022951287733,
+          0.9754585529227772,
+          0.9800650995815589,
+          0.9837606826673175,
+          0.985461761285717,
+          0.986090103852374,
+          0.9898557921851971,
+          0.9907919735895303,
+          0.9916939627863197,
+          0.9937798000151792,
+          0.9941190024968405,
+          0.994447828577408,
+          0.9958251304903325,
+          0.06511160276534865,
+          0.08381460976820876,
+          0.11875564530043675,
+          0.15213458808178712,
+          0.1588522529753047,
+          0.2148207811197498,
+          0.3860368257291042,
+          0.4497773890216351,
+          0.5224688603413892,
+          0.5694206478727569,
+          0.5952691826913646,
+          0.6488759010879898,
+          0.6656133033108654,
+          0.7166139759910877,
+          0.7699613487022456,
+          0.8065148578655469,
+          0.8259313056546211,
+          0.842570321237498,
+          0.8316581821977997,
+          0.8671898237208483,
+          0.8848609592938343,
+          0.9036314993922938,
+          0.9113637193078593,
+          0.9219451863439424,
+          0.9560488374974729,
+          0.9631784080272627,
+          0.9714306480127103,
+          0.9751615910376408,
+          0.9781729822859617,
+          0.9816621975019179,
+          0.9819953901568768,
+          0.9855742267238783,
+          0.9870843711853058,
+          0.9900906058384613,
+          0.9906677048986992,
+          0.9919056506034045,
+          0.004924124527345157,
+          0.006896923789121338,
+          0.010310028794576731,
+          0.015039558988844704,
+          0.0162426509514728,
+          0.022606948829916308,
+          0.06080471078152431,
+          0.07744897110081599,
+          0.10700494760567623,
+          0.14032729466187455,
+          0.16419744776744624,
+          0.20490040444952737,
+          0.22190236062305038,
+          0.27888347127722574,
+          0.3406537262721013,
+          0.39714819098621584,
+          0.42511641230957387,
+          0.4883104483876407,
+          0.4534675226330383,
+          0.5279146699630116,
+          0.5938606488836295,
+          0.6532504081886699,
+          0.6590574354452476,
+          0.7282037710417456,
+          0.8269849406992262,
+          0.8546325077404736,
+          0.8727614620669287,
+          0.8959252196901695,
+          0.9080215182257212,
+          0.9232888803388984,
+          0.9268156620760954,
+          0.938064484096666,
+          0.9519816399906024,
+          0.9565438132410194,
+          0.9630401598403507,
+          0.9670846206600755
+        ],
+        [
+          0.3071163382001019,
+          0.32372953760892814,
+          0.33596992699572753,
+          0.328322774786902,
+          0.3343088996236318,
+          0.314970162273868,
+          0.2765112191934133,
+          0.26343638520669194,
+          0.22071356135821998,
+          0.18904061247743806,
+          0.1985054300459932,
+          0.17867159878722624,
+          0.16154060231894254,
+          0.1419361018706171,
+          0.11953781627416171,
+          0.09784263193372157,
+          0.09736232731966163,
+          0.08194455332397992,
+          0.08314462074490114,
+          0.0706014877705065,
+          0.062136329983045496,
+          0.04993775208534084,
+          0.04458306461641996,
+          0.04165635069473462,
+          0.023935214568305798,
+          0.019566261363582745,
+          0.015981608299489563,
+          0.014350133701017181,
+          0.013742218470034906,
+          0.010038662396783063,
+          0.009113261268569454,
+          0.00824153864616641,
+          0.006175579433214012,
+          0.005849327519414226,
+          0.005524009866703714,
+          0.00415671177479598,
+          0.22107368506380207,
+          0.24365258451161365,
+          0.25830962691390796,
+          0.28856531852057776,
+          0.3006600189734721,
+          0.31144044859810943,
+          0.3324933069249273,
+          0.3197835456788699,
+          0.3021041167213073,
+          0.2825276929629769,
+          0.2789085454321533,
+          0.2557228652017258,
+          0.243912644870773,
+          0.21861771888287276,
+          0.1869148413490857,
+          0.16177997357582388,
+          0.14584058485710322,
+          0.13655937756131056,
+          0.14508848779469158,
+          0.11698998084520627,
+          0.10368912778159992,
+          0.08824133815279926,
+          0.08101904336260923,
+          0.0726075500463786,
+          0.042136373364649406,
+          0.03554100456386383,
+          0.02770977021229487,
+          0.02426305416856232,
+          0.02134015827538128,
+          0.017992393734360734,
+          0.017705633990141884,
+          0.014220530155244871,
+          0.012761610299784303,
+          0.009804463931767033,
+          0.00923783930949814,
+          0.008033188394107608,
+          0.06336119870109154,
+          0.0775705925398904,
+          0.10180636707242743,
+          0.10909792434039274,
+          0.11648395981599417,
+          0.14284045573231643,
+          0.2079307656620879,
+          0.22877401383740711,
+          0.2549402912977014,
+          0.27683331643437875,
+          0.2931216272179956,
+          0.3200965022020852,
+          0.32477257272137494,
+          0.31791917321096674,
+          0.3317655803189359,
+          0.3199960227640701,
+          0.32779438032869307,
+          0.3119584818701416,
+          0.3318094740888937,
+          0.3016418720962426,
+          0.27081427938477515,
+          0.24408057132659167,
+          0.2537560719858691,
+          0.21018188047362293,
+          0.14835294652288292,
+          0.12697270458969045,
+          0.11352523538400362,
+          0.09494188629540021,
+          0.08437230241778924,
+          0.07092183205269201,
+          0.0684493874913827,
+          0.05860193708148519,
+          0.04574394792550301,
+          0.04175752213062253,
+          0.03560665512240696,
+          0.03192333136877682
+        ],
+        [
+          0.5388507295196988,
+          0.4728145335056556,
+          0.41602288488996364,
+          0.3533759938578916,
+          0.31947511794429984,
+          0.2650758763987644,
+          0.13681929939877369,
+          0.10159293620158945,
+          0.07427878605981089,
+          0.05390000928691747,
+          0.05154331894047811,
+          0.03561889750295153,
+          0.029550044487703726,
+          0.02208125112393812,
+          0.014501795825747588,
+          0.010778516923753109,
+          0.009766833777552091,
+          0.007271586488791496,
+          0.0076857297479044065,
+          0.005098105056628934,
+          0.004036469250762408,
+          0.0025317130282511676,
+          0.0022950653469665902,
+          0.0016413541764922338,
+          0.0006062325089170913,
+          0.0003686390548584455,
+          0.00025770903319270586,
+          0.000188105013265644,
+          0.00016767767759126874,
+          0.00010554541801969818,
+          9.476514190031767e-05,
+          6.449856751379075e-05,
+          4.462055160679299e-05,
+          3.1669983745231026e-05,
+          2.8161555888464373e-05,
+          1.8157734871494256e-05,
+          0.7138147121708494,
+          0.6725328057201777,
+          0.6229347277856553,
+          0.5593000933976351,
+          0.5404877280512232,
+          0.47373877028214073,
+          0.28146986734596846,
+          0.23043906529949515,
+          0.1754270229373034,
+          0.1480516591642662,
+          0.1258222718764821,
+          0.09540123371028458,
+          0.0904740518183616,
+          0.06476830512603954,
+          0.04312380994866867,
+          0.031705168558629176,
+          0.028228109488275553,
+          0.020870301201191516,
+          0.02325333000750862,
+          0.01582019543394549,
+          0.011449912924565691,
+          0.008127162454906894,
+          0.0076172373295313855,
+          0.005447263609678945,
+          0.0018147891378776262,
+          0.001280587408873534,
+          0.0008595817749948752,
+          0.0005753547937970747,
+          0.0004868594386569592,
+          0.000345408763721487,
+          0.0002989758529814156,
+          0.00020524312087668242,
+          0.0001540185149099713,
+          0.00010493022977150778,
+          9.445579180272272e-05,
+          6.116100248779614e-05,
+          0.9317146767715633,
+          0.9155324836709883,
+          0.8878836041329959,
+          0.8758625166707625,
+          0.8672733892325329,
+          0.8345525954377672,
+          0.7312645235563877,
+          0.6937770150617768,
+          0.6380547610966224,
+          0.5828393889037466,
+          0.5426809250145581,
+          0.4750030933483874,
+          0.45332506665557465,
+          0.4031973555118074,
+          0.32758069340896284,
+          0.28285578624971414,
+          0.24708920736173307,
+          0.1997310697422176,
+          0.21472300327806806,
+          0.17044345794074578,
+          0.1353250717315952,
+          0.10266902048473855,
+          0.08718649256888332,
+          0.06161434848463143,
+          0.02466211277789084,
+          0.018394787669836012,
+          0.01371330254906761,
+          0.009132894014430203,
+          0.007606179356489649,
+          0.005789287608409562,
+          0.004734950432521824,
+          0.0033335788218487824,
+          0.002274412083894447,
+          0.001698664628357905,
+          0.0013531850372423533,
+          0.0009920479711476042
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [
+        "CommunityOutreachScreening",
+        "BaselineMetabolicRisk"
+      ],
+      "values": [
+        [
+          0.27779849367826964,
+          0.279920831542192,
+          0.28202347622478013,
+          0.3309376516858847,
+          0.33060307311132997,
+          0.33026475030216995,
+          0.24049141273487218,
+          0.24008023617498844,
+          0.2396694416699983
+        ],
+        [
+          0.38493614148516775,
+          0.3794630639615066,
+          0.37402018281111404,
+          0.021357878014047055,
+          0.020873452806974335,
+          0.02039976284365549,
+          0.0007228773431643521,
+          0.0007059873777036103,
+          0.0006894911214816495
+        ],
+        [
+          0.33726536483656255,
+          0.3406161044963015,
+          0.3439563409641057,
+          0.6477044703000683,
+          0.6485234740816957,
+          0.6493354868541746,
+          0.7587857099219636,
+          0.7592137764473079,
+          0.7596410672085201
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts UndiagnosedDiabetesDetection toward TimelyDetection (and away from Undetected). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes UndiagnosedDiabetesDetection.",
+      "answer": [
+        {
+          "variable": "RiskScorePreScreening",
+          "value": "Yes",
+          "improvement": 0.6699
+        },
+        {
+          "variable": "CommunityOutreachScreening",
+          "value": "Full",
+          "improvement": 0.4851
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "UndiagnosedDiabetesDetection",
+          "intervention_A": "PointOfCareHbA1cTesting",
+          "intervention_B": "RiskScorePreScreening",
+          "intervention_C": "CommunityOutreachScreening",
+          "intervention_D": "FastingGlucoseRetestProtocol",
+          "confounder": "BaselineMetabolicRisk"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "RiskScorePreScreening",
+              "value": "Yes",
+              "improvement": 0.6699
+            },
+            {
+              "variable": "CommunityOutreachScreening",
+              "value": "Full",
+              "improvement": 0.4851
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "RiskScorePreScreening",
+              "value": "No",
+              "improvement": -0.3152
+            },
+            {
+              "variable": "RiskScorePreScreening",
+              "value": "Yes",
+              "improvement": 0.6699
+            },
+            {
+              "variable": "CommunityOutreachScreening",
+              "value": "None",
+              "improvement": -0.2953
+            },
+            {
+              "variable": "CommunityOutreachScreening",
+              "value": "Partial",
+              "improvement": 0.204
+            },
+            {
+              "variable": "CommunityOutreachScreening",
+              "value": "Full",
+              "improvement": 0.4851
+            },
+            {
+              "variable": "PointOfCareHbA1cTesting",
+              "value": "None",
+              "improvement": -0.1157
+            },
+            {
+              "variable": "PointOfCareHbA1cTesting",
+              "value": "SingleTest",
+              "improvement": 0.0089
+            },
+            {
+              "variable": "PointOfCareHbA1cTesting",
+              "value": "RepeatedTest",
+              "improvement": 0.0951
+            },
+            {
+              "variable": "FastingGlucoseRetestProtocol",
+              "value": "No",
+              "improvement": -0.027
+            },
+            {
+              "variable": "FastingGlucoseRetestProtocol",
+              "value": "Yes",
+              "improvement": 0.0329
+            }
+          ],
+          "threshold": 0.3445,
+          "baseline_E_target": 0.8292
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,690 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 15,
+    "topology": "invalid_premise",
+    "seed": 8353,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": null
+  },
+  "story": "A state workforce development agency administers unemployment insurance programs across multiple regional offices. The agency's research division has access to administrative claims records and can request both observational and interventional data samples from program participants.",
+  "non_intervenable_variables": [
+    {
+      "name": "ReemploymentSpeed",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreLayoffTenure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "JobSearchIntensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalLaborMarketTightness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClaimantAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IndustryOfPriorJob",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HouseholdSavingsBuffer",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NumberOfDependents",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorUnemploymentSpells",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GeographicMobility",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ReemploymentSpeed",
+      "values": [
+        "Fast",
+        "Moderate",
+        "Slow"
+      ],
+      "desc": "Time category from job loss to stable reemployment",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PreLayoffTenure",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Duration of employment at the job held before layoff",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WeeklyBenefitLevel",
+      "values": [
+        "Low",
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Weekly unemployment insurance payment amount tier assigned to claimant",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "JobSearchIntensity",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Number of verified job applications submitted per week",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LocalLaborMarketTightness",
+      "values": [
+        "Tight",
+        "Balanced",
+        "Slack"
+      ],
+      "desc": "Ratio of job vacancies to unemployed workers in claimant's area",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BenefitDurationWeeks",
+      "values": [
+        "Standard",
+        "Extended"
+      ],
+      "desc": "Maximum number of weeks unemployment benefits are payable",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ClaimantAge",
+      "values": [
+        "Young",
+        "MiddleAge",
+        "Older"
+      ],
+      "desc": "Age group of the unemployment insurance claimant at filing",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "HighSchoolOrLess",
+        "SomeCollege",
+        "BachelorPlus"
+      ],
+      "desc": "Highest educational attainment of the claimant",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "IndustryOfPriorJob",
+      "values": [
+        "Manufacturing",
+        "Services",
+        "TechProfessional"
+      ],
+      "desc": "Sector classification of the claimant's most recent employer",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ReemploymentServicesEnrollment",
+      "values": [
+        "None",
+        "Basic",
+        "Intensive"
+      ],
+      "desc": "Level of state-provided job counseling and training services assigned",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HouseholdSavingsBuffer",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Liquid financial assets available to the claimant household at filing",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NumberOfDependents",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreePlus"
+      ],
+      "desc": "Count of dependent family members in the claimant's household",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorUnemploymentSpells",
+      "values": [
+        "None",
+        "One",
+        "Multiple"
+      ],
+      "desc": "Number of previous unemployment insurance claim episodes on record",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WageReplacementRate",
+      "values": [
+        "Below40Pct",
+        "40to60Pct",
+        "Above60Pct"
+      ],
+      "desc": "Proportion of prior weekly earnings replaced by UI benefits",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "GeographicMobility",
+      "values": [
+        "Immobile",
+        "Limited",
+        "Flexible"
+      ],
+      "desc": "Claimant's stated willingness to relocate for employment",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ReemploymentSpeed",
+      "EducationLevel"
+    ],
+    [
+      "PreLayoffTenure",
+      "ReemploymentSpeed"
+    ],
+    [
+      "WeeklyBenefitLevel",
+      "JobSearchIntensity"
+    ],
+    [
+      "JobSearchIntensity",
+      "ReemploymentSpeed"
+    ],
+    [
+      "JobSearchIntensity",
+      "HouseholdSavingsBuffer"
+    ],
+    [
+      "LocalLaborMarketTightness",
+      "ReemploymentSpeed"
+    ],
+    [
+      "LocalLaborMarketTightness",
+      "EducationLevel"
+    ],
+    [
+      "PriorUnemploymentSpells",
+      "PreLayoffTenure"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "WeeklyBenefitLevel",
+      "parents": [],
+      "values": [
+        [
+          0.2031009552871477
+        ],
+        [
+          0.6902735488512384
+        ],
+        [
+          0.10662549586161392
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LocalLaborMarketTightness",
+      "parents": [],
+      "values": [
+        [
+          0.3075437898424366
+        ],
+        [
+          0.3549537969258304
+        ],
+        [
+          0.337502413231733
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BenefitDurationWeeks",
+      "parents": [],
+      "values": [
+        [
+          0.3150577025854157
+        ],
+        [
+          0.6849422974145843
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ClaimantAge",
+      "parents": [],
+      "values": [
+        [
+          0.21368297164322378
+        ],
+        [
+          0.27266629294777145
+        ],
+        [
+          0.5136507354090047
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "IndustryOfPriorJob",
+      "parents": [],
+      "values": [
+        [
+          0.4761261739154488
+        ],
+        [
+          0.4279950795893438
+        ],
+        [
+          0.09587874649520735
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ReemploymentServicesEnrollment",
+      "parents": [],
+      "values": [
+        [
+          0.09454595953541564
+        ],
+        [
+          0.1928059156847782
+        ],
+        [
+          0.7126481247798062
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NumberOfDependents",
+      "parents": [],
+      "values": [
+        [
+          0.4164609869478732
+        ],
+        [
+          0.4856735646833955
+        ],
+        [
+          0.09786544836873125
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorUnemploymentSpells",
+      "parents": [],
+      "values": [
+        [
+          0.7069312586246851
+        ],
+        [
+          0.19623523341420124
+        ],
+        [
+          0.09683350796111362
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WageReplacementRate",
+      "parents": [],
+      "values": [
+        [
+          0.1441251264391703
+        ],
+        [
+          0.15924785844779343
+        ],
+        [
+          0.6966270151130364
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GeographicMobility",
+      "parents": [],
+      "values": [
+        [
+          0.47679004369867284
+        ],
+        [
+          0.19144668857916292
+        ],
+        [
+          0.3317632677221642
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "JobSearchIntensity",
+      "parents": [
+        "WeeklyBenefitLevel"
+      ],
+      "values": [
+        [
+          0.16838524086994922,
+          0.34094850679365224,
+          0.8748172936274303
+        ],
+        [
+          0.2818631554740932,
+          0.3311448301631152,
+          0.10966994918969081
+        ],
+        [
+          0.5497516036559575,
+          0.3279066630432327,
+          0.015512757182878808
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreLayoffTenure",
+      "parents": [
+        "PriorUnemploymentSpells"
+      ],
+      "values": [
+        [
+          0.48513937274574387,
+          0.3262258593462054,
+          0.14028758225839183
+        ],
+        [
+          0.2507735976051739,
+          0.5721066028813397,
+          0.8346820906471898
+        ],
+        [
+          0.26408702964908204,
+          0.10166753777245488,
+          0.025030327094418315
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HouseholdSavingsBuffer",
+      "parents": [
+        "JobSearchIntensity"
+      ],
+      "values": [
+        [
+          0.3652288014418301,
+          0.031562902063891,
+          0.0017280855462716372
+        ],
+        [
+          0.395639739512031,
+          0.724588797719735,
+          0.8407361546594182
+        ],
+        [
+          0.23913145904613886,
+          0.24384830021637416,
+          0.15753575979431012
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ReemploymentSpeed",
+      "parents": [
+        "PreLayoffTenure",
+        "LocalLaborMarketTightness",
+        "JobSearchIntensity"
+      ],
+      "values": [
+        [
+          0.9302750300270509,
+          0.6780130504665005,
+          0.4150183653083305,
+          0.8860894453236015,
+          0.5309403335002504,
+          0.26816110296380646,
+          0.7278993507077256,
+          0.20769202089129055,
+          0.06715268525842435,
+          0.8641231019185908,
+          0.47575840498960126,
+          0.20990716192095882,
+          0.8086558864932085,
+          0.34419607005617414,
+          0.12719935297569168,
+          0.5517310635545151,
+          0.08714059926604611,
+          0.02325349296386895,
+          0.4806351356638063,
+          0.06208106273715261,
+          0.015737984971244817,
+          0.3260369347322074,
+          0.033211850003085686,
+          0.007178287956679751,
+          0.09063060946714833,
+          0.0050223976337055035,
+          0.0010861645072151194
+        ],
+        [
+          0.06462712209853129,
+          0.23377255166041017,
+          0.32604730080137984,
+          0.102346203421354,
+          0.30473729307138997,
+          0.3292924088765565,
+          0.21064517412848577,
+          0.31297818871682564,
+          0.2153953504302453,
+          0.11968316995705734,
+          0.3069843381668181,
+          0.31401425817782247,
+          0.1582218798541428,
+          0.3244793148447847,
+          0.27700684694495137,
+          0.2958010434054635,
+          0.245579277893072,
+          0.1293500603911936,
+          0.31701326184950257,
+          0.22368405728929563,
+          0.11716072619361116,
+          0.32995679208922857,
+          0.1526362359689153,
+          0.08165171082229002,
+          0.24819746390254369,
+          0.07053295492563147,
+          0.03360442555288884
+        ],
+        [
+          0.005097847874417745,
+          0.08821439787308936,
+          0.25893433389028986,
+          0.011564351255044642,
+          0.16432237342835965,
+          0.402546488159637,
+          0.06145547516378857,
+          0.4793297903918839,
+          0.7174519643113303,
+          0.01619372812435186,
+          0.2172572568435807,
+          0.4760785799012187,
+          0.03312223365264875,
+          0.3313246150990411,
+          0.595793800079357,
+          0.15246789304002148,
+          0.6672801228408819,
+          0.8473964466449375,
+          0.20235160248669118,
+          0.7142348799735517,
+          0.8671012888351439,
+          0.344006273178564,
+          0.814151914027999,
+          0.9111700012210302,
+          0.661171926630308,
+          0.924444647440663,
+          0.9653094099398961
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [
+        "LocalLaborMarketTightness",
+        "ReemploymentSpeed"
+      ],
+      "values": [
+        [
+          0.352176908661468,
+          0.295397212695975,
+          0.1497021672241059,
+          0.2268981059680236,
+          0.14277295035451903,
+          0.06508446750365825,
+          0.12072212055704176,
+          0.06190164458234423,
+          0.02678852269703638
+        ],
+        [
+          0.300792315271322,
+          0.005784473665825694,
+          6.721050187547963e-05,
+          0.207631585713569,
+          0.0029954362407036595,
+          3.13071185112352e-05,
+          0.11836031058942346,
+          0.0013914673604949886,
+          1.3806105765422356e-05
+        ],
+        [
+          0.34703077606721006,
+          0.6988183136381994,
+          0.8502306222740187,
+          0.5654703083184074,
+          0.8542316134047773,
+          0.9348842253778306,
+          0.7609175688535348,
+          0.9367068880571608,
+          0.9731976711971982
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting PreLayoffTenure as a way to shift ReemploymentSpeed toward Fast (and away from Slow). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift ReemploymentSpeed toward Fast.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "WeeklyBenefitLevel",
+          "value": "Enhanced"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": null,
+        "roles": {
+          "target": "ReemploymentSpeed",
+          "non_intervenable_x": "PreLayoffTenure",
+          "intervenable_alt": "WeeklyBenefitLevel",
+          "alt_mediator": "JobSearchIntensity",
+          "confounder": "LocalLaborMarketTightness"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "PreLayoffTenure",
+          "non_intervenable_predictive_gap": 0.8725,
+          "alternative": {
+            "variable": "WeeklyBenefitLevel",
+            "value": "Enhanced"
+          },
+          "alternative_effect": -0.4676,
+          "acceptable_alternatives": [
+            {
+              "variable": "WeeklyBenefitLevel",
+              "value": "Enhanced",
+              "improvement": 0.4676
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

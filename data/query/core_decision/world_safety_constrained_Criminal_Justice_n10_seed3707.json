@@ -1,0 +1,740 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 3707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A state department of corrections oversees multiple juvenile and adult facilities across the region. A researcher embedded within the department has access to administrative records and can request both observational and interventional data samples from participating facilities.",
+  "non_intervenable_variables": [
+    {
+      "name": "RecidivismRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PsychologicalDistress",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmotionalRegulationSkills",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorOffenseHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeAtIntake",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "RecidivismRate",
+      "values": [
+        "NoReoffense",
+        "MinorReoffense",
+        "SeriousReoffense"
+      ],
+      "desc": "Whether the juvenile reoffended within 18 months of program completion.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PsychologicalDistress",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Level of anxiety, depression, and trauma symptoms measured by standardized screening.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CognitiveBehavioralTherapy",
+      "values": [
+        "None",
+        "Weekly",
+        "Intensive"
+      ],
+      "desc": "Dosage of structured cognitive-behavioral therapy sessions provided to the juvenile.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BootCampPlacement",
+      "values": [
+        "None",
+        "ShortTerm",
+        "FullProgram"
+      ],
+      "desc": "Duration of enrollment in a military-style disciplinary boot camp program.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerMentoring",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of meetings with a trained prosocial peer mentor.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "EmotionalRegulationSkills",
+      "values": [
+        "Strong",
+        "Moderate",
+        "Poor"
+      ],
+      "desc": "Assessed ability to manage impulses and regulate emotional responses.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorOffenseHistory",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of prior adjudicated offenses on the juvenile's record at intake.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyEngagement",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the juvenile's family participates in structured family support sessions.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeAtIntake",
+      "values": [
+        "Under14",
+        "14to16",
+        "Over16"
+      ],
+      "desc": "Age category of the juvenile at the time of program enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "values": [
+        "None",
+        "Experimental",
+        "Regular"
+      ],
+      "desc": "Extent of documented substance use prior to program entry.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "CognitiveBehavioralTherapy",
+      "EmotionalRegulationSkills"
+    ],
+    [
+      "BootCampPlacement",
+      "RecidivismRate"
+    ],
+    [
+      "BootCampPlacement",
+      "PsychologicalDistress"
+    ],
+    [
+      "PeerMentoring",
+      "RecidivismRate"
+    ],
+    [
+      "PeerMentoring",
+      "AgeAtIntake"
+    ],
+    [
+      "EmotionalRegulationSkills",
+      "RecidivismRate"
+    ],
+    [
+      "PriorOffenseHistory",
+      "RecidivismRate"
+    ],
+    [
+      "PriorOffenseHistory",
+      "PsychologicalDistress"
+    ],
+    [
+      "PriorOffenseHistory",
+      "BootCampPlacement"
+    ],
+    [
+      "PriorOffenseHistory",
+      "SubstanceUseHistory"
+    ],
+    [
+      "FamilyEngagement",
+      "AgeAtIntake"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "CognitiveBehavioralTherapy",
+      "parents": [],
+      "values": [
+        [
+          0.31049835066949666
+        ],
+        [
+          0.13488760189888407
+        ],
+        [
+          0.5546140474316192
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PeerMentoring",
+      "parents": [],
+      "values": [
+        [
+          0.6129611829864776
+        ],
+        [
+          0.16516312394014793
+        ],
+        [
+          0.2218756930733744
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorOffenseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.35616147445939933
+        ],
+        [
+          0.2364481642030685
+        ],
+        [
+          0.40739036133753215
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilyEngagement",
+      "parents": [],
+      "values": [
+        [
+          0.49204329375107786
+        ],
+        [
+          0.5079567062489221
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EmotionalRegulationSkills",
+      "parents": [
+        "CognitiveBehavioralTherapy"
+      ],
+      "values": [
+        [
+          0.16112892504195225,
+          0.7192223430540919,
+          0.916315530136725
+        ],
+        [
+          0.2978909712301833,
+          0.21936552790049468,
+          0.0764642397085382
+        ],
+        [
+          0.5409801037278644,
+          0.06141212904541334,
+          0.0072202301547367835
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BootCampPlacement",
+      "parents": [
+        "PriorOffenseHistory"
+      ],
+      "values": [
+        [
+          0.32037002957017635,
+          0.6658366928491516,
+          0.8938703059832697
+        ],
+        [
+          0.33314757371539516,
+          0.16355363332952533,
+          0.051865035651643875
+        ],
+        [
+          0.3464823967144285,
+          0.17060967382132308,
+          0.05426465836508639
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubstanceUseHistory",
+      "parents": [
+        "PriorOffenseHistory"
+      ],
+      "values": [
+        [
+          0.2707984654212933,
+          0.01046751086901625,
+          0.0002853677640681102
+        ],
+        [
+          0.3730706145419479,
+          0.38962759037642347,
+          0.28699387824360645
+        ],
+        [
+          0.3561309200367588,
+          0.5999048987545602,
+          0.7127207539923254
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeAtIntake",
+      "parents": [
+        "PeerMentoring",
+        "FamilyEngagement"
+      ],
+      "values": [
+        [
+          0.4032865369082829,
+          0.2989139701623482,
+          0.1264524101281874,
+          0.13424338114207812,
+          0.024627914073328455,
+          0.042396310055077144
+        ],
+        [
+          0.325590227946486,
+          0.08198518891400826,
+          0.6842988088683813,
+          0.24679883536239183,
+          0.8933205765011561,
+          0.5224434858961962
+        ],
+        [
+          0.27112323514523107,
+          0.6191008409236435,
+          0.18924878100343118,
+          0.6189577834955301,
+          0.08205150942551545,
+          0.43516020404872674
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RecidivismRate",
+      "parents": [
+        "PriorOffenseHistory",
+        "EmotionalRegulationSkills",
+        "BootCampPlacement",
+        "PeerMentoring"
+      ],
+      "values": [
+        [
+          0.8224702204218509,
+          0.8359366799607394,
+          0.8864422381886106,
+          0.9566844331638769,
+          0.9601366030969486,
+          0.9711960115797155,
+          0.9855754581616898,
+          0.9882838384062415,
+          0.992310920487429,
+          0.37841169548989384,
+          0.3985567954602136,
+          0.5464637722477691,
+          0.791998427073533,
+          0.8052130849631901,
+          0.8649683759542066,
+          0.9319922295804419,
+          0.9424022787740933,
+          0.9588323804767424,
+          0.054975182638973774,
+          0.061389809596881346,
+          0.11765947320886977,
+          0.37898757640074077,
+          0.3978176321038786,
+          0.5397084650356874,
+          0.735800710149744,
+          0.7689819078707305,
+          0.8380874750657629,
+          0.7031367306077285,
+          0.7214135799387859,
+          0.8026723650081082,
+          0.9187830423819201,
+          0.9309558170328676,
+          0.9536355044189238,
+          0.9737155571137651,
+          0.9777869254063185,
+          0.9859142942637866,
+          0.19497395081311047,
+          0.2176615746129248,
+          0.33043964524980235,
+          0.624979556761502,
+          0.6668655955014346,
+          0.7564017789786618,
+          0.8814274814477314,
+          0.8868032916311226,
+          0.9290062436765196,
+          0.019472045777376382,
+          0.023141947270036715,
+          0.04330380802019405,
+          0.19025874428202963,
+          0.20680991208875468,
+          0.3283158753800979,
+          0.5790346453716507,
+          0.5887861728725506,
+          0.7189060983831818,
+          0.18812380397675754,
+          0.22358758677018623,
+          0.3238748787167294,
+          0.6446040491922499,
+          0.6630062053848569,
+          0.7543386960823999,
+          0.8767360678740816,
+          0.8848068743243005,
+          0.9243486042589447,
+          0.013473375862536491,
+          0.01604889296350962,
+          0.03288585314635397,
+          0.13676509407246662,
+          0.16369232352397897,
+          0.2696341678142906,
+          0.5151243996362354,
+          0.5502526790709071,
+          0.6754380129855855,
+          0.0008502990414855941,
+          0.0010134888355766,
+          0.002411310908261202,
+          0.013352091881891962,
+          0.015788993273078138,
+          0.03275482854865671,
+          0.10348936195358541,
+          0.12489044908129208,
+          0.21300375661864573
+        ],
+        [
+          0.14988380182103817,
+          0.14141022152719485,
+          0.10264652846457424,
+          0.041451405849305074,
+          0.038308915782476805,
+          0.02802517701694868,
+          0.014236406448824178,
+          0.011571539151914957,
+          0.007622770184618692,
+          0.3198063532482745,
+          0.3315168214206223,
+          0.2868830529020274,
+          0.16995827393000432,
+          0.16155563197465195,
+          0.11891796927158625,
+          0.06348567838577109,
+          0.05422765663778007,
+          0.03959001588569733,
+          0.20318880224317676,
+          0.21726257826288398,
+          0.2756255298582021,
+          0.32318882951443534,
+          0.32848583429772815,
+          0.29002258503686346,
+          0.2084464240811382,
+          0.18495934006272802,
+          0.13969511075174915,
+          0.2253258794947953,
+          0.2146750630179266,
+          0.16242637403058413,
+          0.07511459416760637,
+          0.06422285398430734,
+          0.044129198891010975,
+          0.025683647227359163,
+          0.02173600449309634,
+          0.013866674499261758,
+          0.31832657633291694,
+          0.3053299440209088,
+          0.33064157905005837,
+          0.2664397582623753,
+          0.2455444904074577,
+          0.19638447944108134,
+          0.10517043318419898,
+          0.10197461551159204,
+          0.06621604449511281,
+          0.13213760543700398,
+          0.13846347471205453,
+          0.1855055854585047,
+          0.2977050742286261,
+          0.31933086247373116,
+          0.35165281841534207,
+          0.2828082394433473,
+          0.2836348289810728,
+          0.21331664419379376,
+          0.31475199330512554,
+          0.32065327014072664,
+          0.3508759168724216,
+          0.24919533614249337,
+          0.24697015901948,
+          0.19960054415097978,
+          0.1094878171990618,
+          0.10437315920785516,
+          0.07073960155106153,
+          0.11081434153379982,
+          0.12017640429856087,
+          0.15314902579392248,
+          0.27715735056038443,
+          0.30696860387234337,
+          0.33844351203230333,
+          0.30197016405598176,
+          0.28325233931299887,
+          0.2366289350314539,
+          0.029250967261288303,
+          0.031919440843087225,
+          0.047508307814150205,
+          0.10182257509246932,
+          0.11903275898011853,
+          0.1689543917798091,
+          0.2698815772426536,
+          0.27703835749569367,
+          0.31911084455101546
+        ],
+        [
+          0.02764597775711098,
+          0.022653098512065796,
+          0.010911233346815097,
+          0.0018641609868181722,
+          0.0015544811205744885,
+          0.0007788114033357309,
+          0.0001881353894859958,
+          0.00014462244184367058,
+          6.630932795218817e-05,
+          0.3017819512618317,
+          0.2699263831191641,
+          0.1666531748502035,
+          0.03804329899646288,
+          0.03323128306215784,
+          0.01611365477420707,
+          0.0045220920337870445,
+          0.0033700645881264567,
+          0.0015776036375601643,
+          0.7418360151178495,
+          0.7213476121402348,
+          0.6067149969329282,
+          0.297823594084824,
+          0.27369653359839335,
+          0.17026894992744906,
+          0.05575286576911768,
+          0.04605875206654158,
+          0.02221741418248809,
+          0.0715373898974762,
+          0.06391135704328745,
+          0.034901260961307745,
+          0.006102363450473508,
+          0.004821328982825046,
+          0.0022352966900653134,
+          0.000600795658875557,
+          0.0004770701005850132,
+          0.00021903123695162971,
+          0.4866994728539727,
+          0.4770084813661664,
+          0.33891877570013923,
+          0.10858068497612267,
+          0.08758991409110761,
+          0.04721374158025677,
+          0.013402085368069621,
+          0.011222092857285313,
+          0.004777711828367712,
+          0.8483903487856197,
+          0.8383945780179088,
+          0.7711906065213013,
+          0.5120361814893443,
+          0.473859225437514,
+          0.32003130620456005,
+          0.13815711518500187,
+          0.12757899814637663,
+          0.06777725742302457,
+          0.497124202718117,
+          0.45575914308908716,
+          0.32524920441084915,
+          0.10620061466525664,
+          0.09002363559566313,
+          0.04606075976662021,
+          0.013776114926856702,
+          0.010819966467844284,
+          0.004911794189993755,
+          0.8757122826036636,
+          0.8637747027379297,
+          0.8139651210597235,
+          0.5860775553671489,
+          0.5293390726036776,
+          0.3919223201534061,
+          0.18290543630778294,
+          0.166494981616094,
+          0.08793305198296057,
+          0.9698987336972261,
+          0.9670670703213362,
+          0.9500803812775885,
+          0.8848253330256388,
+          0.8651782477468033,
+          0.7982907796715343,
+          0.626629060803761,
+          0.5980711934230142,
+          0.4678853988303388
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PsychologicalDistress",
+      "parents": [
+        "PriorOffenseHistory",
+        "BootCampPlacement"
+      ],
+      "values": [
+        [
+          0.5824872128231182,
+          0.27032812267840867,
+          0.05340525511261524,
+          0.4063040476108476,
+          0.1479926187263422,
+          0.023119010668693773,
+          0.06114481817747444,
+          0.012697666194848297,
+          0.001662776131283566
+        ],
+        [
+          0.283424076048072,
+          0.3409602909382312,
+          0.18997641975510313,
+          0.31972101845711115,
+          0.28587000221655556,
+          0.13237664721415435,
+          0.21551409134841773,
+          0.1114753256020936,
+          0.03913845514937471
+        ],
+        [
+          0.13408871112880974,
+          0.38871158638336023,
+          0.7566183251322817,
+          0.2739749339320412,
+          0.5661373790571022,
+          0.844504342117152,
+          0.7233410904741079,
+          0.875827008203058,
+          0.9591987687193417
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift RecidivismRate toward NoReoffense (and away from SeriousReoffense), but only if the same action does not make PsychologicalDistress more likely to be High. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "CognitiveBehavioralTherapy",
+        "value": "Intensive"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "RecidivismRate",
+          "safety_outcome": "PsychologicalDistress",
+          "good_intervention": "CognitiveBehavioralTherapy",
+          "risky_intervention": "BootCampPlacement",
+          "weak_intervention": "PeerMentoring",
+          "good_mediator": "EmotionalRegulationSkills",
+          "confounder": "PriorOffenseHistory"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "CognitiveBehavioralTherapy",
+            "value": "Intensive"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "CognitiveBehavioralTherapy",
+              "value": "Intensive",
+              "delta_target": -0.2043,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "BootCampPlacement",
+              "value": "ShortTerm",
+              "delta_target": -0.2961,
+              "delta_safety": 0.134,
+              "reason": "worsens safety"
+            },
+            {
+              "variable": "BootCampPlacement",
+              "value": "FullProgram",
+              "delta_target": -0.5582,
+              "delta_safety": 0.4761,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.793,
+            "E_safety": 1.3587
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

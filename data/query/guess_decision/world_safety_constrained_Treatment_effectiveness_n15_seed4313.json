@@ -1,0 +1,816 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 4313,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A researcher at a large academic medical center's endocrinology department has access to electronic health records spanning several years and can request both observational data extracts and prospective interventional study samples from consenting patients.",
+  "non_intervenable_variables": [
+    {
+      "name": "HbA1cLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HypoglycemiaFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PostprandialGlucoseSpike",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineHbA1c",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DiabetesDuration",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RenalFunction",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "HbA1cLevel",
+      "values": [
+        "BelowSeven",
+        "SevenToNine",
+        "AboveNine"
+      ],
+      "desc": "Glycated hemoglobin percentage measured at 6-month follow-up.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "HypoglycemiaFrequency",
+      "values": [
+        "None",
+        "Occasional",
+        "Frequent"
+      ],
+      "desc": "Number of confirmed hypoglycemic episodes per month during treatment.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "GlpOneReceptorAgonist",
+      "values": [
+        "None",
+        "LowDose",
+        "FullDose"
+      ],
+      "desc": "Prescribed GLP-1 receptor agonist dosage tier for glycemic management.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SulfonylureaTherapy",
+      "values": [
+        "None",
+        "LowDose",
+        "HighDose"
+      ],
+      "desc": "Prescribed sulfonylurea medication dosage level.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ChromiumSupplementation",
+      "values": [
+        "None",
+        "Daily"
+      ],
+      "desc": "Whether the patient receives daily chromium picolinate supplements.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PostprandialGlucoseSpike",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Peak blood glucose level measured two hours after a standardized meal.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineHbA1c",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Patient's glycated hemoglobin category at study enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MetforminUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is concurrently taking metformin as background therapy.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAge",
+      "values": [
+        "Under50",
+        "FiftyToSixtyFive",
+        "Over65"
+      ],
+      "desc": "Age category of the patient at study enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndex",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Patient's BMI classification at study enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PhysicalActivityLevel",
+      "values": [
+        "Sedentary",
+        "Moderate",
+        "Active"
+      ],
+      "desc": "Weekly self-reported physical activity category of the patient.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DietaryAdherence",
+      "values": [
+        "Poor",
+        "Partial",
+        "Good"
+      ],
+      "desc": "Patient adherence to a prescribed low-glycemic-index dietary plan.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DiabetesDuration",
+      "values": [
+        "Under5Years",
+        "FiveToTenYears",
+        "Over10Years"
+      ],
+      "desc": "Number of years since the patient's type-2 diabetes diagnosis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RenalFunction",
+      "values": [
+        "Normal",
+        "MildlyReduced",
+        "ModeratelyReduced"
+      ],
+      "desc": "Estimated glomerular filtration rate category at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SelfMonitoringFrequency",
+      "values": [
+        "Rarely",
+        "Weekly",
+        "Daily"
+      ],
+      "desc": "How often the patient checks capillary blood glucose at home.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "GlpOneReceptorAgonist",
+      "PostprandialGlucoseSpike"
+    ],
+    [
+      "GlpOneReceptorAgonist",
+      "ChromiumSupplementation"
+    ],
+    [
+      "SulfonylureaTherapy",
+      "HbA1cLevel"
+    ],
+    [
+      "SulfonylureaTherapy",
+      "HypoglycemiaFrequency"
+    ],
+    [
+      "SulfonylureaTherapy",
+      "RenalFunction"
+    ],
+    [
+      "ChromiumSupplementation",
+      "HbA1cLevel"
+    ],
+    [
+      "PostprandialGlucoseSpike",
+      "HbA1cLevel"
+    ],
+    [
+      "BaselineHbA1c",
+      "HbA1cLevel"
+    ],
+    [
+      "BaselineHbA1c",
+      "HypoglycemiaFrequency"
+    ],
+    [
+      "BaselineHbA1c",
+      "SelfMonitoringFrequency"
+    ],
+    [
+      "SelfMonitoringFrequency",
+      "RenalFunction"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "GlpOneReceptorAgonist",
+      "parents": [],
+      "values": [
+        [
+          0.5296893515385035
+        ],
+        [
+          0.3721794020310521
+        ],
+        [
+          0.09813124643044444
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SulfonylureaTherapy",
+      "parents": [],
+      "values": [
+        [
+          0.5546385366432023
+        ],
+        [
+          0.3358042847657814
+        ],
+        [
+          0.10955717859101638
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineHbA1c",
+      "parents": [],
+      "values": [
+        [
+          0.2836295344283102
+        ],
+        [
+          0.5483836204894322
+        ],
+        [
+          0.16798684508225756
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MetforminUse",
+      "parents": [],
+      "values": [
+        [
+          0.0941772552436919
+        ],
+        [
+          0.9058227447563081
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAge",
+      "parents": [],
+      "values": [
+        [
+          0.11015074596920511
+        ],
+        [
+          0.7117560465485104
+        ],
+        [
+          0.17809320748228452
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndex",
+      "parents": [],
+      "values": [
+        [
+          0.4592273259272083
+        ],
+        [
+          0.4421429113947748
+        ],
+        [
+          0.09862976267801676
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PhysicalActivityLevel",
+      "parents": [],
+      "values": [
+        [
+          0.6085406714964561
+        ],
+        [
+          0.2754944811174169
+        ],
+        [
+          0.11596484738612699
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DietaryAdherence",
+      "parents": [],
+      "values": [
+        [
+          0.3365649383728719
+        ],
+        [
+          0.5019944823957763
+        ],
+        [
+          0.1614405792313519
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiabetesDuration",
+      "parents": [],
+      "values": [
+        [
+          0.25242837541890945
+        ],
+        [
+          0.6483983291748926
+        ],
+        [
+          0.09917329540619797
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostprandialGlucoseSpike",
+      "parents": [
+        "GlpOneReceptorAgonist"
+      ],
+      "values": [
+        [
+          0.16258381375861908,
+          0.7081279943054902,
+          0.9095541077254387
+        ],
+        [
+          0.31035577422693683,
+          0.22731081014108495,
+          0.08339457843691629
+        ],
+        [
+          0.5270604120144441,
+          0.0645611955534248,
+          0.007051313837644964
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ChromiumSupplementation",
+      "parents": [
+        "GlpOneReceptorAgonist"
+      ],
+      "values": [
+        [
+          0.43127473458295473,
+          0.04716357574854952,
+          0.0032205077353145515
+        ],
+        [
+          0.5687252654170452,
+          0.9528364242514505,
+          0.9967794922646855
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HypoglycemiaFrequency",
+      "parents": [
+        "BaselineHbA1c",
+        "SulfonylureaTherapy"
+      ],
+      "values": [
+        [
+          0.5617771977931892,
+          0.27102710934170793,
+          0.05532239105609982,
+          0.3924835328208607,
+          0.14763681874057216,
+          0.024164717993967504,
+          0.06528042572776242,
+          0.013081740272103586,
+          0.001543650792729499
+        ],
+        [
+          0.2977749495451119,
+          0.3346663872143489,
+          0.2029549479233624,
+          0.3323523050160098,
+          0.28504829229082285,
+          0.14222578800471955,
+          0.2144675582309176,
+          0.1049069211514857,
+          0.0396199719784381
+        ],
+        [
+          0.14044785266169887,
+          0.3943065034439432,
+          0.7417226610205377,
+          0.2751641621631295,
+          0.567314888968605,
+          0.8336094940013129,
+          0.72025201604132,
+          0.8820113385764107,
+          0.9588363772288323
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SelfMonitoringFrequency",
+      "parents": [
+        "BaselineHbA1c"
+      ],
+      "values": [
+        [
+          0.3181910632985302,
+          0.19756377884384313,
+          0.06093404412957192
+        ],
+        [
+          0.32482257940319054,
+          0.783407910314621,
+          0.9385621280007564
+        ],
+        [
+          0.3569863572982792,
+          0.019028310841535986,
+          0.0005038278696716651
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HbA1cLevel",
+      "parents": [
+        "BaselineHbA1c",
+        "PostprandialGlucoseSpike",
+        "SulfonylureaTherapy",
+        "ChromiumSupplementation"
+      ],
+      "values": [
+        [
+          0.8198098710987689,
+          0.8872369286470925,
+          0.9543059971258088,
+          0.9703717135730091,
+          0.9856691162456278,
+          0.992024957847162,
+          0.3761772739753327,
+          0.5479631418654233,
+          0.777067132472604,
+          0.8768995274992832,
+          0.9330706273104024,
+          0.9581665169343262,
+          0.05806424268388101,
+          0.12099464991474601,
+          0.3590023684169511,
+          0.5325685212482829,
+          0.7392188138170587,
+          0.8305340741870817,
+          0.699888711604777,
+          0.8021334336979151,
+          0.9180520534639377,
+          0.9486026847785801,
+          0.9758931071200522,
+          0.9841477168439648,
+          0.1861644838397267,
+          0.33733764118864124,
+          0.634304037109374,
+          0.757663690861969,
+          0.8717344050951332,
+          0.9308359544700748,
+          0.01836443263987242,
+          0.047431710821090975,
+          0.19486848484212826,
+          0.32584513154055605,
+          0.5817988770054778,
+          0.7183458814513335,
+          0.19350755009846485,
+          0.33925636806271264,
+          0.6228626136707143,
+          0.7549172532318732,
+          0.879852956520249,
+          0.9307368318661575,
+          0.012081374109971984,
+          0.031389375529465004,
+          0.13722513162971178,
+          0.263774581875693,
+          0.5120445340785309,
+          0.6633948423506908,
+          0.0008734302796527913,
+          0.0022587479378153065,
+          0.012996871937201178,
+          0.033503552590909744,
+          0.11085845484995276,
+          0.20454238450079396
+        ],
+        [
+          0.15209678421768763,
+          0.10123561313537785,
+          0.0437972966515066,
+          0.028868116938584345,
+          0.014151856858816684,
+          0.007908402268534597,
+          0.3320796822329739,
+          0.28189002394772816,
+          0.18286680410080985,
+          0.10792183021269248,
+          0.06283072978791547,
+          0.04021865110573864,
+          0.20842346174251372,
+          0.28101559371777535,
+          0.32552810705966756,
+          0.29283947027104085,
+          0.20346937411465932,
+          0.14496031712417065,
+          0.2281125764547092,
+          0.16535263546947868,
+          0.07561005365218011,
+          0.04896717358993006,
+          0.023492139725274176,
+          0.015628699382513937,
+          0.30246877233526426,
+          0.330869280334116,
+          0.2638351353420367,
+          0.19477270298706217,
+          0.11426187311360905,
+          0.06433123413195298,
+          0.1324966762931855,
+          0.18696521649045164,
+          0.3002834963276783,
+          0.3402209939929527,
+          0.2826351264633698,
+          0.21446187846344617,
+          0.3143859050116283,
+          0.33598524705141236,
+          0.26725121631462445,
+          0.19595396929666933,
+          0.10757574966551978,
+          0.064159666829097,
+          0.10080946951071311,
+          0.16055744047339426,
+          0.2807500591690743,
+          0.3207199549310023,
+          0.2968994173456563,
+          0.24231702205993488,
+          0.028376478841090885,
+          0.04503274344426146,
+          0.10475113753649999,
+          0.15712303121222548,
+          0.2514203286423126,
+          0.31155463912665105
+        ],
+        [
+          0.028093344683543485,
+          0.01152745821752957,
+          0.0018967062226846198,
+          0.0007601694884066737,
+          0.00017902689555554565,
+          6.66398843033511e-05,
+          0.29174304379169347,
+          0.17014683418684845,
+          0.0400660634265862,
+          0.015178642288024366,
+          0.0040986429016820316,
+          0.0016148319599351053,
+          0.7335122955736052,
+          0.5979897563674786,
+          0.31546952452338134,
+          0.17459200848067624,
+          0.05731181206828214,
+          0.02450560868874749,
+          0.07199871194051391,
+          0.03251393083260616,
+          0.006337892883882128,
+          0.002430141631489871,
+          0.0006147531546737794,
+          0.00022358377352137327,
+          0.511366743825009,
+          0.3317930784772428,
+          0.1018608275485892,
+          0.047563606150968774,
+          0.014003721791257737,
+          0.00483281139797215,
+          0.8491388910669422,
+          0.7656030726884573,
+          0.5048480188301935,
+          0.3339338744664913,
+          0.1355659965311524,
+          0.06719224008522033,
+          0.49210654488990696,
+          0.32475838488587505,
+          0.10988617001466135,
+          0.049128777471457455,
+          0.012571293814231192,
+          0.005103501304745525,
+          0.8871091563793149,
+          0.8080531839971408,
+          0.5820248092012139,
+          0.4155054631933048,
+          0.19105604857581285,
+          0.09428813558937436,
+          0.9707500908792565,
+          0.9527085086179232,
+          0.8822519905262989,
+          0.8093734161968648,
+          0.6377212165077345,
+          0.48390297637255497
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RenalFunction",
+      "parents": [
+        "SelfMonitoringFrequency",
+        "SulfonylureaTherapy"
+      ],
+      "values": [
+        [
+          0.21063735953114898,
+          0.5714323274969723,
+          0.8540923437770157,
+          0.08106543407361179,
+          0.25584291526251984,
+          0.5675497565889134,
+          0.01816796591037905,
+          0.06515105893671333,
+          0.2075838602776776
+        ],
+        [
+          0.43984262274053815,
+          0.3179305320469734,
+          0.12661284872976514,
+          0.8584822332847198,
+          0.721895799689205,
+          0.4266881504308451,
+          0.9757433371718346,
+          0.9323012954633696,
+          0.7914690075188276
+        ],
+        [
+          0.349520017728313,
+          0.11063714045605429,
+          0.019294807493219265,
+          0.060452332641668466,
+          0.022261285048275105,
+          0.005762092980241541,
+          0.006088696917786503,
+          0.002547645599916897,
+          0.0009471322034948371
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift HbA1cLevel toward BelowSeven (and away from AboveNine), but only if the same action does not make HypoglycemiaFrequency more likely to be Frequent. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "GlpOneReceptorAgonist",
+        "value": "FullDose"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "HbA1cLevel",
+          "safety_outcome": "HypoglycemiaFrequency",
+          "good_intervention": "GlpOneReceptorAgonist",
+          "risky_intervention": "SulfonylureaTherapy",
+          "weak_intervention": "ChromiumSupplementation",
+          "good_mediator": "PostprandialGlucoseSpike",
+          "confounder": "BaselineHbA1c"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "GlpOneReceptorAgonist",
+            "value": "FullDose"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "GlpOneReceptorAgonist",
+              "value": "LowDose",
+              "delta_target": -0.3206,
+              "delta_safety": 0.0
+            },
+            {
+              "variable": "GlpOneReceptorAgonist",
+              "value": "FullDose",
+              "delta_target": -0.4628,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "SulfonylureaTherapy",
+              "value": "LowDose",
+              "delta_target": -0.2236,
+              "delta_safety": 0.2264,
+              "reason": "worsens safety"
+            },
+            {
+              "variable": "SulfonylureaTherapy",
+              "value": "HighDose",
+              "delta_target": -0.513,
+              "delta_safety": 0.6147,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.726,
+            "E_safety": 1.1847
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

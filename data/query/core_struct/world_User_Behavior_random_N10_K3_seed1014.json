@@ -1,0 +1,568 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "random_N10_K3",
+    "seed": 1014,
+    "llm_model": "Qwen/Qwen2.5-7B-Instruct",
+    "n_per_group": 2,
+    "n_questions": 6
+  },
+  "story": "You are a researcher at TechInnovate, a tech company aiming to enhance user experience and retention. You are conducting a longitudinal study called 'TechEngage' to gather data on user behavior across various applications. The dataset includes information such as login frequency, device type, session duration, feature usage, notification preferences, content engagement, payment methods, referral sources, feedback ratings, and subscription statuses to better understand how these factors influence user satisfaction and loyalty.",
+  "non_intervenable_variables": [
+    {
+      "name": "DeviceType",
+      "reason": "User chooses their own device"
+    },
+    {
+      "name": "ReferralSource",
+      "reason": "User is referred by others"
+    }
+  ],
+  "variables": [
+    {
+      "name": "LoginFrequency",
+      "values": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "desc": "How often the user logs into the application"
+    },
+    {
+      "name": "DeviceType",
+      "values": [
+        "Mobile",
+        "Tablet",
+        "Desktop"
+      ],
+      "desc": "The type of device used to access the application"
+    },
+    {
+      "name": "SessionDuration",
+      "values": [
+        "<10min",
+        "10-30min",
+        "30-60min",
+        ">1hr"
+      ],
+      "desc": "The duration of a single session on the application"
+    },
+    {
+      "name": "FeatureUsage",
+      "values": [
+        "None",
+        "Basic",
+        "Advanced"
+      ],
+      "desc": "The level of feature usage by the user"
+    },
+    {
+      "name": "NotificationPreference",
+      "values": [
+        "Never",
+        "Sometimes",
+        "Always"
+      ],
+      "desc": "The user's preference for receiving notifications"
+    },
+    {
+      "name": "ContentEngagement",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "The level of engagement with content within the application"
+    },
+    {
+      "name": "PaymentMethod",
+      "values": [
+        "CreditCard",
+        "DebitCard",
+        "PayPal",
+        "ApplePay",
+        "GooglePay"
+      ],
+      "desc": "The payment method used for transactions"
+    },
+    {
+      "name": "ReferralSource",
+      "values": [
+        "SocialMedia",
+        "Email",
+        "Website",
+        "Friend"
+      ],
+      "desc": "The source from which the user was referred to the application"
+    },
+    {
+      "name": "FeedbackRating",
+      "values": [
+        "VeryPoor",
+        "Poor",
+        "Average",
+        "Good",
+        "VeryGood"
+      ],
+      "desc": "The user's rating of their experience with the application"
+    },
+    {
+      "name": "SubscriptionStatus",
+      "values": [
+        "Active",
+        "Expired",
+        "Cancelled"
+      ],
+      "desc": "The status of the user's subscription"
+    }
+  ],
+  "edges": [
+    [
+      "LoginFrequency",
+      "NotificationPreference"
+    ],
+    [
+      "LoginFrequency",
+      "PaymentMethod"
+    ],
+    [
+      "LoginFrequency",
+      "SubscriptionStatus"
+    ],
+    [
+      "NotificationPreference",
+      "PaymentMethod"
+    ],
+    [
+      "NotificationPreference",
+      "SubscriptionStatus"
+    ],
+    [
+      "DeviceType",
+      "FeatureUsage"
+    ],
+    [
+      "DeviceType",
+      "ContentEngagement"
+    ],
+    [
+      "DeviceType",
+      "ReferralSource"
+    ],
+    [
+      "DeviceType",
+      "FeedbackRating"
+    ],
+    [
+      "FeatureUsage",
+      "ReferralSource"
+    ],
+    [
+      "ContentEngagement",
+      "FeedbackRating"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "LoginFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.6499591905971098
+        ],
+        [
+          0.2243510882851186
+        ],
+        [
+          0.12568972111777157
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DeviceType",
+      "parents": [],
+      "values": [
+        [
+          0.3678882932492367
+        ],
+        [
+          0.15077288797222552
+        ],
+        [
+          0.48133881877853774
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SessionDuration",
+      "parents": [],
+      "values": [
+        [
+          0.09487758902415673
+        ],
+        [
+          0.44271587589927425
+        ],
+        [
+          0.32763992356779675
+        ],
+        [
+          0.13476661150877237
+        ]
+      ],
+      "cardinality": 4
+    },
+    {
+      "child": "NotificationPreference",
+      "parents": [
+        "LoginFrequency"
+      ],
+      "values": [
+        [
+          0.45939129167461185,
+          0.4463479334018602,
+          0.41373521930746515
+        ],
+        [
+          0.3581463246530449,
+          0.29100562034286714,
+          0.22557992530194793
+        ],
+        [
+          0.1824623836723432,
+          0.2626464462552727,
+          0.3606848553905869
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FeatureUsage",
+      "parents": [
+        "DeviceType"
+      ],
+      "values": [
+        [
+          0.10493448894020738,
+          0.28967275612009313,
+          0.5691177225430618
+        ],
+        [
+          0.5277428110083935,
+          0.3237884583620166,
+          0.14138569163081524
+        ],
+        [
+          0.3673227000513991,
+          0.38653878551789017,
+          0.28949658582612303
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ContentEngagement",
+      "parents": [
+        "DeviceType"
+      ],
+      "values": [
+        [
+          0.47170941549242923,
+          0.268823400513232,
+          0.130495130574308
+        ],
+        [
+          0.2407970225009347,
+          0.29929069675755343,
+          0.3168619076414081
+        ],
+        [
+          0.287493562006636,
+          0.43188590272921457,
+          0.5526429617842838
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PaymentMethod",
+      "parents": [
+        "LoginFrequency",
+        "NotificationPreference"
+      ],
+      "values": [
+        [
+          0.3266598180874105,
+          0.33309551883590094,
+          0.30176099060909234,
+          0.4472434464567812,
+          0.45658086214719107,
+          0.40174041924858156,
+          0.5473922087582229,
+          0.5502743442416752,
+          0.4669266983927014
+        ],
+        [
+          0.07021631242332957,
+          0.09504631887740235,
+          0.11430199681855906,
+          0.029924836454611473,
+          0.04055362802821423,
+          0.04736764000071596,
+          0.01140071029705647,
+          0.015213767419255588,
+          0.017136827469302684
+        ],
+        [
+          0.4042911592718335,
+          0.40549249411580207,
+          0.36132052029788264,
+          0.2799366104632531,
+          0.28109228042019085,
+          0.24327206642639784,
+          0.17327324606154612,
+          0.17132773185364672,
+          0.14299228573287243
+        ],
+        [
+          0.15688564819084255,
+          0.07055386936365464,
+          0.028189001271461293,
+          0.18168475440559137,
+          0.0818006492149121,
+          0.0317430841992446,
+          0.18808757730775294,
+          0.08338833678508796,
+          0.031206085923087993
+        ],
+        [
+          0.04194706202658388,
+          0.09581179880724007,
+          0.19442749100300466,
+          0.06121035221976307,
+          0.13997258018949177,
+          0.2758767901250601,
+          0.07984625757542163,
+          0.1797958197003346,
+          0.34173810248203546
+        ]
+      ],
+      "cardinality": 5
+    },
+    {
+      "child": "SubscriptionStatus",
+      "parents": [
+        "LoginFrequency",
+        "NotificationPreference"
+      ],
+      "values": [
+        [
+          0.07832748462746875,
+          0.13650447964343057,
+          0.16245755085797758,
+          0.05994234024327958,
+          0.07908483926463938,
+          0.08535643738049324,
+          0.03598745073581324,
+          0.04051894387972144,
+          0.041952297921427274
+        ],
+        [
+          0.532202839471108,
+          0.19220920970033328,
+          0.04740579923708125,
+          0.29640265188018533,
+          0.0810412085031374,
+          0.018126469914054352,
+          0.12950449924483495,
+          0.030217335919516353,
+          0.006483628037932325
+        ],
+        [
+          0.38946967590142323,
+          0.6712863106562362,
+          0.7901366499049413,
+          0.6436550078765351,
+          0.8398739522322232,
+          0.8965170927054524,
+          0.8345080500193518,
+          0.9292637202007622,
+          0.9515640740406404
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ReferralSource",
+      "parents": [
+        "DeviceType",
+        "FeatureUsage"
+      ],
+      "values": [
+        [
+          0.1102697742902567,
+          0.12700746860823062,
+          0.13990992089199103,
+          0.17182628768087063,
+          0.21266496023211806,
+          0.23446532178272178,
+          0.21147719005123414,
+          0.31632669510843353,
+          0.3600017677326704
+        ],
+        [
+          0.5765701517715636,
+          0.6316348259113237,
+          0.6617995311408611,
+          0.5022727798625283,
+          0.5912717254917272,
+          0.6200274648725195,
+          0.3455953830093433,
+          0.49167868526696035,
+          0.5322201437175428
+        ],
+        [
+          0.26016493395365653,
+          0.23114261024056298,
+          0.1964073530519234,
+          0.1719711572766814,
+          0.1641800654195654,
+          0.13962448424139068,
+          0.08978489307590928,
+          0.1035938708662778,
+          0.09094133578125982
+        ],
+        [
+          0.0529951399845233,
+          0.010215095239882727,
+          0.0018831949152243635,
+          0.1539297751799197,
+          0.03188324885658938,
+          0.005882729103368033,
+          0.3531425338635134,
+          0.08840074875832817,
+          0.01683675276852703
+        ]
+      ],
+      "cardinality": 4
+    },
+    {
+      "child": "FeedbackRating",
+      "parents": [
+        "DeviceType",
+        "ContentEngagement"
+      ],
+      "values": [
+        [
+          0.1881684414062764,
+          0.2649759859169611,
+          0.3069765909523197,
+          0.21264919712540753,
+          0.2681013098943181,
+          0.27079506100939027,
+          0.17299564929952357,
+          0.21166716235432279,
+          0.20094443282114047
+        ],
+        [
+          0.13066028341702424,
+          0.25070884418165723,
+          0.3957625781731586,
+          0.24262840722467566,
+          0.4168148329065688,
+          0.5736556804900228,
+          0.3243352654168872,
+          0.5407279378886419,
+          0.6994676438656592
+        ],
+        [
+          0.13036710253964273,
+          0.06614659812127267,
+          0.02761124737798263,
+          0.26945784767902387,
+          0.12240687093647115,
+          0.04454791381086378,
+          0.40092961210615435,
+          0.1767527630729725,
+          0.06046004607170242
+        ],
+        [
+          0.21192717721809767,
+          0.12426279085667095,
+          0.059942460555668584,
+          0.08374939613732374,
+          0.043965457178704544,
+          0.01849047711293579,
+          0.02382490563506406,
+          0.012137918480767134,
+          0.004798013085339261
+        ],
+        [
+          0.33887699541895905,
+          0.29390578092343805,
+          0.2097071229408704,
+          0.19151515183356912,
+          0.14871152908393734,
+          0.09251086757678749,
+          0.0779145675423707,
+          0.05871421820329571,
+          0.03432986415615859
+        ]
+      ],
+      "cardinality": 5
+    }
+  ],
+  "questions": [
+    {
+      "question": "Would intervening on 'DeviceType' affect 'PaymentMethod'?",
+      "answer": "No",
+      "question_type": "causal_effect",
+      "question_group": "Causal Structure",
+      "difficulty": "easy",
+      "id": 0
+    },
+    {
+      "question": "Which variables causally affect 'DeviceType' in this network?",
+      "answer": [],
+      "question_type": "all_causes_of",
+      "question_group": "Causal Structure",
+      "difficulty": "easy",
+      "id": 1
+    },
+    {
+      "question": "Are 'DeviceType' and 'FeedbackRating' statistically independent?",
+      "answer": "No",
+      "question_type": "direct_marginal",
+      "question_group": "Marginal Independence",
+      "difficulty": "medium",
+      "id": 2
+    },
+    {
+      "question": "Are 'SessionDuration' and 'NotificationPreference' statistically independent?",
+      "answer": "Yes",
+      "question_type": "other_marginal",
+      "question_group": "Marginal Independence",
+      "difficulty": "medium",
+      "id": 3
+    },
+    {
+      "question": "Even after accounting for 'NotificationPreference', are 'DeviceType' and 'ContentEngagement' statistically dependent?",
+      "answer": "Yes",
+      "question_type": "other_conditional",
+      "question_group": "Conditional Independence",
+      "difficulty": "medium",
+      "id": 4
+    },
+    {
+      "question": "Conditioning on 'NotificationPreference', is 'LoginFrequency' statistically independent of 'FeatureUsage'?",
+      "answer": "Yes",
+      "question_type": "other_conditional",
+      "question_group": "Conditional Independence",
+      "difficulty": "medium",
+      "id": 5
+    }
+  ]
+}
