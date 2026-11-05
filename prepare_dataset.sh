@@ -4,9 +4,8 @@
 #
 #   bash prepare_dataset.sh
 #
-#   data/repair/test           540 ACED-Repair test worlds, 60 per causal structure (9 structures) across 10 domains
-#                              (clinical and fermentation about 135 worlds each, the other eight 31-37)
-#   data/repair/eval            54 of the test worlds (6 per structure), the evaluation set used for the multi-model runs
+#   data/repair/test           540 ACED-Repair test worlds, 60 per causal structure
+#   data/repair/eval            54 of the test worlds (6 per structure), the evaluation set
 #   data/query/core_struct      10 ACED-Query worlds, 60 structural questions
 #   data/query/core_decision    60 ACED-Query worlds, 60 causal-decision questions
 #   data/query/guess_struct     30 worlds, 180 structural questions for the guess-only baseline

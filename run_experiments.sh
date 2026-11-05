@@ -10,7 +10,7 @@
 #   MODEL    model id for that backend
 #
 # Results go to out/repair/NAME or out/query/NAME. Runs are safe to stop and restart.
-# Environment (see README): AWS credentials for Bedrock (always needed: the request parser runs there),
+# Environment (see docs/setup.md): AWS credentials for Bedrock (always needed: the request parser runs there),
 # OPENAI_API_KEY / OPENAI_BASE_URL (or VLLM_BASE_URL) for OpenAI-compatible endpoints, GEMINI_API_KEY for Gemini,
 # MAX_TOKENS (output cap; default 32768 for repair, 65536 for query), CONCURRENCY (repair, default 8).
 set -euo pipefail
