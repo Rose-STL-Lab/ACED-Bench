@@ -1,0 +1,486 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "invalid_premise",
+    "seed": 6030,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": null
+  },
+  "story": "A mid-sized e-commerce company maintains detailed transaction and session logs across its online storefront. The research team has access to historical records and can request both observational and interventional data samples from the platform.",
+  "non_intervenable_variables": [
+    {
+      "name": "CheckoutCompletion",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorPurchaseHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerceivedCheckoutEase",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CartValue",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AccountStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TimeOfSession",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "CheckoutCompletion",
+      "values": [
+        "Completed",
+        "Abandoned"
+      ],
+      "desc": "Whether the shopper finished the checkout and placed an order.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorPurchaseHistory",
+      "values": [
+        "Frequent",
+        "Occasional",
+        "FirstTime"
+      ],
+      "desc": "Number of previous completed purchases on the platform categorized into tiers.",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CheckoutFlowDesign",
+      "values": [
+        "MultiStep",
+        "SinglePage",
+        "OneClick"
+      ],
+      "desc": "The assigned checkout page layout and step structure shown to the shopper.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PerceivedCheckoutEase",
+      "values": [
+        "Easy",
+        "Moderate",
+        "Difficult"
+      ],
+      "desc": "Shopper-reported ease of the checkout process captured via post-session survey.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "DeviceType",
+      "values": [
+        "Desktop",
+        "Mobile",
+        "Tablet"
+      ],
+      "desc": "The device category used by the shopper during the checkout session.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CartValue",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Total monetary value of items in the shopping cart at checkout entry.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PaymentOptionsShown",
+      "values": [
+        "Standard",
+        "Expanded"
+      ],
+      "desc": "Whether the checkout displays only basic or additional payment methods.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AccountStatus",
+      "values": [
+        "Guest",
+        "Registered"
+      ],
+      "desc": "Whether the shopper is checking out as a guest or a registered account holder.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ShippingSpeed",
+      "values": [
+        "Standard",
+        "Express"
+      ],
+      "desc": "The fastest available shipping tier presented to the shopper at checkout.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TimeOfSession",
+      "values": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "desc": "Part of the day when the shopper initiated the checkout session.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PriorPurchaseHistory",
+      "CheckoutCompletion"
+    ],
+    [
+      "PriorPurchaseHistory",
+      "CartValue"
+    ],
+    [
+      "CheckoutFlowDesign",
+      "PerceivedCheckoutEase"
+    ],
+    [
+      "CheckoutFlowDesign",
+      "PaymentOptionsShown"
+    ],
+    [
+      "CheckoutFlowDesign",
+      "ShippingSpeed"
+    ],
+    [
+      "PerceivedCheckoutEase",
+      "CheckoutCompletion"
+    ],
+    [
+      "DeviceType",
+      "CheckoutCompletion"
+    ],
+    [
+      "CartValue",
+      "PaymentOptionsShown"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PriorPurchaseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.3528564900121869
+        ],
+        [
+          0.5073677399981575
+        ],
+        [
+          0.13977576998965555
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CheckoutFlowDesign",
+      "parents": [],
+      "values": [
+        [
+          0.16184403208342238
+        ],
+        [
+          0.4968728782747921
+        ],
+        [
+          0.3412830896417855
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DeviceType",
+      "parents": [],
+      "values": [
+        [
+          0.5865454700448348
+        ],
+        [
+          0.2207888576010354
+        ],
+        [
+          0.19266567235412968
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AccountStatus",
+      "parents": [],
+      "values": [
+        [
+          0.35266490010752344
+        ],
+        [
+          0.6473350998924766
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TimeOfSession",
+      "parents": [],
+      "values": [
+        [
+          0.5951565583325071
+        ],
+        [
+          0.14424777765838184
+        ],
+        [
+          0.2605956640091111
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CartValue",
+      "parents": [
+        "PriorPurchaseHistory"
+      ],
+      "values": [
+        [
+          0.33435537505051033,
+          0.04223581781275429,
+          0.002097901104998628
+        ],
+        [
+          0.391438638412059,
+          0.13078374304636842,
+          0.01718206425016613
+        ],
+        [
+          0.27420598653743067,
+          0.8269804391408773,
+          0.9807200346448351
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerceivedCheckoutEase",
+      "parents": [
+        "CheckoutFlowDesign"
+      ],
+      "values": [
+        [
+          0.15838553475027906,
+          0.33323967605084337,
+          0.8686708964480441
+        ],
+        [
+          0.30527561734210845,
+          0.33411886709857813,
+          0.11487542261101985
+        ],
+        [
+          0.5363388479076124,
+          0.3326414568505785,
+          0.016453680940936105
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ShippingSpeed",
+      "parents": [
+        "CheckoutFlowDesign"
+      ],
+      "values": [
+        [
+          0.5040274142947392,
+          0.9552653336711923,
+          0.997776331450299
+        ],
+        [
+          0.49597258570526087,
+          0.04473466632880778,
+          0.0022236685497011343
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PaymentOptionsShown",
+      "parents": [
+        "CheckoutFlowDesign",
+        "CartValue"
+      ],
+      "values": [
+        [
+          0.3297952716255965,
+          0.6892202566955735,
+          0.9090478400285987,
+          0.5329854356037108,
+          0.837224631318144,
+          0.9586442619720508,
+          0.7257923852784938,
+          0.9226540458019666,
+          0.9817389254393049
+        ],
+        [
+          0.6702047283744036,
+          0.31077974330442654,
+          0.09095215997140124,
+          0.4670145643962892,
+          0.16277536868185608,
+          0.04135573802794927,
+          0.2742076147215063,
+          0.07734595419803332,
+          0.018261074560695093
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CheckoutCompletion",
+      "parents": [
+        "PriorPurchaseHistory",
+        "DeviceType",
+        "PerceivedCheckoutEase"
+      ],
+      "values": [
+        [
+          0.994219689563724,
+          0.8826847107706209,
+          0.6084088928674861,
+          0.9876052783095011,
+          0.7664888993824753,
+          0.385395323994312,
+          0.9159766504623131,
+          0.30708747146649124,
+          0.08306559601782612,
+          0.9823321028862826,
+          0.6932316608494378,
+          0.3137863241084598,
+          0.9608342735948674,
+          0.5027317365883268,
+          0.17417263792933932,
+          0.7704411468787297,
+          0.11397625659641972,
+          0.026069643317090743,
+          0.6979280633585299,
+          0.08851032621925026,
+          0.018311087829227402,
+          0.49987976852854754,
+          0.03895607397099078,
+          0.00773356073639613,
+          0.11703507358919775,
+          0.005344406706135535,
+          0.0010916321655320713
+        ],
+        [
+          0.005780310436276089,
+          0.11731528922937902,
+          0.39159110713251394,
+          0.012394721690498975,
+          0.2335111006175247,
+          0.6146046760056879,
+          0.08402334953768685,
+          0.6929125285335088,
+          0.9169344039821737,
+          0.01766789711371733,
+          0.30676833915056223,
+          0.6862136758915403,
+          0.03916572640513274,
+          0.4972682634116732,
+          0.8258273620706608,
+          0.22955885312127042,
+          0.8860237434035803,
+          0.9739303566829093,
+          0.30207193664147025,
+          0.9114896737807497,
+          0.9816889121707726,
+          0.5001202314714525,
+          0.9610439260290091,
+          0.9922664392636039,
+          0.8829649264108022,
+          0.9946555932938644,
+          0.9989083678344679
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting PriorPurchaseHistory as a way to shift CheckoutCompletion toward Completed (and away from Abandoned). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift CheckoutCompletion toward Completed.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "CheckoutFlowDesign",
+          "value": "OneClick"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": null,
+        "roles": {
+          "target": "CheckoutCompletion",
+          "non_intervenable_x": "PriorPurchaseHistory",
+          "intervenable_alt": "CheckoutFlowDesign",
+          "alt_mediator": "PerceivedCheckoutEase",
+          "confounder": "DeviceType"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "PriorPurchaseHistory",
+          "non_intervenable_predictive_gap": 0.5014,
+          "alternative": {
+            "variable": "CheckoutFlowDesign",
+            "value": "OneClick"
+          },
+          "alternative_effect": -0.1979,
+          "acceptable_alternatives": [
+            {
+              "variable": "CheckoutFlowDesign",
+              "value": "OneClick",
+              "improvement": 0.1979
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

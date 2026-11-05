@@ -1,0 +1,677 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "mediator_structure:direct_and_mediated",
+    "seed": 16323,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "direct_and_mediated"
+  },
+  "story": "A metropolitan public safety research institute partners with city agencies and community organizations. The researcher has access to administrative records across multiple neighborhoods and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "ShootingIncidence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ConflictMediationEvents",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineViolenceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GangPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NeighborhoodPoverty",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PolicePatrolIntensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OutreachWorkerExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CommunityTrust",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DrugMarketActivity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "YouthUnemployment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FirearmAccessibility",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SeasonalPeriod",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SocialServiceDensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RetaliationRiskRating",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "OutreachDosage",
+      "values": [
+        "None",
+        "Standard",
+        "Intensive"
+      ],
+      "desc": "Level of violence-interruption street outreach deployed in a catchment area.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ShootingIncidence",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Quarterly count category of confirmed shooting incidents in the catchment area.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ConflictMediationEvents",
+      "values": [
+        "Few",
+        "Some",
+        "Many"
+      ],
+      "desc": "Number of documented street-level conflict mediations performed by outreach workers.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineViolenceLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Historical violent-crime rate in the catchment area during the prior two years.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GangPresence",
+      "values": [
+        "Minimal",
+        "Moderate",
+        "Substantial"
+      ],
+      "desc": "Estimated level of organized gang activity within the catchment area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NeighborhoodPoverty",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Census-tract concentrated poverty rate classification for the catchment area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PolicePatrolIntensity",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Frequency of uniformed police patrol hours per week in the catchment area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OutreachWorkerExperience",
+      "values": [
+        "Novice",
+        "Experienced"
+      ],
+      "desc": "Average tenure category of outreach workers assigned to the catchment area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunityTrust",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Resident survey-based rating of trust toward outreach staff and program.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DrugMarketActivity",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Observed open-air drug market activity level within the catchment area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "YouthUnemployment",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Proportion of 16-to-24-year-olds without employment in the catchment area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FirearmAccessibility",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Proxy measure of illegal firearm availability based on recovery and seizure data.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SeasonalPeriod",
+      "values": [
+        "ColdMonths",
+        "WarmMonths"
+      ],
+      "desc": "Whether the observation quarter falls in cold or warm calendar months.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SocialServiceDensity",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Count category of active social-service organizations within the catchment area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RetaliationRiskRating",
+      "values": [
+        "Low",
+        "Elevated",
+        "Critical"
+      ],
+      "desc": "Outreach-team-assessed current retaliation threat level among known conflict groups.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "OutreachDosage",
+      "ConflictMediationEvents"
+    ],
+    [
+      "OutreachDosage",
+      "ShootingIncidence"
+    ],
+    [
+      "ConflictMediationEvents",
+      "ShootingIncidence"
+    ],
+    [
+      "ConflictMediationEvents",
+      "YouthUnemployment"
+    ],
+    [
+      "BaselineViolenceLevel",
+      "OutreachDosage"
+    ],
+    [
+      "BaselineViolenceLevel",
+      "ShootingIncidence"
+    ],
+    [
+      "BaselineViolenceLevel",
+      "OutreachWorkerExperience"
+    ],
+    [
+      "DrugMarketActivity",
+      "SeasonalPeriod"
+    ],
+    [
+      "SeasonalPeriod",
+      "OutreachWorkerExperience"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineViolenceLevel",
+      "parents": [],
+      "values": [
+        [
+          0.14401319771742127
+        ],
+        [
+          0.41707058227605476
+        ],
+        [
+          0.43891622000652397
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GangPresence",
+      "parents": [],
+      "values": [
+        [
+          0.535673021821175
+        ],
+        [
+          0.3717875296563301
+        ],
+        [
+          0.09253944852249477
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NeighborhoodPoverty",
+      "parents": [],
+      "values": [
+        [
+          0.36467528787092324
+        ],
+        [
+          0.23119535337359254
+        ],
+        [
+          0.40412935875548417
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PolicePatrolIntensity",
+      "parents": [],
+      "values": [
+        [
+          0.23546902073884377
+        ],
+        [
+          0.4671098730023608
+        ],
+        [
+          0.2974211062587955
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CommunityTrust",
+      "parents": [],
+      "values": [
+        [
+          0.09743502273728258
+        ],
+        [
+          0.39178946476732945
+        ],
+        [
+          0.5107755124953881
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DrugMarketActivity",
+      "parents": [],
+      "values": [
+        [
+          0.18994594041653917
+        ],
+        [
+          0.3487254792743959
+        ],
+        [
+          0.46132858030906493
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FirearmAccessibility",
+      "parents": [],
+      "values": [
+        [
+          0.4423509329624093
+        ],
+        [
+          0.11411351915841429
+        ],
+        [
+          0.4435355478791764
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SocialServiceDensity",
+      "parents": [],
+      "values": [
+        [
+          0.3314716230055211
+        ],
+        [
+          0.2968207756066431
+        ],
+        [
+          0.37170760138783593
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RetaliationRiskRating",
+      "parents": [],
+      "values": [
+        [
+          0.12546244623147715
+        ],
+        [
+          0.13739348781070068
+        ],
+        [
+          0.7371440659578221
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OutreachDosage",
+      "parents": [
+        "BaselineViolenceLevel"
+      ],
+      "values": [
+        [
+          0.25427817341145204,
+          0.049739867850043896,
+          0.004088527680270995
+        ],
+        [
+          0.3502560157495775,
+          0.9103326545829806,
+          0.9942175184610407
+        ],
+        [
+          0.39546581083897053,
+          0.03992747756697563,
+          0.0016939538586883385
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SeasonalPeriod",
+      "parents": [
+        "DrugMarketActivity"
+      ],
+      "values": [
+        [
+          0.5404892994549553,
+          0.11276141582758914,
+          0.013546446025250106
+        ],
+        [
+          0.4595107005450447,
+          0.8872385841724107,
+          0.9864535539747498
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ConflictMediationEvents",
+      "parents": [
+        "OutreachDosage"
+      ],
+      "values": [
+        [
+          0.1584034516480543,
+          0.31624659523712734,
+          0.8716583021568046
+        ],
+        [
+          0.3138430033872057,
+          0.34128505966717243,
+          0.11377974756007259
+        ],
+        [
+          0.5277535449647399,
+          0.34246834509570023,
+          0.014561950283122809
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OutreachWorkerExperience",
+      "parents": [
+        "BaselineViolenceLevel",
+        "SeasonalPeriod"
+      ],
+      "values": [
+        [
+          0.4286637704000529,
+          0.03690510191095527,
+          0.2099051032904251,
+          0.013386988521489975,
+          0.08598375024904674,
+          0.004781599255012283
+        ],
+        [
+          0.5713362295999472,
+          0.9630948980890447,
+          0.7900948967095749,
+          0.98661301147851,
+          0.9140162497509532,
+          0.9952184007449878
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ShootingIncidence",
+      "parents": [
+        "BaselineViolenceLevel",
+        "ConflictMediationEvents",
+        "OutreachDosage"
+      ],
+      "values": [
+        [
+          0.8709756453005089,
+          0.9085827352365592,
+          0.9792099891989334,
+          0.47281973428524815,
+          0.6128498477768958,
+          0.8860278683421728,
+          0.16397459254348923,
+          0.2818568054374584,
+          0.7139986355213821,
+          0.7104076618853464,
+          0.8094429027750228,
+          0.9508126190827584,
+          0.20961279494931254,
+          0.335913727518237,
+          0.7586874570267532,
+          0.04780110496504041,
+          0.09575095555019743,
+          0.4794575060557608,
+          0.20815550687041515,
+          0.3324733919197576,
+          0.7606018773857842,
+          0.016809667277844612,
+          0.03402465465395821,
+          0.27571253001038964,
+          0.0023246165258866626,
+          0.0050375482721099225,
+          0.06317358090417804
+        ],
+        [
+          0.11302805965588009,
+          0.08383768857915119,
+          0.020324592716474618,
+          0.3190279045512403,
+          0.26879352751888275,
+          0.10261787847039343,
+          0.2905929699908972,
+          0.3216202864975519,
+          0.2226531854994656,
+          0.22150128671302022,
+          0.1596192450780493,
+          0.04674424074510435,
+          0.31567474034843257,
+          0.33423055696338544,
+          0.19359850015382124,
+          0.18884927964573592,
+          0.23867704625020617,
+          0.3188870340262403,
+          0.3312000342454811,
+          0.3265752588055027,
+          0.19346461485191857,
+          0.11313346265300066,
+          0.1633324029895383,
+          0.32712980233416167,
+          0.04617693511622918,
+          0.06879276119771575,
+          0.20620131198526132
+        ],
+        [
+          0.015996295043611216,
+          0.0075795761842898,
+          0.00046541808459187706,
+          0.20815236116351143,
+          0.11835662470422133,
+          0.011354253187433624,
+          0.5454324374656137,
+          0.39652290806498963,
+          0.06334817897915221,
+          0.0680910514016334,
+          0.03093785214692783,
+          0.0024431401721372995,
+          0.4747124647022548,
+          0.3298557155183775,
+          0.04771404281942555,
+          0.7633496153892236,
+          0.6655719981995963,
+          0.20165545991799877,
+          0.46064445888410377,
+          0.34095134927473975,
+          0.045933507762297106,
+          0.8700568700691548,
+          0.8026429423565035,
+          0.3971576676554487,
+          0.9514984483578842,
+          0.9261696905301743,
+          0.7306251071105606
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "YouthUnemployment",
+      "parents": [
+        "ConflictMediationEvents"
+      ],
+      "values": [
+        [
+          0.36840318552660567,
+          0.02737042243229805,
+          0.000732406527299745
+        ],
+        [
+          0.27295164680387957,
+          0.8651506919983482,
+          0.9876666340420194
+        ],
+        [
+          0.3586451676695147,
+          0.1074788855693538,
+          0.011600959430680773
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does OutreachDosage change ShootingIncidence? Specifically, does the effect of OutreachDosage on ShootingIncidence flow entirely through ConflictMediationEvents, or is there also a separate pathway that does not pass through ConflictMediationEvents? Investigate using interventions and explain your conclusion.",
+      "answer": "also_direct_or_other",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "direct_and_mediated",
+        "roles": {
+          "treatment": "OutreachDosage",
+          "outcome": "ShootingIncidence",
+          "mediator": "ConflictMediationEvents",
+          "confounder": "BaselineViolenceLevel"
+        },
+        "gold": {
+          "label": "also_direct_or_other",
+          "T": "OutreachDosage",
+          "M": "ConflictMediationEvents",
+          "O": "ShootingIncidence",
+          "total_effect": -1.2841,
+          "max_residual_effect": 0.8161
+        }
+      }
+    }
+  ]
+}

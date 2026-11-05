@@ -1,0 +1,596 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "mediator_structure:mediated_only",
+    "seed": 7747,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "mediated_only"
+  },
+  "story": "A state-level consortium of forensic science laboratories serves multiple jurisdictions. The researcher has access to administrative records across participating labs and can request both observational data extracts and interventional pilot samples from willing facilities.",
+  "non_intervenable_variables": [
+    {
+      "name": "BacklogReductionLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EvidenceTurnaroundTime",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabStaffingLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnnualCaseSubmissionVolume",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabAccreditationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EvidenceTypeDistribution",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabBudgetTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnalystExperienceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OutsourcingUtilization",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EvidenceIntakeDigitization",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "JurisdictionPopulationSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "QualityControlProtocol",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EquipmentModernization",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorBacklogSeverity",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "LabInfoSystemAdoption",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the crime lab implemented a new laboratory information management system.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BacklogReductionLevel",
+      "values": [
+        "Substantial",
+        "Moderate",
+        "Minimal"
+      ],
+      "desc": "Degree to which the forensic evidence backlog decreased over the study period.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "EvidenceTurnaroundTime",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Average number of days from evidence submission to completed forensic analysis.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LabStaffingLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of full-time forensic analysts employed at the crime laboratory.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnnualCaseSubmissionVolume",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Total number of forensic evidence cases submitted to the lab per year.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LabAccreditationStatus",
+      "values": [
+        "NotAccredited",
+        "Accredited"
+      ],
+      "desc": "Whether the forensic laboratory holds current national accreditation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EvidenceTypeDistribution",
+      "values": [
+        "MostlySimple",
+        "Mixed",
+        "MostlyComplex"
+      ],
+      "desc": "Predominant complexity classification of evidence types received by the lab.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LabBudgetTier",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Annual operating budget category allocated to the forensic laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnalystExperienceLevel",
+      "values": [
+        "Junior",
+        "Senior"
+      ],
+      "desc": "Median years of professional forensic analysis experience among lab staff.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OutsourcingUtilization",
+      "values": [
+        "None",
+        "Partial"
+      ],
+      "desc": "Whether the lab sends any evidence to external contract laboratories for analysis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EvidenceIntakeDigitization",
+      "values": [
+        "PaperBased",
+        "PartiallyDigital",
+        "FullyDigital"
+      ],
+      "desc": "Extent to which evidence intake and chain-of-custody tracking uses digital records.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "JurisdictionPopulationSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Population category of the jurisdiction served by the forensic laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "QualityControlProtocol",
+      "values": [
+        "Basic",
+        "Enhanced"
+      ],
+      "desc": "Stringency tier of internal quality assurance and review procedures at the lab.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EquipmentModernization",
+      "values": [
+        "Outdated",
+        "Current"
+      ],
+      "desc": "Recency classification of primary analytical instruments in the laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorBacklogSeverity",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Size of the unprocessed forensic evidence backlog at the start of the study.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "LabInfoSystemAdoption",
+      "EvidenceTurnaroundTime"
+    ],
+    [
+      "BacklogReductionLevel",
+      "LabAccreditationStatus"
+    ],
+    [
+      "BacklogReductionLevel",
+      "AnnualCaseSubmissionVolume"
+    ],
+    [
+      "EvidenceTurnaroundTime",
+      "BacklogReductionLevel"
+    ],
+    [
+      "LabStaffingLevel",
+      "LabInfoSystemAdoption"
+    ],
+    [
+      "LabStaffingLevel",
+      "BacklogReductionLevel"
+    ],
+    [
+      "LabStaffingLevel",
+      "JurisdictionPopulationSize"
+    ],
+    [
+      "OutsourcingUtilization",
+      "EquipmentModernization"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "LabStaffingLevel",
+      "parents": [],
+      "values": [
+        [
+          0.09656226979983602
+        ],
+        [
+          0.5354228541453628
+        ],
+        [
+          0.3680148760548012
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EvidenceTypeDistribution",
+      "parents": [],
+      "values": [
+        [
+          0.2371193017863258
+        ],
+        [
+          0.3686999764975503
+        ],
+        [
+          0.3941807217161239
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LabBudgetTier",
+      "parents": [],
+      "values": [
+        [
+          0.1972219688332396
+        ],
+        [
+          0.09345497706825674
+        ],
+        [
+          0.7093230540985036
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnalystExperienceLevel",
+      "parents": [],
+      "values": [
+        [
+          0.2267527589229208
+        ],
+        [
+          0.7732472410770792
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OutsourcingUtilization",
+      "parents": [],
+      "values": [
+        [
+          0.18392382767286714
+        ],
+        [
+          0.8160761723271329
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EvidenceIntakeDigitization",
+      "parents": [],
+      "values": [
+        [
+          0.24342485942668945
+        ],
+        [
+          0.3355964998974222
+        ],
+        [
+          0.4209786406758883
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "QualityControlProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.17221193473037022
+        ],
+        [
+          0.8277880652696299
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorBacklogSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.19450577370451796
+        ],
+        [
+          0.597294151987595
+        ],
+        [
+          0.20820007430788706
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LabInfoSystemAdoption",
+      "parents": [
+        "LabStaffingLevel"
+      ],
+      "values": [
+        [
+          0.60018196959074,
+          0.8592796544952387,
+          0.9612988629223449
+        ],
+        [
+          0.39981803040926,
+          0.14072034550476134,
+          0.0387011370776551
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "JurisdictionPopulationSize",
+      "parents": [
+        "LabStaffingLevel"
+      ],
+      "values": [
+        [
+          0.37084834031211517,
+          0.27603207609011304,
+          0.19735702336904629
+        ],
+        [
+          0.34190556886507056,
+          0.41324753347553417,
+          0.47978226239328103
+        ],
+        [
+          0.2872460908228143,
+          0.3107203904343529,
+          0.32286071423767276
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EquipmentModernization",
+      "parents": [
+        "OutsourcingUtilization"
+      ],
+      "values": [
+        [
+          0.5855951267983508,
+          0.7299994020661511
+        ],
+        [
+          0.4144048732016492,
+          0.2700005979338489
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EvidenceTurnaroundTime",
+      "parents": [
+        "LabInfoSystemAdoption"
+      ],
+      "values": [
+        [
+          0.1565841743982051,
+          0.8661049084160732
+        ],
+        [
+          0.2940394991790716,
+          0.11777541442505461
+        ],
+        [
+          0.5493763264227233,
+          0.016119677158871998
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BacklogReductionLevel",
+      "parents": [
+        "LabStaffingLevel",
+        "EvidenceTurnaroundTime"
+      ],
+      "values": [
+        [
+          0.9104333524912646,
+          0.6015264484586051,
+          0.25918736005395376,
+          0.8051967882455998,
+          0.3302222776237302,
+          0.08983984493403632,
+          0.3236471317637448,
+          0.032094599016797606,
+          0.005296678239304798
+        ],
+        [
+          0.0822371366161283,
+          0.27120900704768036,
+          0.33003481690946823,
+          0.16066856263200133,
+          0.3444780853068565,
+          0.23836805432598782,
+          0.3452637920287468,
+          0.1538865594237094,
+          0.06728806848836266
+        ],
+        [
+          0.007329510892607013,
+          0.12726454449371458,
+          0.41077782303657795,
+          0.034134649122398907,
+          0.32529963706941345,
+          0.6717921007399759,
+          0.33108907620750844,
+          0.814018841559493,
+          0.9274152532723325
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LabAccreditationStatus",
+      "parents": [
+        "BacklogReductionLevel"
+      ],
+      "values": [
+        [
+          0.49952222669360496,
+          0.3442383905853021,
+          0.21635852820401041
+        ],
+        [
+          0.5004777733063951,
+          0.655761609414698,
+          0.7836414717959895
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AnnualCaseSubmissionVolume",
+      "parents": [
+        "BacklogReductionLevel"
+      ],
+      "values": [
+        [
+          0.33126801341623957,
+          0.03500957606196976,
+          0.001412956372677844
+        ],
+        [
+          0.34027153597856696,
+          0.03902396406125803,
+          0.0017091166170093678
+        ],
+        [
+          0.3284604506051935,
+          0.9259664598767722,
+          0.9968779270103129
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does LabInfoSystemAdoption change BacklogReductionLevel? Specifically, does the effect of LabInfoSystemAdoption on BacklogReductionLevel flow entirely through EvidenceTurnaroundTime, or is there also a separate pathway that does not pass through EvidenceTurnaroundTime? Investigate using interventions and explain your conclusion.",
+      "answer": "only_through_M",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "mediated_only",
+        "roles": {
+          "treatment": "LabInfoSystemAdoption",
+          "outcome": "BacklogReductionLevel",
+          "mediator": "EvidenceTurnaroundTime",
+          "confounder": "LabStaffingLevel"
+        },
+        "gold": {
+          "label": "only_through_M",
+          "T": "LabInfoSystemAdoption",
+          "M": "EvidenceTurnaroundTime",
+          "O": "BacklogReductionLevel",
+          "total_effect": -0.75,
+          "max_residual_effect": 0.0
+        }
+      }
+    }
+  ]
+}

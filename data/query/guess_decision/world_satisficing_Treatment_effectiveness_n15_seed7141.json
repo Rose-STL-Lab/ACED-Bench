@@ -1,0 +1,1119 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 7141,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A cardiac rehabilitation center within a large academic medical system maintains detailed patient records across multiple treatment programs. The research team can access historical data and request new observational or interventional samples as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "FunctionalCapacityOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineEjectionFraction",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmokingStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DiabetesPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InfarctType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RevascularizationMethod",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BetaBlockerUse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineDepressionScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SocialSupportLevel",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "FunctionalCapacityOutcome",
+      "values": [
+        "Good",
+        "Fair",
+        "Poor"
+      ],
+      "desc": "Functional capacity classification at 12 weeks post-MI based on peak METs.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SupervisedExerciseProgram",
+      "values": [
+        "None",
+        "Moderate",
+        "Intensive"
+      ],
+      "desc": "Level of structured, supervised aerobic and resistance exercise sessions per week.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PsychosocialCounseling",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of individual psychosocial counseling sessions during rehabilitation.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TeleheathMonitoring",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether remote telemonitoring of heart rate and symptoms is provided.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NutritionalIntervention",
+      "values": [
+        "None",
+        "Guided",
+        "Intensive"
+      ],
+      "desc": "Level of dietitian-led nutritional counseling and meal planning provided.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineEjectionFraction",
+      "values": [
+        "Preserved",
+        "Mildly-reduced",
+        "Reduced"
+      ],
+      "desc": "Left ventricular ejection fraction category measured before rehabilitation begins.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under60",
+        "60to74",
+        "75plus"
+      ],
+      "desc": "Patient age group at the time of myocardial infarction.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmokingStatus",
+      "values": [
+        "Never",
+        "Former",
+        "Current"
+      ],
+      "desc": "Patient self-reported smoking status at rehabilitation enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DiabetesPresence",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has a diagnosis of type 2 diabetes mellitus.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InfarctType",
+      "values": [
+        "NSTEMI",
+        "STEMI"
+      ],
+      "desc": "Classification of the index myocardial infarction event type.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RevascularizationMethod",
+      "values": [
+        "None",
+        "PCI",
+        "CABG"
+      ],
+      "desc": "Type of revascularization procedure performed during the index admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BetaBlockerUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is prescribed a beta-blocker at discharge.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineDepressionScore",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "PHQ-9 depression severity category measured at rehabilitation intake.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Body mass index classification at the start of cardiac rehabilitation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SocialSupportLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Patient-reported level of family and social support at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SupervisedExerciseProgram",
+      "FunctionalCapacityOutcome"
+    ],
+    [
+      "PsychosocialCounseling",
+      "FunctionalCapacityOutcome"
+    ],
+    [
+      "TeleheathMonitoring",
+      "FunctionalCapacityOutcome"
+    ],
+    [
+      "NutritionalIntervention",
+      "FunctionalCapacityOutcome"
+    ],
+    [
+      "NutritionalIntervention",
+      "PsychosocialCounseling"
+    ],
+    [
+      "NutritionalIntervention",
+      "DiabetesPresence"
+    ],
+    [
+      "BaselineEjectionFraction",
+      "FunctionalCapacityOutcome"
+    ],
+    [
+      "BaselineDepressionScore",
+      "SupervisedExerciseProgram"
+    ],
+    [
+      "SocialSupportLevel",
+      "AgeGroup"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "TeleheathMonitoring",
+      "parents": [],
+      "values": [
+        [
+          0.4076224357209189
+        ],
+        [
+          0.5923775642790812
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NutritionalIntervention",
+      "parents": [],
+      "values": [
+        [
+          0.09378911661735918
+        ],
+        [
+          0.6028827039817638
+        ],
+        [
+          0.3033281794008771
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineEjectionFraction",
+      "parents": [],
+      "values": [
+        [
+          0.14940070501692648
+        ],
+        [
+          0.14631872572732857
+        ],
+        [
+          0.704280569255745
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SmokingStatus",
+      "parents": [],
+      "values": [
+        [
+          0.14833011328568058
+        ],
+        [
+          0.1709634978106484
+        ],
+        [
+          0.680706388903671
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InfarctType",
+      "parents": [],
+      "values": [
+        [
+          0.20740498971702578
+        ],
+        [
+          0.7925950102829742
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RevascularizationMethod",
+      "parents": [],
+      "values": [
+        [
+          0.2001637066450067
+        ],
+        [
+          0.3842331081583111
+        ],
+        [
+          0.41560318519668227
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BetaBlockerUse",
+      "parents": [],
+      "values": [
+        [
+          0.7042330412775268
+        ],
+        [
+          0.2957669587224732
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineDepressionScore",
+      "parents": [],
+      "values": [
+        [
+          0.2628050207573303
+        ],
+        [
+          0.5727232669450892
+        ],
+        [
+          0.16447171229758054
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [],
+      "values": [
+        [
+          0.2750890931858098
+        ],
+        [
+          0.19329912587508963
+        ],
+        [
+          0.5316117809391006
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SocialSupportLevel",
+      "parents": [],
+      "values": [
+        [
+          0.3152976831854678
+        ],
+        [
+          0.15237059693370153
+        ],
+        [
+          0.5323317198808306
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PsychosocialCounseling",
+      "parents": [
+        "NutritionalIntervention"
+      ],
+      "values": [
+        [
+          0.2639529253898224,
+          0.2940840271652335,
+          0.317216848621735
+        ],
+        [
+          0.2972916976192702,
+          0.21438960572245275,
+          0.14968025772996524
+        ],
+        [
+          0.4387553769909074,
+          0.4915263671123139,
+          0.5331028936482998
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiabetesPresence",
+      "parents": [
+        "NutritionalIntervention"
+      ],
+      "values": [
+        [
+          0.49111554248118466,
+          0.9418204269413584,
+          0.996330787273628
+        ],
+        [
+          0.5088844575188153,
+          0.058179573058641534,
+          0.0036692127263718635
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SupervisedExerciseProgram",
+      "parents": [
+        "BaselineDepressionScore"
+      ],
+      "values": [
+        [
+          0.30459900754122954,
+          0.6709132406405591,
+          0.7872366277981184
+        ],
+        [
+          0.4502704662979811,
+          0.016428086418530673,
+          0.0003193019317503469
+        ],
+        [
+          0.2451305261607892,
+          0.3126586729409102,
+          0.2124440702701312
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [
+        "SocialSupportLevel"
+      ],
+      "values": [
+        [
+          0.21148144582634734,
+          0.06241813821346114,
+          0.015436814098024257
+        ],
+        [
+          0.35462686423758416,
+          0.5300228932033118,
+          0.6637827298932774
+        ],
+        [
+          0.43389168993606847,
+          0.4075589685832272,
+          0.3207804560086984
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FunctionalCapacityOutcome",
+      "parents": [
+        "BaselineEjectionFraction",
+        "SupervisedExerciseProgram",
+        "NutritionalIntervention",
+        "PsychosocialCounseling",
+        "TeleheathMonitoring"
+      ],
+      "values": [
+        [
+          0.16158659365943537,
+          0.21820865428315894,
+          0.2622417036898932,
+          0.3053901590454242,
+          0.33421711185781316,
+          0.3956811079215664,
+          0.5752385852083813,
+          0.6342483951728709,
+          0.6917372600862048,
+          0.7388283005121548,
+          0.7521739972393958,
+          0.7834726344819984,
+          0.8183649031150118,
+          0.8432787715703977,
+          0.8684536824397173,
+          0.8880473738764558,
+          0.8968763035197426,
+          0.9089730051062431,
+          0.7192877671157492,
+          0.7605744219315629,
+          0.7955055700007968,
+          0.8366966398228125,
+          0.8420902637450559,
+          0.8721915049353242,
+          0.9213788008065537,
+          0.9336331009959433,
+          0.9438460969039455,
+          0.9578903125612295,
+          0.9601950595553308,
+          0.9659072644064883,
+          0.9673862883921672,
+          0.9737022205804813,
+          0.9786540392929179,
+          0.9818054529614786,
+          0.9824967341969697,
+          0.985758927638599,
+          0.9068169492019728,
+          0.9301340617678934,
+          0.9382575123375297,
+          0.9484572683055367,
+          0.9522291243123016,
+          0.9619793259719626,
+          0.9761764398655325,
+          0.9799151031225314,
+          0.9848145076311335,
+          0.9862136828135813,
+          0.9866750809123825,
+          0.9897990924648958,
+          0.9903163682485431,
+          0.9919855674625561,
+          0.9934879401318694,
+          0.994558220093095,
+          0.9948187733401099,
+          0.995909324855902,
+          0.059297163287003365,
+          0.0888264336659682,
+          0.12147602569313372,
+          0.14874370430466657,
+          0.1635510889316177,
+          0.20726827466084796,
+          0.38702602986069,
+          0.4564656404707155,
+          0.5122481577974031,
+          0.5574546399966888,
+          0.6034917142035218,
+          0.6541427949279506,
+          0.6832348838662989,
+          0.727622045867724,
+          0.7625936994312781,
+          0.7926139261335484,
+          0.8058258188055861,
+          0.8539123708205729,
+          0.5233785989046947,
+          0.5969911730034341,
+          0.6645899586838064,
+          0.7075046576031929,
+          0.7267633248413689,
+          0.7620452205844715,
+          0.8574186261765949,
+          0.8839643965381847,
+          0.9041685459805113,
+          0.9141414474564898,
+          0.9240408995450097,
+          0.939425359661039,
+          0.9457563214984073,
+          0.9510217289589281,
+          0.958051888878132,
+          0.9658202260388823,
+          0.9687538968831634,
+          0.9736525407270414,
+          0.8364079674619368,
+          0.8607564850926012,
+          0.8864755984421973,
+          0.9047486848672595,
+          0.9059537815630174,
+          0.9278745963167213,
+          0.9573285695171158,
+          0.963749749381607,
+          0.9693409772178568,
+          0.9747847167161875,
+          0.9784035858494349,
+          0.979770044177319,
+          0.9825659564523913,
+          0.9864940765651394,
+          0.987670280782367,
+          0.9899321908506385,
+          0.991112681168278,
+          0.9924073759047329,
+          0.00473232007231063,
+          0.007024801247950588,
+          0.010318364959625327,
+          0.014126975440231311,
+          0.015750955014441532,
+          0.022204744791277202,
+          0.062074817380652854,
+          0.07759865957581008,
+          0.1088544449359286,
+          0.1394679056065668,
+          0.16112183075222591,
+          0.19952917129898165,
+          0.21656927678849794,
+          0.2784391026365907,
+          0.32891805572246063,
+          0.40541353981139927,
+          0.41574415587350505,
+          0.4816535655981598,
+          0.12235058469549215,
+          0.16624687798990673,
+          0.19689216755786224,
+          0.2540226485762133,
+          0.2743580469909062,
+          0.32239614403266986,
+          0.5122147250456346,
+          0.5647420174359614,
+          0.6447774375682724,
+          0.6942280758782482,
+          0.7049526156893235,
+          0.7511228444256532,
+          0.771362318614174,
+          0.8125517463423092,
+          0.8361809602719027,
+          0.8608624557815362,
+          0.8746058301402593,
+          0.8941768014920342,
+          0.4653040813773262,
+          0.5231578954990089,
+          0.588600112830543,
+          0.6381347639661631,
+          0.668775813956175,
+          0.710328591966231,
+          0.82697046557689,
+          0.8513939132518261,
+          0.8773815736500257,
+          0.9055972966752978,
+          0.911721436168098,
+          0.9231074525235489,
+          0.9270811924649163,
+          0.9385952049099897,
+          0.9516545133196246,
+          0.9607574602465478,
+          0.9623924960822712,
+          0.9689570504555547
+        ],
+        [
+          0.30058064482336844,
+          0.3185837221504177,
+          0.33028618528666515,
+          0.3273954073398655,
+          0.33390279541649553,
+          0.338534114303298,
+          0.2819963320101126,
+          0.2576930642815449,
+          0.232907866554369,
+          0.20490287671196145,
+          0.19633539618366358,
+          0.1783161131171682,
+          0.1509094897482156,
+          0.13351343493981677,
+          0.11570743659639159,
+          0.10061889343115968,
+          0.0933687475471238,
+          0.08412603495653038,
+          0.21371652071288208,
+          0.1919825649159216,
+          0.16976045916394653,
+          0.13977003788892703,
+          0.1348400481285514,
+          0.11197381237188886,
+          0.07289648792544737,
+          0.0625818108328192,
+          0.05328773335226202,
+          0.040244355097376956,
+          0.03819238690193781,
+          0.03293984031513878,
+          0.031606697041072815,
+          0.025588480111565042,
+          0.020872010751873653,
+          0.017882009239884016,
+          0.01721879427523642,
+          0.014042564777617785,
+          0.08543630957898443,
+          0.06450014453344714,
+          0.05808934573819835,
+          0.04903527538425491,
+          0.04539109140593802,
+          0.036547963702186506,
+          0.02325908565062668,
+          0.01968476951657103,
+          0.014939194384746678,
+          0.01359626008901012,
+          0.013163657248494437,
+          0.010092500169424418,
+          0.00959043669023749,
+          0.007950348448622344,
+          0.006466713899889127,
+          0.0054110425875291855,
+          0.00515504237393827,
+          0.004071868829313292,
+          0.21437018873934088,
+          0.24204440641604907,
+          0.2804874045301871,
+          0.2762131485704989,
+          0.31332672948818097,
+          0.32550789428700144,
+          0.3331108644378473,
+          0.30759179871439324,
+          0.30070978559747336,
+          0.29280795314842345,
+          0.26372123360218575,
+          0.24765480337891524,
+          0.23118431595040548,
+          0.2085291581356999,
+          0.19025069053969157,
+          0.17360157238153195,
+          0.164085639952449,
+          0.1257304176010987,
+          0.30271873155159945,
+          0.27536186796703255,
+          0.24090367954704292,
+          0.2231758273459037,
+          0.21131851937240814,
+          0.19127941169437673,
+          0.1247748246977273,
+          0.10317645146894097,
+          0.08683529192235616,
+          0.07935617212437937,
+          0.07017478142575055,
+          0.05690095298283395,
+          0.051163010578214006,
+          0.04673990074786853,
+          0.04034348519756247,
+          0.03309913095502847,
+          0.030232461441355427,
+          0.02564182577078836,
+          0.14156171415523824,
+          0.12197774766619761,
+          0.1010854451996356,
+          0.08649200197653903,
+          0.08688075791993796,
+          0.06717929119986146,
+          0.04094198538280906,
+          0.03500125360179908,
+          0.029790016109564135,
+          0.024617325911646178,
+          0.02107597480140711,
+          0.019868112445222404,
+          0.017111216877024455,
+          0.01329185278788059,
+          0.012176663368558006,
+          0.009960770329850195,
+          0.008804131764280526,
+          0.007531565120973993,
+          0.06846794683727184,
+          0.08174167463066885,
+          0.09575702629632589,
+          0.11405287204928326,
+          0.11935368753169784,
+          0.1304556879422933,
+          0.21094950092856038,
+          0.24110778197693478,
+          0.24360715501417898,
+          0.2910115580637076,
+          0.2977693613267573,
+          0.3076880315533335,
+          0.32833919265178146,
+          0.32061416262578213,
+          0.3435994214615824,
+          0.32859000118934406,
+          0.31935643626467697,
+          0.32377307393501964,
+          0.26697818243823523,
+          0.2923902725482455,
+          0.3274120196561791,
+          0.32957331915072025,
+          0.3441750086748581,
+          0.32956017127864196,
+          0.309755694561058,
+          0.2910305688264225,
+          0.25196087086526225,
+          0.22614821823321557,
+          0.22374519525349942,
+          0.19694200932061948,
+          0.18607401406310803,
+          0.1557218528458401,
+          0.1415634711320918,
+          0.12208522728784285,
+          0.11062763287889528,
+          0.09514583554358995,
+          0.32239064340088563,
+          0.30429827263176695,
+          0.2800146955657756,
+          0.2576577225294564,
+          0.24629012011320028,
+          0.2240017130566156,
+          0.14784874871436832,
+          0.12911212927122598,
+          0.1086663598628374,
+          0.08516554579581112,
+          0.08087183527372974,
+          0.07145625231418848,
+          0.06805744970470612,
+          0.058014496308300786,
+          0.04591557912447472,
+          0.03771906649214381,
+          0.03627967152324881,
+          0.030052755646845508
+        ],
+        [
+          0.5378327615171962,
+          0.4632076235664233,
+          0.40747211102344166,
+          0.36721443361471023,
+          0.33188009272569124,
+          0.2657847777751355,
+          0.14276508278150601,
+          0.10805854054558413,
+          0.07535487335942605,
+          0.05626882277588393,
+          0.051490606576940476,
+          0.03821125240083335,
+          0.030725607136772616,
+          0.023207793489785487,
+          0.015838880963891112,
+          0.011333732692384578,
+          0.009754948933133558,
+          0.006900959937226513,
+          0.06699571217136878,
+          0.04744301315251551,
+          0.034733970835256645,
+          0.023533322288260442,
+          0.023069688126392776,
+          0.015834682692786994,
+          0.00572471126799901,
+          0.0037850881712374776,
+          0.002866169743792445,
+          0.0018653323413936529,
+          0.0016125535427315466,
+          0.0011528952783727757,
+          0.0010070145667599286,
+          0.0007092993079535735,
+          0.000473949955208348,
+          0.00031253779863732613,
+          0.00028447152779396035,
+          0.00019850758378325468,
+          0.007746741219042811,
+          0.005365793698659377,
+          0.0036531419242718855,
+          0.0025074563102086386,
+          0.002379784281760418,
+          0.0014727103258511294,
+          0.0005644744838407376,
+          0.00040012736089764474,
+          0.0002462979841197178,
+          0.00019005709740843946,
+          0.00016126183912314876,
+          0.00010840736567975992,
+          9.319506121958656e-05,
+          6.40840888215032e-05,
+          4.5345968241356246e-05,
+          3.07373193757637e-05,
+          2.618428595179269e-05,
+          1.880631478459254e-05,
+          0.7263326479736557,
+          0.6691291599179828,
+          0.5980365697766791,
+          0.5750431471248346,
+          0.5231221815802013,
+          0.46722383105215054,
+          0.27986310570146267,
+          0.23594256081489132,
+          0.1870420566051236,
+          0.14973740685488784,
+          0.13278705219429257,
+          0.09820240169313428,
+          0.08558080018329567,
+          0.06384879599657607,
+          0.047155610029030424,
+          0.033784501484919585,
+          0.03008854124196494,
+          0.02035721157832833,
+          0.17390266954370595,
+          0.12764695902953344,
+          0.0945063617691507,
+          0.06931951505090335,
+          0.06191815578622295,
+          0.04667536772115166,
+          0.017806549125677605,
+          0.012859151992874232,
+          0.008996162097132483,
+          0.006502380419130875,
+          0.005784319029239798,
+          0.0036736873561270906,
+          0.003080667923378585,
+          0.0022383702932032407,
+          0.0016046259243054038,
+          0.0010806430060891093,
+          0.0010136416754812226,
+          0.0007056335021701232,
+          0.02203031838282495,
+          0.01726576724120129,
+          0.012438956358167195,
+          0.008759313156201452,
+          0.007165460517044482,
+          0.004946112483417198,
+          0.0017294451000751658,
+          0.0012489970165938309,
+          0.0008690066725791858,
+          0.0005979573721662431,
+          0.0005204393491581251,
+          0.00036184337745845564,
+          0.00032282667058433097,
+          0.00021407064698000016,
+          0.00015305584907481957,
+          0.00010703881951137952,
+          8.318706744155793e-05,
+          6.105897429285718e-05,
+          0.9267997330904176,
+          0.9112335241213806,
+          0.8939246087440489,
+          0.8718201525104854,
+          0.8648953574538606,
+          0.8473395672664294,
+          0.7269756816907867,
+          0.6812935584472551,
+          0.6475384000498925,
+          0.5695205363297255,
+          0.5411088079210168,
+          0.4927827971476848,
+          0.45509153055972046,
+          0.4009467347376272,
+          0.3274825228159569,
+          0.2659964589992566,
+          0.2648994078618179,
+          0.19457336046682036,
+          0.6106712328662727,
+          0.5413628494618478,
+          0.4756958127859587,
+          0.4164040322730665,
+          0.38146694433423567,
+          0.3480436846886881,
+          0.1780295803933073,
+          0.14422741373761608,
+          0.10326169156646528,
+          0.07962370588853628,
+          0.0713021890571771,
+          0.05193514625372717,
+          0.042563667322717935,
+          0.03172640081185075,
+          0.0222555685960055,
+          0.01705231693062109,
+          0.014766536980845452,
+          0.010677362964376026,
+          0.2123052752217881,
+          0.17254383186922412,
+          0.1313851916036814,
+          0.10420751350438055,
+          0.08493406593062465,
+          0.06566969497715354,
+          0.025180785708741594,
+          0.01949395747694783,
+          0.013952066487136981,
+          0.009237157528891137,
+          0.007406728558172139,
+          0.005436295162262568,
+          0.004861357830377676,
+          0.0033902987817093695,
+          0.002429907555900669,
+          0.001523473261308406,
+          0.0013278323944799532,
+          0.0009901938975996306
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts FunctionalCapacityOutcome toward Good (and away from Poor). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes FunctionalCapacityOutcome.",
+      "answer": [
+        {
+          "variable": "SupervisedExerciseProgram",
+          "value": "Intensive",
+          "improvement": 0.6049
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "FunctionalCapacityOutcome",
+          "intervention_A": "SupervisedExerciseProgram",
+          "intervention_B": "PsychosocialCounseling",
+          "intervention_C": "TeleheathMonitoring",
+          "intervention_D": "NutritionalIntervention",
+          "confounder": "BaselineEjectionFraction"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "SupervisedExerciseProgram",
+              "value": "Intensive",
+              "improvement": 0.6049
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "SupervisedExerciseProgram",
+              "value": "None",
+              "improvement": -0.3662
+            },
+            {
+              "variable": "SupervisedExerciseProgram",
+              "value": "Moderate",
+              "improvement": 0.3838
+            },
+            {
+              "variable": "SupervisedExerciseProgram",
+              "value": "Intensive",
+              "improvement": 0.6049
+            },
+            {
+              "variable": "NutritionalIntervention",
+              "value": "None",
+              "improvement": -0.5169
+            },
+            {
+              "variable": "NutritionalIntervention",
+              "value": "Guided",
+              "improvement": -0.0514
+            },
+            {
+              "variable": "NutritionalIntervention",
+              "value": "Intensive",
+              "improvement": 0.2619
+            },
+            {
+              "variable": "PsychosocialCounseling",
+              "value": "None",
+              "improvement": -0.1344
+            },
+            {
+              "variable": "PsychosocialCounseling",
+              "value": "Monthly",
+              "improvement": -0.0054
+            },
+            {
+              "variable": "PsychosocialCounseling",
+              "value": "Weekly",
+              "improvement": 0.0828
+            },
+            {
+              "variable": "TeleheathMonitoring",
+              "value": "No",
+              "improvement": -0.0367
+            },
+            {
+              "variable": "TeleheathMonitoring",
+              "value": "Yes",
+              "improvement": 0.0252
+            }
+          ],
+          "threshold": 0.4943,
+          "baseline_E_target": 0.7064
+        }
+      }
+    }
+  ]
+}

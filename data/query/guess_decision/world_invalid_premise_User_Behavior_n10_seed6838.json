@@ -1,0 +1,534 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "invalid_premise",
+    "seed": 6838,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": null
+  },
+  "story": "A streaming media company's internal analytics division maintains detailed records of viewer activity and platform configurations. The research team can access historical logs and request both observational and interventional data collection from consenting users.",
+  "non_intervenable_variables": [
+    {
+      "name": "SessionEngagementLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CumulativeWatchHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NovelContentExposure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UserAccountAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TimeOfDayBucket",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubscriptionTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreferredContentLength",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "SessionEngagementLevel",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Degree of active viewing engagement within a single platform session",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CumulativeWatchHistory",
+      "values": [
+        "Deep",
+        "Moderate",
+        "Shallow"
+      ],
+      "desc": "Total volume of videos previously watched on the platform by the user",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RecommendationDiversityPolicy",
+      "values": [
+        "Off",
+        "Moderate",
+        "Full"
+      ],
+      "desc": "Algorithmic policy setting controlling topic variety in recommended feeds",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NovelContentExposure",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Proportion of recommended videos from categories the user has not previously watched",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "UserAccountAge",
+      "values": [
+        "Veteran",
+        "Intermediate",
+        "New"
+      ],
+      "desc": "Duration since the user first registered on the platform",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeviceType",
+      "values": [
+        "Mobile",
+        "Desktop",
+        "SmartTV"
+      ],
+      "desc": "Primary device category used during the viewing session",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TimeOfDayBucket",
+      "values": [
+        "Morning",
+        "Afternoon",
+        "Evening"
+      ],
+      "desc": "Part of the day when the session takes place",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubscriptionTier",
+      "values": [
+        "Free",
+        "Premium"
+      ],
+      "desc": "User subscription level on the video platform",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PreferredContentLength",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Typical video duration the user most frequently selects",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AutoplayToggle",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether the autoplay feature is enabled in user settings",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "CumulativeWatchHistory",
+      "SessionEngagementLevel"
+    ],
+    [
+      "RecommendationDiversityPolicy",
+      "NovelContentExposure"
+    ],
+    [
+      "NovelContentExposure",
+      "SessionEngagementLevel"
+    ],
+    [
+      "NovelContentExposure",
+      "TimeOfDayBucket"
+    ],
+    [
+      "UserAccountAge",
+      "SessionEngagementLevel"
+    ],
+    [
+      "UserAccountAge",
+      "RecommendationDiversityPolicy"
+    ],
+    [
+      "DeviceType",
+      "RecommendationDiversityPolicy"
+    ],
+    [
+      "TimeOfDayBucket",
+      "PreferredContentLength"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "CumulativeWatchHistory",
+      "parents": [],
+      "values": [
+        [
+          0.3655564820488692
+        ],
+        [
+          0.5125028081719706
+        ],
+        [
+          0.12194070977916024
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UserAccountAge",
+      "parents": [],
+      "values": [
+        [
+          0.3313631573461306
+        ],
+        [
+          0.2165816402639109
+        ],
+        [
+          0.4520552023899585
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DeviceType",
+      "parents": [],
+      "values": [
+        [
+          0.4850913206556097
+        ],
+        [
+          0.41628873870766947
+        ],
+        [
+          0.0986199406367207
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubscriptionTier",
+      "parents": [],
+      "values": [
+        [
+          0.8352501234884349
+        ],
+        [
+          0.16474987651156514
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AutoplayToggle",
+      "parents": [],
+      "values": [
+        [
+          0.6565009319734383
+        ],
+        [
+          0.34349906802656166
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RecommendationDiversityPolicy",
+      "parents": [
+        "DeviceType",
+        "UserAccountAge"
+      ],
+      "values": [
+        [
+          0.37687918530536835,
+          0.4121871672595705,
+          0.3462259044442065,
+          0.48060668607956203,
+          0.42420834149504066,
+          0.34612201437729917,
+          0.5047856967160618,
+          0.4253041301391051,
+          0.3450203672159426
+        ],
+        [
+          0.2664127872184738,
+          0.03858343189030201,
+          0.004291601812912705,
+          0.061840593794321864,
+          0.007227972986242645,
+          0.0007809442169177137,
+          0.011822839999209031,
+          0.0013190700081264764,
+          0.00014169889145713708
+        ],
+        [
+          0.356708027476158,
+          0.5492294008501275,
+          0.6494824937428809,
+          0.45755272012611603,
+          0.5685636855187167,
+          0.6530970414057832,
+          0.4833914632847292,
+          0.5733767998527683,
+          0.6548379338926001
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NovelContentExposure",
+      "parents": [
+        "RecommendationDiversityPolicy"
+      ],
+      "values": [
+        [
+          0.1644966670535925,
+          0.34175574814131504,
+          0.8706871674436539
+        ],
+        [
+          0.2933780670893852,
+          0.32611037124627423,
+          0.11444699040091325
+        ],
+        [
+          0.5421252658570224,
+          0.33213388061241067,
+          0.01486584215543281
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SessionEngagementLevel",
+      "parents": [
+        "CumulativeWatchHistory",
+        "UserAccountAge",
+        "NovelContentExposure"
+      ],
+      "values": [
+        [
+          0.9282349173047872,
+          0.6646349449569833,
+          0.4014065514122192,
+          0.8881318739306866,
+          0.5474952771743632,
+          0.27826196371044,
+          0.7086148023521016,
+          0.20761892390129283,
+          0.06585219608976263,
+          0.8671660355928015,
+          0.4704707237254363,
+          0.21726228493977423,
+          0.8074082586525613,
+          0.33236599733494665,
+          0.11931210162510619,
+          0.5409533950319332,
+          0.08792113592166212,
+          0.02321977260677775,
+          0.4801491466434178,
+          0.06154590993149306,
+          0.015486832173512943,
+          0.32505327719930877,
+          0.0326389962736463,
+          0.0071329616055878006,
+          0.08879042497159874,
+          0.004785532006548761,
+          0.0010920570045828734
+        ],
+        [
+          0.06682924856569633,
+          0.24508225293271693,
+          0.337815088119369,
+          0.10156072704362186,
+          0.293034919278502,
+          0.331887030618424,
+          0.22769498304901917,
+          0.3077444272351048,
+          0.22515793589368788,
+          0.11744672312902647,
+          0.31569448113997645,
+          0.3164491121634967,
+          0.15891278497927755,
+          0.3346044742963394,
+          0.2578260736643046,
+          0.2904973075994765,
+          0.2506272829798787,
+          0.1380633109380083,
+          0.314097703860884,
+          0.2174159227927936,
+          0.11696568025865964,
+          0.33589171797610523,
+          0.1532976692829535,
+          0.07700765393723334,
+          0.2610558123183182,
+          0.06945606746830273,
+          0.03257916582290061
+        ],
+        [
+          0.004935834129516496,
+          0.09028280211029982,
+          0.2607783604684118,
+          0.010307399025691508,
+          0.1594698035471347,
+          0.3898510056711361,
+          0.06369021459887927,
+          0.4846366488636022,
+          0.7089898680165496,
+          0.015387241278172026,
+          0.2138347951345873,
+          0.4662886028967292,
+          0.03367895636816117,
+          0.33302952836871397,
+          0.6228618247105892,
+          0.1685492973685903,
+          0.6614515810984591,
+          0.838716916455214,
+          0.20575314949569826,
+          0.7210381672757133,
+          0.8675474875678274,
+          0.33905500482458606,
+          0.8140633344434003,
+          0.915859384457179,
+          0.6501537627100831,
+          0.9257584005251485,
+          0.9663287771725166
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TimeOfDayBucket",
+      "parents": [
+        "NovelContentExposure"
+      ],
+      "values": [
+        [
+          0.28841209939643525,
+          0.013174900471665233,
+          0.00026140306678544854
+        ],
+        [
+          0.2967293152242419,
+          0.009703534285262308,
+          0.00013782528625608026
+        ],
+        [
+          0.41485858537932285,
+          0.9771215652430724,
+          0.9996007716469586
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreferredContentLength",
+      "parents": [
+        "TimeOfDayBucket"
+      ],
+      "values": [
+        [
+          0.23255110476072663,
+          0.005553844120543692,
+          7.72251018285423e-05
+        ],
+        [
+          0.3162117072365228,
+          0.69210745339558,
+          0.881979785890554
+        ],
+        [
+          0.45123718800275053,
+          0.3023387024838764,
+          0.11794298900761734
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting CumulativeWatchHistory as a way to shift SessionEngagementLevel toward High (and away from Low). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift SessionEngagementLevel toward High.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "RecommendationDiversityPolicy",
+          "value": "Full"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": null,
+        "roles": {
+          "target": "SessionEngagementLevel",
+          "non_intervenable_x": "CumulativeWatchHistory",
+          "intervenable_alt": "RecommendationDiversityPolicy",
+          "alt_mediator": "NovelContentExposure",
+          "confounder": "UserAccountAge"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "CumulativeWatchHistory",
+          "non_intervenable_predictive_gap": 0.9129,
+          "alternative": {
+            "variable": "RecommendationDiversityPolicy",
+            "value": "Full"
+          },
+          "alternative_effect": -0.2958,
+          "acceptable_alternatives": [
+            {
+              "variable": "RecommendationDiversityPolicy",
+              "value": "Full",
+              "improvement": 0.2958
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

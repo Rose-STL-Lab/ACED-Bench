@@ -157,3 +157,6 @@ pytest-coverage.txt
 
 # Ignore any locally generated check files
 filechk_results.txt
+
+# Benchmark outputs
+out/

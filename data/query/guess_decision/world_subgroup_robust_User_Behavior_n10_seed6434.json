@@ -1,0 +1,657 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 6434,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A large social media platform's trust and safety division maintains detailed logs of user activity and moderation actions. The research team has access to historical records and can request both observational extracts and controlled interventional samples from the platform.",
+  "non_intervenable_variables": [
+    {
+      "name": "PostViolationRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UserTenure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorStrikeHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DailySessionDuration",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ContentTypePosted",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CommunitySize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PlatformLiteracy",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PostViolationRate",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Proportion of a user's posts flagged as policy-violating in a period",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "UserTenure",
+      "values": [
+        "NewUser",
+        "EstablishedUser"
+      ],
+      "desc": "Whether the account was created within the last six months or earlier",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AutomatedRemovalIntensity",
+      "values": [
+        "None",
+        "Selective",
+        "Aggressive"
+      ],
+      "desc": "Level of automated content removal applied to a user's flagged posts",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FrictionBasedWarningSystem",
+      "values": [
+        "Off",
+        "Enabled"
+      ],
+      "desc": "Whether interstitial warning prompts appear before a user submits a post",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ShadowThrottling",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Degree to which a user's content distribution reach is silently reduced",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorStrikeHistory",
+      "values": [
+        "NoStrikes",
+        "OneOrMoreStrikes"
+      ],
+      "desc": "Number of community-guideline strikes accumulated before the study period",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DailySessionDuration",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Average daily time a user spends actively browsing the platform",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ContentTypePosted",
+      "values": [
+        "TextOnly",
+        "MediaRich"
+      ],
+      "desc": "Whether a user predominantly posts text or includes images and video",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunitySize",
+      "values": [
+        "Small",
+        "Large"
+      ],
+      "desc": "Number of followers or group members the user primarily interacts with",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PlatformLiteracy",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "User's demonstrated familiarity with platform rules and reporting tools",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PostViolationRate",
+      "PlatformLiteracy"
+    ],
+    [
+      "UserTenure",
+      "PostViolationRate"
+    ],
+    [
+      "AutomatedRemovalIntensity",
+      "PostViolationRate"
+    ],
+    [
+      "FrictionBasedWarningSystem",
+      "PostViolationRate"
+    ],
+    [
+      "ShadowThrottling",
+      "PostViolationRate"
+    ],
+    [
+      "ShadowThrottling",
+      "DailySessionDuration"
+    ],
+    [
+      "ShadowThrottling",
+      "CommunitySize"
+    ],
+    [
+      "PriorStrikeHistory",
+      "PostViolationRate"
+    ],
+    [
+      "CommunitySize",
+      "ContentTypePosted"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "UserTenure",
+      "parents": [],
+      "values": [
+        [
+          0.4915497258141219
+        ],
+        [
+          0.5084502741858781
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AutomatedRemovalIntensity",
+      "parents": [],
+      "values": [
+        [
+          0.31427148799676796
+        ],
+        [
+          0.5063618367018144
+        ],
+        [
+          0.1793666753014177
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FrictionBasedWarningSystem",
+      "parents": [],
+      "values": [
+        [
+          0.6463051506560157
+        ],
+        [
+          0.3536948493439844
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ShadowThrottling",
+      "parents": [],
+      "values": [
+        [
+          0.3762153436313177
+        ],
+        [
+          0.41839490488359493
+        ],
+        [
+          0.2053897514850873
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorStrikeHistory",
+      "parents": [],
+      "values": [
+        [
+          0.30685055952048373
+        ],
+        [
+          0.6931494404795163
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DailySessionDuration",
+      "parents": [
+        "ShadowThrottling"
+      ],
+      "values": [
+        [
+          0.35257747610854717,
+          0.08384916356215795,
+          0.010331027735105655
+        ],
+        [
+          0.42442679242540876,
+          0.9001513377603022,
+          0.9890742464056115
+        ],
+        [
+          0.22299573146604418,
+          0.015999498677539813,
+          0.000594725859282791
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CommunitySize",
+      "parents": [
+        "ShadowThrottling"
+      ],
+      "values": [
+        [
+          0.5748970348353337,
+          0.2599086541978748,
+          0.08357419542766693
+        ],
+        [
+          0.4251029651646662,
+          0.7400913458021252,
+          0.9164258045723331
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PostViolationRate",
+      "parents": [
+        "PriorStrikeHistory",
+        "UserTenure",
+        "AutomatedRemovalIntensity",
+        "FrictionBasedWarningSystem",
+        "ShadowThrottling"
+      ],
+      "values": [
+        [
+          0.36867659772173145,
+          0.42366537335732035,
+          0.19370258844223087,
+          0.7707238254454262,
+          0.7995505728603648,
+          0.5954892238321973,
+          0.4952335704806186,
+          0.5845327406010636,
+          0.3053411985931234,
+          0.8431154432082266,
+          0.8624864500081937,
+          0.7072609762733076,
+          0.6419358278810054,
+          0.6945795280632192,
+          0.43827907962397356,
+          0.8958965166086255,
+          0.9124774983436463,
+          0.7998293676191044,
+          0.10195350813292407,
+          0.13927857655258466,
+          0.430169413539561,
+          0.47429279631377164,
+          0.5540805085089838,
+          0.8057688944824949,
+          0.18183068361700852,
+          0.24709527314731827,
+          0.5679861148273049,
+          0.6151362385092499,
+          0.669317159009713,
+          0.8653635630298746,
+          0.6343599474398349,
+          0.7047327612118301,
+          0.8807228434724392,
+          0.8831153085134689,
+          0.9113783127428731,
+          0.9672303737802137,
+          0.01989561372259115,
+          0.026961572413171816,
+          0.005877089006191567,
+          0.16934500125296348,
+          0.21544731930793717,
+          0.061897627854127855,
+          0.037857776546895566,
+          0.05303832483923197,
+          0.014267194543702833,
+          0.27655389628459437,
+          0.33576451585226796,
+          0.11948431889487081,
+          0.07483418784375334,
+          0.10631015402658917,
+          0.02682185364147551,
+          0.40311870957062196,
+          0.48071071881922744,
+          0.20595276870299684,
+          0.002950281684907931,
+          0.003897714937370305,
+          0.02678187169481859,
+          0.030291617040002123,
+          0.046114443124662265,
+          0.21275508765100729,
+          0.005934939811462164,
+          0.00899351099629655,
+          0.055509526560176846,
+          0.06850219685343709,
+          0.09381192323444974,
+          0.34076566735105607,
+          0.07522818064907381,
+          0.10474744094483517,
+          0.3770370774131981,
+          0.387721920773992,
+          0.4910274524833877,
+          0.7619688934132541
+        ],
+        [
+          0.34473368124197706,
+          0.3233276094221392,
+          0.3060280088430257,
+          0.18435004514441336,
+          0.16620226903509516,
+          0.2820215435214257,
+          0.3174407581749905,
+          0.2720472056094203,
+          0.32586488379783374,
+          0.13427517970053232,
+          0.12153576751890759,
+          0.22959620210355808,
+          0.25211238669033603,
+          0.22585564353552007,
+          0.32076618649943983,
+          0.09336128373484895,
+          0.07979749388176466,
+          0.16611684710263694,
+          0.2512175526955513,
+          0.2839082139985879,
+          0.3336041156118306,
+          0.3238170473552316,
+          0.28480760009520156,
+          0.16221146495128042,
+          0.2924271245468721,
+          0.3231749021174462,
+          0.2855498397615818,
+          0.26537628307758754,
+          0.244603710399962,
+          0.11889651533312816,
+          0.2632625206772092,
+          0.2175155177822371,
+          0.10597379529805118,
+          0.10556409748081347,
+          0.08121028725205989,
+          0.03174581001379696,
+          0.13492216203620194,
+          0.14314846505486653,
+          0.07631659986428009,
+          0.28884913710163973,
+          0.3197613015247909,
+          0.20915137845370727,
+          0.18408254996555448,
+          0.2062259915167801,
+          0.11071849232800475,
+          0.32835135772397656,
+          0.318355429019887,
+          0.2767207193017605,
+          0.21855832960502808,
+          0.26558620498092883,
+          0.14708671912815635,
+          0.3288818077633383,
+          0.3142431036786241,
+          0.3033694538951016,
+          0.05373490537719745,
+          0.06289690397320127,
+          0.14961228614610353,
+          0.15556338626698,
+          0.19077036435440128,
+          0.3104940720633571,
+          0.0736051802178102,
+          0.0872282292304968,
+          0.20407369100997882,
+          0.2221781527398595,
+          0.2461054150809278,
+          0.3181249349404933,
+          0.2195706070665735,
+          0.2545173919403815,
+          0.32773243619276,
+          0.34426184283984773,
+          0.308037653558246,
+          0.19189896671256176
+        ],
+        [
+          0.2865897210362915,
+          0.25300701722054036,
+          0.5002694027147434,
+          0.0449261294101606,
+          0.03424715810454,
+          0.12248923264637693,
+          0.18732567134439088,
+          0.14342005378951608,
+          0.3687939176090429,
+          0.022609377091241067,
+          0.01597778247289867,
+          0.06314282162313418,
+          0.10595178542865864,
+          0.07956482840126072,
+          0.24095473387658675,
+          0.010742199656525696,
+          0.007725007774589013,
+          0.034053785278258496,
+          0.6468289391715246,
+          0.5768132094488275,
+          0.2362264708486084,
+          0.20189015633099683,
+          0.1611118913958146,
+          0.032019640566224694,
+          0.5257421918361194,
+          0.4297298247352355,
+          0.14646404541111316,
+          0.11948747841316247,
+          0.08607913059032507,
+          0.015739921636997195,
+          0.10237753188295584,
+          0.07775172100593276,
+          0.013303361229509569,
+          0.0113205940057177,
+          0.007411400005067074,
+          0.0010238162059893225,
+          0.8451822242412069,
+          0.8298899625319616,
+          0.9178063111295284,
+          0.5418058616453968,
+          0.464791379167272,
+          0.7289509936921649,
+          0.77805967348755,
+          0.7407356836439879,
+          0.8750143131282924,
+          0.3950947459914291,
+          0.34588005512784514,
+          0.6037949618033687,
+          0.7066074825512186,
+          0.628103640992482,
+          0.8260914272303682,
+          0.26799948266603973,
+          0.20504617750214843,
+          0.4906777774019016,
+          0.9433148129378945,
+          0.9332053810894284,
+          0.823605842159078,
+          0.814144996693018,
+          0.7631151925209365,
+          0.4767508402856356,
+          0.9204598799707276,
+          0.9037782597732067,
+          0.7404167824298443,
+          0.7093196504067034,
+          0.6600826616846224,
+          0.3411093977084507,
+          0.7052012122843526,
+          0.6407351671147833,
+          0.2952304863940418,
+          0.26801623638616034,
+          0.2009348939583663,
+          0.04613213987418417
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ContentTypePosted",
+      "parents": [
+        "CommunitySize"
+      ],
+      "values": [
+        [
+          0.49364852610595306,
+          0.9413869727104979
+        ],
+        [
+          0.506351473894047,
+          0.05861302728950211
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PlatformLiteracy",
+      "parents": [
+        "PostViolationRate"
+      ],
+      "values": [
+        [
+          0.5918346303842031,
+          0.36161881169340704,
+          0.1811990739920533
+        ],
+        [
+          0.4081653696157969,
+          0.6383811883065931,
+          0.8188009260079467
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift PostViolationRate toward Low (and away from High). The deployment will reach individuals with UserTenure=NewUser as well as UserTenure=EstablishedUser, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "FrictionBasedWarningSystem",
+        "value": "Enabled",
+        "min_improvement": 0.3139,
+        "improvement_low": 0.3618,
+        "improvement_high": 0.3139
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "PostViolationRate",
+          "group": "UserTenure",
+          "intervention_avg": "AutomatedRemovalIntensity",
+          "intervention_rob": "FrictionBasedWarningSystem",
+          "intervention_bad": "ShadowThrottling",
+          "confounder": "PriorStrikeHistory"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "FrictionBasedWarningSystem",
+            "value": "Enabled",
+            "min_improvement": 0.3139,
+            "improvement_low": 0.3618,
+            "improvement_high": 0.3139
+          },
+          "avg_best_but_uneven": {
+            "variable": "AutomatedRemovalIntensity",
+            "value": "Aggressive",
+            "min_improvement": 0.1875,
+            "improvement_low": 0.1875,
+            "improvement_high": 0.5022
+          },
+          "harmful_in_subgroup": {
+            "variable": "ShadowThrottling",
+            "value": "Full",
+            "min_improvement": -0.2183,
+            "improvement_low": -0.2183,
+            "improvement_high": 0.3266
+          },
+          "subgroups": [
+            "NewUser",
+            "EstablishedUser"
+          ],
+          "group_variable": "UserTenure",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "AutomatedRemovalIntensity",
+              "value": "Aggressive",
+              "improvement_low": 0.1875,
+              "improvement_high": 0.5022,
+              "min_improvement": 0.1875
+            },
+            {
+              "variable": "FrictionBasedWarningSystem",
+              "value": "Enabled",
+              "improvement_low": 0.3618,
+              "improvement_high": 0.3139,
+              "min_improvement": 0.3139
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,637 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "invalid_premise:valid_proposed_intervention",
+    "seed": 9503,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "valid_proposed_intervention"
+  },
+  "story": "A mid-sized urban school district partners with a university research lab to study its after-school tutoring program. The researcher has access to student records and can request observational or interventional samples from participating schools.",
+  "non_intervenable_variables": [
+    {
+      "name": "MathGradeImprovement",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StudentEngagementLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ParentalEducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineMathScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TutorExperienceYears",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SessionAttendanceRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StudentGradeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PeerGroupSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorTutoringExposure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HomeworkLoadPerWeek",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TransportationAccess",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EnglishLanguageProficiency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FreeReducedLunchStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "MathGradeImprovement",
+      "values": [
+        "Substantial",
+        "Moderate",
+        "Minimal"
+      ],
+      "desc": "Degree of improvement in student math grades over one semester",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SmallGroupTutoringFormat",
+      "values": [
+        "None",
+        "WeeklySmallGroup",
+        "BiweeklySmallGroup"
+      ],
+      "desc": "Frequency of small-group tutoring sessions assigned after school",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HomeworkCompletionChecklist",
+      "values": [
+        "NotProvided",
+        "Provided"
+      ],
+      "desc": "Whether students receive a structured checklist for daily homework tasks",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "StudentEngagementLevel",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Observed level of active participation during tutoring sessions",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ParentalEducationLevel",
+      "values": [
+        "CollegeDegree",
+        "HighSchool",
+        "BelowHighSchool"
+      ],
+      "desc": "Highest education level completed by the student's primary caregiver",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineMathScore",
+      "values": [
+        "AboveAverage",
+        "Average",
+        "BelowAverage"
+      ],
+      "desc": "Student's standardized math score at the start of the program",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TutorExperienceYears",
+      "values": [
+        "Experienced",
+        "Novice"
+      ],
+      "desc": "Whether the assigned tutor has more than two years of tutoring experience",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SessionAttendanceRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of scheduled tutoring sessions actually attended by the student",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "StudentGradeLevel",
+      "values": [
+        "MiddleSchool",
+        "Elementary"
+      ],
+      "desc": "The grade band in which the student is currently enrolled",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerGroupSize",
+      "values": [
+        "TwoToThree",
+        "FourToSix",
+        "SevenOrMore"
+      ],
+      "desc": "Number of students in the assigned tutoring group",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorTutoringExposure",
+      "values": [
+        "Yes",
+        "No"
+      ],
+      "desc": "Whether the student participated in any tutoring program previously",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HomeworkLoadPerWeek",
+      "values": [
+        "Heavy",
+        "Moderate",
+        "Light"
+      ],
+      "desc": "Amount of homework assigned by the student's regular classroom teacher weekly",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TransportationAccess",
+      "values": [
+        "Reliable",
+        "Unreliable"
+      ],
+      "desc": "Whether the student has consistent transportation to the tutoring site",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EnglishLanguageProficiency",
+      "values": [
+        "Fluent",
+        "Intermediate",
+        "Beginner"
+      ],
+      "desc": "Student's assessed English language proficiency at program entry",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FreeReducedLunchStatus",
+      "values": [
+        "Yes",
+        "No"
+      ],
+      "desc": "Whether the student qualifies for free or reduced-price school lunch",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SmallGroupTutoringFormat",
+      "StudentEngagementLevel"
+    ],
+    [
+      "HomeworkCompletionChecklist",
+      "MathGradeImprovement"
+    ],
+    [
+      "HomeworkCompletionChecklist",
+      "TutorExperienceYears"
+    ],
+    [
+      "StudentEngagementLevel",
+      "MathGradeImprovement"
+    ],
+    [
+      "ParentalEducationLevel",
+      "MathGradeImprovement"
+    ],
+    [
+      "ParentalEducationLevel",
+      "SessionAttendanceRate"
+    ],
+    [
+      "ParentalEducationLevel",
+      "TutorExperienceYears"
+    ],
+    [
+      "EnglishLanguageProficiency",
+      "HomeworkLoadPerWeek"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "SmallGroupTutoringFormat",
+      "parents": [],
+      "values": [
+        [
+          0.3338610990251705
+        ],
+        [
+          0.12195475302862903
+        ],
+        [
+          0.5441841479462005
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HomeworkCompletionChecklist",
+      "parents": [],
+      "values": [
+        [
+          0.6786947333248257
+        ],
+        [
+          0.3213052666751744
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ParentalEducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.16136120693142061
+        ],
+        [
+          0.4962564152324327
+        ],
+        [
+          0.3423823778361467
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineMathScore",
+      "parents": [],
+      "values": [
+        [
+          0.17830546767647373
+        ],
+        [
+          0.6127617958465036
+        ],
+        [
+          0.20893273647702268
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StudentGradeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.5792173934005554
+        ],
+        [
+          0.42078260659944455
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PeerGroupSize",
+      "parents": [],
+      "values": [
+        [
+          0.4835814710002104
+        ],
+        [
+          0.38349706881902157
+        ],
+        [
+          0.13292146018076795
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorTutoringExposure",
+      "parents": [],
+      "values": [
+        [
+          0.3453567583537461
+        ],
+        [
+          0.654643241646254
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TransportationAccess",
+      "parents": [],
+      "values": [
+        [
+          0.3594315208818112
+        ],
+        [
+          0.6405684791181888
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EnglishLanguageProficiency",
+      "parents": [],
+      "values": [
+        [
+          0.6098861807889112
+        ],
+        [
+          0.196270768774136
+        ],
+        [
+          0.19384305043695288
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FreeReducedLunchStatus",
+      "parents": [],
+      "values": [
+        [
+          0.6792372547684006
+        ],
+        [
+          0.3207627452315994
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "StudentEngagementLevel",
+      "parents": [
+        "SmallGroupTutoringFormat"
+      ],
+      "values": [
+        [
+          0.15318986464881154,
+          0.3385203454383756,
+          0.8638296665899592
+        ],
+        [
+          0.3006042074136487,
+          0.32817095315298167,
+          0.12039642934379946
+        ],
+        [
+          0.5462059279375397,
+          0.3333087014086427,
+          0.015773904066241323
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SessionAttendanceRate",
+      "parents": [
+        "ParentalEducationLevel"
+      ],
+      "values": [
+        [
+          0.4237197168794191,
+          0.4593155218222366,
+          0.4942447255446545
+        ],
+        [
+          0.30895552816194616,
+          0.3076689333573741,
+          0.30413737565943644
+        ],
+        [
+          0.2673247549586347,
+          0.23301554482038936,
+          0.20161789879590902
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TutorExperienceYears",
+      "parents": [
+        "HomeworkCompletionChecklist",
+        "ParentalEducationLevel"
+      ],
+      "values": [
+        [
+          0.48777288886908354,
+          0.5350438278418735,
+          0.5816934931856085,
+          0.7844277987525777,
+          0.8147209135422429,
+          0.8416166236620616
+        ],
+        [
+          0.5122271111309165,
+          0.46495617215812646,
+          0.41830650681439163,
+          0.21557220124742213,
+          0.18527908645775723,
+          0.15838337633793828
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HomeworkLoadPerWeek",
+      "parents": [
+        "EnglishLanguageProficiency"
+      ],
+      "values": [
+        [
+          0.25789128693414587,
+          0.07979283439035162,
+          0.013694243029815636
+        ],
+        [
+          0.40823646814205816,
+          0.16414156487591178,
+          0.036607684241580556
+        ],
+        [
+          0.333872244923796,
+          0.7560656007337365,
+          0.9496980727286038
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MathGradeImprovement",
+      "parents": [
+        "ParentalEducationLevel",
+        "StudentEngagementLevel",
+        "HomeworkCompletionChecklist"
+      ],
+      "values": [
+        [
+          0.8827694862777473,
+          0.8030108803530781,
+          0.48981561834179815,
+          0.33431992439367786,
+          0.23226804208083815,
+          0.12750049821495876,
+          0.8278930314850003,
+          0.7171234001972009,
+          0.3592984675167653,
+          0.21138217001557025,
+          0.13299919618191153,
+          0.0671527798400802,
+          0.5635462943100528,
+          0.4001294134051606,
+          0.10445978523975057,
+          0.046076449930058515,
+          0.0274249429538311,
+          0.011089706756208687
+        ],
+        [
+          0.10427426356662275,
+          0.16338266424072234,
+          0.319083551612485,
+          0.33513472214664947,
+          0.34110682333294245,
+          0.28314964534697973,
+          0.14623794207384883,
+          0.2162651309979704,
+          0.3430538790026414,
+          0.3142808015080649,
+          0.281456255667293,
+          0.21674496694602477,
+          0.28837816839766767,
+          0.33670536494046377,
+          0.2567546187630824,
+          0.18274326136538094,
+          0.14717339002355181,
+          0.09658472343780118
+        ],
+        [
+          0.012956250155629987,
+          0.033606455406199505,
+          0.1911008300457169,
+          0.33054535345967273,
+          0.42662513458621937,
+          0.5893498564380616,
+          0.02586902644115089,
+          0.06661146880482877,
+          0.2976476534805933,
+          0.47433702847636483,
+          0.5855445481507956,
+          0.7161022532138951,
+          0.1480755372922795,
+          0.2631652216543757,
+          0.638785595997167,
+          0.7711802887045605,
+          0.8254016670226171,
+          0.8923255698059901
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting SmallGroupTutoringFormat=BiweeklySmallGroup as a way to shift MathGradeImprovement toward Substantial (and away from Minimal). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift MathGradeImprovement toward Substantial.",
+      "answer": {
+        "is_valid_intervention": true,
+        "invalid_reason": null,
+        "proposed_intervention": {
+          "variable": "SmallGroupTutoringFormat",
+          "value": "BiweeklySmallGroup"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "valid_proposed_intervention",
+        "roles": {
+          "target": "MathGradeImprovement",
+          "proposed_intervention": "SmallGroupTutoringFormat",
+          "intervenable_alt": "HomeworkCompletionChecklist",
+          "alt_mediator": "StudentEngagementLevel",
+          "confounder": "ParentalEducationLevel"
+        },
+        "gold": {
+          "is_valid_intervention": true,
+          "valid_reason": "proposed_intervention_meaningfully_improves_target",
+          "proposed_intervention": {
+            "variable": "SmallGroupTutoringFormat",
+            "value": "BiweeklySmallGroup"
+          },
+          "proposed_effect": -0.3294,
+          "acceptable_alternatives": [
+            {
+              "variable": "SmallGroupTutoringFormat",
+              "value": "BiweeklySmallGroup",
+              "improvement": 0.3294
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+name: Runs pytests and generates coverage report
+
+on: [pull_request]
+
+jobs:
+
+  run_pytest:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # pgmpy requires torch; the CPU wheel is enough and much smaller
+      - name: Install dependencies
+        run: |
+          pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: Build coverage file
+        run: |
+          pytest --cache-clear --cov=src tests/ > pytest-coverage.txt
+      - name: Comment coverage
+        uses: coroo/pytest-coverage-commentator@v1.0.2

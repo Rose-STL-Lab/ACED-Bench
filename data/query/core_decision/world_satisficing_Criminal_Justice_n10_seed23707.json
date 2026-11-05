@@ -1,0 +1,806 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 10,
+    "topology": "satisficing",
+    "seed": 23707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A state-level forensic science commission oversees multiple crime laboratories serving diverse jurisdictions. The research team has access to administrative records across these laboratories and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "BacklogClearanceRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreExistingCaseVolume",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LabStaffExperienceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "JurisdictionPopulationSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EvidenceTypeComposition",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnnualLabBudgetTier",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "BacklogClearanceRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of pending forensic cases processed within target timeframe.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "RapidDnaPlatformDeployment",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Extent of rapid DNA analysis instruments installed in the crime lab.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "EvidenceTriagePrioritization",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether a structured triage protocol ranks incoming evidence by case urgency.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OutsourcedLabPartnerships",
+      "values": [
+        "None",
+        "Limited",
+        "Extensive"
+      ],
+      "desc": "Degree of contracted partnerships with accredited private forensic laboratories.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalEvidenceTracking",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a barcode or RFID chain-of-custody tracking system is in use.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PreExistingCaseVolume",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of unprocessed forensic cases already queued before the study period.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LabStaffExperienceLevel",
+      "values": [
+        "Junior",
+        "Senior"
+      ],
+      "desc": "Average years of forensic analysis experience among current lab personnel.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "JurisdictionPopulationSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Population category of the jurisdiction served by the forensic laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EvidenceTypeComposition",
+      "values": [
+        "MostlyBiological",
+        "MostlyNonBiological",
+        "Mixed"
+      ],
+      "desc": "Predominant category of physical evidence items submitted to the lab.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnnualLabBudgetTier",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Fiscal year operating budget bracket allocated to the forensic laboratory.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "RapidDnaPlatformDeployment",
+      "BacklogClearanceRate"
+    ],
+    [
+      "EvidenceTriagePrioritization",
+      "BacklogClearanceRate"
+    ],
+    [
+      "OutsourcedLabPartnerships",
+      "BacklogClearanceRate"
+    ],
+    [
+      "OutsourcedLabPartnerships",
+      "RapidDnaPlatformDeployment"
+    ],
+    [
+      "DigitalEvidenceTracking",
+      "BacklogClearanceRate"
+    ],
+    [
+      "DigitalEvidenceTracking",
+      "RapidDnaPlatformDeployment"
+    ],
+    [
+      "PreExistingCaseVolume",
+      "BacklogClearanceRate"
+    ],
+    [
+      "PreExistingCaseVolume",
+      "LabStaffExperienceLevel"
+    ],
+    [
+      "EvidenceTypeComposition",
+      "DigitalEvidenceTracking"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "EvidenceTriagePrioritization",
+      "parents": [],
+      "values": [
+        [
+          0.24972697556831855
+        ],
+        [
+          0.7502730244316814
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OutsourcedLabPartnerships",
+      "parents": [],
+      "values": [
+        [
+          0.528680172806147
+        ],
+        [
+          0.10610654613801017
+        ],
+        [
+          0.3652132810558429
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreExistingCaseVolume",
+      "parents": [],
+      "values": [
+        [
+          0.09207285922097895
+        ],
+        [
+          0.4050687565751129
+        ],
+        [
+          0.5028583842039082
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "JurisdictionPopulationSize",
+      "parents": [],
+      "values": [
+        [
+          0.1968233415950653
+        ],
+        [
+          0.2056649777881425
+        ],
+        [
+          0.5975116806167922
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EvidenceTypeComposition",
+      "parents": [],
+      "values": [
+        [
+          0.2273810124674364
+        ],
+        [
+          0.6808767245274782
+        ],
+        [
+          0.09174226300508538
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnnualLabBudgetTier",
+      "parents": [],
+      "values": [
+        [
+          0.20909960968914396
+        ],
+        [
+          0.6915433257366836
+        ],
+        [
+          0.09935706457417234
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LabStaffExperienceLevel",
+      "parents": [
+        "PreExistingCaseVolume"
+      ],
+      "values": [
+        [
+          0.35348457234813074,
+          0.0094521564046066,
+          0.0001665125578338159
+        ],
+        [
+          0.6465154276518693,
+          0.9905478435953934,
+          0.9998334874421662
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DigitalEvidenceTracking",
+      "parents": [
+        "EvidenceTypeComposition"
+      ],
+      "values": [
+        [
+          0.5904925541675098,
+          0.9879446555658957,
+          0.9997853388751363
+        ],
+        [
+          0.4095074458324902,
+          0.0120553444341043,
+          0.0002146611248637473
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RapidDnaPlatformDeployment",
+      "parents": [
+        "OutsourcedLabPartnerships",
+        "DigitalEvidenceTracking"
+      ],
+      "values": [
+        [
+          0.23158604554928602,
+          0.024171412853921652,
+          0.05950449417732708,
+          0.005148092256585793,
+          0.008632221973246305,
+          0.0007109317676906786
+        ],
+        [
+          0.34405682724282594,
+          0.4336560928661336,
+          0.08211880499998353,
+          0.08579555684870607,
+          0.01106599609111453,
+          0.011005795961866082
+        ],
+        [
+          0.4243571272078881,
+          0.5421724942799446,
+          0.8583767008226894,
+          0.909056350894708,
+          0.9803017819356392,
+          0.9882832722704431
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BacklogClearanceRate",
+      "parents": [
+        "PreExistingCaseVolume",
+        "EvidenceTriagePrioritization",
+        "OutsourcedLabPartnerships",
+        "DigitalEvidenceTracking",
+        "RapidDnaPlatformDeployment"
+      ],
+      "values": [
+        [
+          0.15745869037680932,
+          0.18797065334004226,
+          0.19927256305294505,
+          0.34306261055598153,
+          0.3727560243995758,
+          0.4057807899879305,
+          0.5965537020658475,
+          0.6229763114889887,
+          0.6356771227638668,
+          0.7570928465072146,
+          0.7831588041540629,
+          0.8023964713863477,
+          0.8088425152429193,
+          0.8298493573904829,
+          0.835704054315249,
+          0.9001713851387646,
+          0.9097269346914204,
+          0.9178694988245442,
+          0.9076667129139212,
+          0.9174414971087214,
+          0.9213381256429746,
+          0.9524349770487733,
+          0.9540016213375212,
+          0.9614073678527426,
+          0.9763531888604147,
+          0.9778216957448056,
+          0.9808149886963785,
+          0.9878990211920129,
+          0.9885516164500237,
+          0.989226767409199,
+          0.990310743376086,
+          0.9907742928086793,
+          0.9920544706067673,
+          0.9946994953261985,
+          0.9953814972811725,
+          0.9958483595910546,
+          0.06849761439431483,
+          0.07860152181669405,
+          0.09023979001258309,
+          0.1537003901814933,
+          0.1925269167552577,
+          0.2168070377874625,
+          0.3843208496190023,
+          0.4167906086636841,
+          0.4325988632095518,
+          0.5792305750870436,
+          0.6164273677056971,
+          0.656079306367975,
+          0.691794816949164,
+          0.6911107135240739,
+          0.7185976788648615,
+          0.8192819477681945,
+          0.8436069221410384,
+          0.8465064995931559,
+          0.8377652626920933,
+          0.8548774287296175,
+          0.8654881989744152,
+          0.9113630005410202,
+          0.9211681288500967,
+          0.9251027251035007,
+          0.9563861577574554,
+          0.9614649253076568,
+          0.9644400489867789,
+          0.9759926911649173,
+          0.9792425660550738,
+          0.9796500428836844,
+          0.9819706356205323,
+          0.9836749162333214,
+          0.9846835974667222,
+          0.9905863887743024,
+          0.9918786549746393,
+          0.9917545667396759,
+          0.005296992067602617,
+          0.006698778004863437,
+          0.006961581932565457,
+          0.016251959713623677,
+          0.020687552709084907,
+          0.021437456956034752,
+          0.058927391773556784,
+          0.06952677868082119,
+          0.07883486765821379,
+          0.14984432553264315,
+          0.1893357308983823,
+          0.19675456331168514,
+          0.216544694185248,
+          0.26719934448984145,
+          0.280234971705419,
+          0.4237012001011626,
+          0.46735693760962016,
+          0.4972871609884803,
+          0.457359307651537,
+          0.5207896559693929,
+          0.5247812315414515,
+          0.6606456537938155,
+          0.6866302306278241,
+          0.7122977504742076,
+          0.8295602595667629,
+          0.8383105477732797,
+          0.8480269323591806,
+          0.904597397871114,
+          0.9121722065484497,
+          0.9206997700779544,
+          0.9256363284856965,
+          0.9368622777031167,
+          0.943027719208404,
+          0.962217966848038,
+          0.9657116556745347,
+          0.9688902165401929
+        ],
+        [
+          0.2968580315024595,
+          0.3134968806144911,
+          0.3095526549706692,
+          0.322678628963231,
+          0.33206239119194675,
+          0.3323495462531351,
+          0.27286554787614914,
+          0.27042712910481437,
+          0.2592811688262764,
+          0.1900622254519954,
+          0.17582718003091577,
+          0.16202985859163171,
+          0.15900409747831,
+          0.14467202671460333,
+          0.14138133619278037,
+          0.09048188426083519,
+          0.08266514757999201,
+          0.07578470047803086,
+          0.08449983084884788,
+          0.07614093047985006,
+          0.07324571129287982,
+          0.04519679892872004,
+          0.044006332343680996,
+          0.0371128527588277,
+          0.023086196595712673,
+          0.02174232080631162,
+          0.018806206760369246,
+          0.011938700705494524,
+          0.011324679218328443,
+          0.010657186915226923,
+          0.009594198837316624,
+          0.009145944772498608,
+          0.007886668020961218,
+          0.005273598867039787,
+          0.004596239996058197,
+          0.00413439774427124,
+          0.22648122459875028,
+          0.2374617263218002,
+          0.2427959508001728,
+          0.30240371628922075,
+          0.3186273094078684,
+          0.3224382042601926,
+          0.32462902931170584,
+          0.31731654245217333,
+          0.3306711017837938,
+          0.28651237208212094,
+          0.27421716947549485,
+          0.25142625778854866,
+          0.22298643185950426,
+          0.23371654226881286,
+          0.22132844383677924,
+          0.15160331569078644,
+          0.13375949440656468,
+          0.13250973668370986,
+          0.13993646476235197,
+          0.1273102729880561,
+          0.11756978018477285,
+          0.08122446207676909,
+          0.07256208244478235,
+          0.06975358389045648,
+          0.04189920348751512,
+          0.03716143848733972,
+          0.034265959194920606,
+          0.023457478089890443,
+          0.02034819925699048,
+          0.019961815556324883,
+          0.01771856430127354,
+          0.016064382332286277,
+          0.015114672378963395,
+          0.009327547289300367,
+          0.008054775505629887,
+          0.008183317908616917,
+          0.07231607823477712,
+          0.077522804386923,
+          0.07885301323489814,
+          0.12686814628431564,
+          0.13212554681867397,
+          0.13442449573108162,
+          0.21818857073408907,
+          0.229062768198222,
+          0.2323376950648674,
+          0.2981380007947413,
+          0.300245407424636,
+          0.31353601564917477,
+          0.3259566927316258,
+          0.32368968446737134,
+          0.3284279289411469,
+          0.3252235545738526,
+          0.31554230989391696,
+          0.31289337712546955,
+          0.32309347422986967,
+          0.2994647246095199,
+          0.30502374095809165,
+          0.24686621034788903,
+          0.237603207053266,
+          0.21717571061022592,
+          0.14382317328004654,
+          0.1396637428728113,
+          0.1322153112506492,
+          0.08747790574410619,
+          0.08130253008333904,
+          0.07393098407079395,
+          0.06937489148388032,
+          0.05927248076437148,
+          0.05363122269932068,
+          0.03635616170616442,
+          0.033117046732585795,
+          0.03016590686963533
+        ],
+        [
+          0.5456832781207311,
+          0.4985324660454667,
+          0.49117478197638587,
+          0.3342587604807874,
+          0.2951815844084775,
+          0.2618696637589344,
+          0.13058075005800338,
+          0.10659655940619696,
+          0.10504170840985694,
+          0.05284492804078997,
+          0.0410140158150214,
+          0.03557367002202053,
+          0.032153387278770706,
+          0.025478615894913792,
+          0.022914609491970564,
+          0.009346730600400182,
+          0.007607917728587613,
+          0.006345800697425006,
+          0.007833456237231038,
+          0.006417572411428428,
+          0.005416163064145757,
+          0.0023682240225066766,
+          0.0019920463187978457,
+          0.0014797793884297485,
+          0.0005606145438725567,
+          0.0004359834488827578,
+          0.0003788045432522533,
+          0.0001622781024927401,
+          0.00012370433164784724,
+          0.00011604567557396238,
+          9.505778659734089e-05,
+          7.976241882195802e-05,
+          5.886137227163602e-05,
+          2.6905806761620854e-05,
+          2.2262722769202044e-05,
+          1.7242664674174863e-05,
+          0.7050211610069349,
+          0.6839367518615058,
+          0.666964259187244,
+          0.5438958935292859,
+          0.4888457738368738,
+          0.46075475795234494,
+          0.2910501210692919,
+          0.26589284888414255,
+          0.23673003500665435,
+          0.13425705283083553,
+          0.10935546281880809,
+          0.09249443584347637,
+          0.08521875119133182,
+          0.07517274420711319,
+          0.06007387729835924,
+          0.029114736541019145,
+          0.022633583452396914,
+          0.02098376372313427,
+          0.02229827254555478,
+          0.017812298282326385,
+          0.016942020840811933,
+          0.007412537382210753,
+          0.006269788705120804,
+          0.005143691006042879,
+          0.001714638755029523,
+          0.001373636205003426,
+          0.001293991818300419,
+          0.0005498307451921551,
+          0.000409234687935688,
+          0.00038814155999060786,
+          0.00031080007819424174,
+          0.000260701434392455,
+          0.00020173015431422365,
+          8.60639363972966e-05,
+          6.656951973070195e-05,
+          6.211535170713012e-05,
+          0.9223869296976203,
+          0.9157784176082135,
+          0.9141854048325364,
+          0.8568798940020607,
+          0.8471869004722411,
+          0.8441380473128837,
+          0.7228840374923541,
+          0.7014104531209568,
+          0.6888274372769189,
+          0.5520176736726156,
+          0.5104188616769817,
+          0.4897094210391402,
+          0.4574986130831263,
+          0.4091109710427871,
+          0.391337099353434,
+          0.2510752453249848,
+          0.21710075249646285,
+          0.1898194618860502,
+          0.21954721811859332,
+          0.1797456194210872,
+          0.1701950275004568,
+          0.09248813585829549,
+          0.07576656231890987,
+          0.07052653891556643,
+          0.026616567153190683,
+          0.02202570935390889,
+          0.019757756390170154,
+          0.007924696384779793,
+          0.006525263368211339,
+          0.005369245851251557,
+          0.004988780030423112,
+          0.003865241532511949,
+          0.0033410580922754976,
+          0.0014258714457977396,
+          0.0011712975928795846,
+          0.0009438765901718307
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts BacklogClearanceRate toward High (and away from Low). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes BacklogClearanceRate.",
+      "answer": [
+        {
+          "variable": "EvidenceTriagePrioritization",
+          "value": "On",
+          "improvement": 0.2606
+        },
+        {
+          "variable": "OutsourcedLabPartnerships",
+          "value": "Extensive",
+          "improvement": 0.2951
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "BacklogClearanceRate",
+          "intervention_A": "RapidDnaPlatformDeployment",
+          "intervention_B": "EvidenceTriagePrioritization",
+          "intervention_C": "OutsourcedLabPartnerships",
+          "intervention_D": "DigitalEvidenceTracking",
+          "confounder": "PreExistingCaseVolume"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "EvidenceTriagePrioritization",
+              "value": "On",
+              "improvement": 0.2606
+            },
+            {
+              "variable": "OutsourcedLabPartnerships",
+              "value": "Extensive",
+              "improvement": 0.2951
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "EvidenceTriagePrioritization",
+              "value": "Off",
+              "improvement": -0.7828
+            },
+            {
+              "variable": "EvidenceTriagePrioritization",
+              "value": "On",
+              "improvement": 0.2606
+            },
+            {
+              "variable": "OutsourcedLabPartnerships",
+              "value": "None",
+              "improvement": -0.2302
+            },
+            {
+              "variable": "OutsourcedLabPartnerships",
+              "value": "Limited",
+              "improvement": 0.1311
+            },
+            {
+              "variable": "OutsourcedLabPartnerships",
+              "value": "Extensive",
+              "improvement": 0.2951
+            },
+            {
+              "variable": "DigitalEvidenceTracking",
+              "value": "No",
+              "improvement": -0.015
+            },
+            {
+              "variable": "DigitalEvidenceTracking",
+              "value": "Yes",
+              "improvement": 0.1328
+            },
+            {
+              "variable": "RapidDnaPlatformDeployment",
+              "value": "None",
+              "improvement": -0.0377
+            },
+            {
+              "variable": "RapidDnaPlatformDeployment",
+              "value": "Partial",
+              "improvement": -0.0024
+            },
+            {
+              "variable": "RapidDnaPlatformDeployment",
+              "value": "Full",
+              "improvement": 0.0101
+            }
+          ],
+          "threshold": 0.1967,
+          "baseline_E_target": 0.4933
+        }
+      }
+    }
+  ]
+}

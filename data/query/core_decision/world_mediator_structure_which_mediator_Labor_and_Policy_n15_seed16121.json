@@ -1,0 +1,649 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 15,
+    "topology": "mediator_structure:which_mediator",
+    "seed": 16121,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "which_mediator"
+  },
+  "story": "A state labor policy institute maintains comprehensive records on gig economy workers across metropolitan and rural areas. The research team can access administrative datasets and request both observational and interventional samples from participating platform companies.",
+  "non_intervenable_variables": [
+    {
+      "name": "WorkerFinancialStability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PlatformBenefitsContribution",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WorkerAppRating",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GigTaskDiversity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MetroLaborMarketTightness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WorkerAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WeeklyGigHours",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DependentCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorTraditionalEmployment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "VehicleOwnership",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PlatformTenure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UrbanRuralClassification",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ExistingHealthInsurance",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PortableBenefitsMandate",
+      "values": [
+        "NoMandate",
+        "MandateEnacted"
+      ],
+      "desc": "Whether a jurisdiction has enacted a portable benefits mandate for gig platforms.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "WorkerFinancialStability",
+      "values": [
+        "Stable",
+        "Precarious",
+        "Distressed"
+      ],
+      "desc": "Self-reported financial stability level of gig workers over the past quarter.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PlatformBenefitsContribution",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Level of per-hour benefits contributions platforms deposit into worker accounts.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "WorkerAppRating",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Average customer satisfaction rating for the gig worker on the platform.",
+      "role": "decoy_M1",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "GigTaskDiversity",
+      "values": [
+        "SinglePlatform",
+        "MultiPlatform"
+      ],
+      "desc": "Whether the worker performs tasks across one or multiple gig platforms.",
+      "role": "decoy_M2",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MetroLaborMarketTightness",
+      "values": [
+        "Loose",
+        "Moderate",
+        "Tight"
+      ],
+      "desc": "Ratio of job openings to job seekers in the worker's metropolitan area.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WorkerAge",
+      "values": [
+        "Under30",
+        "30to50",
+        "Over50"
+      ],
+      "desc": "Age bracket of the gig worker at time of survey.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "HighSchoolOrLess",
+        "SomeCollege",
+        "BachelorPlus"
+      ],
+      "desc": "Highest level of formal education completed by the gig worker.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WeeklyGigHours",
+      "values": [
+        "PartTime",
+        "FullTime"
+      ],
+      "desc": "Whether the worker logs fewer or more than 30 gig hours per week.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DependentCount",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreePlus"
+      ],
+      "desc": "Number of financial dependents in the gig worker's household.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorTraditionalEmployment",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the worker held a traditional W-2 job in the preceding two years.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "VehicleOwnership",
+      "values": [
+        "NoVehicle",
+        "OwnsVehicle"
+      ],
+      "desc": "Whether the gig worker owns or leases a personal vehicle for work.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PlatformTenure",
+      "values": [
+        "Under1Year",
+        "1to3Years",
+        "Over3Years"
+      ],
+      "desc": "Duration of the worker's active account on their primary gig platform.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UrbanRuralClassification",
+      "values": [
+        "Urban",
+        "Suburban",
+        "Rural"
+      ],
+      "desc": "Census-based classification of the worker's primary operating area.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ExistingHealthInsurance",
+      "values": [
+        "Uninsured",
+        "Insured"
+      ],
+      "desc": "Whether the gig worker had any health insurance at baseline enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PortableBenefitsMandate",
+      "PlatformBenefitsContribution"
+    ],
+    [
+      "PortableBenefitsMandate",
+      "WorkerAppRating"
+    ],
+    [
+      "WorkerFinancialStability",
+      "WeeklyGigHours"
+    ],
+    [
+      "PlatformBenefitsContribution",
+      "WorkerFinancialStability"
+    ],
+    [
+      "GigTaskDiversity",
+      "WorkerFinancialStability"
+    ],
+    [
+      "MetroLaborMarketTightness",
+      "PortableBenefitsMandate"
+    ],
+    [
+      "MetroLaborMarketTightness",
+      "WorkerFinancialStability"
+    ],
+    [
+      "EducationLevel",
+      "PlatformTenure"
+    ],
+    [
+      "VehicleOwnership",
+      "DependentCount"
+    ],
+    [
+      "PlatformTenure",
+      "WorkerAge"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "GigTaskDiversity",
+      "parents": [],
+      "values": [
+        [
+          0.7255072737082499
+        ],
+        [
+          0.27449272629175014
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MetroLaborMarketTightness",
+      "parents": [],
+      "values": [
+        [
+          0.8254071017068898
+        ],
+        [
+          0.08729644914655509
+        ],
+        [
+          0.08729644914655509
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.6676288724915022
+        ],
+        [
+          0.0946150101106844
+        ],
+        [
+          0.23775611739781347
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorTraditionalEmployment",
+      "parents": [],
+      "values": [
+        [
+          0.5905068783982339
+        ],
+        [
+          0.40949312160176615
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "VehicleOwnership",
+      "parents": [],
+      "values": [
+        [
+          0.25870595729667367
+        ],
+        [
+          0.7412940427033263
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "UrbanRuralClassification",
+      "parents": [],
+      "values": [
+        [
+          0.36196418733943236
+        ],
+        [
+          0.2441505647111214
+        ],
+        [
+          0.3938852479494463
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ExistingHealthInsurance",
+      "parents": [],
+      "values": [
+        [
+          0.33909629370063465
+        ],
+        [
+          0.6609037062993655
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PortableBenefitsMandate",
+      "parents": [
+        "MetroLaborMarketTightness"
+      ],
+      "values": [
+        [
+          0.42681788481464633,
+          0.3918326446374287,
+          0.3579243489256605
+        ],
+        [
+          0.5731821151853536,
+          0.6081673553625714,
+          0.6420756510743395
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PlatformTenure",
+      "parents": [
+        "EducationLevel"
+      ],
+      "values": [
+        [
+          0.32531197423136105,
+          0.03054515234200013,
+          0.0014468903670530927
+        ],
+        [
+          0.33740622642916185,
+          0.7992978623742868,
+          0.9552461452892419
+        ],
+        [
+          0.33728179933947716,
+          0.17015698528371323,
+          0.043306964343705186
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DependentCount",
+      "parents": [
+        "VehicleOwnership"
+      ],
+      "values": [
+        [
+          0.4139028289456696,
+          0.593314535709126
+        ],
+        [
+          0.20392937087806307,
+          0.39179963093567194
+        ],
+        [
+          0.3821678001762673,
+          0.014885833355202027
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PlatformBenefitsContribution",
+      "parents": [
+        "PortableBenefitsMandate"
+      ],
+      "values": [
+        [
+          0.16198636220906865,
+          0.8744792026382782
+        ],
+        [
+          0.2941702382628929,
+          0.11012152149727022
+        ],
+        [
+          0.5438433995280385,
+          0.015399275864451663
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WorkerAppRating",
+      "parents": [
+        "PortableBenefitsMandate"
+      ],
+      "values": [
+        [
+          0.2087066392140426,
+          0.7700601104942973
+        ],
+        [
+          0.3000561170262193,
+          0.18440188197211382
+        ],
+        [
+          0.49123724375973815,
+          0.045538007533588734
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WorkerAge",
+      "parents": [
+        "PlatformTenure"
+      ],
+      "values": [
+        [
+          0.46272705598359043,
+          0.6150894283149712,
+          0.6647979202585282
+        ],
+        [
+          0.24528239788681055,
+          0.04083111732209504,
+          0.005526550792327903
+        ],
+        [
+          0.29199054612959896,
+          0.3440794543629338,
+          0.3296755289491438
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WorkerFinancialStability",
+      "parents": [
+        "MetroLaborMarketTightness",
+        "PlatformBenefitsContribution",
+        "GigTaskDiversity"
+      ],
+      "values": [
+        [
+          0.9639977689336172,
+          0.831099295819388,
+          0.8325547317756059,
+          0.3999597862669199,
+          0.6089769725029893,
+          0.12768940911620624,
+          0.9233278735033975,
+          0.6728094819685276,
+          0.6636363382561615,
+          0.15741229292500128,
+          0.33334044063902113,
+          0.032656058429334396,
+          0.6597944452335606,
+          0.1601689932319174,
+          0.17256158692721243,
+          0.011409187111136207,
+          0.034371361256274977,
+          0.0016387017375993375
+        ],
+        [
+          0.034842029208769824,
+          0.14617397795102166,
+          0.14481353433619007,
+          0.34319830050655703,
+          0.27135629822493745,
+          0.28444214891298786,
+          0.07177937496967367,
+          0.238222892280517,
+          0.24429227970837064,
+          0.29153874093734844,
+          0.3358211733988061,
+          0.16243373636587125,
+          0.249323829637576,
+          0.3047616308000907,
+          0.2975853452535397,
+          0.10062259808805245,
+          0.15874263124706492,
+          0.038077343192969966
+        ],
+        [
+          0.0011602018576129833,
+          0.02272672622959024,
+          0.022631733888204122,
+          0.2568419132265231,
+          0.11966672927207325,
+          0.5878684419708059,
+          0.0048927515269288945,
+          0.08896762575095532,
+          0.09207138203546777,
+          0.5510489661376502,
+          0.3308383859621727,
+          0.8049102052047944,
+          0.09088172512886347,
+          0.5350693759679919,
+          0.5298530678192478,
+          0.8879682148008113,
+          0.8068860074966601,
+          0.9602839550694308
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WeeklyGigHours",
+      "parents": [
+        "WorkerFinancialStability"
+      ],
+      "values": [
+        [
+          0.5969220496340184,
+          0.6314138307796512,
+          0.6646124480528628
+        ],
+        [
+          0.40307795036598154,
+          0.36858616922034887,
+          0.33538755194713726
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "Among the variables [PlatformBenefitsContribution, WorkerAppRating, GigTaskDiversity], which one is on the actual causal pathway from PortableBenefitsMandate to WorkerFinancialStability? Identify the single variable and explain how you ruled out the others.",
+      "answer": "which_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "which_mediator",
+        "roles": {
+          "treatment": "PortableBenefitsMandate",
+          "outcome": "WorkerFinancialStability",
+          "true_mediator": "PlatformBenefitsContribution",
+          "decoy_M1": "WorkerAppRating",
+          "decoy_M2": "GigTaskDiversity",
+          "confounder": "MetroLaborMarketTightness"
+        },
+        "gold": {
+          "label": "which_mediator",
+          "T": "PortableBenefitsMandate",
+          "O": "WorkerFinancialStability",
+          "true_mediator": "PlatformBenefitsContribution",
+          "candidates": [
+            "PlatformBenefitsContribution",
+            "WorkerAppRating",
+            "GigTaskDiversity"
+          ],
+          "candidate_do_effects": {
+            "PlatformBenefitsContribution": 0.7604,
+            "WorkerAppRating": 0.0,
+            "GigTaskDiversity": 0.4755
+          },
+          "total_effect": -0.4678
+        }
+      }
+    }
+  ]
+}

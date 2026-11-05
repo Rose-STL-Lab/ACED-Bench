@@ -1,0 +1,584 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 15,
+    "topology": "mediator_structure:not_mediator",
+    "seed": 14202,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "not_mediator"
+  },
+  "story": "A researcher works within a large academic medical center's surgical department. The institution maintains detailed perioperative records and permits the researcher to request both observational chart reviews and prospective interventional data collection.",
+  "non_intervenable_variables": [
+    {
+      "name": "SurgicalSiteComplicationGrade",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IntraopWoundIrrigationFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ResidualBacterialBioburden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientDiabetesStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SurgeryDurationCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WoundClassification",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorSurgicalSiteInfectionHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerioperativeAntibioticTiming",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmokingStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IntraopHypothermiaOccurrence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SurgicalTechniqueType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PostopDrainPlacement",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PreopSkinAntisepticProtocol",
+      "values": [
+        "StandardPrep",
+        "EnhancedPrep"
+      ],
+      "desc": "Type of preoperative skin antiseptic regimen applied before incision.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgicalSiteComplicationGrade",
+      "values": [
+        "NoComplication",
+        "MinorComplication",
+        "MajorComplication"
+      ],
+      "desc": "Postoperative surgical site complication severity within 30 days.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "IntraopWoundIrrigationFrequency",
+      "values": [
+        "None",
+        "Occasional",
+        "Frequent"
+      ],
+      "desc": "Frequency of intraoperative wound irrigation performed during surgery.",
+      "role": "proposed_M",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ResidualBacterialBioburden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Estimated bacterial load remaining on the surgical site at incision time.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PatientDiabetesStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has a documented diagnosis of diabetes mellitus.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Under50",
+        "50to69",
+        "70plus"
+      ],
+      "desc": "Age category of the patient at the time of surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Patient body mass index classification recorded at preoperative assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgeryDurationCategory",
+      "values": [
+        "Short",
+        "Moderate",
+        "Long"
+      ],
+      "desc": "Total operative time from incision to closure categorized by duration.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WoundClassification",
+      "values": [
+        "Clean",
+        "CleanContaminated",
+        "Contaminated"
+      ],
+      "desc": "CDC wound classification assigned based on operative field contamination level.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorSurgicalSiteInfectionHistory",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has a prior documented surgical site infection.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PerioperativeAntibioticTiming",
+      "values": [
+        "OnTime",
+        "Delayed"
+      ],
+      "desc": "Whether prophylactic antibiotics were administered within the recommended window.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmokingStatus",
+      "values": [
+        "NonSmoker",
+        "CurrentSmoker"
+      ],
+      "desc": "Patient self-reported tobacco smoking status at time of surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "IntraopHypothermiaOccurrence",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient experienced core temperature below 36°C during surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgicalTechniqueType",
+      "values": [
+        "Open",
+        "Laparoscopic"
+      ],
+      "desc": "Primary surgical approach used for the operative procedure.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PostopDrainPlacement",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a surgical drain was placed at the operative site before closure.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PreopSkinAntisepticProtocol",
+      "ResidualBacterialBioburden"
+    ],
+    [
+      "PreopSkinAntisepticProtocol",
+      "IntraopWoundIrrigationFrequency"
+    ],
+    [
+      "ResidualBacterialBioburden",
+      "SurgicalSiteComplicationGrade"
+    ],
+    [
+      "PatientDiabetesStatus",
+      "PreopSkinAntisepticProtocol"
+    ],
+    [
+      "PatientDiabetesStatus",
+      "SurgicalSiteComplicationGrade"
+    ],
+    [
+      "PatientDiabetesStatus",
+      "PriorSurgicalSiteInfectionHistory"
+    ],
+    [
+      "BodyMassIndexCategory",
+      "WoundClassification"
+    ],
+    [
+      "SurgicalTechniqueType",
+      "PostopDrainPlacement"
+    ],
+    [
+      "SurgicalTechniqueType",
+      "BodyMassIndexCategory"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PatientDiabetesStatus",
+      "parents": [],
+      "values": [
+        [
+          0.7902433665117877
+        ],
+        [
+          0.20975663348821225
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.2821740372954252
+        ],
+        [
+          0.10282377340288563
+        ],
+        [
+          0.6150021893016892
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgeryDurationCategory",
+      "parents": [],
+      "values": [
+        [
+          0.10996245563403152
+        ],
+        [
+          0.5411077198154968
+        ],
+        [
+          0.3489298245504718
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerioperativeAntibioticTiming",
+      "parents": [],
+      "values": [
+        [
+          0.31988983496891255
+        ],
+        [
+          0.6801101650310876
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SmokingStatus",
+      "parents": [],
+      "values": [
+        [
+          0.13095290374097807
+        ],
+        [
+          0.8690470962590219
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "IntraopHypothermiaOccurrence",
+      "parents": [],
+      "values": [
+        [
+          0.8062785008465791
+        ],
+        [
+          0.19372149915342088
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SurgicalTechniqueType",
+      "parents": [],
+      "values": [
+        [
+          0.7834103483417886
+        ],
+        [
+          0.21658965165821148
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PreopSkinAntisepticProtocol",
+      "parents": [
+        "PatientDiabetesStatus"
+      ],
+      "values": [
+        [
+          0.4297407259305213,
+          0.27422531211654266
+        ],
+        [
+          0.5702592740694787,
+          0.7257746878834573
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorSurgicalSiteInfectionHistory",
+      "parents": [
+        "PatientDiabetesStatus"
+      ],
+      "values": [
+        [
+          0.422548873988275,
+          0.44317212281444596
+        ],
+        [
+          0.577451126011725,
+          0.5568278771855539
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PostopDrainPlacement",
+      "parents": [
+        "SurgicalTechniqueType"
+      ],
+      "values": [
+        [
+          0.489599458785129,
+          0.7728820588588511
+        ],
+        [
+          0.510400541214871,
+          0.2271179411411488
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [
+        "SurgicalTechniqueType"
+      ],
+      "values": [
+        [
+          0.2393754468823665,
+          0.7666441353694037
+        ],
+        [
+          0.4611150596276312,
+          0.1885272859572628
+        ],
+        [
+          0.2995094934900022,
+          0.044828578673333556
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ResidualBacterialBioburden",
+      "parents": [
+        "PreopSkinAntisepticProtocol"
+      ],
+      "values": [
+        [
+          0.16134980038357843,
+          0.8760097879576086
+        ],
+        [
+          0.29386661351960164,
+          0.10868231999510561
+        ],
+        [
+          0.54478358609682,
+          0.015307892047285705
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "IntraopWoundIrrigationFrequency",
+      "parents": [
+        "PreopSkinAntisepticProtocol"
+      ],
+      "values": [
+        [
+          0.2064849894454346,
+          0.8032933652159222
+        ],
+        [
+          0.314561577091255,
+          0.16605823054727617
+        ],
+        [
+          0.4789534334633104,
+          0.030648404236801513
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WoundClassification",
+      "parents": [
+        "BodyMassIndexCategory"
+      ],
+      "values": [
+        [
+          0.33202371197791425,
+          0.8819950675430241,
+          0.9907025892862383
+        ],
+        [
+          0.2237031247134034,
+          0.0264900281916847,
+          0.0013263950010835182
+        ],
+        [
+          0.4442731633086822,
+          0.09151490426529123,
+          0.00797101571267811
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgicalSiteComplicationGrade",
+      "parents": [
+        "PatientDiabetesStatus",
+        "ResidualBacterialBioburden"
+      ],
+      "values": [
+        [
+          0.91036773160357,
+          0.6062088457378607,
+          0.27564293462796935,
+          0.33477129294440305,
+          0.03261419151950036,
+          0.005304428232564272
+        ],
+        [
+          0.08201523967896233,
+          0.26918061363675455,
+          0.32346182068548757,
+          0.3404954021914037,
+          0.15465904624124843,
+          0.07393640415749955
+        ],
+        [
+          0.007617028717467684,
+          0.12461054062538486,
+          0.40089524468654314,
+          0.3247333048641932,
+          0.8127267622392512,
+          0.9207591676099361
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "An analyst hypothesizes that IntraopWoundIrrigationFrequency is the variable through which PreopSkinAntisepticProtocol changes SurgicalSiteComplicationGrade. Investigate the system and decide whether this hypothesis is supported, and explain why.",
+      "answer": "not_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "not_mediator",
+        "roles": {
+          "treatment": "PreopSkinAntisepticProtocol",
+          "outcome": "SurgicalSiteComplicationGrade",
+          "proposed_M": "IntraopWoundIrrigationFrequency",
+          "true_mediator": "ResidualBacterialBioburden",
+          "confounder": "PatientDiabetesStatus"
+        },
+        "gold": {
+          "label": "not_mediator",
+          "T": "PreopSkinAntisepticProtocol",
+          "M_proposed": "IntraopWoundIrrigationFrequency",
+          "M_true": "ResidualBacterialBioburden",
+          "O": "SurgicalSiteComplicationGrade",
+          "total_effect": -0.6252,
+          "residual_after_fix_proposed": 0.6252,
+          "do_proposed_effect_on_O": 0.0
+        }
+      }
+    }
+  ]
+}

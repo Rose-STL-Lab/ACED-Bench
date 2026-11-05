@@ -1,0 +1,875 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 7949,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A researcher works within a large academic medical center's perioperative services division. The researcher has access to detailed patient records and can request both observational data extracts and prospective interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "PainReliefLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RespiratoryDepression",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OpioidConsumption48Hr",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselinePainSensitivity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SurgeryType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreoperativeAnxiety",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NursePatientRatio",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ChronicOpioidUseHistory",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PainReliefLevel",
+      "values": [
+        "Adequate",
+        "Partial",
+        "Inadequate"
+      ],
+      "desc": "Patient-reported pain relief adequacy at 48 hours post-surgery.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "RespiratoryDepression",
+      "values": [
+        "None",
+        "Mild",
+        "Severe"
+      ],
+      "desc": "Degree of respiratory depression observed during postoperative monitoring.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MultimodalAnalgesia",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Extent of scheduled non-opioid analgesic combination protocol administered.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OpioidDoseTier",
+      "values": [
+        "None",
+        "Standard",
+        "High"
+      ],
+      "desc": "Prescribed postoperative opioid dosing intensity tier.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CryotherapyApplication",
+      "values": [
+        "None",
+        "Intermittent",
+        "Continuous"
+      ],
+      "desc": "Frequency of surgical-site cold therapy application postoperatively.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OpioidConsumption48Hr",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Total opioid consumption measured in morphine equivalents over 48 hours.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselinePainSensitivity",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Preoperative quantitative sensory testing classification of pain sensitivity.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgeryType",
+      "values": [
+        "Minor",
+        "Major"
+      ],
+      "desc": "Classification of surgical procedure by tissue invasiveness and duration.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Young",
+        "MiddleAge",
+        "Elderly"
+      ],
+      "desc": "Patient age bracket at time of surgical procedure.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnesthesiaType",
+      "values": [
+        "General",
+        "Regional"
+      ],
+      "desc": "Primary anesthesia modality used during the surgical procedure.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PreoperativeAnxiety",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Standardized preoperative anxiety score measured before surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NursePatientRatio",
+      "values": [
+        "Favorable",
+        "Standard",
+        "Stretched"
+      ],
+      "desc": "Postoperative ward nurse-to-patient staffing ratio category.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EarlyMobilizationProtocol",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a structured early ambulation protocol is assigned postoperatively.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ChronicOpioidUseHistory",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient had chronic opioid use prior to surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientControlledAnalgesia",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether a patient-controlled analgesia pump is set up postoperatively.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PainReliefLevel",
+      "NursePatientRatio"
+    ],
+    [
+      "MultimodalAnalgesia",
+      "OpioidConsumption48Hr"
+    ],
+    [
+      "OpioidDoseTier",
+      "PainReliefLevel"
+    ],
+    [
+      "OpioidDoseTier",
+      "RespiratoryDepression"
+    ],
+    [
+      "CryotherapyApplication",
+      "PainReliefLevel"
+    ],
+    [
+      "OpioidConsumption48Hr",
+      "PainReliefLevel"
+    ],
+    [
+      "BaselinePainSensitivity",
+      "PainReliefLevel"
+    ],
+    [
+      "BaselinePainSensitivity",
+      "RespiratoryDepression"
+    ],
+    [
+      "BaselinePainSensitivity",
+      "SurgeryType"
+    ],
+    [
+      "PreoperativeAnxiety",
+      "AnesthesiaType"
+    ],
+    [
+      "NursePatientRatio",
+      "AnesthesiaType"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MultimodalAnalgesia",
+      "parents": [],
+      "values": [
+        [
+          0.22750593818562675
+        ],
+        [
+          0.24621165425763902
+        ],
+        [
+          0.5262824075567343
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OpioidDoseTier",
+      "parents": [],
+      "values": [
+        [
+          0.7538762313857278
+        ],
+        [
+          0.1463526466726808
+        ],
+        [
+          0.09977112194159139
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CryotherapyApplication",
+      "parents": [],
+      "values": [
+        [
+          0.165109464823381
+        ],
+        [
+          0.09615829261073733
+        ],
+        [
+          0.7387322425658818
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselinePainSensitivity",
+      "parents": [],
+      "values": [
+        [
+          0.09385467969521667
+        ],
+        [
+          0.46091868741325526
+        ],
+        [
+          0.44522663289152803
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.1893593924418646
+        ],
+        [
+          0.22291855017348566
+        ],
+        [
+          0.5877220573846498
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreoperativeAnxiety",
+      "parents": [],
+      "values": [
+        [
+          0.4181101279183971
+        ],
+        [
+          0.2042809382261048
+        ],
+        [
+          0.3776089338554982
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EarlyMobilizationProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.8613782119014601
+        ],
+        [
+          0.13862178809853995
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ChronicOpioidUseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.8125212180749936
+        ],
+        [
+          0.18747878192500633
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientControlledAnalgesia",
+      "parents": [],
+      "values": [
+        [
+          0.8402065737245579
+        ],
+        [
+          0.1597934262754421
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OpioidConsumption48Hr",
+      "parents": [
+        "MultimodalAnalgesia"
+      ],
+      "values": [
+        [
+          0.16379715873296521,
+          0.7304871357063806,
+          0.9079784528672883
+        ],
+        [
+          0.29127587010201206,
+          0.2080491529762043,
+          0.0845674235151667
+        ],
+        [
+          0.5449269711650226,
+          0.0614637113174152,
+          0.007454123617545007
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RespiratoryDepression",
+      "parents": [
+        "BaselinePainSensitivity",
+        "OpioidDoseTier"
+      ],
+      "values": [
+        [
+          0.5569035736686406,
+          0.2602751422256856,
+          0.054084346942409614,
+          0.4077420410414738,
+          0.14522760359685863,
+          0.02154252527428891,
+          0.06578573249331865,
+          0.012991115583474214,
+          0.0014819480205110261
+        ],
+        [
+          0.29456200479948014,
+          0.32407280137532796,
+          0.20811307698507606,
+          0.32863354671588246,
+          0.27382386208699977,
+          0.13642960016777825,
+          0.20820893259636972,
+          0.11255531660730404,
+          0.03618662537833934
+        ],
+        [
+          0.14853442153187918,
+          0.4156520563989865,
+          0.7378025760725143,
+          0.2636244122426437,
+          0.5809485343161417,
+          0.8420278745579328,
+          0.7260053349103116,
+          0.8744535678092218,
+          0.9623314266011498
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgeryType",
+      "parents": [
+        "BaselinePainSensitivity"
+      ],
+      "values": [
+        [
+          0.47139350389702345,
+          0.7345841175322678,
+          0.8957214855388448
+        ],
+        [
+          0.5286064961029765,
+          0.26541588246773223,
+          0.10427851446115519
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PainReliefLevel",
+      "parents": [
+        "BaselinePainSensitivity",
+        "OpioidConsumption48Hr",
+        "OpioidDoseTier",
+        "CryotherapyApplication"
+      ],
+      "values": [
+        [
+          0.8209788524532817,
+          0.8368176548404259,
+          0.8916390460321096,
+          0.9533773198971098,
+          0.9602351525076516,
+          0.9739497190084718,
+          0.9852038619779138,
+          0.9877703164410233,
+          0.9917033590526282,
+          0.3656107376588324,
+          0.3984867194649853,
+          0.5413454101611068,
+          0.7931499285773245,
+          0.8052424692009876,
+          0.8603813031031126,
+          0.9347572219661948,
+          0.9426660889183308,
+          0.9593880934389986,
+          0.05374208671607951,
+          0.06654381265773175,
+          0.11656133095165495,
+          0.3656176329987053,
+          0.40803416774728246,
+          0.5376379908927575,
+          0.7434875625835353,
+          0.7664713891489948,
+          0.8367197592586337,
+          0.6921646335123431,
+          0.7083959552045083,
+          0.8048436863759156,
+          0.9236728959747059,
+          0.9297093723076649,
+          0.9488718278835141,
+          0.9763280995547381,
+          0.9789918391972064,
+          0.9854464374569449,
+          0.19429965112295627,
+          0.20865190046068302,
+          0.3187968269194329,
+          0.6326657872835879,
+          0.6677249035037861,
+          0.755791592630044,
+          0.8822916371904374,
+          0.8925461144817747,
+          0.9262355555644288,
+          0.01887480878185834,
+          0.023098675965203624,
+          0.04757011388957505,
+          0.18593506812187346,
+          0.20511444745623852,
+          0.33181305259554444,
+          0.5816056344629985,
+          0.5985362556313488,
+          0.7104996957599949,
+          0.1796353233189305,
+          0.20400334977124301,
+          0.326363445868534,
+          0.6358973751784229,
+          0.6757307200348478,
+          0.7657397365102799,
+          0.8736848563452715,
+          0.8905982697025193,
+          0.9236000881318767,
+          0.014173952521833953,
+          0.01579900170011941,
+          0.030735320706151006,
+          0.14374086810894626,
+          0.16827656955430553,
+          0.25638041713510024,
+          0.501627613590516,
+          0.5464772531947917,
+          0.6675437641867351,
+          0.000886777494548135,
+          0.0011136013120696502,
+          0.00245803959644958,
+          0.01405728968842827,
+          0.01607151570605157,
+          0.03339783793340376,
+          0.10346714560066354,
+          0.11892693155734202,
+          0.2145558084591704
+        ],
+        [
+          0.15034604681382277,
+          0.13973826834543407,
+          0.09754566010264606,
+          0.04462855791577656,
+          0.03819511947744181,
+          0.025380637063412762,
+          0.014613636276116542,
+          0.012084412377968007,
+          0.008230503482566503,
+          0.33158022850936625,
+          0.32366907533875094,
+          0.29852335762858667,
+          0.1681583638015866,
+          0.15987528433887832,
+          0.12304958781103797,
+          0.061109551799020764,
+          0.053943701159960826,
+          0.03904806175060263,
+          0.2079941482824306,
+          0.22309046390930018,
+          0.2687855872889466,
+          0.3360159363097419,
+          0.320593579258635,
+          0.29867744522768613,
+          0.20256921961612703,
+          0.18927776437720142,
+          0.1386700562144434,
+          0.2336602332469334,
+          0.2256820899215667,
+          0.16283047042669255,
+          0.07039242305567563,
+          0.06551730125026704,
+          0.04877585216624481,
+          0.023076180858779514,
+          0.02052504789536219,
+          0.014335329057553352,
+          0.3063997045977071,
+          0.3133045624671332,
+          0.33458318343065474,
+          0.26153101639634024,
+          0.24039829904038634,
+          0.19818854366923516,
+          0.10438959014196024,
+          0.09665004070995037,
+          0.06830878633583817,
+          0.126036320580772,
+          0.1424375244004714,
+          0.1899384324826891,
+          0.2993220462363076,
+          0.3142461747768793,
+          0.3188932598743937,
+          0.28065619121745405,
+          0.2838511608943754,
+          0.2198379642562241,
+          0.29844978138472605,
+          0.30690074765381353,
+          0.33929272183664017,
+          0.2591433308068312,
+          0.23780445631645986,
+          0.1863503614262332,
+          0.11288375563750053,
+          0.09875617176487025,
+          0.07125695558010252,
+          0.10796580651554141,
+          0.12135159937547278,
+          0.15295166943779248,
+          0.29883570706405443,
+          0.2833846690465204,
+          0.34117837200298545,
+          0.3110790382698617,
+          0.29617600547326084,
+          0.24304956160296298,
+          0.029981754368324735,
+          0.030845758116022626,
+          0.0505642783474121,
+          0.1122042262909548,
+          0.11638299758005573,
+          0.1611175215976554,
+          0.257535594637854,
+          0.2704874047905226,
+          0.3099600359736806
+        ],
+        [
+          0.028675100732895382,
+          0.023444076814139923,
+          0.0108152938652443,
+          0.001994122187113448,
+          0.0015697280149066775,
+          0.000669643928115399,
+          0.0001825017459696988,
+          0.00014527118100859566,
+          6.613746480543663e-05,
+          0.3028090338318014,
+          0.2778442051962637,
+          0.1601312322103065,
+          0.03869170762108896,
+          0.03488224646013399,
+          0.01656910908584932,
+          0.004133226234784312,
+          0.0033902099217082895,
+          0.0015638448103987865,
+          0.7382637650014899,
+          0.7103657234329681,
+          0.6146530817593984,
+          0.2983664306915527,
+          0.27137225299408246,
+          0.1636845638795563,
+          0.05394321780033753,
+          0.044250846473803736,
+          0.024610184526922752,
+          0.07417513324072347,
+          0.06592195487392516,
+          0.03232584319739197,
+          0.005934680969618487,
+          0.004773326442067925,
+          0.002352319950241213,
+          0.0005957195864823051,
+          0.0004831129074313313,
+          0.00021823348550152177,
+          0.49930064427933657,
+          0.47804353707218367,
+          0.34661998964991236,
+          0.10580319632007193,
+          0.0918767974558276,
+          0.04601986370072083,
+          0.013318772667602376,
+          0.010803844808275058,
+          0.0054556580997329,
+          0.8550888706373697,
+          0.8344637996343249,
+          0.7624914536277357,
+          0.5147428856418189,
+          0.48063937776688215,
+          0.3492936875300619,
+          0.1377381743195475,
+          0.1176125834742757,
+          0.06966233998378084,
+          0.5219148952963435,
+          0.4890959025749434,
+          0.33434383229482595,
+          0.10495929401474582,
+          0.08646482364869233,
+          0.047909902063486685,
+          0.01343138801722795,
+          0.010645558532610264,
+          0.005142956288020885,
+          0.8778602409626245,
+          0.8628493989244078,
+          0.8163130098560566,
+          0.5574234248269992,
+          0.548338761399174,
+          0.40244121086191426,
+          0.18729334813962215,
+          0.15734674133194748,
+          0.0894066742103018,
+          0.9691314681371272,
+          0.9680406405719078,
+          0.9469776820561384,
+          0.8737384840206169,
+          0.8675454867138928,
+          0.8054846404689409,
+          0.6389972597614825,
+          0.6105856636521354,
+          0.475484155567149
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NursePatientRatio",
+      "parents": [
+        "PainReliefLevel"
+      ],
+      "values": [
+        [
+          0.30145204935690284,
+          0.21706822207209564,
+          0.13701809703675508
+        ],
+        [
+          0.3244378254504309,
+          0.22730963166282225,
+          0.13960721663171766
+        ],
+        [
+          0.3741101251926663,
+          0.5556221462650821,
+          0.7233746863315272
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnesthesiaType",
+      "parents": [
+        "PreoperativeAnxiety",
+        "NursePatientRatio"
+      ],
+      "values": [
+        [
+          0.6169644351765926,
+          0.5664097382517899,
+          0.5144339764430277,
+          0.3316590665808732,
+          0.28696777634610077,
+          0.2460813173557104,
+          0.1326112534300473,
+          0.11031465150319389,
+          0.09137198194368
+        ],
+        [
+          0.38303556482340745,
+          0.4335902617482101,
+          0.48556602355697237,
+          0.6683409334191268,
+          0.7130322236538992,
+          0.7539186826442896,
+          0.8673887465699526,
+          0.8896853484968061,
+          0.9086280180563199
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift PainReliefLevel toward Adequate (and away from Inadequate), but only if the same action does not make RespiratoryDepression more likely to be Severe. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "MultimodalAnalgesia",
+        "value": "Full"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "PainReliefLevel",
+          "safety_outcome": "RespiratoryDepression",
+          "good_intervention": "MultimodalAnalgesia",
+          "risky_intervention": "OpioidDoseTier",
+          "weak_intervention": "CryotherapyApplication",
+          "good_mediator": "OpioidConsumption48Hr",
+          "confounder": "BaselinePainSensitivity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "MultimodalAnalgesia",
+            "value": "Full"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "MultimodalAnalgesia",
+              "value": "Full",
+              "delta_target": -0.2078,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "OpioidDoseTier",
+              "value": "Standard",
+              "delta_target": -0.3387,
+              "delta_safety": 0.2819,
+              "reason": "worsens safety"
+            },
+            {
+              "variable": "OpioidDoseTier",
+              "value": "High",
+              "delta_target": -0.5793,
+              "delta_safety": 0.553,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.7715,
+            "E_safety": 1.3171
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,472 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 10,
+    "topology": "mediator_structure:direct_and_mediated",
+    "seed": 13707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "direct_and_mediated"
+  },
+  "story": "A state department of corrections maintains detailed records on individuals under community supervision. A researcher affiliated with the department has access to these administrative records and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "RecidivismStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ConditionComplianceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorCriminalHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeAtSentencing",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmploymentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OffenseCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerCaseloadSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingStability",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "SupervisionIntensity",
+      "values": [
+        "Standard",
+        "Intensive"
+      ],
+      "desc": "Level of probation contact frequency and monitoring assigned to the individual.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RecidivismStatus",
+      "values": [
+        "NoNewOffense",
+        "NewMisdemeanor",
+        "NewFelony"
+      ],
+      "desc": "Whether the probationer was arrested for a new offense within 18 months.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ConditionComplianceLevel",
+      "values": [
+        "Full",
+        "Partial",
+        "NonCompliant"
+      ],
+      "desc": "Degree to which the probationer met court-ordered supervision conditions.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorCriminalHistory",
+      "values": [
+        "None",
+        "Moderate",
+        "Extensive"
+      ],
+      "desc": "Number and severity of prior arrests and convictions before current probation term.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeAtSentencing",
+      "values": [
+        "Under25",
+        "25to40",
+        "Over40"
+      ],
+      "desc": "Age category of the probationer at the time of sentencing.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the probationer had a documented substance use disorder at intake.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmploymentStatus",
+      "values": [
+        "Employed",
+        "Unemployed"
+      ],
+      "desc": "Whether the probationer held steady employment during the supervision period.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OffenseCategory",
+      "values": [
+        "NonViolent",
+        "Violent"
+      ],
+      "desc": "Classification of the index offense as violent or non-violent.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerCaseloadSize",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Number of active cases assigned to the supervising probation officer.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingStability",
+      "values": [
+        "Stable",
+        "Unstable"
+      ],
+      "desc": "Whether the probationer maintained a consistent residential address during supervision.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SupervisionIntensity",
+      "ConditionComplianceLevel"
+    ],
+    [
+      "SupervisionIntensity",
+      "RecidivismStatus"
+    ],
+    [
+      "ConditionComplianceLevel",
+      "RecidivismStatus"
+    ],
+    [
+      "PriorCriminalHistory",
+      "SupervisionIntensity"
+    ],
+    [
+      "PriorCriminalHistory",
+      "RecidivismStatus"
+    ],
+    [
+      "PriorCriminalHistory",
+      "SubstanceUseHistory"
+    ],
+    [
+      "AgeAtSentencing",
+      "SubstanceUseHistory"
+    ],
+    [
+      "OffenseCategory",
+      "SupervisionIntensity"
+    ],
+    [
+      "HousingStability",
+      "OffenseCategory"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PriorCriminalHistory",
+      "parents": [],
+      "values": [
+        [
+          0.11899472753885372
+        ],
+        [
+          0.5006871774193805
+        ],
+        [
+          0.3803180950417657
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeAtSentencing",
+      "parents": [],
+      "values": [
+        [
+          0.44080268711796955
+        ],
+        [
+          0.12683233080104186
+        ],
+        [
+          0.4323649820809886
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmploymentStatus",
+      "parents": [],
+      "values": [
+        [
+          0.10114061672268018
+        ],
+        [
+          0.8988593832773198
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OfficerCaseloadSize",
+      "parents": [],
+      "values": [
+        [
+          0.5269898106880824
+        ],
+        [
+          0.4730101893119177
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HousingStability",
+      "parents": [],
+      "values": [
+        [
+          0.9060397732982994
+        ],
+        [
+          0.0939602267017006
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SubstanceUseHistory",
+      "parents": [
+        "AgeAtSentencing",
+        "PriorCriminalHistory"
+      ],
+      "values": [
+        [
+          0.5015976875625833,
+          0.05115981482390085,
+          0.0028803389095776507,
+          0.8084910893171998,
+          0.1844564431562329,
+          0.01197226230205997,
+          0.9465501370253545,
+          0.4868537981614417,
+          0.04837104911425941
+        ],
+        [
+          0.4984023124374168,
+          0.9488401851760991,
+          0.9971196610904223,
+          0.1915089106828002,
+          0.815543556843767,
+          0.9880277376979401,
+          0.05344986297464545,
+          0.5131462018385583,
+          0.9516289508857405
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OffenseCategory",
+      "parents": [
+        "HousingStability"
+      ],
+      "values": [
+        [
+          0.5609748897754966,
+          0.514751348106796
+        ],
+        [
+          0.4390251102245034,
+          0.48524865189320393
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SupervisionIntensity",
+      "parents": [
+        "PriorCriminalHistory",
+        "OffenseCategory"
+      ],
+      "values": [
+        [
+          0.3850397908448106,
+          0.6487289623923815,
+          0.6630428040466112,
+          0.8530281428132348,
+          0.8608033221593553,
+          0.9480263749523414
+        ],
+        [
+          0.6149602091551893,
+          0.35127103760761835,
+          0.3369571959533888,
+          0.14697185718676523,
+          0.1391966778406447,
+          0.0519736250476586
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ConditionComplianceLevel",
+      "parents": [
+        "SupervisionIntensity"
+      ],
+      "values": [
+        [
+          0.16369290158144426,
+          0.8730090191122843
+        ],
+        [
+          0.29731735944660037,
+          0.1118499831052758
+        ],
+        [
+          0.5389897389719553,
+          0.015140997782439849
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RecidivismStatus",
+      "parents": [
+        "PriorCriminalHistory",
+        "ConditionComplianceLevel",
+        "SupervisionIntensity"
+      ],
+      "values": [
+        [
+          0.8612391306203561,
+          0.9774623535087805,
+          0.47468322347841124,
+          0.8884444307853291,
+          0.1608669154080496,
+          0.7240796452146443,
+          0.7236898578058925,
+          0.9495271106606648,
+          0.21406071075563052,
+          0.7510717523307362,
+          0.045858998085974,
+          0.4661455115095899,
+          0.2054702565812564,
+          0.7530350439060993,
+          0.014685839531205013,
+          0.2618500421034274,
+          0.002543000446334187,
+          0.06810102311060677
+        ],
+        [
+          0.12266007646853709,
+          0.022062571251356328,
+          0.3219322647001271,
+          0.10050895797172438,
+          0.29135510105006773,
+          0.21273349640001035,
+          0.2119825616655618,
+          0.04806636439254632,
+          0.31858590019056504,
+          0.20326382443344124,
+          0.18634104871387022,
+          0.319073284895584,
+          0.32164177661816884,
+          0.19817013842090878,
+          0.11252134905648087,
+          0.3188259569058878,
+          0.047566776060536775,
+          0.2218188503781639
+        ],
+        [
+          0.016100792911106818,
+          0.0004750752398632618,
+          0.20338451182146164,
+          0.011046611242946501,
+          0.5477779835418826,
+          0.06318685838534546,
+          0.06432758052854569,
+          0.0024065249467889985,
+          0.46735338905380436,
+          0.04566442323582262,
+          0.7677999532001557,
+          0.21478120359482622,
+          0.4728879668005749,
+          0.048794817672992014,
+          0.8727928114123141,
+          0.41932400099068484,
+          0.9498902234931291,
+          0.7100801265112293
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does SupervisionIntensity change RecidivismStatus? Specifically, does the effect of SupervisionIntensity on RecidivismStatus flow entirely through ConditionComplianceLevel, or is there also a separate pathway that does not pass through ConditionComplianceLevel? Investigate using interventions and explain your conclusion.",
+      "answer": "also_direct_or_other",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "direct_and_mediated",
+        "roles": {
+          "treatment": "SupervisionIntensity",
+          "outcome": "RecidivismStatus",
+          "mediator": "ConditionComplianceLevel",
+          "confounder": "PriorCriminalHistory"
+        },
+        "gold": {
+          "label": "also_direct_or_other",
+          "T": "SupervisionIntensity",
+          "M": "ConditionComplianceLevel",
+          "O": "RecidivismStatus",
+          "total_effect": -1.2783,
+          "max_residual_effect": 0.8186
+        }
+      }
+    }
+  ]
+}

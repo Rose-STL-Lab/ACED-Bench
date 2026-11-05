@@ -1,0 +1,1081 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 15,
+    "topology": "subgroup_robust",
+    "seed": 34707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A large academic medical center maintains comprehensive labor and delivery records spanning several years. The research team has institutional access to these records and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "MaternalNeonatalOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ParityGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PregnancyRiskScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MaternalAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GestationalAgeCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreexistingHypertension",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LaborOnsetType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrenatalVisitAdequacy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GestationalDiabetesStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FetalPresentationAtAdmission",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "MaternalNeonatalOutcome",
+      "values": [
+        "Optimal",
+        "Suboptimal",
+        "Adverse"
+      ],
+      "desc": "Composite rating of maternal and neonatal status at discharge.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ParityGroup",
+      "values": [
+        "Nulliparous",
+        "Multiparous"
+      ],
+      "desc": "Whether the patient is delivering for the first time or has prior births.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ContinuousEFMProtocol",
+      "values": [
+        "None",
+        "Intermittent",
+        "Continuous"
+      ],
+      "desc": "Level of electronic fetal monitoring applied during labor.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "StructuredLaborSupportBundle",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Degree of standardized nursing and doula support provided during labor.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ElectiveAugmentationPolicy",
+      "values": [
+        "None",
+        "LowDose",
+        "ActiveAugmentation"
+      ],
+      "desc": "Intensity of elective oxytocin augmentation administered during labor.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PregnancyRiskScore",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Antepartum risk classification based on medical and obstetric history.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MaternalAge",
+      "values": [
+        "Under30",
+        "30AndOver"
+      ],
+      "desc": "Age category of the patient at the time of admission for delivery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GestationalAgeCategory",
+      "values": [
+        "EarlyTerm",
+        "FullTerm",
+        "LateTerm"
+      ],
+      "desc": "Gestational age range at the time labor begins.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PreexistingHypertension",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Documented chronic or gestational hypertension prior to labor onset.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Pre-pregnancy body mass index classification of the patient.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LaborOnsetType",
+      "values": [
+        "Spontaneous",
+        "Induced"
+      ],
+      "desc": "Whether labor began naturally or was medically initiated.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EpiduralAnalgesia",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether epidural pain relief was administered during labor.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PrenatalVisitAdequacy",
+      "values": [
+        "Inadequate",
+        "Adequate"
+      ],
+      "desc": "Classification of prenatal care visit frequency relative to guidelines.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GestationalDiabetesStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Presence of diagnosed gestational diabetes during the current pregnancy.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FetalPresentationAtAdmission",
+      "values": [
+        "Cephalic",
+        "NonCephalic"
+      ],
+      "desc": "Position of the fetus at the time of labor admission assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ParityGroup",
+      "MaternalNeonatalOutcome"
+    ],
+    [
+      "ContinuousEFMProtocol",
+      "MaternalNeonatalOutcome"
+    ],
+    [
+      "StructuredLaborSupportBundle",
+      "MaternalNeonatalOutcome"
+    ],
+    [
+      "ElectiveAugmentationPolicy",
+      "MaternalNeonatalOutcome"
+    ],
+    [
+      "PregnancyRiskScore",
+      "MaternalNeonatalOutcome"
+    ],
+    [
+      "BodyMassIndexCategory",
+      "GestationalAgeCategory"
+    ],
+    [
+      "BodyMassIndexCategory",
+      "ElectiveAugmentationPolicy"
+    ],
+    [
+      "PrenatalVisitAdequacy",
+      "GestationalAgeCategory"
+    ],
+    [
+      "FetalPresentationAtAdmission",
+      "EpiduralAnalgesia"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ParityGroup",
+      "parents": [],
+      "values": [
+        [
+          0.3671001029837751
+        ],
+        [
+          0.6328998970162248
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ContinuousEFMProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.13542664810181418
+        ],
+        [
+          0.5452317237915886
+        ],
+        [
+          0.31934162810659733
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StructuredLaborSupportBundle",
+      "parents": [],
+      "values": [
+        [
+          0.4663560471659889
+        ],
+        [
+          0.4243060482346527
+        ],
+        [
+          0.10933790459935838
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PregnancyRiskScore",
+      "parents": [],
+      "values": [
+        [
+          0.811763755407821
+        ],
+        [
+          0.09411812229608948
+        ],
+        [
+          0.09411812229608948
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MaternalAge",
+      "parents": [],
+      "values": [
+        [
+          0.11697686002565284
+        ],
+        [
+          0.8830231399743471
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PreexistingHypertension",
+      "parents": [],
+      "values": [
+        [
+          0.6308016727068556
+        ],
+        [
+          0.3691983272931444
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [],
+      "values": [
+        [
+          0.3458627326958374
+        ],
+        [
+          0.09801157874449924
+        ],
+        [
+          0.5561256885596633
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LaborOnsetType",
+      "parents": [],
+      "values": [
+        [
+          0.27598900654119246
+        ],
+        [
+          0.7240109934588076
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PrenatalVisitAdequacy",
+      "parents": [],
+      "values": [
+        [
+          0.6612980537404831
+        ],
+        [
+          0.3387019462595169
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GestationalDiabetesStatus",
+      "parents": [],
+      "values": [
+        [
+          0.7182012171260506
+        ],
+        [
+          0.2817987828739494
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FetalPresentationAtAdmission",
+      "parents": [],
+      "values": [
+        [
+          0.5523782304584594
+        ],
+        [
+          0.4476217695415406
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ElectiveAugmentationPolicy",
+      "parents": [
+        "BodyMassIndexCategory"
+      ],
+      "values": [
+        [
+          0.36934574111680685,
+          0.12241849931191802,
+          0.0207523750736249
+        ],
+        [
+          0.36369547916787626,
+          0.8328361214721577,
+          0.975411798218046
+        ],
+        [
+          0.26695877971531695,
+          0.044745379215924246,
+          0.0038358267083290582
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GestationalAgeCategory",
+      "parents": [
+        "PrenatalVisitAdequacy",
+        "BodyMassIndexCategory"
+      ],
+      "values": [
+        [
+          0.4762202168341999,
+          0.09722314000398778,
+          0.0077759645710408064,
+          0.9611525182895481,
+          0.6709499336911313,
+          0.12471422959573095
+        ],
+        [
+          0.28670133866106534,
+          0.8501687421497861,
+          0.987650666102766,
+          0.03193544152172437,
+          0.32380558017972355,
+          0.8742262051325579
+        ],
+        [
+          0.23707844450473475,
+          0.052608117846226085,
+          0.004573369326193197,
+          0.006912040188727538,
+          0.005244486129145117,
+          0.001059565271711137
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EpiduralAnalgesia",
+      "parents": [
+        "FetalPresentationAtAdmission"
+      ],
+      "values": [
+        [
+          0.41168041254999677,
+          0.18052196321123187
+        ],
+        [
+          0.5883195874500032,
+          0.8194780367887682
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MaternalNeonatalOutcome",
+      "parents": [
+        "PregnancyRiskScore",
+        "ParityGroup",
+        "ContinuousEFMProtocol",
+        "StructuredLaborSupportBundle",
+        "ElectiveAugmentationPolicy"
+      ],
+      "values": [
+        [
+          0.37199015844838484,
+          0.44876483009609375,
+          0.17853663874158135,
+          0.47122931260777834,
+          0.5465239407484275,
+          0.2646200837727681,
+          0.7656909967306246,
+          0.8071661907517365,
+          0.6059413556663391,
+          0.5016236475310488,
+          0.5762851217413757,
+          0.3095913514847101,
+          0.5997418627079726,
+          0.6625454723032828,
+          0.4006187058577793,
+          0.8323785855182869,
+          0.8701953977151825,
+          0.7174245126968654,
+          0.6289189728838676,
+          0.7019447797295628,
+          0.43814808967508295,
+          0.7174629978687243,
+          0.7616510400521564,
+          0.5412098741896189,
+          0.8905843038049636,
+          0.9066873693091092,
+          0.8012026786487515,
+          0.10412475261484029,
+          0.1425430104763961,
+          0.43363177965609445,
+          0.16492969003861271,
+          0.21184825614935446,
+          0.5449232744070436,
+          0.4790492973035873,
+          0.5278909478956384,
+          0.8062546827434001,
+          0.18247838340654166,
+          0.23442501484456535,
+          0.5746415373866529,
+          0.26835111958984326,
+          0.32553516918849407,
+          0.6645626133563555,
+          0.5970705980213604,
+          0.6762506099483692,
+          0.8612715983730151,
+          0.6250071825316192,
+          0.7019158240264802,
+          0.8743076713627531,
+          0.7052611226005805,
+          0.7725805340128701,
+          0.9138565850524876,
+          0.8905106776456996,
+          0.9113340780465696,
+          0.9665715994726796,
+          0.18423049408135672,
+          0.24301288896337273,
+          0.07967253904168714,
+          0.2580557208353159,
+          0.33239086803785983,
+          0.11998670331395696,
+          0.6078508036392413,
+          0.662988795866476,
+          0.4014254535864238,
+          0.30815844078911214,
+          0.3681938211074195,
+          0.13684509443700316,
+          0.41523482312897636,
+          0.4722923927624441,
+          0.2086706281278001,
+          0.734933234910169,
+          0.7599059804660894,
+          0.5466732511443263,
+          0.4242080356206658,
+          0.502137956294843,
+          0.23970638256781926,
+          0.5541849057063574,
+          0.6018708593463725,
+          0.3294041639127952,
+          0.7943814941468417,
+          0.840603127864833,
+          0.6585698745381954,
+          0.0399071815648174,
+          0.0559204419807504,
+          0.2342734175649621,
+          0.06354299511035665,
+          0.09090406796647138,
+          0.3265861867905039,
+          0.27539412432494736,
+          0.3226909958586663,
+          0.6559988969209295,
+          0.07439118879881924,
+          0.10576181615899875,
+          0.37007381851812376,
+          0.12743605810435166,
+          0.16553110883690172,
+          0.4653284458394035,
+          0.38709543866393675,
+          0.4693594008252711,
+          0.7667823141442309,
+          0.4434148585722133,
+          0.5025695414059816,
+          0.7770804150606887,
+          0.5474442438971495,
+          0.6022195324916586,
+          0.843347306660314,
+          0.8059150630531913,
+          0.8366095140821325,
+          0.9398675287939797,
+          0.018542649053047745,
+          0.027099739346873344,
+          0.006253082543999003,
+          0.03248662438170491,
+          0.046800599578235264,
+          0.01105451079824905,
+          0.163557893595329,
+          0.21305870930503223,
+          0.06685366787352656,
+          0.038887536096312646,
+          0.054273893700981284,
+          0.013140287256472618,
+          0.0642560438219302,
+          0.0950693580636696,
+          0.02151123246627125,
+          0.28315823578941257,
+          0.3409028782374926,
+          0.12130471367522858,
+          0.07770141331142892,
+          0.10450593491900287,
+          0.028104727598497296,
+          0.12075585624615921,
+          0.17341948124692155,
+          0.04728183281428689,
+          0.3992662974909724,
+          0.47770797462762576,
+          0.21021808395295524,
+          0.002739816117974458,
+          0.00435587217657474,
+          0.027336033021701844,
+          0.004979963757989538,
+          0.007636321020790077,
+          0.04796449257126327,
+          0.03303055041956447,
+          0.048813348549693804,
+          0.21724734160000797,
+          0.006185130892786804,
+          0.009298154036428679,
+          0.05391410903851223,
+          0.011079675346902537,
+          0.014947551501517954,
+          0.08624276874214774,
+          0.06100771319749456,
+          0.08479130342503148,
+          0.34447460854204826,
+          0.07738745723840804,
+          0.10220099248783052,
+          0.37095706007402296,
+          0.11732857829943348,
+          0.16608369236912934,
+          0.4860643424615369,
+          0.3900962521861472,
+          0.4808154298339643,
+          0.7700781447705454
+        ],
+        [
+          0.34031627834789496,
+          0.3180079833696357,
+          0.3197410670351138,
+          0.3129459373220067,
+          0.29449217713593673,
+          0.34351446779214373,
+          0.18836133090945945,
+          0.15982549369313293,
+          0.26982386225828564,
+          0.30948849545355495,
+          0.2878020372605367,
+          0.3234366043059356,
+          0.2782857647322267,
+          0.24387255681063585,
+          0.3272870911329069,
+          0.14450995858891372,
+          0.1142554873950326,
+          0.22180589933811753,
+          0.2674242252357082,
+          0.22349895674275985,
+          0.32765945151834663,
+          0.21876321736156729,
+          0.19123632810126115,
+          0.29943697668228236,
+          0.09889429081778724,
+          0.08611475911886389,
+          0.16525894864120355,
+          0.2546802682992596,
+          0.29488952644348637,
+          0.3182814626835668,
+          0.2890310608291424,
+          0.31650112608675185,
+          0.2982864393805901,
+          0.312176653469341,
+          0.3089797596865396,
+          0.16192330391423584,
+          0.3026410550303505,
+          0.32828115206925546,
+          0.28083502108681185,
+          0.3337993686710238,
+          0.3453235375399354,
+          0.2488220755029221,
+          0.27474399877401867,
+          0.2373614879642323,
+          0.12294258532121444,
+          0.27113940866145914,
+          0.22422613417271847,
+          0.11183400671441972,
+          0.2286738509214868,
+          0.18166596708465144,
+          0.07853261280095025,
+          0.09794309785984714,
+          0.08116174003483062,
+          0.03239838536334452,
+          0.29649280535925354,
+          0.3269972164478973,
+          0.2272257550299171,
+          0.3271999052499999,
+          0.3353700115530918,
+          0.2726167073585283,
+          0.2687747789240461,
+          0.24911815358568523,
+          0.3244701886258278,
+          0.33427649307373675,
+          0.3316516631411624,
+          0.28223575534044326,
+          0.32719266978145767,
+          0.31381455012326714,
+          0.3237144942332594,
+          0.20069411125691125,
+          0.19307413440509524,
+          0.2867309990788206,
+          0.33830330113415436,
+          0.31726331358287957,
+          0.3380907712070135,
+          0.28473828197686113,
+          0.27883028961449274,
+          0.3419805248503604,
+          0.1731931551463611,
+          0.1377302143999765,
+          0.25123545996053576,
+          0.17308417204791618,
+          0.20045464141689914,
+          0.3252571617440589,
+          0.22714180633521233,
+          0.2324812827038817,
+          0.3500732733963257,
+          0.32864341884410403,
+          0.34024545504655895,
+          0.24981628389287303,
+          0.2201262275293466,
+          0.249036493449571,
+          0.3311167148907711,
+          0.2704644584627868,
+          0.31154581056850256,
+          0.3231266310826901,
+          0.33645209727075853,
+          0.31212669363102746,
+          0.18683723711534087,
+          0.3269909777244592,
+          0.30697180033043786,
+          0.18240793637215122,
+          0.2936717169907915,
+          0.2789555046608925,
+          0.13440558911374972,
+          0.16081386835546363,
+          0.1408414332790479,
+          0.05687323639562575,
+          0.11802575688774612,
+          0.15419518955783862,
+          0.08091012734976627,
+          0.16835274610715434,
+          0.1970204897487855,
+          0.09740701763699265,
+          0.3006550182272405,
+          0.309187253275884,
+          0.20326367177941504,
+          0.1662961042172427,
+          0.2135644326933878,
+          0.10585092907574079,
+          0.21444667387353958,
+          0.23806706379240072,
+          0.1359072895952438,
+          0.32586916785723496,
+          0.3199379937902045,
+          0.27651279073865886,
+          0.2266178838121508,
+          0.2546816478451283,
+          0.15122767335165246,
+          0.27474619956840834,
+          0.2930110471119023,
+          0.1938256974408406,
+          0.33052532717378535,
+          0.3089903246894858,
+          0.3120697591475627,
+          0.05051198098141784,
+          0.06330945769156805,
+          0.15048413860797497,
+          0.06571425863799729,
+          0.08875065469872896,
+          0.19447546124244885,
+          0.16974392341090727,
+          0.18791155546790314,
+          0.30675144005012195,
+          0.07649339230504874,
+          0.09631775186298173,
+          0.19762929813196586,
+          0.10458839187059976,
+          0.11827408313923568,
+          0.249518938476566,
+          0.20251766587308376,
+          0.2508667119473403,
+          0.32037030270335465,
+          0.22800528745357868,
+          0.25597818359024194,
+          0.3268230664265609,
+          0.275846717707852,
+          0.29446002508193037,
+          0.2965983370508131,
+          0.33288868184797255,
+          0.32018646160683184,
+          0.18341263213909004
+        ],
+        [
+          0.28769356320372014,
+          0.23322718653427052,
+          0.5017222942233048,
+          0.21582475007021487,
+          0.15898388211563588,
+          0.39186544843508814,
+          0.04594767235991596,
+          0.03300831555513061,
+          0.12423478207537533,
+          0.18888785701539618,
+          0.13591284099808765,
+          0.3669720442093543,
+          0.12197237255980073,
+          0.0935819708860814,
+          0.27209420300931375,
+          0.023111455892799435,
+          0.015549114889784924,
+          0.06076958796501711,
+          0.10365680188042418,
+          0.07455626352767739,
+          0.2341924588065705,
+          0.06377378476970853,
+          0.04711263184658254,
+          0.15935314912809884,
+          0.01052140537724909,
+          0.007197871572026987,
+          0.033538372710044874,
+          0.6411949790859001,
+          0.5625674630801175,
+          0.24808675766033875,
+          0.5460392491322449,
+          0.47165061776389366,
+          0.15679028621236635,
+          0.20877404922707182,
+          0.163129292417822,
+          0.031822013342364217,
+          0.5148805615631079,
+          0.4372938330861793,
+          0.1445234415265352,
+          0.39784951173913286,
+          0.32914129327157055,
+          0.08661531114072256,
+          0.128185403204621,
+          0.08638790208739855,
+          0.015785816305770504,
+          0.1038534088069215,
+          0.07385804180080122,
+          0.013858321922827212,
+          0.06606502647793279,
+          0.04575349890247841,
+          0.007610802146562211,
+          0.01154622449445315,
+          0.0075041819185996585,
+          0.00103001516397587,
+          0.5192767005593898,
+          0.4299898945887299,
+          0.6931017059283957,
+          0.41474437391468416,
+          0.3322391204090483,
+          0.6073965893275147,
+          0.12337441743671261,
+          0.08789305054783883,
+          0.27410435778774833,
+          0.3575650661371511,
+          0.3001545157514181,
+          0.5809191502225536,
+          0.2575725070895659,
+          0.2138930571142887,
+          0.4676148776389406,
+          0.06437265383291962,
+          0.04701988512881534,
+          0.16659574977685315,
+          0.23748866324517978,
+          0.18059873012227742,
+          0.42220284622516735,
+          0.16107681231678156,
+          0.11929885103913485,
+          0.3286153112368443,
+          0.03242535070679724,
+          0.021666657735190536,
+          0.0901946655012688,
+          0.7870086463872664,
+          0.7436249166023504,
+          0.440469420690979,
+          0.709315198554431,
+          0.6766146493296469,
+          0.32334053981317046,
+          0.39596245683094855,
+          0.33706354909477476,
+          0.09418481918619762,
+          0.7054825836718341,
+          0.6452016903914303,
+          0.29880946659110513,
+          0.6020994834328616,
+          0.5229230805945958,
+          0.21154492307790634,
+          0.27645246406530477,
+          0.21851390554370137,
+          0.046380448740428314,
+          0.22959416370332755,
+          0.19045865826358052,
+          0.040511648567160045,
+          0.15888403911205898,
+          0.11882496284744895,
+          0.022247104225936388,
+          0.033271068591345064,
+          0.02254905263881955,
+          0.003259234810394366,
+          0.863431594059206,
+          0.818705071095288,
+          0.9128367901062346,
+          0.7991606295111406,
+          0.7561789106729792,
+          0.8915384715647584,
+          0.5357870881774305,
+          0.47775403741908384,
+          0.7298826603470584,
+          0.7948163596864447,
+          0.7321616736056309,
+          0.8810087836677866,
+          0.7212972823045302,
+          0.6668635781439297,
+          0.842581477938485,
+          0.3909725963533525,
+          0.3391591279723029,
+          0.6021824955861126,
+          0.6956807028764203,
+          0.6408124172358689,
+          0.8206675990498502,
+          0.6044979441854323,
+          0.5335694716411762,
+          0.7588924697448726,
+          0.27020837533524217,
+          0.21330170068288853,
+          0.47771215689948204,
+          0.9467482029006078,
+          0.9323346701318571,
+          0.8221798283703231,
+          0.9293057776040131,
+          0.9036130242804811,
+          0.7575600461862879,
+          0.7972255261695282,
+          0.7632750959824031,
+          0.47600121834986997,
+          0.9173214768021645,
+          0.8943840941005896,
+          0.7484565928295218,
+          0.8843319327824977,
+          0.8667783653592465,
+          0.6642382927812862,
+          0.7364746209294216,
+          0.6643419846276283,
+          0.335155088754597,
+          0.6946072553080134,
+          0.6418208239219275,
+          0.30221987349941615,
+          0.6068247039927146,
+          0.5394562825489403,
+          0.21733732048764995,
+          0.27701506596588016,
+          0.19899810855920377,
+          0.046509223090364496
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift MaternalNeonatalOutcome toward Optimal (and away from Adverse). The deployment will reach individuals with ParityGroup=Nulliparous as well as ParityGroup=Multiparous, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "StructuredLaborSupportBundle",
+        "value": "Full",
+        "min_improvement": 0.3623,
+        "improvement_low": 0.3623,
+        "improvement_high": 0.4665
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "MaternalNeonatalOutcome",
+          "group": "ParityGroup",
+          "intervention_avg": "ContinuousEFMProtocol",
+          "intervention_rob": "StructuredLaborSupportBundle",
+          "intervention_bad": "ElectiveAugmentationPolicy",
+          "confounder": "PregnancyRiskScore"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "StructuredLaborSupportBundle",
+            "value": "Full",
+            "min_improvement": 0.3623,
+            "improvement_low": 0.3623,
+            "improvement_high": 0.4665
+          },
+          "avg_best_but_uneven": {
+            "variable": "ContinuousEFMProtocol",
+            "value": "Continuous",
+            "min_improvement": 0.1445,
+            "improvement_low": 0.1445,
+            "improvement_high": 0.4969
+          },
+          "harmful_in_subgroup": {
+            "variable": "ElectiveAugmentationPolicy",
+            "value": "ActiveAugmentation",
+            "min_improvement": -0.3562,
+            "improvement_low": -0.3562,
+            "improvement_high": 0.4221
+          },
+          "subgroups": [
+            "Nulliparous",
+            "Multiparous"
+          ],
+          "group_variable": "ParityGroup",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "ContinuousEFMProtocol",
+              "value": "Continuous",
+              "improvement_low": 0.1445,
+              "improvement_high": 0.4969,
+              "min_improvement": 0.1445
+            },
+            {
+              "variable": "StructuredLaborSupportBundle",
+              "value": "Full",
+              "improvement_low": 0.3623,
+              "improvement_high": 0.4665,
+              "min_improvement": 0.3623
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

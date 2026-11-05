@@ -1,0 +1,658 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 8454,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A digital neobank is onboarding new customers through its mobile and web platforms. The product analytics team has access to detailed user session records and can design observational or interventional studies across onboarding cohorts.",
+  "non_intervenable_variables": [
+    {
+      "name": "OnboardingCompletion",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DigitalLiteracy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorBankingExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "KycDocumentAvailability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SessionTimeOfDay",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ReferralSource",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "OnboardingCompletion",
+      "values": [
+        "FullyCompleted",
+        "PartiallyCompleted",
+        "Abandoned"
+      ],
+      "desc": "Extent to which a user finished all fintech account onboarding steps.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "DigitalLiteracy",
+      "values": [
+        "HighLiteracy",
+        "LowLiteracy"
+      ],
+      "desc": "Self-reported comfort level with digital financial tools and apps.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GamifiedProgressBar",
+      "values": [
+        "None",
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Type of gamified progress indicator shown during onboarding flow.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LiveChatGuidance",
+      "values": [
+        "Off",
+        "Reactive",
+        "Proactive"
+      ],
+      "desc": "Availability mode of live human chat support during onboarding.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AutofillPrefetch",
+      "values": [
+        "Disabled",
+        "Enabled"
+      ],
+      "desc": "Whether personal data fields are auto-populated from linked sources.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorBankingExperience",
+      "values": [
+        "Experienced",
+        "Novice"
+      ],
+      "desc": "Whether the user has previously held a traditional bank account.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeviceType",
+      "values": [
+        "Mobile",
+        "Desktop"
+      ],
+      "desc": "Primary device used by the user during the onboarding session.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "KycDocumentAvailability",
+      "values": [
+        "ReadilyAvailable",
+        "NotReadilyAvailable"
+      ],
+      "desc": "Whether the user had required identity documents at hand during signup.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SessionTimeOfDay",
+      "values": [
+        "Daytime",
+        "Evening",
+        "LateNight"
+      ],
+      "desc": "Time-of-day window in which the user started the onboarding session.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ReferralSource",
+      "values": [
+        "Organic",
+        "PaidAd",
+        "FriendReferral"
+      ],
+      "desc": "Channel through which the user first arrived at the fintech platform.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "DigitalLiteracy",
+      "OnboardingCompletion"
+    ],
+    [
+      "DigitalLiteracy",
+      "LiveChatGuidance"
+    ],
+    [
+      "GamifiedProgressBar",
+      "OnboardingCompletion"
+    ],
+    [
+      "LiveChatGuidance",
+      "OnboardingCompletion"
+    ],
+    [
+      "AutofillPrefetch",
+      "OnboardingCompletion"
+    ],
+    [
+      "AutofillPrefetch",
+      "DeviceType"
+    ],
+    [
+      "AutofillPrefetch",
+      "GamifiedProgressBar"
+    ],
+    [
+      "PriorBankingExperience",
+      "OnboardingCompletion"
+    ],
+    [
+      "DeviceType",
+      "LiveChatGuidance"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "DigitalLiteracy",
+      "parents": [],
+      "values": [
+        [
+          0.5242228803751653
+        ],
+        [
+          0.47577711962483477
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AutofillPrefetch",
+      "parents": [],
+      "values": [
+        [
+          0.8297192875157925
+        ],
+        [
+          0.17028071248420754
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorBankingExperience",
+      "parents": [],
+      "values": [
+        [
+          0.09730404145299817
+        ],
+        [
+          0.9026959585470019
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "KycDocumentAvailability",
+      "parents": [],
+      "values": [
+        [
+          0.6373509106373639
+        ],
+        [
+          0.36264908936263607
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SessionTimeOfDay",
+      "parents": [],
+      "values": [
+        [
+          0.3114012391986199
+        ],
+        [
+          0.4468410346293199
+        ],
+        [
+          0.2417577261720602
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ReferralSource",
+      "parents": [],
+      "values": [
+        [
+          0.220703305898804
+        ],
+        [
+          0.5043478866792472
+        ],
+        [
+          0.2749488074219488
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DeviceType",
+      "parents": [
+        "AutofillPrefetch"
+      ],
+      "values": [
+        [
+          0.4477260546161104,
+          0.8523322619242728
+        ],
+        [
+          0.5522739453838895,
+          0.14766773807572717
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GamifiedProgressBar",
+      "parents": [
+        "AutofillPrefetch"
+      ],
+      "values": [
+        [
+          0.31744747491631015,
+          0.6972246833004289
+        ],
+        [
+          0.38546669180955473,
+          0.22642957331243985
+        ],
+        [
+          0.2970858332741352,
+          0.0763457433871313
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LiveChatGuidance",
+      "parents": [
+        "DeviceType",
+        "DigitalLiteracy"
+      ],
+      "values": [
+        [
+          0.4181874560554492,
+          0.7966857945505251,
+          0.24713062690604232,
+          0.6070775017672798
+        ],
+        [
+          0.3559807876205873,
+          0.04389129974469334,
+          0.38918546794997144,
+          0.061874256464277244
+        ],
+        [
+          0.2258317563239635,
+          0.1594229057047815,
+          0.36368390514398624,
+          0.33104824176844294
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OnboardingCompletion",
+      "parents": [
+        "PriorBankingExperience",
+        "DigitalLiteracy",
+        "GamifiedProgressBar",
+        "LiveChatGuidance",
+        "AutofillPrefetch"
+      ],
+      "values": [
+        [
+          0.3523073020946949,
+          0.18131000426728927,
+          0.4677197812473027,
+          0.27946420033635977,
+          0.7683575427032715,
+          0.5962786444176598,
+          0.5103538364740902,
+          0.29413907143605444,
+          0.5894082417154926,
+          0.4028066686923161,
+          0.8431603728990058,
+          0.7092172119883471,
+          0.6335565698445026,
+          0.4319612056016577,
+          0.7327376084497637,
+          0.537555541862301,
+          0.8877291961846534,
+          0.8149830825519009,
+          0.10823647063345393,
+          0.4317684583535229,
+          0.1719174897782954,
+          0.549446086159643,
+          0.4749528207964681,
+          0.8038554083638348,
+          0.1914029366967357,
+          0.5699622488841827,
+          0.2683189604251035,
+          0.6578330413621039,
+          0.6030201437957096,
+          0.8740524262771517,
+          0.6327486862411849,
+          0.8760892781191213,
+          0.7244467746935662,
+          0.9062549078162175,
+          0.8882104802607476,
+          0.9673533512753104,
+          0.018241267604762103,
+          0.006244448909993901,
+          0.03244288538748797,
+          0.010736195983640623,
+          0.17150947275950645,
+          0.06178184378103506,
+          0.03883683789628131,
+          0.012889778349502147,
+          0.06842145911354043,
+          0.022497839364225777,
+          0.27903857718406955,
+          0.11512754587056424,
+          0.07610635775813958,
+          0.028291095052549606,
+          0.1258003020739601,
+          0.04639275100546315,
+          0.3956913489686016,
+          0.20147040146919248,
+          0.0027983073146552015,
+          0.027201934786743265,
+          0.0049124565982214255,
+          0.046973481644206797,
+          0.03165013364153318,
+          0.2098997969485326,
+          0.006471177739942417,
+          0.05420134803316101,
+          0.010588277168462902,
+          0.0867037768752501,
+          0.06569559253208947,
+          0.35019650862056095,
+          0.07272261137395805,
+          0.3612914080418882,
+          0.12127158737874005,
+          0.4811249389099759,
+          0.398304392879933,
+          0.7742294655780256
+        ],
+        [
+          0.3463941960517976,
+          0.3165733431957211,
+          0.3156590686271289,
+          0.3252527243959713,
+          0.1878573841452758,
+          0.28283716900752237,
+          0.30747198803673254,
+          0.34415526634991817,
+          0.28390274537018045,
+          0.32078709640434777,
+          0.13411883326933102,
+          0.225874693937085,
+          0.25955538756681584,
+          0.3240433638645106,
+          0.20660961593400182,
+          0.29909181868655155,
+          0.10086527294794354,
+          0.15327745979108962,
+          0.25116546325567374,
+          0.3310762829347401,
+          0.2922492528548214,
+          0.29528493073273226,
+          0.31191925862818737,
+          0.1626582285179206,
+          0.29583524192937266,
+          0.28477196324792453,
+          0.33377005997550807,
+          0.2556340248739039,
+          0.2772348632031408,
+          0.11067325310692823,
+          0.25972310027573514,
+          0.11147751724735962,
+          0.21126124504814778,
+          0.08618305078656174,
+          0.10097477049564846,
+          0.03152354540240696,
+          0.12779429884333918,
+          0.07739987710455228,
+          0.16117142474169677,
+          0.09688825323821822,
+          0.2976365055896573,
+          0.21173203200778537,
+          0.17125910617635132,
+          0.11141577971558474,
+          0.20767670455224793,
+          0.1304522884398976,
+          0.3306269250773109,
+          0.2682726401847705,
+          0.23118516327036503,
+          0.16062032161135723,
+          0.28514268953608196,
+          0.1887181209514221,
+          0.33473705367747764,
+          0.31235778558818333,
+          0.05480322825607952,
+          0.1537093052633564,
+          0.06983473403203633,
+          0.18995327798885792,
+          0.16084441977172495,
+          0.31509200807911286,
+          0.07429892089915424,
+          0.19141310061537675,
+          0.10404339225876598,
+          0.23998847208745702,
+          0.2041711824627957,
+          0.327586216682749,
+          0.22082936571028292,
+          0.3303480220608093,
+          0.2725699352045644,
+          0.3076232795155055,
+          0.3273618546472861,
+          0.18034945777476746
+        ],
+        [
+          0.3012985018535075,
+          0.5021166525369896,
+          0.2166211501255684,
+          0.39528307526766887,
+          0.04378507315145276,
+          0.120884186574818,
+          0.18217417548917725,
+          0.36170566221402733,
+          0.1266890129143268,
+          0.2764062349033361,
+          0.02272079383166313,
+          0.06490809407456784,
+          0.10688804258868163,
+          0.24399543053383177,
+          0.060652775616234514,
+          0.16335263945114736,
+          0.011405530867403094,
+          0.0317394576570094,
+          0.6405980661108723,
+          0.23715525871173698,
+          0.5358332573668833,
+          0.15526898310762474,
+          0.21312792057534446,
+          0.033486363118244586,
+          0.5127618213738917,
+          0.14526578786789276,
+          0.3979109795993884,
+          0.08653293376399228,
+          0.11974499300114981,
+          0.015274320615919932,
+          0.10752821348307998,
+          0.01243320463351907,
+          0.06429198025828602,
+          0.007562041397220576,
+          0.010814749243604064,
+          0.0011231033222825768,
+          0.8539644335518988,
+          0.9163556739854539,
+          0.8063856898708154,
+          0.8923755507781411,
+          0.5308540216508362,
+          0.7264861242111795,
+          0.7899040559273672,
+          0.8756944419349131,
+          0.7239018363342117,
+          0.8470498721958767,
+          0.39033449773861956,
+          0.6165998139446652,
+          0.6927084789714953,
+          0.8110885833360931,
+          0.5890570083899579,
+          0.7648891280431147,
+          0.2695715973539208,
+          0.4861718129426241,
+          0.9423984644292652,
+          0.8190887599499003,
+          0.9252528093697422,
+          0.7630732403669351,
+          0.8075054465867418,
+          0.47500819497235447,
+          0.9192299013609033,
+          0.7543855513514622,
+          0.8853683305727712,
+          0.6733077510372928,
+          0.7301332250051148,
+          0.3222172746966901,
+          0.7064480229157591,
+          0.30836056989730254,
+          0.6061584774166955,
+          0.21125178157451865,
+          0.2743337524727809,
+          0.04542107664720693
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift OnboardingCompletion toward FullyCompleted (and away from Abandoned). The deployment will reach individuals with DigitalLiteracy=HighLiteracy as well as DigitalLiteracy=LowLiteracy, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "LiveChatGuidance",
+        "value": "Proactive",
+        "min_improvement": 0.3242,
+        "improvement_low": 0.3587,
+        "improvement_high": 0.3242
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "OnboardingCompletion",
+          "group": "DigitalLiteracy",
+          "intervention_avg": "GamifiedProgressBar",
+          "intervention_rob": "LiveChatGuidance",
+          "intervention_bad": "AutofillPrefetch",
+          "confounder": "PriorBankingExperience"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "LiveChatGuidance",
+            "value": "Proactive",
+            "min_improvement": 0.3242,
+            "improvement_low": 0.3587,
+            "improvement_high": 0.3242
+          },
+          "avg_best_but_uneven": {
+            "variable": "GamifiedProgressBar",
+            "value": "Enhanced",
+            "min_improvement": 0.1796,
+            "improvement_low": 0.1796,
+            "improvement_high": 0.4051
+          },
+          "harmful_in_subgroup": {
+            "variable": "AutofillPrefetch",
+            "value": "Enabled",
+            "min_improvement": -0.2579,
+            "improvement_low": -0.2579,
+            "improvement_high": 0.1381
+          },
+          "subgroups": [
+            "HighLiteracy",
+            "LowLiteracy"
+          ],
+          "group_variable": "DigitalLiteracy",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "GamifiedProgressBar",
+              "value": "Enhanced",
+              "improvement_low": 0.1796,
+              "improvement_high": 0.4051,
+              "min_improvement": 0.1796
+            },
+            {
+              "variable": "LiveChatGuidance",
+              "value": "Proactive",
+              "improvement_low": 0.3587,
+              "improvement_high": 0.3242,
+              "min_improvement": 0.3242
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,904 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 15,
+    "topology": "subgroup_robust",
+    "seed": 34101,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A federal occupational safety and health administration oversees workplace inspections and enforcement across diverse manufacturing firms. The researcher has access to administrative records and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "InjuryIncidenceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FirmSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineHazardExposure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IndustryRiskTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SafetyOfficerPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorViolationHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WorkforceUnionization",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WorkerTurnoverRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RegionalInspectorStaffing",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FacilityAge",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "InjuryIncidenceLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Recorded rate category of workplace injuries per establishment per quarter.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FirmSize",
+      "values": [
+        "SmallFirm",
+        "LargeFirm"
+      ],
+      "desc": "Whether the establishment has fewer or more than 50 employees.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PenaltyEscalationProgram",
+      "values": [
+        "None",
+        "Standard",
+        "Aggressive"
+      ],
+      "desc": "Tier of escalating monetary fines applied for repeated safety violations.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CooperativeComplianceProgram",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Level of joint regulator-employer safety planning and technical assistance provided.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SurpriseBlitzInspection",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the establishment received an unannounced intensive multi-day inspection.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineHazardExposure",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Pre-study classification of physical and chemical hazard levels at the worksite.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "IndustryRiskTier",
+      "values": [
+        "LowerRisk",
+        "HigherRisk"
+      ],
+      "desc": "Broad industry classification by historical occupational injury and illness rates.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SafetyOfficerPresence",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the establishment employs a dedicated on-site safety officer.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorViolationHistory",
+      "values": [
+        "None",
+        "Some",
+        "Many"
+      ],
+      "desc": "Number category of OSHA-cited violations in the three years before the study.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WorkforceUnionization",
+      "values": [
+        "NonUnion",
+        "Unionized"
+      ],
+      "desc": "Whether the majority of the establishment's workforce is covered by a union contract.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WorkerTurnoverRate",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Annual employee turnover rate category at the establishment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SafetyTrainingFrequency",
+      "values": [
+        "Rare",
+        "Quarterly",
+        "Monthly"
+      ],
+      "desc": "How often the establishment conducts formal safety training sessions for workers.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RegionalInspectorStaffing",
+      "values": [
+        "Understaffed",
+        "AdequatelyStaffed"
+      ],
+      "desc": "Staffing level of the regional OSHA inspection office relative to its caseload.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PersonalProtectiveEquipmentSupply",
+      "values": [
+        "Insufficient",
+        "Adequate"
+      ],
+      "desc": "Whether required personal protective equipment is consistently available on site.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FacilityAge",
+      "values": [
+        "Newer",
+        "Older"
+      ],
+      "desc": "Whether the primary worksite structure was built within the last 20 years or earlier.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "FirmSize",
+      "InjuryIncidenceLevel"
+    ],
+    [
+      "PenaltyEscalationProgram",
+      "InjuryIncidenceLevel"
+    ],
+    [
+      "CooperativeComplianceProgram",
+      "InjuryIncidenceLevel"
+    ],
+    [
+      "CooperativeComplianceProgram",
+      "FacilityAge"
+    ],
+    [
+      "SurpriseBlitzInspection",
+      "InjuryIncidenceLevel"
+    ],
+    [
+      "SurpriseBlitzInspection",
+      "WorkforceUnionization"
+    ],
+    [
+      "BaselineHazardExposure",
+      "InjuryIncidenceLevel"
+    ],
+    [
+      "WorkforceUnionization",
+      "CooperativeComplianceProgram"
+    ],
+    [
+      "RegionalInspectorStaffing",
+      "IndustryRiskTier"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "FirmSize",
+      "parents": [],
+      "values": [
+        [
+          0.4860842452485402
+        ],
+        [
+          0.5139157547514599
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PenaltyEscalationProgram",
+      "parents": [],
+      "values": [
+        [
+          0.5507084724849031
+        ],
+        [
+          0.13272662894568815
+        ],
+        [
+          0.3165648985694087
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurpriseBlitzInspection",
+      "parents": [],
+      "values": [
+        [
+          0.7092891414152077
+        ],
+        [
+          0.2907108585847923
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineHazardExposure",
+      "parents": [],
+      "values": [
+        [
+          0.13684729709034998
+        ],
+        [
+          0.20216556918074238
+        ],
+        [
+          0.6609871337289077
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SafetyOfficerPresence",
+      "parents": [],
+      "values": [
+        [
+          0.7267884647446003
+        ],
+        [
+          0.2732115352553997
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorViolationHistory",
+      "parents": [],
+      "values": [
+        [
+          0.535230825995113
+        ],
+        [
+          0.24024369442345705
+        ],
+        [
+          0.22452547958143004
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WorkerTurnoverRate",
+      "parents": [],
+      "values": [
+        [
+          0.19557819439128526
+        ],
+        [
+          0.5345457545761381
+        ],
+        [
+          0.2698760510325768
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SafetyTrainingFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.5182882317638635
+        ],
+        [
+          0.23054405342065296
+        ],
+        [
+          0.25116771481548344
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RegionalInspectorStaffing",
+      "parents": [],
+      "values": [
+        [
+          0.836094914338593
+        ],
+        [
+          0.1639050856614071
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PersonalProtectiveEquipmentSupply",
+      "parents": [],
+      "values": [
+        [
+          0.41683728299882783
+        ],
+        [
+          0.5831627170011723
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "WorkforceUnionization",
+      "parents": [
+        "SurpriseBlitzInspection"
+      ],
+      "values": [
+        [
+          0.5084490841526388,
+          0.046071954985412264
+        ],
+        [
+          0.49155091584736127,
+          0.9539280450145876
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "IndustryRiskTier",
+      "parents": [
+        "RegionalInspectorStaffing"
+      ],
+      "values": [
+        [
+          0.5227418729864861,
+          0.039163410563567085
+        ],
+        [
+          0.47725812701351383,
+          0.9608365894364328
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CooperativeComplianceProgram",
+      "parents": [
+        "WorkforceUnionization"
+      ],
+      "values": [
+        [
+          0.3688661010109898,
+          0.760703791687285
+        ],
+        [
+          0.34755712328967964,
+          0.1262439305695538
+        ],
+        [
+          0.28357677569933054,
+          0.11305227774316125
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InjuryIncidenceLevel",
+      "parents": [
+        "BaselineHazardExposure",
+        "FirmSize",
+        "PenaltyEscalationProgram",
+        "CooperativeComplianceProgram",
+        "SurpriseBlitzInspection"
+      ],
+      "values": [
+        [
+          0.3578863484691804,
+          0.18562420211713548,
+          0.4583790237065364,
+          0.2676193282503588,
+          0.7742164761646406,
+          0.5903210690479717,
+          0.5153498496270259,
+          0.3108067455751565,
+          0.6099586369327317,
+          0.3969689358966185,
+          0.836094720892569,
+          0.7160615335654406,
+          0.6313189708072274,
+          0.4336499768699357,
+          0.7343187411633365,
+          0.5470638419912309,
+          0.8937487433384083,
+          0.8010299439451231,
+          0.10624686968755306,
+          0.4460512885041331,
+          0.1608783723101992,
+          0.5343874211983094,
+          0.46638667726800637,
+          0.8056317195516711,
+          0.17817120912723367,
+          0.5783564447311299,
+          0.25379960228490506,
+          0.6625746871615893,
+          0.6065740776900509,
+          0.8608476692133965,
+          0.6421384028226793,
+          0.87486948436783,
+          0.7173440496458316,
+          0.9128807857723863,
+          0.8878563792446894,
+          0.968323335524737,
+          0.1765276433221013,
+          0.07452556925396311,
+          0.26484553406036726,
+          0.11816225191816687,
+          0.60996243458834,
+          0.4031361267249494,
+          0.3026928784799873,
+          0.14616142759008294,
+          0.3978140997187721,
+          0.20297923850700791,
+          0.7126224076663571,
+          0.532702027770806,
+          0.43442625734418405,
+          0.24007886858185945,
+          0.5497712046243296,
+          0.3283849927576012,
+          0.7949241903368534,
+          0.6760195613368091,
+          0.040335727489159166,
+          0.24848643299498352,
+          0.06553266947052473,
+          0.3371218023161711,
+          0.2664963252731622,
+          0.6594147062800434,
+          0.07891304878907886,
+          0.369860760638709,
+          0.12696206257991297,
+          0.4619218454910037,
+          0.3993378057384647,
+          0.7654826255128045,
+          0.42968803201608985,
+          0.7878217997509972,
+          0.5314653125867796,
+          0.8312266947382072,
+          0.8030304569479808,
+          0.9378021423833502,
+          0.018882544624875784,
+          0.006164690735063521,
+          0.032306196966942716,
+          0.011593534455700726,
+          0.16179440335041523,
+          0.06819054749825454,
+          0.04034060614555345,
+          0.013324241286578524,
+          0.06526448427043419,
+          0.022977842534109536,
+          0.2758862289631931,
+          0.12484840415689319,
+          0.07671862891678119,
+          0.025523516045253398,
+          0.11981209277174157,
+          0.04468253925112305,
+          0.4059174585440096,
+          0.2119686896338375,
+          0.002907244571657451,
+          0.02538998632515653,
+          0.005357612969601147,
+          0.049342902498541834,
+          0.034036418021993434,
+          0.21703879046914404,
+          0.005818208934234816,
+          0.052183945908969284,
+          0.010599508011939403,
+          0.09012431879763572,
+          0.0668554585029569,
+          0.3417348319310194,
+          0.07856359005157876,
+          0.37206685016751023,
+          0.12694302808459365,
+          0.4784691341865412,
+          0.4084330372987215,
+          0.7680297188248463
+        ],
+        [
+          0.334346417711329,
+          0.3066259449795075,
+          0.3320360575123587,
+          0.33483954555042816,
+          0.1806366068909729,
+          0.28032209852146295,
+          0.3002715369839671,
+          0.32883627140294425,
+          0.27251343486615326,
+          0.3184825740308037,
+          0.14124822075345178,
+          0.21686889427623027,
+          0.2619542954820675,
+          0.328392562170357,
+          0.20316759639847132,
+          0.29269929124318556,
+          0.0958483802634528,
+          0.1649866486525496,
+          0.2703519932269109,
+          0.3253113302090401,
+          0.29612752074718357,
+          0.30770985913460963,
+          0.3094062297224426,
+          0.16260421966394964,
+          0.317324096401509,
+          0.27836214509238016,
+          0.33610397815561416,
+          0.24624487918263982,
+          0.27406099013453356,
+          0.12213920061049777,
+          0.25690368987974843,
+          0.11153179170194748,
+          0.21651754768983394,
+          0.07989793923478292,
+          0.10111203918557796,
+          0.030650206972708816,
+          0.3063295186453308,
+          0.2265516739084994,
+          0.3289585983088667,
+          0.27823788579464415,
+          0.27206162753049407,
+          0.33133447052409165,
+          0.3223565401370157,
+          0.29339017216076285,
+          0.33986209487614827,
+          0.33098447392722136,
+          0.2200160851957492,
+          0.29793339725158097,
+          0.32057988164016377,
+          0.32592011687327094,
+          0.29602819975439854,
+          0.3398152769930545,
+          0.17026669322333676,
+          0.23337453941303793,
+          0.1781391017589204,
+          0.31616169648857684,
+          0.21237563649361457,
+          0.32911276948530416,
+          0.34547353982604107,
+          0.250539446177826,
+          0.23735947068419544,
+          0.3422537293238312,
+          0.27256079332186295,
+          0.32141319585060424,
+          0.3170718065656281,
+          0.19009531835074886,
+          0.32649227164641104,
+          0.1741271841006669,
+          0.297808824551042,
+          0.14466879857148,
+          0.16438964135251988,
+          0.058717270816570924,
+          0.12893966728130515,
+          0.07468303507833925,
+          0.1623198789015924,
+          0.09620241839873947,
+          0.30978006802258795,
+          0.22282316736866375,
+          0.17181165684608452,
+          0.11444614546189769,
+          0.22844526599592466,
+          0.14361545929689218,
+          0.31478923528341374,
+          0.2726800140920627,
+          0.2237112924816499,
+          0.15289105651212745,
+          0.285062566827219,
+          0.19140000012870623,
+          0.32086788975792846,
+          0.305332364129481,
+          0.05012989269749749,
+          0.14795380653027623,
+          0.0730826256682151,
+          0.19805213700155894,
+          0.16179536716636228,
+          0.31824687607365826,
+          0.0710411336998436,
+          0.20631047281823414,
+          0.09739336723110617,
+          0.23524105613156343,
+          0.2311133955610654,
+          0.3245768477928725,
+          0.22225357314800426,
+          0.3241065626402988,
+          0.26584015299556735,
+          0.3106211698965808,
+          0.3284384528479426,
+          0.1871381259657376
+        ],
+        [
+          0.3077672338194905,
+          0.507749852903357,
+          0.20958491878110488,
+          0.3975411261992131,
+          0.04514691694438637,
+          0.12935683243056548,
+          0.18437861338900705,
+          0.3603569830218993,
+          0.11752792820111498,
+          0.28454849007257776,
+          0.02265705835397934,
+          0.06706957215832914,
+          0.10672673371070507,
+          0.23795746095970718,
+          0.06251366243819215,
+          0.16023686676558355,
+          0.010402876398138985,
+          0.033983407402327345,
+          0.623401137085536,
+          0.22863738128682692,
+          0.5429941069426173,
+          0.15790271966708097,
+          0.22420709300955116,
+          0.0317640607843792,
+          0.5045046944712575,
+          0.14328141017649001,
+          0.41009641955948084,
+          0.09118043365577097,
+          0.11936493217541558,
+          0.017013130176105555,
+          0.10095790729757219,
+          0.0135987239302225,
+          0.0661384026643344,
+          0.007221274992830741,
+          0.011031581569732636,
+          0.0010264575025542952,
+          0.5171428380325679,
+          0.6989227568375375,
+          0.40619586763076604,
+          0.603599862287189,
+          0.11797593788116599,
+          0.26552940275095893,
+          0.374950581382997,
+          0.5604484002491541,
+          0.2623238054050796,
+          0.46603628756577065,
+          0.06736150713789374,
+          0.16936457497761306,
+          0.24499386101565235,
+          0.4340010145448697,
+          0.15420059562127186,
+          0.33179973024934434,
+          0.034809116439809835,
+          0.09060589925015304,
+          0.7815251707519204,
+          0.4353518705164397,
+          0.7220916940358606,
+          0.33376542819852467,
+          0.3880301349007968,
+          0.0900458475421307,
+          0.6837274805267256,
+          0.28788551003745977,
+          0.6004771440982242,
+          0.2166649586583921,
+          0.28359038769590716,
+          0.04442205613644657,
+          0.24381969633749906,
+          0.03805101614833587,
+          0.17072586286217847,
+          0.024104506690312697,
+          0.03257990169949935,
+          0.0034805868000788542,
+          0.852177788093819,
+          0.9191522741865973,
+          0.8053739241314649,
+          0.8922040471455599,
+          0.5284255286269968,
+          0.7089862851330817,
+          0.787847737008362,
+          0.8722296132515237,
+          0.7062902497336411,
+          0.8334066981689984,
+          0.40932453575339317,
+          0.6024715817510441,
+          0.6995700786015691,
+          0.8215854274426191,
+          0.5951253404010394,
+          0.7639174606201707,
+          0.27321465169806197,
+          0.4826989462366816,
+          0.946962862730845,
+          0.8266562071445671,
+          0.9215597613621838,
+          0.7526049604998991,
+          0.8041682148116442,
+          0.4647143334571977,
+          0.9231406573659215,
+          0.7415055812727966,
+          0.8920071247569544,
+          0.6746346250708009,
+          0.7020311459359777,
+          0.3336883202761082,
+          0.6991828368004169,
+          0.30382658719219097,
+          0.6072168189198389,
+          0.21090969591687803,
+          0.2631285098533358,
+          0.04483215520941614
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FacilityAge",
+      "parents": [
+        "CooperativeComplianceProgram"
+      ],
+      "values": [
+        [
+          0.6567772348514879,
+          0.6131680982093708,
+          0.5676654573782035
+        ],
+        [
+          0.34322276514851213,
+          0.3868319017906291,
+          0.4323345426217965
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift InjuryIncidenceLevel toward Low (and away from High). The deployment will reach individuals with FirmSize=SmallFirm as well as FirmSize=LargeFirm, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "CooperativeComplianceProgram",
+        "value": "Full",
+        "min_improvement": 0.3867,
+        "improvement_low": 0.4451,
+        "improvement_high": 0.3867
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "InjuryIncidenceLevel",
+          "group": "FirmSize",
+          "intervention_avg": "PenaltyEscalationProgram",
+          "intervention_rob": "CooperativeComplianceProgram",
+          "intervention_bad": "SurpriseBlitzInspection",
+          "confounder": "BaselineHazardExposure"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "CooperativeComplianceProgram",
+            "value": "Full",
+            "min_improvement": 0.3867,
+            "improvement_low": 0.4451,
+            "improvement_high": 0.3867
+          },
+          "avg_best_but_uneven": {
+            "variable": "PenaltyEscalationProgram",
+            "value": "Aggressive",
+            "min_improvement": 0.1968,
+            "improvement_low": 0.1968,
+            "improvement_high": 0.4586
+          },
+          "harmful_in_subgroup": {
+            "variable": "SurpriseBlitzInspection",
+            "value": "Yes",
+            "min_improvement": -0.1908,
+            "improvement_low": -0.1908,
+            "improvement_high": 0.2764
+          },
+          "subgroups": [
+            "SmallFirm",
+            "LargeFirm"
+          ],
+          "group_variable": "FirmSize",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "PenaltyEscalationProgram",
+              "value": "Aggressive",
+              "improvement_low": 0.1968,
+              "improvement_high": 0.4586,
+              "min_improvement": 0.1968
+            },
+            {
+              "variable": "CooperativeComplianceProgram",
+              "value": "Full",
+              "improvement_low": 0.4451,
+              "improvement_high": 0.3867,
+              "min_improvement": 0.3867
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

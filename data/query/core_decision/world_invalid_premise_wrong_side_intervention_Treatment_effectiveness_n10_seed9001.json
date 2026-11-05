@@ -1,0 +1,451 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 10,
+    "topology": "invalid_premise:wrong_side_intervention",
+    "seed": 9001,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "wrong_side_intervention"
+  },
+  "story": "A researcher is based at a large academic medical center's perioperative services division. The researcher has access to electronic health records and can request observational or interventional samples from surgical patient populations.",
+  "non_intervenable_variables": [
+    {
+      "name": "PatientPainControl",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OpioidSparing",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SurgeryInvasiveness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreoperativeOpioidUse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PatientPainControl",
+      "values": [
+        "Adequate",
+        "Moderate",
+        "Poor"
+      ],
+      "desc": "Patient-reported level of pain control in first 48 hours post-surgery.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PainScoreDocumentationStatus",
+      "values": [
+        "Incomplete",
+        "Complete"
+      ],
+      "desc": "Whether nursing staff recorded all scheduled pain assessments in the EHR.",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MultimodalAnalgesiaProtocol",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Degree of multimodal analgesia regimen prescribed at discharge from recovery.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OpioidSparing",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Extent to which non-opioid agents substitute for opioid consumption postoperatively.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SurgeryInvasiveness",
+      "values": [
+        "Minor",
+        "Major"
+      ],
+      "desc": "Classification of surgical procedure by tissue disruption and expected trauma.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAge",
+      "values": [
+        "Under50",
+        "50to70",
+        "Over70"
+      ],
+      "desc": "Age group of the patient at time of surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PreoperativeOpioidUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient was taking opioids regularly before surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RegionalAnesthesiaUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a regional nerve block was administered perioperatively.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Ratio of nursing staff to patients on the postoperative ward during recovery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnxietyLevel",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Patient self-reported preoperative anxiety measured by validated screening tool.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PatientPainControl",
+      "PainScoreDocumentationStatus"
+    ],
+    [
+      "MultimodalAnalgesiaProtocol",
+      "OpioidSparing"
+    ],
+    [
+      "MultimodalAnalgesiaProtocol",
+      "PreoperativeOpioidUse"
+    ],
+    [
+      "MultimodalAnalgesiaProtocol",
+      "PatientAge"
+    ],
+    [
+      "OpioidSparing",
+      "PatientPainControl"
+    ],
+    [
+      "SurgeryInvasiveness",
+      "PatientPainControl"
+    ],
+    [
+      "RegionalAnesthesiaUse",
+      "AnxietyLevel"
+    ],
+    [
+      "AnxietyLevel",
+      "PatientAge"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MultimodalAnalgesiaProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.38628734686706645
+        ],
+        [
+          0.3275312626608014
+        ],
+        [
+          0.28618139047213215
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgeryInvasiveness",
+      "parents": [],
+      "values": [
+        [
+          0.42157220830495096
+        ],
+        [
+          0.578427791695049
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RegionalAnesthesiaUse",
+      "parents": [],
+      "values": [
+        [
+          0.9014404074956205
+        ],
+        [
+          0.09855959250437951
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NurseToPatientRatio",
+      "parents": [],
+      "values": [
+        [
+          0.4952082470400857
+        ],
+        [
+          0.2554068166055513
+        ],
+        [
+          0.24938493635436293
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OpioidSparing",
+      "parents": [
+        "MultimodalAnalgesiaProtocol"
+      ],
+      "values": [
+        [
+          0.1639181000642104,
+          0.3454479080019548,
+          0.8704902281688782
+        ],
+        [
+          0.29396124104843185,
+          0.3283024184111129,
+          0.1136785460929209
+        ],
+        [
+          0.5421206588873577,
+          0.3262496735869323,
+          0.015831225738200956
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreoperativeOpioidUse",
+      "parents": [
+        "MultimodalAnalgesiaProtocol"
+      ],
+      "values": [
+        [
+          0.533635087419807,
+          0.9841853421497128,
+          0.9997046370403704
+        ],
+        [
+          0.46636491258019297,
+          0.015814657850287194,
+          0.00029536295962949975
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AnxietyLevel",
+      "parents": [
+        "RegionalAnesthesiaUse"
+      ],
+      "values": [
+        [
+          0.5750668987712968,
+          0.040661642878018364
+        ],
+        [
+          0.42493310122870326,
+          0.9593383571219818
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientPainControl",
+      "parents": [
+        "SurgeryInvasiveness",
+        "OpioidSparing"
+      ],
+      "values": [
+        [
+          0.8595040195958169,
+          0.4612644800774363,
+          0.219843273732237,
+          0.5491502147255205,
+          0.0937569289016424,
+          0.02170061006332998
+        ],
+        [
+          0.12499010818740527,
+          0.32268382963642533,
+          0.3131970143048776,
+          0.29411121361824155,
+          0.23885572577509426,
+          0.1429665649814145
+        ],
+        [
+          0.015505872216777818,
+          0.21605169028613844,
+          0.46695971196288544,
+          0.15673857165623786,
+          0.6673873453232633,
+          0.8353328249552555
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAge",
+      "parents": [
+        "AnxietyLevel",
+        "MultimodalAnalgesiaProtocol"
+      ],
+      "values": [
+        [
+          0.2892424607944901,
+          0.0690734606322764,
+          0.013134735931741753,
+          0.5090369483568705,
+          0.15378320219891858,
+          0.03052322480295446
+        ],
+        [
+          0.28284431978564756,
+          0.31201124229394944,
+          0.27406525923223507,
+          0.12001163837007492,
+          0.1674775394971515,
+          0.1535506648096562
+        ],
+        [
+          0.4279132194198622,
+          0.6189152970737741,
+          0.7128000048360231,
+          0.3709514132730545,
+          0.67873925830393,
+          0.8159261103873893
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PainScoreDocumentationStatus",
+      "parents": [
+        "PatientPainControl"
+      ],
+      "values": [
+        [
+          0.8334190358764028,
+          0.49281385656988996,
+          0.01797311256336423
+        ],
+        [
+          0.16658096412359724,
+          0.50718614343011,
+          0.9820268874366359
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting PainScoreDocumentationStatus=Complete as a way to shift PatientPainControl toward Adequate (and away from Poor). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift PatientPainControl toward Adequate.",
+      "answer": {
+        "is_valid_intervention": false,
+        "invalid_reason": "wrong_side_intervention",
+        "alternative": {
+          "variable": "MultimodalAnalgesiaProtocol",
+          "value": "Full"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "wrong_side_intervention",
+        "roles": {
+          "target": "PatientPainControl",
+          "proposed_intervention": "PainScoreDocumentationStatus",
+          "intervenable_alt": "MultimodalAnalgesiaProtocol",
+          "alt_mediator": "OpioidSparing",
+          "confounder": "SurgeryInvasiveness"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "alternative": {
+            "variable": "MultimodalAnalgesiaProtocol",
+            "value": "Full"
+          },
+          "alternative_effect": -0.4666,
+          "acceptable_alternatives": [
+            {
+              "variable": "MultimodalAnalgesiaProtocol",
+              "value": "Full",
+              "improvement": 0.4666
+            }
+          ],
+          "accept_threshold": 0.1,
+          "invalid_reason": "wrong_side_intervention",
+          "proposed_intervention": {
+            "variable": "PainScoreDocumentationStatus",
+            "value": "Complete"
+          },
+          "proposed_predictive_gap": 1.2661,
+          "proposed_do_effect": 0.0
+        }
+      }
+    }
+  ]
+}

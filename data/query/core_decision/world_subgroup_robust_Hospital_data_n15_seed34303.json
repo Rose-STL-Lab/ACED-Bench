@@ -1,0 +1,1076 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 15,
+    "topology": "subgroup_robust",
+    "seed": 34303,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A large academic medical center maintains detailed electronic health records for all surgical patients. The research team has institutional approval to access existing records and to design prospective observational or interventional studies within the facility.",
+  "non_intervenable_variables": [
+    {
+      "name": "FunctionalRecoveryStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidityBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineFrailtyIndex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SurgeryType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreOpAnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WoundComplicationPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SleepQualityInHospital",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DischargeReadinessAssessment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAge",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "FunctionalRecoveryStatus",
+      "values": [
+        "FullRecovery",
+        "PartialRecovery",
+        "PoorRecovery"
+      ],
+      "desc": "Patient-reported functional independence level at 30 days post-surgery.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ComorbidityBurden",
+      "values": [
+        "LowComorbidity",
+        "HighComorbidity"
+      ],
+      "desc": "Classification of pre-existing chronic disease load at admission.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AcceleratedMobilizationProtocol",
+      "values": [
+        "None",
+        "EarlyAmbulation",
+        "IntensiveAmbulation"
+      ],
+      "desc": "Degree of structured early physical mobilization initiated within 12 hours post-op.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "StructuredMultimodalRehab",
+      "values": [
+        "None",
+        "Moderate",
+        "Full"
+      ],
+      "desc": "Intensity of combined physiotherapy, nutrition, and breathing exercise program.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OpioidBasedPainManagement",
+      "values": [
+        "None",
+        "LowDose",
+        "HighDose"
+      ],
+      "desc": "Scheduled opioid analgesic dosing tier during the first 72 post-operative hours.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineFrailtyIndex",
+      "values": [
+        "Robust",
+        "PreFrail",
+        "Frail"
+      ],
+      "desc": "Frailty classification based on pre-operative grip strength and gait speed.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgeryType",
+      "values": [
+        "Minor",
+        "Major"
+      ],
+      "desc": "Categorization of surgical procedure by tissue invasiveness and duration.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnesthesiaMethod",
+      "values": [
+        "General",
+        "Regional"
+      ],
+      "desc": "Primary anesthetic technique used during the surgical procedure.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PostOpNutritionSupport",
+      "values": [
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Level of caloric and protein supplementation provided after surgery.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PreOpAnxietyLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported anxiety score measured on the day before surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "values": [
+        "Favorable",
+        "Unfavorable"
+      ],
+      "desc": "Staffing ratio on the post-operative ward during the patient's stay.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WoundComplicationPresence",
+      "values": [
+        "NoComplication",
+        "MinorComplication",
+        "MajorComplication"
+      ],
+      "desc": "Surgical site infection or dehiscence status within 14 days post-op.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SleepQualityInHospital",
+      "values": [
+        "Good",
+        "Poor"
+      ],
+      "desc": "Patient-rated sleep quality during the inpatient recovery period.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DischargeReadinessAssessment",
+      "values": [
+        "Ready",
+        "Borderline",
+        "NotReady"
+      ],
+      "desc": "Clinical team evaluation of safe discharge criteria fulfillment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAge",
+      "values": [
+        "Under65",
+        "Over65"
+      ],
+      "desc": "Age bracket of the patient at the time of surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "FunctionalRecoveryStatus",
+      "AnesthesiaMethod"
+    ],
+    [
+      "ComorbidityBurden",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "AcceleratedMobilizationProtocol",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "AcceleratedMobilizationProtocol",
+      "PostOpNutritionSupport"
+    ],
+    [
+      "StructuredMultimodalRehab",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "OpioidBasedPainManagement",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "BaselineFrailtyIndex",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "WoundComplicationPresence",
+      "PatientAge"
+    ],
+    [
+      "SleepQualityInHospital",
+      "PatientAge"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ComorbidityBurden",
+      "parents": [],
+      "values": [
+        [
+          0.09537161129625438
+        ],
+        [
+          0.9046283887037455
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AcceleratedMobilizationProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.40335179215984845
+        ],
+        [
+          0.13252108811449237
+        ],
+        [
+          0.46412711972565923
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StructuredMultimodalRehab",
+      "parents": [],
+      "values": [
+        [
+          0.476962480730106
+        ],
+        [
+          0.20347903407175116
+        ],
+        [
+          0.31955848519814284
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OpioidBasedPainManagement",
+      "parents": [],
+      "values": [
+        [
+          0.30175327146321085
+        ],
+        [
+          0.5303190438952072
+        ],
+        [
+          0.16792768464158195
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineFrailtyIndex",
+      "parents": [],
+      "values": [
+        [
+          0.09347267451561955
+        ],
+        [
+          0.6788217155906977
+        ],
+        [
+          0.2277056098936827
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgeryType",
+      "parents": [],
+      "values": [
+        [
+          0.2514131564624158
+        ],
+        [
+          0.7485868435375843
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PreOpAnxietyLevel",
+      "parents": [],
+      "values": [
+        [
+          0.23503628413252892
+        ],
+        [
+          0.4767967215751769
+        ],
+        [
+          0.2881669942922942
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NurseToPatientRatio",
+      "parents": [],
+      "values": [
+        [
+          0.4031741938975556
+        ],
+        [
+          0.5968258061024444
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "WoundComplicationPresence",
+      "parents": [],
+      "values": [
+        [
+          0.09360510969199563
+        ],
+        [
+          0.34659917479297947
+        ],
+        [
+          0.5597957155150249
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SleepQualityInHospital",
+      "parents": [],
+      "values": [
+        [
+          0.4741292312528977
+        ],
+        [
+          0.5258707687471023
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DischargeReadinessAssessment",
+      "parents": [],
+      "values": [
+        [
+          0.2374638717319146
+        ],
+        [
+          0.6678105353276932
+        ],
+        [
+          0.09472559294039214
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostOpNutritionSupport",
+      "parents": [
+        "AcceleratedMobilizationProtocol"
+      ],
+      "values": [
+        [
+          0.4125619604632105,
+          0.7591095981328908,
+          0.9339488710848328
+        ],
+        [
+          0.5874380395367895,
+          0.24089040186710925,
+          0.06605112891516716
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FunctionalRecoveryStatus",
+      "parents": [
+        "BaselineFrailtyIndex",
+        "ComorbidityBurden",
+        "AcceleratedMobilizationProtocol",
+        "StructuredMultimodalRehab",
+        "OpioidBasedPainManagement"
+      ],
+      "values": [
+        [
+          0.353696871060682,
+          0.42762339091771834,
+          0.1922539222117377,
+          0.4683580084224318,
+          0.5517424159289289,
+          0.27641645828527456,
+          0.7762630598278788,
+          0.8006309190688816,
+          0.6083183531442338,
+          0.5136441426317073,
+          0.5897789942980526,
+          0.30151004963722694,
+          0.6034044456478966,
+          0.6690148904374564,
+          0.39967039526184545,
+          0.8365976624408237,
+          0.8671336221078955,
+          0.7253068060780546,
+          0.6517760926035925,
+          0.6880234059318902,
+          0.42793038641054587,
+          0.7254374763189185,
+          0.7669670881114333,
+          0.5227429283734559,
+          0.887955563818438,
+          0.9121538269625358,
+          0.7999382078361748,
+          0.10302639576846319,
+          0.13823020505417577,
+          0.4448976768918056,
+          0.15873480505958731,
+          0.2041827162988171,
+          0.526210523729362,
+          0.4633079389323388,
+          0.5359692266711327,
+          0.8066760956758954,
+          0.1915821645846828,
+          0.23327199322800923,
+          0.5690190983089727,
+          0.2690579507211861,
+          0.3400289578821908,
+          0.6537825890542938,
+          0.595942380248274,
+          0.6553782115551162,
+          0.8658017294316519,
+          0.6482491810057351,
+          0.6989481563974963,
+          0.8716892334043671,
+          0.7239888955543304,
+          0.7735136278391679,
+          0.9140615934915295,
+          0.8822861942325911,
+          0.9116445724645873,
+          0.9658669565169764,
+          0.1895108484090917,
+          0.24379094455303651,
+          0.07736998313086627,
+          0.27428891640315134,
+          0.3456344039815542,
+          0.1256529006248616,
+          0.5953569325550562,
+          0.6745914135584047,
+          0.41488456173207944,
+          0.3050597562400018,
+          0.3668404137973545,
+          0.1344151480057066,
+          0.4026524019510792,
+          0.4649094406638803,
+          0.20147894129339247,
+          0.7182002860137363,
+          0.7676496648894146,
+          0.5519724405012082,
+          0.42673299707954343,
+          0.5127745086841838,
+          0.24702830641401125,
+          0.5219098476565105,
+          0.613053484065153,
+          0.34162208419169265,
+          0.8051064144946622,
+          0.8442175101082234,
+          0.6643579513866298,
+          0.03736591859248602,
+          0.05079302259229021,
+          0.23630275652742325,
+          0.06297575757402084,
+          0.09122763555434202,
+          0.328315701569066,
+          0.26607785746821727,
+          0.34570924652120066,
+          0.6575384654889935,
+          0.07790255324242516,
+          0.10942907206092245,
+          0.3829075506995308,
+          0.1233393906347014,
+          0.16500078892844688,
+          0.4685195202811228,
+          0.4073947380324204,
+          0.45718493481213435,
+          0.7660604996954695,
+          0.44824898602244884,
+          0.5111703094832475,
+          0.7868267012636848,
+          0.5507405095282328,
+          0.5964415477232382,
+          0.8353175643061873,
+          0.7988847910755068,
+          0.8324540540183074,
+          0.9418348725902856,
+          0.01835757888207882,
+          0.0264318191672155,
+          0.0061355574297603105,
+          0.033319395310858646,
+          0.046900237960647226,
+          0.010411148434459408,
+          0.1610973590379418,
+          0.21285396720028776,
+          0.06140987638888757,
+          0.03773070471445073,
+          0.05563534337257545,
+          0.013885099608474533,
+          0.06773931608329714,
+          0.08667750234582175,
+          0.024290286922548848,
+          0.26847158802604976,
+          0.33310655005679174,
+          0.12289305179756521,
+          0.0760003794322217,
+          0.10768536152724838,
+          0.02934400565658179,
+          0.1208419360528467,
+          0.15448358082594094,
+          0.04716752147877373,
+          0.39011094083891207,
+          0.4581352289161487,
+          0.20941471574025355,
+          0.002874107489510581,
+          0.004105448859932005,
+          0.02851979359404977,
+          0.005479595918351438,
+          0.007401347140472811,
+          0.04958384781956899,
+          0.03199141445405216,
+          0.044792607050804574,
+          0.21495220127149944,
+          0.006412679701964101,
+          0.009255886944791743,
+          0.054510349389006,
+          0.010841719759298925,
+          0.015178395908172708,
+          0.08894286543339697,
+          0.0665035856312516,
+          0.08676322924232693,
+          0.33522360358032166,
+          0.07452136866840146,
+          0.10615826928750702,
+          0.37447684125024966,
+          0.11795953269748638,
+          0.16050666849627707,
+          0.48174943675343146,
+          0.3950751823711602,
+          0.461819533494585,
+          0.7484237383564792
+        ],
+        [
+          0.34931784788858544,
+          0.3253280620166326,
+          0.3043389027847123,
+          0.30947087120576294,
+          0.288446121802556,
+          0.3307855743012991,
+          0.1782843954055389,
+          0.16571594308154397,
+          0.27204602706402387,
+          0.30925767889507433,
+          0.2684552232564213,
+          0.33422387570507794,
+          0.2770115263026229,
+          0.2395278265928007,
+          0.3246497143081474,
+          0.13973597497331167,
+          0.1180483513969206,
+          0.20801183142275076,
+          0.24746479704664812,
+          0.23117123040992374,
+          0.3262888343008861,
+          0.21128930837145068,
+          0.18998224509140577,
+          0.3081340190525056,
+          0.10010572759718495,
+          0.08076471103678114,
+          0.16813179118184804,
+          0.2690800805322453,
+          0.2730823705748879,
+          0.3083370195395279,
+          0.2911601944784812,
+          0.3271923039957641,
+          0.306643295675346,
+          0.330870358498186,
+          0.29659985534169836,
+          0.1603453889355737,
+          0.30585642491383197,
+          0.3370943944200191,
+          0.2879159353219971,
+          0.333354508600918,
+          0.3261530061022996,
+          0.2520380025657148,
+          0.28036304648519267,
+          0.2551818625050048,
+          0.11846143019696581,
+          0.2456129409301602,
+          0.22689997310750137,
+          0.1150181445276356,
+          0.21063215426677465,
+          0.17920217441312164,
+          0.0787059075256255,
+          0.1062437379043541,
+          0.08076903988781102,
+          0.03303543509614486,
+          0.2973253201579427,
+          0.31591758299205414,
+          0.22762202567737694,
+          0.31838496012376344,
+          0.3282998784029539,
+          0.2795894197023254,
+          0.2788238075577271,
+          0.24008223815129837,
+          0.3188379356854088,
+          0.3279955316707056,
+          0.3196352243094488,
+          0.27931604601665505,
+          0.3233204739818472,
+          0.3195606430412909,
+          0.3244040956005907,
+          0.21573112206385697,
+          0.18527400649085388,
+          0.28672617695400576,
+          0.33630242793306225,
+          0.30712416615364413,
+          0.3264399559075619,
+          0.314178631078038,
+          0.26937714031262444,
+          0.3442287471442162,
+          0.1628881779447339,
+          0.13368818735522542,
+          0.2423281326567472,
+          0.1809882587067683,
+          0.19972910361746438,
+          0.31077291981028066,
+          0.21002767714781104,
+          0.2407284041875051,
+          0.3257066011981126,
+          0.3281215834469572,
+          0.3178151960800661,
+          0.25327732053521135,
+          0.23395121019906695,
+          0.24481910386417624,
+          0.32604328245594144,
+          0.2800806351683315,
+          0.29347205910937835,
+          0.30718927719426076,
+          0.3205309589868087,
+          0.326402841247218,
+          0.18817681250908533,
+          0.32486533220111896,
+          0.3138409153300425,
+          0.17546471121438872,
+          0.29290034817690996,
+          0.28004992221339425,
+          0.14041572377537076,
+          0.1682068372988428,
+          0.14471411243812904,
+          0.05461782860423429,
+          0.12535639024453082,
+          0.14349077676200608,
+          0.07093172667284742,
+          0.16456805896162466,
+          0.19896202451521217,
+          0.09116753401086776,
+          0.2812276693342105,
+          0.31700469963491135,
+          0.21269323879621166,
+          0.17433425312680023,
+          0.19669122178914,
+          0.10663593073699132,
+          0.21667756812857838,
+          0.25589868534757665,
+          0.13876971017269701,
+          0.3392034749391145,
+          0.32708156439963115,
+          0.2662381269042948,
+          0.2154482856361495,
+          0.2533951691439372,
+          0.15331773431075504,
+          0.27537671006510595,
+          0.29434726499537067,
+          0.19354930643554974,
+          0.33193952642231467,
+          0.32150691412974824,
+          0.325304275371693,
+          0.05677854442633399,
+          0.061814790078534194,
+          0.14409415571393108,
+          0.0679554312829043,
+          0.0807978607781798,
+          0.1918765365119947,
+          0.1636359764240026,
+          0.17800587540212806,
+          0.3153238416522845,
+          0.07945951740722369,
+          0.09379910373776416,
+          0.1961017860882605,
+          0.09999598635747707,
+          0.1217358322016254,
+          0.23801209435934575,
+          0.2161770660387248,
+          0.2493458229372023,
+          0.3385222312505762,
+          0.21767652258685252,
+          0.2571000311173848,
+          0.33577338117786737,
+          0.27368886208083304,
+          0.2933340782184372,
+          0.30998477855876705,
+          0.3448731577898373,
+          0.3208432041274018,
+          0.20206989083095214
+        ],
+        [
+          0.2969852810507327,
+          0.24704854706564913,
+          0.50340717500355,
+          0.22217112037180528,
+          0.15981146226851511,
+          0.39279796741342626,
+          0.04545254476658245,
+          0.033653137849574494,
+          0.11963561979174236,
+          0.1770981784732183,
+          0.1417657824455261,
+          0.3642660746576951,
+          0.11958402804948051,
+          0.09145728296974297,
+          0.27567989043000724,
+          0.02366636258586473,
+          0.01481802649518398,
+          0.0666813624991946,
+          0.1007591103497594,
+          0.08080536365818597,
+          0.24578077928856806,
+          0.06327321530963083,
+          0.04305066679716088,
+          0.16912305257403848,
+          0.011938708584377056,
+          0.007081462000683162,
+          0.031930000981977194,
+          0.6278935236992915,
+          0.5886874243709362,
+          0.24676530356866636,
+          0.5501050004619314,
+          0.4686249797054189,
+          0.1671461805952921,
+          0.2058217025694751,
+          0.167430917987169,
+          0.03297851538853084,
+          0.5025614105014853,
+          0.42963361235197156,
+          0.1430649663690301,
+          0.3975875406778959,
+          0.3338180360155096,
+          0.09417940837999143,
+          0.12369457326653335,
+          0.089439925939879,
+          0.015736840371382246,
+          0.10613787806410471,
+          0.07415187049500226,
+          0.013292622067997483,
+          0.06537895017889488,
+          0.047284197747710546,
+          0.007232498982844987,
+          0.011470067863054753,
+          0.007586387647601596,
+          0.0010976083868787945,
+          0.5131638314329656,
+          0.4402914724549094,
+          0.6950079911917567,
+          0.40732612347308517,
+          0.32606571761549186,
+          0.594757679672813,
+          0.1258192598872167,
+          0.08532634829029696,
+          0.26627750258251187,
+          0.3669447120892926,
+          0.31352436189319677,
+          0.5862688059776384,
+          0.27402712406707347,
+          0.21552991629482882,
+          0.4741169631060169,
+          0.06606859192240676,
+          0.04707632861973162,
+          0.16130138254478607,
+          0.23696457498739434,
+          0.18010132516217206,
+          0.4265317376784269,
+          0.1639115212654515,
+          0.11756937562222249,
+          0.3141491686640912,
+          0.032005407560603966,
+          0.022094302536551157,
+          0.09331391595662301,
+          0.7816458227007458,
+          0.7494778737902454,
+          0.452924323662296,
+          0.726996565278168,
+          0.6680439602581528,
+          0.3459776972328214,
+          0.40580055908482554,
+          0.33647555739873325,
+          0.08918421397579518,
+          0.6881462365585078,
+          0.6457518240749013,
+          0.29104916684452764,
+          0.5965799741969672,
+          0.5415271519621747,
+          0.22429120252461646,
+          0.27207430298077084,
+          0.2164122239406476,
+          0.04576268779544522,
+          0.22688568177643223,
+          0.17498877518671008,
+          0.03770858752192649,
+          0.15635914229485737,
+          0.12350853006336758,
+          0.02426671191844205,
+          0.03290837162565038,
+          0.022831833543563506,
+          0.0035472988054799683,
+          0.8562860308733903,
+          0.8300774040707783,
+          0.9229327158973922,
+          0.8021125457275167,
+          0.7541377375241406,
+          0.8984213175546727,
+          0.5576749716278477,
+          0.470141333164801,
+          0.7258968848149009,
+          0.7879350421587491,
+          0.7476734348382845,
+          0.8794789696545342,
+          0.7155831157881245,
+          0.6574238123066015,
+          0.8369400029047541,
+          0.39232493703483584,
+          0.33981188554357716,
+          0.61086882129814,
+          0.7085513349316289,
+          0.6389194693288144,
+          0.8173382600326631,
+          0.6037813538820473,
+          0.5511691541786884,
+          0.7592831720856764,
+          0.27794953273877315,
+          0.2203578569541031,
+          0.4652810088880533,
+          0.9403473480841554,
+          0.9340797610615339,
+          0.8273860506920192,
+          0.9265649727987444,
+          0.9118007920813475,
+          0.7585396156684362,
+          0.8043726091219453,
+          0.7772015175470675,
+          0.469723957076216,
+          0.9141278028908123,
+          0.8969450093174441,
+          0.7493878645227335,
+          0.8891622938832239,
+          0.863085771890202,
+          0.6730450402072573,
+          0.7173193483300235,
+          0.6638909478204708,
+          0.32625416516910216,
+          0.707802108744746,
+          0.6367416995951082,
+          0.28974977757188297,
+          0.6083516052216806,
+          0.5461592532852858,
+          0.20826578468780135,
+          0.2600516598390026,
+          0.21733726237801324,
+          0.04950637081256876
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAge",
+      "parents": [
+        "WoundComplicationPresence",
+        "SleepQualityInHospital"
+      ],
+      "values": [
+        [
+          0.3931323895589661,
+          0.36823807593551466,
+          0.2565808070235313,
+          0.23695710213969443,
+          0.1553202288559269,
+          0.14196220162652667
+        ],
+        [
+          0.6068676104410339,
+          0.6317619240644854,
+          0.7434191929764687,
+          0.7630428978603057,
+          0.8446797711440731,
+          0.8580377983734734
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AnesthesiaMethod",
+      "parents": [
+        "FunctionalRecoveryStatus"
+      ],
+      "values": [
+        [
+          0.47485279489170024,
+          0.05701876237423331,
+          0.004027161295714027
+        ],
+        [
+          0.5251472051082997,
+          0.9429812376257666,
+          0.9959728387042861
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift FunctionalRecoveryStatus toward FullRecovery (and away from PoorRecovery). The deployment will reach individuals with ComorbidityBurden=LowComorbidity as well as ComorbidityBurden=HighComorbidity, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "StructuredMultimodalRehab",
+        "value": "Full",
+        "min_improvement": 0.3547,
+        "improvement_low": 0.4015,
+        "improvement_high": 0.3547
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "FunctionalRecoveryStatus",
+          "group": "ComorbidityBurden",
+          "intervention_avg": "AcceleratedMobilizationProtocol",
+          "intervention_rob": "StructuredMultimodalRehab",
+          "intervention_bad": "OpioidBasedPainManagement",
+          "confounder": "BaselineFrailtyIndex"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "StructuredMultimodalRehab",
+            "value": "Full",
+            "min_improvement": 0.3547,
+            "improvement_low": 0.4015,
+            "improvement_high": 0.3547
+          },
+          "avg_best_but_uneven": {
+            "variable": "AcceleratedMobilizationProtocol",
+            "value": "IntensiveAmbulation",
+            "min_improvement": 0.1877,
+            "improvement_low": 0.1877,
+            "improvement_high": 0.4329
+          },
+          "harmful_in_subgroup": {
+            "variable": "OpioidBasedPainManagement",
+            "value": "HighDose",
+            "min_improvement": -0.2955,
+            "improvement_low": -0.2955,
+            "improvement_high": 0.3742
+          },
+          "subgroups": [
+            "LowComorbidity",
+            "HighComorbidity"
+          ],
+          "group_variable": "ComorbidityBurden",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "AcceleratedMobilizationProtocol",
+              "value": "IntensiveAmbulation",
+              "improvement_low": 0.1877,
+              "improvement_high": 0.4329,
+              "min_improvement": 0.1877
+            },
+            {
+              "variable": "StructuredMultimodalRehab",
+              "value": "Full",
+              "improvement_low": 0.4015,
+              "improvement_high": 0.3547,
+              "min_improvement": 0.3547
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

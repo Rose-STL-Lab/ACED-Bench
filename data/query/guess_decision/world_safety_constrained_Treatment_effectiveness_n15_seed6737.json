@@ -1,0 +1,880 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 6737,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A comprehensive cancer center maintains detailed electronic health records for all patients treated in its medical oncology division. The research team has access to these records and can request observational or interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "TumorResponse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CardiotoxicityGrade",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DrugBioavailability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselinePerformanceStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TumorStage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RenalFunction",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorChemotherapyExposure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidityBurden",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "TumorResponse",
+      "values": [
+        "CompleteResponse",
+        "PartialResponse",
+        "ProgressiveDisease"
+      ],
+      "desc": "Radiologic assessment of tumor size change after treatment cycles.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CardiotoxicityGrade",
+      "values": [
+        "None",
+        "Mild",
+        "Severe"
+      ],
+      "desc": "Severity grade of cardiac dysfunction measured by echocardiography.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "TaxaneBasedRegimen",
+      "values": [
+        "None",
+        "StandardDose",
+        "DoseIntensified"
+      ],
+      "desc": "Whether a taxane-class chemotherapy regimen is administered and at what intensity.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AnthracyclineBasedRegimen",
+      "values": [
+        "None",
+        "StandardDose",
+        "HighDose"
+      ],
+      "desc": "Whether an anthracycline-class chemotherapy regimen is administered and at what dose.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SupportiveAntiemeticProtocol",
+      "values": [
+        "None",
+        "Basic",
+        "Enhanced"
+      ],
+      "desc": "Level of antiemetic prophylaxis protocol given alongside chemotherapy.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DrugBioavailability",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Measured systemic plasma concentration of active chemotherapy metabolites.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselinePerformanceStatus",
+      "values": [
+        "Good",
+        "Moderate",
+        "Poor"
+      ],
+      "desc": "ECOG performance status score recorded before treatment initiation.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GranulocyteColonyStimulatingFactor",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether prophylactic G-CSF is administered during chemotherapy cycles.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TumorStage",
+      "values": [
+        "StageII",
+        "StageIII",
+        "StageIV"
+      ],
+      "desc": "TNM staging classification of the primary tumor at diagnosis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Under50",
+        "50to65",
+        "Over65"
+      ],
+      "desc": "Age category of the patient at the time of enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RenalFunction",
+      "values": [
+        "Normal",
+        "MildImpairment",
+        "ModerateImpairment"
+      ],
+      "desc": "Estimated glomerular filtration rate category before treatment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CycleFrequency",
+      "values": [
+        "Every3Weeks",
+        "Every2Weeks"
+      ],
+      "desc": "Scheduled interval between consecutive chemotherapy administration cycles.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorChemotherapyExposure",
+      "values": [
+        "None",
+        "OneLine",
+        "TwoOrMoreLines"
+      ],
+      "desc": "Number of previous chemotherapy lines the patient has received.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HydrationProtocol",
+      "values": [
+        "Standard",
+        "Aggressive"
+      ],
+      "desc": "Volume and duration of intravenous hydration given with chemotherapy.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ComorbidityBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Charlson comorbidity index category summarizing coexisting medical conditions.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "TumorResponse",
+      "TumorStage"
+    ],
+    [
+      "TumorResponse",
+      "PriorChemotherapyExposure"
+    ],
+    [
+      "TaxaneBasedRegimen",
+      "DrugBioavailability"
+    ],
+    [
+      "AnthracyclineBasedRegimen",
+      "TumorResponse"
+    ],
+    [
+      "AnthracyclineBasedRegimen",
+      "CardiotoxicityGrade"
+    ],
+    [
+      "SupportiveAntiemeticProtocol",
+      "TumorResponse"
+    ],
+    [
+      "DrugBioavailability",
+      "TumorResponse"
+    ],
+    [
+      "BaselinePerformanceStatus",
+      "TumorResponse"
+    ],
+    [
+      "BaselinePerformanceStatus",
+      "CardiotoxicityGrade"
+    ],
+    [
+      "TumorStage",
+      "CycleFrequency"
+    ],
+    [
+      "PatientAgeGroup",
+      "ComorbidityBurden"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "TaxaneBasedRegimen",
+      "parents": [],
+      "values": [
+        [
+          0.23418856507301325
+        ],
+        [
+          0.4698524413474876
+        ],
+        [
+          0.2959589935794993
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnthracyclineBasedRegimen",
+      "parents": [],
+      "values": [
+        [
+          0.7169409358878627
+        ],
+        [
+          0.09835165287149995
+        ],
+        [
+          0.18470741124063741
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SupportiveAntiemeticProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.2730031893942717
+        ],
+        [
+          0.29368670144863424
+        ],
+        [
+          0.43331010915709395
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselinePerformanceStatus",
+      "parents": [],
+      "values": [
+        [
+          0.1026071213669449
+        ],
+        [
+          0.16216755407169783
+        ],
+        [
+          0.7352253245613573
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "GranulocyteColonyStimulatingFactor",
+      "parents": [],
+      "values": [
+        [
+          0.596676591698271
+        ],
+        [
+          0.4033234083017291
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.0985566738111383
+        ],
+        [
+          0.6667276754629395
+        ],
+        [
+          0.23471565072592232
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RenalFunction",
+      "parents": [],
+      "values": [
+        [
+          0.26286484395470605
+        ],
+        [
+          0.25971320091073036
+        ],
+        [
+          0.4774219551345636
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HydrationProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.9012717765471981
+        ],
+        [
+          0.09872822345280188
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DrugBioavailability",
+      "parents": [
+        "TaxaneBasedRegimen"
+      ],
+      "values": [
+        [
+          0.15597570495719476,
+          0.7342573080083175,
+          0.9081194521071299
+        ],
+        [
+          0.30293277179323813,
+          0.20264706589144735,
+          0.08400778566104525
+        ],
+        [
+          0.5410915232495671,
+          0.06309562610023521,
+          0.00787276223182486
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CardiotoxicityGrade",
+      "parents": [
+        "BaselinePerformanceStatus",
+        "AnthracyclineBasedRegimen"
+      ],
+      "values": [
+        [
+          0.5691427352291465,
+          0.2705795617516984,
+          0.05857139783057889,
+          0.39610048529263725,
+          0.15183871967412793,
+          0.022990041271720458,
+          0.06399713672975473,
+          0.013105207791682508,
+          0.0016301406222077712
+        ],
+        [
+          0.291292929572984,
+          0.31994901312423624,
+          0.1980050818055387,
+          0.33448886292827823,
+          0.2863158038833765,
+          0.13374731392530748,
+          0.20714614207641677,
+          0.10576178247254403,
+          0.03971615402834879
+        ],
+        [
+          0.1395643351978696,
+          0.40947142512406537,
+          0.7434235203638824,
+          0.2694106517790844,
+          0.5618454764424956,
+          0.843262644802972,
+          0.7288567211938285,
+          0.8811330097357735,
+          0.9586537053494434
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComorbidityBurden",
+      "parents": [
+        "PatientAgeGroup"
+      ],
+      "values": [
+        [
+          0.3430902657276221,
+          0.13129276470986323,
+          0.036111468688338866
+        ],
+        [
+          0.3319000205173717,
+          0.616604985550694,
+          0.8233391098035491
+        ],
+        [
+          0.32500971375500626,
+          0.25210224973944273,
+          0.140549421508112
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TumorResponse",
+      "parents": [
+        "BaselinePerformanceStatus",
+        "DrugBioavailability",
+        "AnthracyclineBasedRegimen",
+        "SupportiveAntiemeticProtocol"
+      ],
+      "values": [
+        [
+          0.8242216980277856,
+          0.8341135303160645,
+          0.892696352071895,
+          0.952446194217925,
+          0.9566930944501957,
+          0.9734071943458289,
+          0.9864961165565725,
+          0.9880652031514088,
+          0.9915828660665751,
+          0.380777172320328,
+          0.4026582551326649,
+          0.5468870077879603,
+          0.7920803147677898,
+          0.8098690705836107,
+          0.8656514006561873,
+          0.9359106153114904,
+          0.9366578193527979,
+          0.9591125065593618,
+          0.05559194972944313,
+          0.06472029971460554,
+          0.12219287787994211,
+          0.37162707860308547,
+          0.4020228552763731,
+          0.5574099877603003,
+          0.7478448435703722,
+          0.7649633757780305,
+          0.840995618600619,
+          0.6879232048977454,
+          0.7196704372850575,
+          0.8121123028204398,
+          0.92037053250978,
+          0.9223558175671221,
+          0.9516159787760655,
+          0.9766713588870268,
+          0.9769935020479749,
+          0.9853126338097937,
+          0.1821510472895443,
+          0.2086478625613055,
+          0.3316124833227825,
+          0.6395406510728552,
+          0.6810384318016244,
+          0.7702936055511473,
+          0.8695499741994346,
+          0.8840296081633021,
+          0.931763588980239,
+          0.018912172971295015,
+          0.022449827107155873,
+          0.04775995537081648,
+          0.17890499569732282,
+          0.20725844574564842,
+          0.3395251391054851,
+          0.5715506422046471,
+          0.6146188791813434,
+          0.7211876042290257,
+          0.18343843637263865,
+          0.21138539972081116,
+          0.3340792223598955,
+          0.6192367595338767,
+          0.6650041726119573,
+          0.773983783388272,
+          0.8867818622898996,
+          0.8889645709807067,
+          0.9261610998671829,
+          0.013312684624069903,
+          0.01545653804919924,
+          0.03128348216407655,
+          0.13590044841263937,
+          0.1565286680009881,
+          0.2764356121845725,
+          0.5233578205754353,
+          0.5412962061085828,
+          0.6784834627296771,
+          0.0008405583886618274,
+          0.0010366812550911188,
+          0.0023122064132142426,
+          0.012998234627626204,
+          0.016142936210262544,
+          0.031226111933647997,
+          0.10294552120994567,
+          0.12307690215042941,
+          0.20808371476595292
+        ],
+        [
+          0.1487311371807891,
+          0.14250759163874585,
+          0.09603336668531759,
+          0.045599801352915886,
+          0.04158540208439666,
+          0.02590262698725163,
+          0.01330700656237481,
+          0.011788654654764988,
+          0.008345262920094696,
+          0.3366926117634893,
+          0.3242501014290354,
+          0.29923719466233933,
+          0.16867763989788281,
+          0.15693084160905796,
+          0.11851581096118999,
+          0.06007565027459549,
+          0.05967022939689382,
+          0.039241777630551866,
+          0.19622795665442413,
+          0.2136698833320534,
+          0.2689006601766725,
+          0.3326191787382881,
+          0.3263232137168977,
+          0.28491068749517123,
+          0.198288894379572,
+          0.18741793629143247,
+          0.13645280525069464,
+          0.23630768005338562,
+          0.21812544026178166,
+          0.15683892970486166,
+          0.07361373406245098,
+          0.07231295216318599,
+          0.04610878283859799,
+          0.022784941826358564,
+          0.02251354060584053,
+          0.014479303642922391,
+          0.29116335268813714,
+          0.30917215242387114,
+          0.3262381398364331,
+          0.26010785692670174,
+          0.23020223583534788,
+          0.18693916741718308,
+          0.11703192372782006,
+          0.1043577186077111,
+          0.06319020459056726,
+          0.1289636082620117,
+          0.1415423261635056,
+          0.1855180808298628,
+          0.29752164934677416,
+          0.32407021419294596,
+          0.34240818619956653,
+          0.2841237196959733,
+          0.2649174715337634,
+          0.21712901902560083,
+          0.309798938311938,
+          0.31613858522238086,
+          0.3336733678426853,
+          0.2768529434474521,
+          0.24190003344545813,
+          0.1816851338946913,
+          0.1001305264233973,
+          0.10045115669304444,
+          0.06889004190216316,
+          0.10041947256025296,
+          0.11687816842718529,
+          0.16768664045115939,
+          0.2968684545243358,
+          0.29432025604805645,
+          0.32951909428293175,
+          0.2969733439674818,
+          0.3003710550016318,
+          0.2329551349080908,
+          0.029845794962206313,
+          0.031354016082859676,
+          0.04643457725807353,
+          0.10358692676382994,
+          0.11574567887558541,
+          0.16152034923380335,
+          0.26567903857795955,
+          0.26745740437447507,
+          0.31875671404011463
+        ],
+        [
+          0.02704716479142527,
+          0.023378878045189674,
+          0.011270281242787448,
+          0.001954004429159078,
+          0.0017215034654076728,
+          0.0006901786669195304,
+          0.0001968768810527115,
+          0.0001461421938262542,
+          7.187101333026056e-05,
+          0.28253021591618277,
+          0.2730916434382997,
+          0.15387579754970046,
+          0.039242045334327326,
+          0.033200087807331545,
+          0.015832788382622802,
+          0.00401373441391418,
+          0.0036719512503081224,
+          0.001645715810086274,
+          0.7481800936161327,
+          0.721609816953341,
+          0.6089064619433854,
+          0.29575374265862636,
+          0.27165393100672924,
+          0.1576793247445286,
+          0.05386626205005572,
+          0.04761868793053706,
+          0.02255157614868644,
+          0.07576911504886902,
+          0.06220412245316092,
+          0.031048767474698712,
+          0.006015733427769022,
+          0.005331230269691734,
+          0.0022752383853363763,
+          0.0005436992866145367,
+          0.0004929573461846077,
+          0.00020806254728388248,
+          0.5266856000223186,
+          0.4821799850148235,
+          0.34214937684078434,
+          0.10035149200044306,
+          0.08875933236302774,
+          0.042767227031669554,
+          0.01341810207274519,
+          0.01161267322898688,
+          0.005046206429193676,
+          0.8521242187666933,
+          0.8360078467293385,
+          0.7667219637993208,
+          0.5235733549559031,
+          0.46867134006140554,
+          0.31806667469494837,
+          0.1443256380993796,
+          0.12046364928489325,
+          0.06168337674537337,
+          0.5067626253154234,
+          0.47247601505680803,
+          0.3322474097974192,
+          0.10391029701867113,
+          0.09309579394258453,
+          0.044331082717036716,
+          0.013087611286703212,
+          0.010584272326248895,
+          0.004948858230654052,
+          0.8862678428156772,
+          0.8676652935236154,
+          0.8010298773847642,
+          0.5672310970630249,
+          0.5491510759509555,
+          0.39404529353249573,
+          0.1796688354570828,
+          0.15833273888978536,
+          0.08856140236223212,
+          0.9693136466491318,
+          0.9676093026620491,
+          0.9512532163287122,
+          0.8834148386085439,
+          0.868111384914152,
+          0.8072535388325486,
+          0.6313754402120947,
+          0.6094656934750955,
+          0.4731595711939325
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TumorStage",
+      "parents": [
+        "TumorResponse"
+      ],
+      "values": [
+        [
+          0.36984317938681616,
+          0.1892789479953068,
+          0.04523196211729007
+        ],
+        [
+          0.3393462471877925,
+          0.04050831969555805,
+          0.002257895412674692
+        ],
+        [
+          0.2908105734253913,
+          0.7702127323091352,
+          0.9525101424700353
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorChemotherapyExposure",
+      "parents": [
+        "TumorResponse"
+      ],
+      "values": [
+        [
+          0.22625613610230358,
+          0.49361704552225194,
+          0.6354861316454636
+        ],
+        [
+          0.4504605156367592,
+          0.06267376622366999,
+          0.005145659018308345
+        ],
+        [
+          0.3232833482609371,
+          0.443709188254078,
+          0.35936820933622793
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CycleFrequency",
+      "parents": [
+        "TumorStage"
+      ],
+      "values": [
+        [
+          0.4795557524556636,
+          0.9859806408774076,
+          0.9998137468862812
+        ],
+        [
+          0.5204442475443364,
+          0.014019359122592398,
+          0.0001862531137187828
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift TumorResponse toward CompleteResponse (and away from ProgressiveDisease), but only if the same action does not make CardiotoxicityGrade more likely to be Severe. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "TaxaneBasedRegimen",
+        "value": "DoseIntensified"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "TumorResponse",
+          "safety_outcome": "CardiotoxicityGrade",
+          "good_intervention": "TaxaneBasedRegimen",
+          "risky_intervention": "AnthracyclineBasedRegimen",
+          "weak_intervention": "SupportiveAntiemeticProtocol",
+          "good_mediator": "DrugBioavailability",
+          "confounder": "BaselinePerformanceStatus"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "TaxaneBasedRegimen",
+            "value": "DoseIntensified"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "TaxaneBasedRegimen",
+              "value": "DoseIntensified",
+              "delta_target": -0.2209,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "AnthracyclineBasedRegimen",
+              "value": "StandardDose",
+              "delta_target": -0.3459,
+              "delta_safety": 0.1766,
+              "reason": "worsens safety"
+            },
+            {
+              "variable": "AnthracyclineBasedRegimen",
+              "value": "HighDose",
+              "delta_target": -0.6739,
+              "delta_safety": 0.3646,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.9859,
+            "E_safety": 1.5423
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

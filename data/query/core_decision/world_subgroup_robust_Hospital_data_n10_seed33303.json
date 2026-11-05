@@ -1,0 +1,767 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 33303,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A researcher is embedded within a large academic medical center's critical care division. The researcher has access to detailed patient records and can request both observational data extracts and prospective interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "SepsisOrganOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RenalFunctionGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineSofaScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LactateLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorAntibioticExposure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MechanicalVentilationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CharlsonComorbidityTier",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "SepsisOrganOutcome",
+      "values": [
+        "Resolved",
+        "Persistent",
+        "Deteriorated"
+      ],
+      "desc": "Organ dysfunction status at ICU day seven assessed by clinical criteria",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "RenalFunctionGroup",
+      "values": [
+        "PreservedRenal",
+        "ImpairedRenal"
+      ],
+      "desc": "Baseline renal function category based on admission creatinine clearance",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AggressiveBroadSpectrum",
+      "values": [
+        "None",
+        "Standard",
+        "Maximal"
+      ],
+      "desc": "Intensity tier of empiric broad-spectrum antibiotic coverage initiated at sepsis recognition",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProtocolizedDeEscalation",
+      "values": [
+        "None",
+        "Moderate",
+        "Full"
+      ],
+      "desc": "Degree of structured antibiotic de-escalation protocol applied after culture results",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "EarlyHighDoseVasopressor",
+      "values": [
+        "None",
+        "EarlyHigh"
+      ],
+      "desc": "Whether high-dose vasopressor therapy was initiated within one hour of sepsis onset",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineSofaScore",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Sequential Organ Failure Assessment score category at ICU admission",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LactateLevel",
+      "values": [
+        "Normal",
+        "Elevated",
+        "Severe"
+      ],
+      "desc": "Initial serum lactate concentration category measured at sepsis recognition",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorAntibioticExposure",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient received systemic antibiotics within thirty days before admission",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MechanicalVentilationStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether invasive mechanical ventilation is in use at time of sepsis diagnosis",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CharlsonComorbidityTier",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Charlson comorbidity index category summarizing chronic disease burden at admission",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SepsisOrganOutcome",
+      "CharlsonComorbidityTier"
+    ],
+    [
+      "RenalFunctionGroup",
+      "SepsisOrganOutcome"
+    ],
+    [
+      "RenalFunctionGroup",
+      "MechanicalVentilationStatus"
+    ],
+    [
+      "AggressiveBroadSpectrum",
+      "SepsisOrganOutcome"
+    ],
+    [
+      "ProtocolizedDeEscalation",
+      "SepsisOrganOutcome"
+    ],
+    [
+      "EarlyHighDoseVasopressor",
+      "SepsisOrganOutcome"
+    ],
+    [
+      "EarlyHighDoseVasopressor",
+      "AggressiveBroadSpectrum"
+    ],
+    [
+      "BaselineSofaScore",
+      "SepsisOrganOutcome"
+    ],
+    [
+      "PriorAntibioticExposure",
+      "AggressiveBroadSpectrum"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "RenalFunctionGroup",
+      "parents": [],
+      "values": [
+        [
+          0.47171445634070064
+        ],
+        [
+          0.5282855436592994
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ProtocolizedDeEscalation",
+      "parents": [],
+      "values": [
+        [
+          0.369436266329063
+        ],
+        [
+          0.3015719830715155
+        ],
+        [
+          0.3289917505994215
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EarlyHighDoseVasopressor",
+      "parents": [],
+      "values": [
+        [
+          0.881375780885641
+        ],
+        [
+          0.11862421911435901
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineSofaScore",
+      "parents": [],
+      "values": [
+        [
+          0.28205609989583535
+        ],
+        [
+          0.5188863160905388
+        ],
+        [
+          0.19905758401362578
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LactateLevel",
+      "parents": [],
+      "values": [
+        [
+          0.3371870861618784
+        ],
+        [
+          0.37249188832108715
+        ],
+        [
+          0.2903210255170344
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorAntibioticExposure",
+      "parents": [],
+      "values": [
+        [
+          0.7902765774394624
+        ],
+        [
+          0.20972342256053764
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MechanicalVentilationStatus",
+      "parents": [
+        "RenalFunctionGroup"
+      ],
+      "values": [
+        [
+          0.5571212445649298,
+          0.4193926742574822
+        ],
+        [
+          0.44287875543507016,
+          0.5806073257425178
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AggressiveBroadSpectrum",
+      "parents": [
+        "PriorAntibioticExposure",
+        "EarlyHighDoseVasopressor"
+      ],
+      "values": [
+        [
+          0.3615131417739585,
+          0.0783169067742495,
+          0.3212290376093717,
+          0.1819910198585112
+        ],
+        [
+          0.35827672459741333,
+          0.858226856511547,
+          0.07334214571541849,
+          0.4594527367075582
+        ],
+        [
+          0.2802101336286281,
+          0.0634562367142033,
+          0.6054288166752098,
+          0.35855624343393067
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SepsisOrganOutcome",
+      "parents": [
+        "BaselineSofaScore",
+        "RenalFunctionGroup",
+        "AggressiveBroadSpectrum",
+        "ProtocolizedDeEscalation",
+        "EarlyHighDoseVasopressor"
+      ],
+      "values": [
+        [
+          0.3786532858352203,
+          0.19079918435041482,
+          0.4683503413759584,
+          0.2630911307755425,
+          0.7718192334565095,
+          0.5881917584926197,
+          0.4914603514173541,
+          0.2938696614658807,
+          0.605403857230727,
+          0.4102668345941568,
+          0.8300270161161558,
+          0.7316763384466961,
+          0.643198834840774,
+          0.4378795723213591,
+          0.7182252608176358,
+          0.5277584976184901,
+          0.8941232407108303,
+          0.8043792928699098,
+          0.10872606045827232,
+          0.43717688051785636,
+          0.1609898370999722,
+          0.53237289444617,
+          0.4779697960849143,
+          0.8016907319418389,
+          0.18980172413287852,
+          0.5669474049866451,
+          0.26319237358712505,
+          0.6696305388878494,
+          0.6017529646923643,
+          0.8645923197755527,
+          0.6385733883800381,
+          0.8728422754610392,
+          0.7156017017333345,
+          0.9067185042859475,
+          0.886658332987267,
+          0.9653676512320752,
+          0.17876344843205097,
+          0.08017891930374499,
+          0.2777613520101284,
+          0.1204579621550188,
+          0.6105909892919071,
+          0.41240747186543425,
+          0.2960773787712659,
+          0.13988210801692164,
+          0.4030659169126626,
+          0.2239260187444063,
+          0.7265524554522466,
+          0.5369209425612893,
+          0.4235067749371427,
+          0.23971437161648587,
+          0.5568858761116107,
+          0.32731914137137363,
+          0.8122716739069846,
+          0.6544198569251901,
+          0.03656881168373008,
+          0.24246242912447472,
+          0.06467840694127196,
+          0.338009543428644,
+          0.2829058096603173,
+          0.679070053887764,
+          0.07903755742386803,
+          0.3658853970073826,
+          0.1186998645020661,
+          0.4645642322274544,
+          0.39245415844967535,
+          0.7640378839548211,
+          0.4489486710592685,
+          0.7858503225794573,
+          0.5414200418816731,
+          0.8437782413002194,
+          0.79801712896507,
+          0.9398588522244622,
+          0.01793620627185271,
+          0.00615516670077675,
+          0.032753607979538066,
+          0.011403882536373592,
+          0.1749837961208587,
+          0.06165254823197325,
+          0.04019445549037962,
+          0.013985470640238426,
+          0.06398289675903816,
+          0.023361668229220017,
+          0.28539670818046775,
+          0.12541176206069357,
+          0.08055125676889587,
+          0.028707599359687756,
+          0.12795287814663367,
+          0.044888366185068626,
+          0.4034093356574018,
+          0.2133213217912744,
+          0.0028358678836348855,
+          0.026667254350228282,
+          0.005292828886952432,
+          0.04542578086341095,
+          0.032688000333064036,
+          0.20828822195644095,
+          0.006095950399673918,
+          0.05598128043733525,
+          0.01129737479358405,
+          0.08613604423687626,
+          0.06398028037483801,
+          0.32467500780905606,
+          0.07759529650324412,
+          0.35974355842686323,
+          0.11536986030734045,
+          0.4846323490562937,
+          0.40170452870745077,
+          0.7688617942891914
+        ],
+        [
+          0.32451430271603715,
+          0.29728164770542465,
+          0.3091903083261307,
+          0.33557580628494704,
+          0.18116015948591313,
+          0.2843058271524467,
+          0.32166345840657395,
+          0.3332078729207014,
+          0.2756777787296466,
+          0.3213379344406107,
+          0.1471124533999034,
+          0.20438844009119936,
+          0.25492244177044787,
+          0.31143961369238216,
+          0.21785763717095924,
+          0.3013692455704928,
+          0.09515000102198509,
+          0.16167277847366462,
+          0.2592097284210746,
+          0.32986027712521865,
+          0.3024710294528926,
+          0.3039170820892886,
+          0.3123821260982673,
+          0.16547586955585877,
+          0.31306087259912424,
+          0.29202790928719696,
+          0.3385390031611617,
+          0.2396045592346172,
+          0.2766921090236579,
+          0.11934077404468649,
+          0.2525020554356434,
+          0.11329143949452096,
+          0.2200441707525943,
+          0.08581848078575324,
+          0.10170175546164209,
+          0.0335856963344124,
+          0.3095243151622357,
+          0.23478978106420229,
+          0.331085166829701,
+          0.26881806693359184,
+          0.27355390796976714,
+          0.31567029187770157,
+          0.32753679645784767,
+          0.2829776752633355,
+          0.3287960553086722,
+          0.308391559809708,
+          0.20901993723960888,
+          0.297328903656685,
+          0.32655189618116237,
+          0.32367182077902573,
+          0.2904754400984925,
+          0.3242223790023677,
+          0.1555278859962371,
+          0.2566169163646296,
+          0.17610673413220793,
+          0.3170554989937882,
+          0.20848157514454813,
+          0.31906702549864013,
+          0.3212259692818628,
+          0.23388931002034555,
+          0.22742791114760857,
+          0.3367125699161766,
+          0.2766636989800094,
+          0.32762364351003126,
+          0.33472440195273945,
+          0.19026045083454304,
+          0.3078925610583085,
+          0.17423210682681717,
+          0.29713795052460035,
+          0.1332236447208426,
+          0.16916906381935434,
+          0.05672478673289362,
+          0.1211473654278667,
+          0.07333759618594489,
+          0.16107120686784587,
+          0.10006955158124423,
+          0.294828084523556,
+          0.21362082686542477,
+          0.18463020432805907,
+          0.11390049665486122,
+          0.2311936254338837,
+          0.12906270537200318,
+          0.3208563894734019,
+          0.2834821168632,
+          0.23482346506410873,
+          0.15531743052352107,
+          0.2677942426205486,
+          0.18698609030062005,
+          0.32777287639939257,
+          0.31010213447989815,
+          0.052477754470557796,
+          0.14372231976692154,
+          0.07052671540941981,
+          0.1809240591825313,
+          0.1512145036885581,
+          0.3113497558572759,
+          0.07583699446235254,
+          0.20023697690216602,
+          0.1017389606701154,
+          0.23840334938334132,
+          0.22819329853882495,
+          0.34438864593237434,
+          0.22672583319465908,
+          0.32890006041872427,
+          0.27447317365131035,
+          0.3082513300788602,
+          0.3202686587339936,
+          0.18235749625563924
+        ],
+        [
+          0.2968324114487426,
+          0.5119191679441605,
+          0.2224593502979109,
+          0.4013330629395104,
+          0.04702060705757752,
+          0.12750241435493367,
+          0.18687619017607193,
+          0.3729224656134179,
+          0.11891836403962636,
+          0.2683952309652325,
+          0.02286053048394083,
+          0.06393522146210455,
+          0.10187872338877826,
+          0.25068081398625874,
+          0.06391710201140495,
+          0.17087225681101698,
+          0.010726758267184553,
+          0.033947928656425444,
+          0.6320642111206531,
+          0.23296284235692494,
+          0.5365391334471352,
+          0.16371002346454158,
+          0.20964807781681838,
+          0.03283339850230225,
+          0.4971374032679974,
+          0.141024685726158,
+          0.39826862325171325,
+          0.09076490187753347,
+          0.12155492628397788,
+          0.016066906179760608,
+          0.10892455618431844,
+          0.013866285044439784,
+          0.06435412751407124,
+          0.007463014928299428,
+          0.01163991155109085,
+          0.001046652433512477,
+          0.5117122364057133,
+          0.6850312996320528,
+          0.39115348116017057,
+          0.6107239709113893,
+          0.11585510273832574,
+          0.2719222362568641,
+          0.3763858247708864,
+          0.5771402167197428,
+          0.26813802777866536,
+          0.4676824214458856,
+          0.06442760730814458,
+          0.16575015378202562,
+          0.24994132888169482,
+          0.4366138076044883,
+          0.15263868378989676,
+          0.3484584796262587,
+          0.03220044009677815,
+          0.08896322671018045,
+          0.7873244541840618,
+          0.44048207188173705,
+          0.7268400179141798,
+          0.3429234310727159,
+          0.39586822105781994,
+          0.08704063609189053,
+          0.6935345314285234,
+          0.2974020330764408,
+          0.6046364365179244,
+          0.2078121242625143,
+          0.27282143959758515,
+          0.04570166521063582,
+          0.24315876788242305,
+          0.03991757059372545,
+          0.1614420075937266,
+          0.022998113978937928,
+          0.03281380721557562,
+          0.0034163610426440924,
+          0.8609164283002806,
+          0.9205072371132783,
+          0.8061751851526161,
+          0.8885265658823822,
+          0.5301881193555853,
+          0.7247266249026019,
+          0.7751753401815612,
+          0.8721140327049004,
+          0.7048234778070781,
+          0.8475756263987768,
+          0.3937469023461303,
+          0.5911061210761064,
+          0.6846252781669954,
+          0.8159749701167911,
+          0.6042528792328178,
+          0.7681255435143113,
+          0.26881778794320554,
+          0.4765765437288276,
+          0.9446863776458072,
+          0.8296104258828502,
+          0.9241804557036277,
+          0.7736501599540576,
+          0.8160974959783779,
+          0.48036202218628327,
+          0.9180670551379736,
+          0.7437817426604988,
+          0.8869636645363006,
+          0.6754606063797823,
+          0.707826421086337,
+          0.3309363462585696,
+          0.6956788703020969,
+          0.31135638115441255,
+          0.6101569660413493,
+          0.207116320864846,
+          0.2780268125585556,
+          0.048780709455169435
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CharlsonComorbidityTier",
+      "parents": [
+        "SepsisOrganOutcome"
+      ],
+      "values": [
+        [
+          0.5365129895321289,
+          0.8605409013018781,
+          0.9704955913349642
+        ],
+        [
+          0.46348701046787116,
+          0.13945909869812195,
+          0.029504408665035693
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift SepsisOrganOutcome toward Resolved (and away from Deteriorated). The deployment will reach individuals with RenalFunctionGroup=PreservedRenal as well as RenalFunctionGroup=ImpairedRenal, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "ProtocolizedDeEscalation",
+        "value": "Full",
+        "min_improvement": 0.3554,
+        "improvement_low": 0.3805,
+        "improvement_high": 0.3554
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "SepsisOrganOutcome",
+          "group": "RenalFunctionGroup",
+          "intervention_avg": "AggressiveBroadSpectrum",
+          "intervention_rob": "ProtocolizedDeEscalation",
+          "intervention_bad": "EarlyHighDoseVasopressor",
+          "confounder": "BaselineSofaScore"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "ProtocolizedDeEscalation",
+            "value": "Full",
+            "min_improvement": 0.3554,
+            "improvement_low": 0.3805,
+            "improvement_high": 0.3554
+          },
+          "avg_best_but_uneven": {
+            "variable": "AggressiveBroadSpectrum",
+            "value": "Maximal",
+            "min_improvement": 0.195,
+            "improvement_low": 0.195,
+            "improvement_high": 0.5016
+          },
+          "harmful_in_subgroup": {
+            "variable": "EarlyHighDoseVasopressor",
+            "value": "EarlyHigh",
+            "min_improvement": -0.2602,
+            "improvement_low": -0.2602,
+            "improvement_high": 0.4039
+          },
+          "subgroups": [
+            "PreservedRenal",
+            "ImpairedRenal"
+          ],
+          "group_variable": "RenalFunctionGroup",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "AggressiveBroadSpectrum",
+              "value": "Maximal",
+              "improvement_low": 0.195,
+              "improvement_high": 0.5016,
+              "min_improvement": 0.195
+            },
+            {
+              "variable": "ProtocolizedDeEscalation",
+              "value": "Full",
+              "improvement_low": 0.3805,
+              "improvement_high": 0.3554,
+              "min_improvement": 0.3554
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

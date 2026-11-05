@@ -1,0 +1,654 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 15,
+    "topology": "invalid_premise:valid_proposed_intervention",
+    "seed": 9705,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "valid_proposed_intervention"
+  },
+  "story": "A state workforce development agency maintains administrative records on program participants and local economic indicators. The researcher has access to these records and can request observational or interventional samples from the agency's data systems.",
+  "non_intervenable_variables": [
+    {
+      "name": "PovertyStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NetHouseholdIncome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalLaborMarketConditions",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NumberOfDependents",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FilingStatusAwareness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmploymentHoursPerWeek",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingCostBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ChildcareCosts",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MaritalStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PovertyStatus",
+      "values": [
+        "AbovePoverty",
+        "NearPoverty",
+        "BelowPoverty"
+      ],
+      "desc": "Household income position relative to federal poverty line",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "EitcBenefitExpansion",
+      "values": [
+        "CurrentLevel",
+        "ModerateIncrease",
+        "SubstantialIncrease"
+      ],
+      "desc": "Legislated increase in maximum EITC credit amount for eligible filers",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "JobTrainingAccess",
+      "values": [
+        "None",
+        "BasicProgram",
+        "IntensiveProgram"
+      ],
+      "desc": "Availability of subsidized workforce development programs for low-income workers",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NetHouseholdIncome",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Total post-tax-and-transfer annual household income",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LocalLaborMarketConditions",
+      "values": [
+        "Strong",
+        "Moderate",
+        "Weak"
+      ],
+      "desc": "Regional unemployment rate and job availability classification",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NumberOfDependents",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Count of qualifying dependent children in the household",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FilingStatusAwareness",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Filer knowledge of EITC eligibility rules and filing requirements",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmploymentHoursPerWeek",
+      "values": [
+        "PartTime",
+        "FullTime"
+      ],
+      "desc": "Weekly hours worked by primary household earner",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FreeFilingAssistance",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether free tax preparation services are available to the household",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingCostBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Share of household income spent on rent or mortgage",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "LessThanHighSchool",
+        "HighSchoolOrGED",
+        "SomeCollegeOrMore"
+      ],
+      "desc": "Highest educational attainment of primary earner",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "StateEitcSupplement",
+      "values": [
+        "None",
+        "Partial",
+        "Generous"
+      ],
+      "desc": "Presence and generosity of state-level EITC add-on credit",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ChildcareCosts",
+      "values": [
+        "None",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Monthly out-of-pocket expenditure on childcare services",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MaritalStatus",
+      "values": [
+        "Single",
+        "Married"
+      ],
+      "desc": "Whether the tax filer files as single or married filing jointly",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PeriodicPaymentOption",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether EITC benefits are disbursed in periodic installments rather than lump sum",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "EitcBenefitExpansion",
+      "NetHouseholdIncome"
+    ],
+    [
+      "JobTrainingAccess",
+      "PovertyStatus"
+    ],
+    [
+      "NetHouseholdIncome",
+      "PovertyStatus"
+    ],
+    [
+      "LocalLaborMarketConditions",
+      "PovertyStatus"
+    ],
+    [
+      "EmploymentHoursPerWeek",
+      "NumberOfDependents"
+    ],
+    [
+      "FreeFilingAssistance",
+      "PeriodicPaymentOption"
+    ],
+    [
+      "EducationLevel",
+      "JobTrainingAccess"
+    ],
+    [
+      "ChildcareCosts",
+      "EmploymentHoursPerWeek"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "EitcBenefitExpansion",
+      "parents": [],
+      "values": [
+        [
+          0.47164869635358125
+        ],
+        [
+          0.2180099516298399
+        ],
+        [
+          0.3103413520165789
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LocalLaborMarketConditions",
+      "parents": [],
+      "values": [
+        [
+          0.18781391473303985
+        ],
+        [
+          0.21172145215902663
+        ],
+        [
+          0.6004646331079335
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FilingStatusAwareness",
+      "parents": [],
+      "values": [
+        [
+          0.6569326824855872
+        ],
+        [
+          0.19091592258644527
+        ],
+        [
+          0.15215139492796756
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FreeFilingAssistance",
+      "parents": [],
+      "values": [
+        [
+          0.6366267663573342
+        ],
+        [
+          0.36337323364266577
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HousingCostBurden",
+      "parents": [],
+      "values": [
+        [
+          0.09514498419355961
+        ],
+        [
+          0.4678031680706567
+        ],
+        [
+          0.4370518477357837
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.32250817458564646
+        ],
+        [
+          0.5738789857061654
+        ],
+        [
+          0.10361283970818819
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StateEitcSupplement",
+      "parents": [],
+      "values": [
+        [
+          0.21724727941666316
+        ],
+        [
+          0.15122150080740793
+        ],
+        [
+          0.6315312197759289
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ChildcareCosts",
+      "parents": [],
+      "values": [
+        [
+          0.19848124973478046
+        ],
+        [
+          0.3872166723380859
+        ],
+        [
+          0.41430207792713375
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MaritalStatus",
+      "parents": [],
+      "values": [
+        [
+          0.13554893520875894
+        ],
+        [
+          0.864451064791241
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NetHouseholdIncome",
+      "parents": [
+        "EitcBenefitExpansion"
+      ],
+      "values": [
+        [
+          0.16784321704009553,
+          0.33818099676512825,
+          0.8666231616116163
+        ],
+        [
+          0.3022890167496376,
+          0.3313593619868602,
+          0.11725190143728102
+        ],
+        [
+          0.5298677662102669,
+          0.33045964124801147,
+          0.01612493695110259
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PeriodicPaymentOption",
+      "parents": [
+        "FreeFilingAssistance"
+      ],
+      "values": [
+        [
+          0.37818519963705954,
+          0.7187621420066755
+        ],
+        [
+          0.6218148003629405,
+          0.2812378579933244
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "JobTrainingAccess",
+      "parents": [
+        "EducationLevel"
+      ],
+      "values": [
+        [
+          0.2922478061448291,
+          0.3950524315839664,
+          0.408002635100604
+        ],
+        [
+          0.3432838683973536,
+          0.506887621191577,
+          0.571840254794837
+        ],
+        [
+          0.3644683254578174,
+          0.09805994722445652,
+          0.020157110104558968
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmploymentHoursPerWeek",
+      "parents": [
+        "ChildcareCosts"
+      ],
+      "values": [
+        [
+          0.5334671155945582,
+          0.9829621724125002,
+          0.9996565756796277
+        ],
+        [
+          0.4665328844054419,
+          0.017037827587499808,
+          0.0003434243203721673
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PovertyStatus",
+      "parents": [
+        "LocalLaborMarketConditions",
+        "NetHouseholdIncome",
+        "JobTrainingAccess"
+      ],
+      "values": [
+        [
+          0.878214661569928,
+          0.8665868054867558,
+          0.8072871371024044,
+          0.5168593554531915,
+          0.4671011537877776,
+          0.3438783325443683,
+          0.25000811689024705,
+          0.21915156439548442,
+          0.11707143410455258,
+          0.8255278012188995,
+          0.803450357110208,
+          0.7360146309648259,
+          0.3630567299170382,
+          0.34187783912078656,
+          0.22202378903926384,
+          0.14359447197574726,
+          0.12491935818510973,
+          0.06464258046736503,
+          0.5708712110810501,
+          0.5348360393786101,
+          0.4191315291541677,
+          0.09912315488876618,
+          0.09314579609358777,
+          0.0464539469607524,
+          0.02818885756869228,
+          0.024255670216863097,
+          0.011493023137333415
+        ],
+        [
+          0.10776481524548451,
+          0.1178510762799587,
+          0.1579815213939545,
+          0.2989126058069694,
+          0.3265755218303228,
+          0.3230046587746815,
+          0.30935196003835147,
+          0.31314529577234784,
+          0.2680052121398263,
+          0.147745410825653,
+          0.16335893197797763,
+          0.2029844617679592,
+          0.3330199693751569,
+          0.3327828998592394,
+          0.3099169108014478,
+          0.2882504286606901,
+          0.2862326238623185,
+          0.20377982580281018,
+          0.28574336871295486,
+          0.2990458276977081,
+          0.3175550491882491,
+          0.26487954433174665,
+          0.23475008131499708,
+          0.18515845067434314,
+          0.15156904869149299,
+          0.13607635163668613,
+          0.09484862740111087
+        ],
+        [
+          0.01402052318458747,
+          0.015562118233285502,
+          0.0347313415036411,
+          0.184228038739839,
+          0.20632332438189954,
+          0.3331170086809502,
+          0.44063992307140143,
+          0.4677031398321678,
+          0.614923353755621,
+          0.02672678795544753,
+          0.03319071091181445,
+          0.061000907267214785,
+          0.303923300707805,
+          0.3253392610199739,
+          0.4680593001592884,
+          0.5681550993635627,
+          0.5888480179525717,
+          0.7315775937298248,
+          0.14338542020599493,
+          0.16611813292368185,
+          0.2633134216575832,
+          0.6359973007794871,
+          0.6721041225914152,
+          0.7683876023649043,
+          0.8202420937398148,
+          0.8396679781464508,
+          0.8936583494615558
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NumberOfDependents",
+      "parents": [
+        "EmploymentHoursPerWeek"
+      ],
+      "values": [
+        [
+          0.2524039364729919,
+          0.0054991315416662275
+        ],
+        [
+          0.33270607980768097,
+          0.23557878999482315
+        ],
+        [
+          0.41488998371932717,
+          0.7589220784635107
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting EitcBenefitExpansion=SubstantialIncrease as a way to shift PovertyStatus toward AbovePoverty (and away from BelowPoverty). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift PovertyStatus toward AbovePoverty.",
+      "answer": {
+        "is_valid_intervention": true,
+        "invalid_reason": null,
+        "proposed_intervention": {
+          "variable": "EitcBenefitExpansion",
+          "value": "SubstantialIncrease"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "valid_proposed_intervention",
+        "roles": {
+          "target": "PovertyStatus",
+          "proposed_intervention": "EitcBenefitExpansion",
+          "intervenable_alt": "JobTrainingAccess",
+          "alt_mediator": "NetHouseholdIncome",
+          "confounder": "LocalLaborMarketConditions"
+        },
+        "gold": {
+          "is_valid_intervention": true,
+          "valid_reason": "proposed_intervention_meaningfully_improves_target",
+          "proposed_intervention": {
+            "variable": "EitcBenefitExpansion",
+            "value": "SubstantialIncrease"
+          },
+          "proposed_effect": -0.4787,
+          "acceptable_alternatives": [
+            {
+              "variable": "EitcBenefitExpansion",
+              "value": "SubstantialIncrease",
+              "improvement": 0.4787
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,686 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 3202,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A researcher works within a large academic medical center's critical care division. The researcher has access to detailed patient records and can request both observational data extracts and prospective interventional study samples from the institution.",
+  "non_intervenable_variables": [
+    {
+      "name": "OrganDysfunctionScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AcuteKidneyInjuryStage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LactateClearanceRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineSepsisSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CharlsonComorbidityIndex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MechanicalVentilationStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "OrganDysfunctionScore",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Sequential organ failure assessment score category at 72 hours post-admission.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AcuteKidneyInjuryStage",
+      "values": [
+        "None",
+        "Stage1",
+        "Stage2or3"
+      ],
+      "desc": "KDIGO-classified acute kidney injury stage during ICU stay.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "EarlyGoalDirectedFluidProtocol",
+      "values": [
+        "None",
+        "Standard",
+        "Aggressive"
+      ],
+      "desc": "Structured early fluid resuscitation protocol intensity within first six hours.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HighDoseVasopressorStrategy",
+      "values": [
+        "Off",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Norepinephrine-equivalent vasopressor dosing tier administered to the patient.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProbioticAdministration",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether enteral probiotic supplementation was given during ICU stay.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LactateClearanceRate",
+      "values": [
+        "Adequate",
+        "Impaired",
+        "Absent"
+      ],
+      "desc": "Categorized percentage reduction in serum lactate over initial 12 hours.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineSepsisSeverity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Sepsis severity classification at ICU admission based on qSOFA and cultures.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AntibioticTimingWindow",
+      "values": [
+        "Within1Hr",
+        "OneToThreeHr",
+        "After3Hr"
+      ],
+      "desc": "Time interval from sepsis recognition to first appropriate antibiotic dose.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CharlsonComorbidityIndex",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Categorized pre-existing comorbidity burden at hospital admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MechanicalVentilationStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether invasive mechanical ventilation was initiated during the ICU stay.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "OrganDysfunctionScore",
+      "AntibioticTimingWindow"
+    ],
+    [
+      "EarlyGoalDirectedFluidProtocol",
+      "LactateClearanceRate"
+    ],
+    [
+      "HighDoseVasopressorStrategy",
+      "OrganDysfunctionScore"
+    ],
+    [
+      "HighDoseVasopressorStrategy",
+      "AcuteKidneyInjuryStage"
+    ],
+    [
+      "ProbioticAdministration",
+      "OrganDysfunctionScore"
+    ],
+    [
+      "ProbioticAdministration",
+      "AntibioticTimingWindow"
+    ],
+    [
+      "LactateClearanceRate",
+      "OrganDysfunctionScore"
+    ],
+    [
+      "LactateClearanceRate",
+      "AntibioticTimingWindow"
+    ],
+    [
+      "BaselineSepsisSeverity",
+      "OrganDysfunctionScore"
+    ],
+    [
+      "BaselineSepsisSeverity",
+      "AcuteKidneyInjuryStage"
+    ],
+    [
+      "MechanicalVentilationStatus",
+      "ProbioticAdministration"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "EarlyGoalDirectedFluidProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.426111058944813
+        ],
+        [
+          0.3858804612975578
+        ],
+        [
+          0.18800847975762908
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HighDoseVasopressorStrategy",
+      "parents": [],
+      "values": [
+        [
+          0.525405422622754
+        ],
+        [
+          0.380359436086541
+        ],
+        [
+          0.09423514129070487
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineSepsisSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.35659679403630073
+        ],
+        [
+          0.18639854389468016
+        ],
+        [
+          0.45700466206901913
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CharlsonComorbidityIndex",
+      "parents": [],
+      "values": [
+        [
+          0.4617325372305348
+        ],
+        [
+          0.0984131829039529
+        ],
+        [
+          0.4398542798655121
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MechanicalVentilationStatus",
+      "parents": [],
+      "values": [
+        [
+          0.2522204094880292
+        ],
+        [
+          0.7477795905119707
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LactateClearanceRate",
+      "parents": [
+        "EarlyGoalDirectedFluidProtocol"
+      ],
+      "values": [
+        [
+          0.1682876617379207,
+          0.7227663224729637,
+          0.9100493800540692
+        ],
+        [
+          0.28405943837482883,
+          0.2111401031279764,
+          0.0826504953133975
+        ],
+        [
+          0.5476528998872505,
+          0.06609357439905994,
+          0.00730012463253325
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AcuteKidneyInjuryStage",
+      "parents": [
+        "BaselineSepsisSeverity",
+        "HighDoseVasopressorStrategy"
+      ],
+      "values": [
+        [
+          0.5720323540703791,
+          0.2760618778034057,
+          0.056517192582839326,
+          0.40639036254680017,
+          0.13549997414620205,
+          0.021890074105158898,
+          0.06435583574490085,
+          0.013018725179915888,
+          0.0015978176477460108
+        ],
+        [
+          0.29120279459079107,
+          0.32681421215778717,
+          0.20739175138061755,
+          0.322833693657085,
+          0.27884659688016816,
+          0.13331342731262794,
+          0.2191529587720534,
+          0.10760346398600118,
+          0.0390539734366956
+        ],
+        [
+          0.13676485133882976,
+          0.39712391003880715,
+          0.7360910560365431,
+          0.27077594379611497,
+          0.5856534289736298,
+          0.8447964985822132,
+          0.7164912054830457,
+          0.8793778108340831,
+          0.9593482089155584
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProbioticAdministration",
+      "parents": [
+        "MechanicalVentilationStatus"
+      ],
+      "values": [
+        [
+          0.6404478404835572,
+          0.8139158211690671
+        ],
+        [
+          0.3595521595164428,
+          0.18608417883093295
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OrganDysfunctionScore",
+      "parents": [
+        "BaselineSepsisSeverity",
+        "LactateClearanceRate",
+        "HighDoseVasopressorStrategy",
+        "ProbioticAdministration"
+      ],
+      "values": [
+        [
+          0.8288654835348067,
+          0.8899940991417964,
+          0.9528780626776026,
+          0.9720899070326601,
+          0.9861501248153515,
+          0.9914811670235383,
+          0.3693981450916083,
+          0.537176078515776,
+          0.7929794059533237,
+          0.8739887212869714,
+          0.9343363774078556,
+          0.9586213713710261,
+          0.05745931541912934,
+          0.11707462994117825,
+          0.36222973218820664,
+          0.5441770576865276,
+          0.7465469930010146,
+          0.8329933600158927,
+          0.695484552057936,
+          0.8132004182628771,
+          0.9191201386779467,
+          0.949968337368784,
+          0.9756637106267173,
+          0.9835543539813233,
+          0.1911138239299529,
+          0.32132409077657,
+          0.6337675266907954,
+          0.7630275964759988,
+          0.8743761162138456,
+          0.9267823887812923,
+          0.018957251566251925,
+          0.045869562497036394,
+          0.18795555299178182,
+          0.3460085905830708,
+          0.579522842034304,
+          0.7134244458450056,
+          0.1855010183126282,
+          0.3338474961725217,
+          0.6442328454410261,
+          0.7569337205345125,
+          0.8790545413139138,
+          0.9214441426766318,
+          0.013777057688598632,
+          0.03360401432678835,
+          0.1387480933397174,
+          0.2711757799395204,
+          0.5190771424330793,
+          0.664287473759023,
+          0.0008564600488335472,
+          0.0023861456780558754,
+          0.013816055498603963,
+          0.03341117915331958,
+          0.11109673012534355,
+          0.22239791848596052
+        ],
+        [
+          0.1453014134488652,
+          0.09848612106901744,
+          0.045177443470496334,
+          0.027196198872363356,
+          0.013653151355392861,
+          0.008450320229513768,
+          0.3337310928008992,
+          0.28998856641465093,
+          0.16969283270191274,
+          0.1107669122416649,
+          0.06164351905999178,
+          0.039657605585489364,
+          0.20229943521154053,
+          0.2724571743719289,
+          0.3422868972396016,
+          0.29906542252546725,
+          0.20001043108111732,
+          0.1442824389810888,
+          0.2286386659610588,
+          0.15555798188316902,
+          0.07505843512934686,
+          0.0475343202483261,
+          0.023738807318594395,
+          0.016212131906075976,
+          0.2999788518929361,
+          0.3423291992475545,
+          0.25960216709323863,
+          0.18921091445782035,
+          0.11293921644029953,
+          0.06811027355536793,
+          0.1327654365887871,
+          0.18391787751298264,
+          0.3073576044584714,
+          0.33511758241088785,
+          0.2789172875239549,
+          0.22193531129818228,
+          0.32316494936018847,
+          0.3316697957692734,
+          0.2487788617190979,
+          0.1961718354397381,
+          0.10728230392529385,
+          0.07328558407327798,
+          0.11414087705355305,
+          0.16993246681125262,
+          0.29069501061723374,
+          0.3302077068578861,
+          0.2968489073758735,
+          0.2491453602604395,
+          0.03010376462512975,
+          0.04575132349575742,
+          0.1078551777253467,
+          0.17437898799084492,
+          0.2612163079405943,
+          0.3083888894404299
+        ],
+        [
+          0.025833103016328247,
+          0.011519779789186125,
+          0.0019444938519010916,
+          0.0007138940949764696,
+          0.00019672382925565768,
+          6.851274694799956e-05,
+          0.2968707621074925,
+          0.17283535506957307,
+          0.03732776134476356,
+          0.015244366471363659,
+          0.004020103532152683,
+          0.0017210230434845256,
+          0.7402412493693301,
+          0.6104681956868928,
+          0.2954833705721918,
+          0.1567575197880052,
+          0.053442575917868156,
+          0.022724201003018453,
+          0.0758767819810051,
+          0.031241599853953896,
+          0.005821426192706342,
+          0.0024973423828898705,
+          0.0005974820546882293,
+          0.00023351411260083937,
+          0.508907324177111,
+          0.3363467099758755,
+          0.1066303062159659,
+          0.04776148906618087,
+          0.012684667345854925,
+          0.00510733766333968,
+          0.8482773118449609,
+          0.770212559989981,
+          0.5046868425497468,
+          0.31887382700604133,
+          0.14155987044174098,
+          0.0646402428568121,
+          0.4913340323271832,
+          0.3344827080582049,
+          0.10698829283987601,
+          0.04689444402574933,
+          0.013663154760792454,
+          0.005270273250090329,
+          0.8720820652578483,
+          0.796463518861959,
+          0.5705568960430488,
+          0.39861651320259345,
+          0.18407395019104722,
+          0.08656716598053747,
+          0.9690397753260368,
+          0.9518625308261867,
+          0.8783287667760493,
+          0.7922098328558356,
+          0.627686961934062,
+          0.4692131920736095
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AntibioticTimingWindow",
+      "parents": [
+        "LactateClearanceRate",
+        "OrganDysfunctionScore",
+        "ProbioticAdministration"
+      ],
+      "values": [
+        [
+          0.24113557042737807,
+          0.01682584497450047,
+          0.8084995343072161,
+          0.11620002293666336,
+          0.9757763508891591,
+          0.49976883739470246,
+          0.25558155697871343,
+          0.018747044931104927,
+          0.8227575187130708,
+          0.12808771100377572,
+          0.9781504401508425,
+          0.5275375877383613,
+          0.27043400946431856,
+          0.02088155386437008,
+          0.8360777922609128,
+          0.14099519407900116,
+          0.9802908286135817,
+          0.5551356684862503
+        ],
+        [
+          0.3090691901792426,
+          0.9628253945421413,
+          0.1369449609878661,
+          0.8787163636314312,
+          0.021841799591747084,
+          0.4994402277668787,
+          0.2930868364459109,
+          0.9597891577941997,
+          0.12468393745003334,
+          0.8666072762685134,
+          0.019589175209957236,
+          0.47167202923967855,
+          0.27746005950339153,
+          0.9564850767616219,
+          0.11335944294410548,
+          0.8534764507580017,
+          0.0175645813057147,
+          0.44407693046874336
+        ],
+        [
+          0.44979523939337934,
+          0.02034876048335818,
+          0.054555504704917726,
+          0.0050836134319054895,
+          0.002381849519093781,
+          0.0007909348384189846,
+          0.4513316065753757,
+          0.02146379727469536,
+          0.0525585438368958,
+          0.005305012727710842,
+          0.0022603846392001727,
+          0.0007903830219601273,
+          0.45210593103228996,
+          0.022633369374007825,
+          0.050562764794981674,
+          0.005528355162997016,
+          0.002144590080703521,
+          0.0007874010450062921
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift OrganDysfunctionScore toward Low (and away from High), but only if the same action does not make AcuteKidneyInjuryStage more likely to be Stage2or3. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "EarlyGoalDirectedFluidProtocol",
+        "value": "Aggressive"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "OrganDysfunctionScore",
+          "safety_outcome": "AcuteKidneyInjuryStage",
+          "good_intervention": "EarlyGoalDirectedFluidProtocol",
+          "risky_intervention": "HighDoseVasopressorStrategy",
+          "weak_intervention": "ProbioticAdministration",
+          "good_mediator": "LactateClearanceRate",
+          "confounder": "BaselineSepsisSeverity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "EarlyGoalDirectedFluidProtocol",
+            "value": "Aggressive"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "EarlyGoalDirectedFluidProtocol",
+              "value": "Standard",
+              "delta_target": -0.2188,
+              "delta_safety": 0.0
+            },
+            {
+              "variable": "EarlyGoalDirectedFluidProtocol",
+              "value": "Aggressive",
+              "delta_target": -0.3604,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "HighDoseVasopressorStrategy",
+              "value": "Moderate",
+              "delta_target": -0.2273,
+              "delta_safety": 0.1838,
+              "reason": "worsens safety"
+            },
+            {
+              "variable": "HighDoseVasopressorStrategy",
+              "value": "High",
+              "delta_target": -0.5445,
+              "delta_safety": 0.4942,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.8731,
+            "E_safety": 1.3392
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

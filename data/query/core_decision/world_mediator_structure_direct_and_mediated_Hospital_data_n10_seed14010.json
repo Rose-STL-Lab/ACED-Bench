@@ -1,0 +1,464 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "mediator_structure:direct_and_mediated",
+    "seed": 14010,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "direct_and_mediated"
+  },
+  "story": "A researcher is based at a large university-affiliated maternity hospital. She has access to detailed delivery and patient records and can request both observational data extracts and prospective interventional study samples from the institution.",
+  "non_intervenable_variables": [
+    {
+      "name": "PostpartumHemorrhageSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SecondStageDuration",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MaternalAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "Parity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "GestationalAgeCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PredeliveryHemoglobin",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BirthWeight",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeliveryMode",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "EpiduralAnalgesia",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether epidural analgesia was administered during labor.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PostpartumHemorrhageSeverity",
+      "values": [
+        "None",
+        "Minor",
+        "Major"
+      ],
+      "desc": "Classification of blood loss severity within 24 hours after delivery.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SecondStageDuration",
+      "values": [
+        "Short",
+        "Moderate",
+        "Prolonged"
+      ],
+      "desc": "Length of the second stage of labor from full dilation to delivery.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MaternalAge",
+      "values": [
+        "Under30",
+        "30to35",
+        "Over35"
+      ],
+      "desc": "Age category of the birthing person at time of admission.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "Parity",
+      "values": [
+        "Nulliparous",
+        "Multiparous"
+      ],
+      "desc": "Whether the patient has previously delivered a viable infant.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "GestationalAgeCategory",
+      "values": [
+        "EarlyTerm",
+        "FullTerm",
+        "LateTerm"
+      ],
+      "desc": "Gestational age range at the time labor begins.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OxytocinAugmentation",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether synthetic oxytocin was used to augment labor contractions.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PredeliveryHemoglobin",
+      "values": [
+        "Normal",
+        "Low"
+      ],
+      "desc": "Hemoglobin level measured on admission before delivery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BirthWeight",
+      "values": [
+        "Normal",
+        "High"
+      ],
+      "desc": "Categorized weight of the neonate recorded immediately after birth.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeliveryMode",
+      "values": [
+        "Spontaneous",
+        "Instrumental",
+        "Cesarean"
+      ],
+      "desc": "Method by which the infant was ultimately delivered.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "EpiduralAnalgesia",
+      "SecondStageDuration"
+    ],
+    [
+      "EpiduralAnalgesia",
+      "PostpartumHemorrhageSeverity"
+    ],
+    [
+      "EpiduralAnalgesia",
+      "OxytocinAugmentation"
+    ],
+    [
+      "SecondStageDuration",
+      "PostpartumHemorrhageSeverity"
+    ],
+    [
+      "MaternalAge",
+      "EpiduralAnalgesia"
+    ],
+    [
+      "MaternalAge",
+      "PostpartumHemorrhageSeverity"
+    ],
+    [
+      "BirthWeight",
+      "OxytocinAugmentation"
+    ],
+    [
+      "BirthWeight",
+      "EpiduralAnalgesia"
+    ],
+    [
+      "DeliveryMode",
+      "PredeliveryHemoglobin"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MaternalAge",
+      "parents": [],
+      "values": [
+        [
+          0.13242555353545205
+        ],
+        [
+          0.7357828316780018
+        ],
+        [
+          0.13179161478654616
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "Parity",
+      "parents": [],
+      "values": [
+        [
+          0.2924201632454193
+        ],
+        [
+          0.7075798367545807
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "GestationalAgeCategory",
+      "parents": [],
+      "values": [
+        [
+          0.11077995393904552
+        ],
+        [
+          0.5987524644920937
+        ],
+        [
+          0.2904675815688607
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BirthWeight",
+      "parents": [],
+      "values": [
+        [
+          0.33400673766814737
+        ],
+        [
+          0.6659932623318527
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DeliveryMode",
+      "parents": [],
+      "values": [
+        [
+          0.46943653320244494
+        ],
+        [
+          0.43318282964216825
+        ],
+        [
+          0.0973806371553867
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EpiduralAnalgesia",
+      "parents": [
+        "MaternalAge",
+        "BirthWeight"
+      ],
+      "values": [
+        [
+          0.4968158617917573,
+          0.034907945182819346,
+          0.07701310235493297,
+          0.0030474081439156742,
+          0.007001934712497936,
+          0.00025825248964407794
+        ],
+        [
+          0.5031841382082427,
+          0.9650920548171805,
+          0.9229868976450669,
+          0.9969525918560843,
+          0.9929980652875021,
+          0.9997417475103559
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PredeliveryHemoglobin",
+      "parents": [
+        "DeliveryMode"
+      ],
+      "values": [
+        [
+          0.5400197094770163,
+          0.4328179314687855,
+          0.3315576616327187
+        ],
+        [
+          0.4599802905229837,
+          0.5671820685312146,
+          0.6684423383672813
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SecondStageDuration",
+      "parents": [
+        "EpiduralAnalgesia"
+      ],
+      "values": [
+        [
+          0.15962923837988607,
+          0.8701818337481411
+        ],
+        [
+          0.2907419762101199,
+          0.11452279994838996
+        ],
+        [
+          0.549628785409994,
+          0.015295366303469074
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OxytocinAugmentation",
+      "parents": [
+        "BirthWeight",
+        "EpiduralAnalgesia"
+      ],
+      "values": [
+        [
+          0.35863156230819704,
+          0.8192451037196092,
+          0.2032394457187575,
+          0.6740104931978556
+        ],
+        [
+          0.641368437691803,
+          0.18075489628039074,
+          0.7967605542812425,
+          0.3259895068021444
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PostpartumHemorrhageSeverity",
+      "parents": [
+        "MaternalAge",
+        "SecondStageDuration",
+        "EpiduralAnalgesia"
+      ],
+      "values": [
+        [
+          0.875831297068533,
+          0.978574786226647,
+          0.4679100631992048,
+          0.8927047419583799,
+          0.1601905572160136,
+          0.7110388737765235,
+          0.7082726580749046,
+          0.952008895313385,
+          0.21935291743160554,
+          0.7690116444106302,
+          0.046353374500482804,
+          0.4731928776160082,
+          0.21539797761904012,
+          0.7522536637365441,
+          0.015563969115134241,
+          0.27780521254255863,
+          0.002237430419425904,
+          0.06298391813075503
+        ],
+        [
+          0.10943182988600916,
+          0.020949337937762512,
+          0.3274114279642405,
+          0.09652757588602545,
+          0.28810117307686783,
+          0.22047238352120355,
+          0.22641978330839663,
+          0.04574454095114332,
+          0.3148503216473988,
+          0.18429781634375755,
+          0.18946373176721126,
+          0.31225094993906605,
+          0.3241472250480317,
+          0.2008533832908069,
+          0.11393429579525534,
+          0.3281279577475228,
+          0.044043461725096746,
+          0.21770104346669147
+        ],
+        [
+          0.014736873045457744,
+          0.0004758758355905004,
+          0.20467850883655458,
+          0.01076768215559478,
+          0.5517082697071185,
+          0.06848874270227287,
+          0.06530755861669868,
+          0.002246563735471649,
+          0.4657967609209958,
+          0.046690539245612256,
+          0.7641828937323059,
+          0.21455617244492578,
+          0.46045479733292816,
+          0.046892952972649025,
+          0.8705017350896105,
+          0.3940668297099185,
+          0.9537191078554774,
+          0.7193150384025534
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does EpiduralAnalgesia change PostpartumHemorrhageSeverity? Specifically, does the effect of EpiduralAnalgesia on PostpartumHemorrhageSeverity flow entirely through SecondStageDuration, or is there also a separate pathway that does not pass through SecondStageDuration? Investigate using interventions and explain your conclusion.",
+      "answer": "also_direct_or_other",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "direct_and_mediated",
+        "roles": {
+          "treatment": "EpiduralAnalgesia",
+          "outcome": "PostpartumHemorrhageSeverity",
+          "mediator": "SecondStageDuration",
+          "confounder": "MaternalAge"
+        },
+        "gold": {
+          "label": "also_direct_or_other",
+          "T": "EpiduralAnalgesia",
+          "M": "SecondStageDuration",
+          "O": "PostpartumHemorrhageSeverity",
+          "total_effect": -1.2516,
+          "max_residual_effect": 0.8943
+        }
+      }
+    }
+  ]
+}

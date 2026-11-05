@@ -1,0 +1,798 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 4303,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A state department of community corrections maintains detailed administrative records on all supervised individuals. The research division has authorization to access these records and to request both observational and interventional data samples across district offices.",
+  "non_intervenable_variables": [
+    {
+      "name": "RecidivismStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TechnicalViolationRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ProbationerEngagement",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OffenseSeverityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorConvictionCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeAtSentencing",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceAbuseHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmploymentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingStability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RiskAssessmentScore",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "RecidivismStatus",
+      "values": [
+        "NoNewOffense",
+        "Misdemeanor",
+        "Felony"
+      ],
+      "desc": "Whether the probationer committed a new criminal offense during supervision.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "TechnicalViolationRate",
+      "values": [
+        "NoViolations",
+        "MinorViolations",
+        "MajorViolations"
+      ],
+      "desc": "Level of technical probation condition violations recorded during supervision period.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CognitiveBehavioralProgramming",
+      "values": [
+        "None",
+        "GroupSessions",
+        "IndividualAndGroup"
+      ],
+      "desc": "Extent of structured cognitive-behavioral intervention assigned during probation.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ContactFrequency",
+      "values": [
+        "Monthly",
+        "Biweekly",
+        "Weekly"
+      ],
+      "desc": "Scheduled frequency of face-to-face meetings with the probation officer.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ElectronicMonitoring",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether GPS ankle monitoring is applied to the probationer.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProbationerEngagement",
+      "values": [
+        "HighEngagement",
+        "ModerateEngagement",
+        "LowEngagement"
+      ],
+      "desc": "Degree of active participation in assigned supervision activities and programs.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "OffenseSeverityLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Severity classification of the original offense leading to probation.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorConvictionCount",
+      "values": [
+        "None",
+        "OneToTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of prior criminal convictions on the probationer's record.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeAtSentencing",
+      "values": [
+        "Under25",
+        "TwentyFiveToForty",
+        "OverForty"
+      ],
+      "desc": "Age group of the probationer at the time of sentencing.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceAbuseHistory",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the probationer has a documented history of substance abuse.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmploymentStatus",
+      "values": [
+        "Employed",
+        "Unemployed"
+      ],
+      "desc": "Whether the probationer holds employment during the supervision period.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceAbuseTreatmentReferral",
+      "values": [
+        "None",
+        "Outpatient",
+        "Intensive"
+      ],
+      "desc": "Level of substance abuse treatment program the probationer is referred to.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CaseloadSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Number of probationers assigned to the supervising officer's caseload.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingStability",
+      "values": [
+        "Stable",
+        "Unstable"
+      ],
+      "desc": "Whether the probationer maintains consistent and adequate housing.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RiskAssessmentScore",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Standardized actuarial risk score assigned at intake assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "TechnicalViolationRate",
+      "AgeAtSentencing"
+    ],
+    [
+      "CognitiveBehavioralProgramming",
+      "ProbationerEngagement"
+    ],
+    [
+      "ContactFrequency",
+      "RecidivismStatus"
+    ],
+    [
+      "ContactFrequency",
+      "TechnicalViolationRate"
+    ],
+    [
+      "ContactFrequency",
+      "HousingStability"
+    ],
+    [
+      "ElectronicMonitoring",
+      "RecidivismStatus"
+    ],
+    [
+      "ProbationerEngagement",
+      "RecidivismStatus"
+    ],
+    [
+      "ProbationerEngagement",
+      "PriorConvictionCount"
+    ],
+    [
+      "ProbationerEngagement",
+      "RiskAssessmentScore"
+    ],
+    [
+      "OffenseSeverityLevel",
+      "RecidivismStatus"
+    ],
+    [
+      "OffenseSeverityLevel",
+      "TechnicalViolationRate"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "CognitiveBehavioralProgramming",
+      "parents": [],
+      "values": [
+        [
+          0.46206337886246246
+        ],
+        [
+          0.21367491085854068
+        ],
+        [
+          0.32426171027899686
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ContactFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.10607792209153225
+        ],
+        [
+          0.5517601338464244
+        ],
+        [
+          0.34216194406204326
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ElectronicMonitoring",
+      "parents": [],
+      "values": [
+        [
+          0.5574594040400669
+        ],
+        [
+          0.44254059595993317
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "OffenseSeverityLevel",
+      "parents": [],
+      "values": [
+        [
+          0.12661624128051263
+        ],
+        [
+          0.4233510574545494
+        ],
+        [
+          0.45003270126493794
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubstanceAbuseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.4245664394228084
+        ],
+        [
+          0.5754335605771916
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EmploymentStatus",
+      "parents": [],
+      "values": [
+        [
+          0.43531489468788787
+        ],
+        [
+          0.5646851053121121
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SubstanceAbuseTreatmentReferral",
+      "parents": [],
+      "values": [
+        [
+          0.7831540822209957
+        ],
+        [
+          0.12054287695279431
+        ],
+        [
+          0.09630304082620991
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CaseloadSize",
+      "parents": [],
+      "values": [
+        [
+          0.48790723617949183
+        ],
+        [
+          0.158626949466958
+        ],
+        [
+          0.35346581435355023
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProbationerEngagement",
+      "parents": [
+        "CognitiveBehavioralProgramming"
+      ],
+      "values": [
+        [
+          0.1642726706546155,
+          0.7107544487637096,
+          0.9134888743098494
+        ],
+        [
+          0.2992407989905076,
+          0.220750034022726,
+          0.0793026344697749
+        ],
+        [
+          0.5364865303548768,
+          0.06849551721356434,
+          0.007208491220375654
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HousingStability",
+      "parents": [
+        "ContactFrequency"
+      ],
+      "values": [
+        [
+          0.46137041738073425,
+          0.5230964808509008,
+          0.5841250109753556
+        ],
+        [
+          0.5386295826192656,
+          0.4769035191490992,
+          0.41587498902464437
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TechnicalViolationRate",
+      "parents": [
+        "OffenseSeverityLevel",
+        "ContactFrequency"
+      ],
+      "values": [
+        [
+          0.5761958671421584,
+          0.26714102984075627,
+          0.05200334881678719,
+          0.4045344034348408,
+          0.13344544753976537,
+          0.02310550908394589,
+          0.06641729950381794,
+          0.013092764122473814,
+          0.00164540443115851
+        ],
+        [
+          0.28254034922687404,
+          0.33631252720255345,
+          0.20346338493683705,
+          0.3286938865988564,
+          0.286860092523359,
+          0.1325297961097544,
+          0.2219276466739255,
+          0.1083394525295388,
+          0.040463912103736455
+        ],
+        [
+          0.14126378363096753,
+          0.3965464429566903,
+          0.7445332662463758,
+          0.2667717099663028,
+          0.5796944599368756,
+          0.8443646948062997,
+          0.7116550538222566,
+          0.8785677833479874,
+          0.957890683465105
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RecidivismStatus",
+      "parents": [
+        "OffenseSeverityLevel",
+        "ProbationerEngagement",
+        "ContactFrequency",
+        "ElectronicMonitoring"
+      ],
+      "values": [
+        [
+          0.8281606351880455,
+          0.8910897109679575,
+          0.9562544787609623,
+          0.9717907353849682,
+          0.9867150299970989,
+          0.9917854056885665,
+          0.36904119284179604,
+          0.54875657079094,
+          0.7825845970674054,
+          0.8730138222688755,
+          0.9300512226394131,
+          0.9594807352533073,
+          0.055008493811516124,
+          0.12460629219080101,
+          0.3723787925889191,
+          0.5424929604554233,
+          0.7465658508260471,
+          0.841621189641473,
+          0.6859470735733957,
+          0.7960835767070975,
+          0.9147274198001667,
+          0.9490955313474865,
+          0.9733744581423115,
+          0.9843627098975632,
+          0.1875778471950985,
+          0.327723597891317,
+          0.6260165544780536,
+          0.7630251672167,
+          0.8832973630999743,
+          0.9246468502269246,
+          0.019397229914373277,
+          0.048275118503042266,
+          0.18018683031470117,
+          0.34754367269155084,
+          0.5749800273257833,
+          0.7172557319818736,
+          0.18585592370505805,
+          0.33043966258929425,
+          0.6428540949265495,
+          0.7558567652564193,
+          0.877936281546048,
+          0.9215830698381641,
+          0.014195614458357783,
+          0.03261142771335917,
+          0.13487953694896904,
+          0.26460842558173664,
+          0.504823266945068,
+          0.6620315910249199,
+          0.0008990578753389441,
+          0.002330500016433375,
+          0.014141620220803609,
+          0.03064702155386517,
+          0.1054180890871884,
+          0.20734144078772937
+        ],
+        [
+          0.14409408058619494,
+          0.09834131483078834,
+          0.04182727268323847,
+          0.027486675156463858,
+          0.013109969780672193,
+          0.008146043593143287,
+          0.3452706013363268,
+          0.2839258505600112,
+          0.17648805871343304,
+          0.11211635610479162,
+          0.0656607738960951,
+          0.03887823251562066,
+          0.20630834563527586,
+          0.27287736248987965,
+          0.3219882558041836,
+          0.28862733924994877,
+          0.19638571571982433,
+          0.13520890978684383,
+          0.23623939535543942,
+          0.1712413070261831,
+          0.07920969285397461,
+          0.04856730420628917,
+          0.02599914256627456,
+          0.015404328800997373,
+          0.31058030826280586,
+          0.3360752850165838,
+          0.267241478201954,
+          0.18918389284809634,
+          0.1038432959754295,
+          0.07002453432963493,
+          0.12792370073919215,
+          0.20195895007808137,
+          0.31333358684314633,
+          0.332469566767278,
+          0.28622856966416993,
+          0.2159381855066314,
+          0.3147395861586146,
+          0.33312241744157195,
+          0.25726692950171776,
+          0.19484719110005772,
+          0.10783607948566426,
+          0.07307967464367916,
+          0.10654271276383306,
+          0.15298209929069967,
+          0.2799525500517911,
+          0.32296556915801883,
+          0.3075290529355237,
+          0.2501818035308391,
+          0.02992920689606933,
+          0.04394243393292585,
+          0.11119946328883706,
+          0.16239002630313298,
+          0.2655385721463121,
+          0.3180156343116256
+        ],
+        [
+          0.027745284225759493,
+          0.01056897420125417,
+          0.0019182485557993046,
+          0.0007225894585679142,
+          0.00017500022222885963,
+          6.855071829013814e-05,
+          0.2856882058218772,
+          0.16731757864904886,
+          0.0409273442191615,
+          0.014869821626332748,
+          0.004288003464491694,
+          0.00164103223107195,
+          0.738683160553208,
+          0.6025163453193193,
+          0.3056329516068973,
+          0.16887970029462795,
+          0.057048433454128446,
+          0.02316990057168319,
+          0.07781353107116488,
+          0.0326751162667195,
+          0.006062887345858495,
+          0.0023371644462243145,
+          0.0006263992914141466,
+          0.00023296130143930988,
+          0.5018418445420956,
+          0.33620111709209927,
+          0.10674196731999251,
+          0.04779093993520358,
+          0.012859340924596101,
+          0.005328615443440425,
+          0.8526790693464346,
+          0.7497659314188763,
+          0.5064795828421524,
+          0.31998676054117126,
+          0.1387914030100466,
+          0.06680608251149496,
+          0.4994044901363273,
+          0.3364379199691338,
+          0.09987897557173285,
+          0.04929604364352308,
+          0.014227638968287758,
+          0.0053372555181568,
+          0.8792616727778091,
+          0.8144064729959412,
+          0.5851679129992399,
+          0.41242600526024453,
+          0.18764768011940824,
+          0.08778660544424095,
+          0.9691717352285918,
+          0.9537270660506408,
+          0.8746589164903594,
+          0.8069629521430018,
+          0.6290433387664995,
+          0.47464292490064497
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorConvictionCount",
+      "parents": [
+        "ProbationerEngagement"
+      ],
+      "values": [
+        [
+          0.32033733403053094,
+          0.17165742227940473,
+          0.04859064457530612
+        ],
+        [
+          0.3261179290322867,
+          0.7638927145889453,
+          0.9452030282501019
+        ],
+        [
+          0.3535447369371824,
+          0.06444986313165005,
+          0.006206327174591888
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RiskAssessmentScore",
+      "parents": [
+        "ProbationerEngagement"
+      ],
+      "values": [
+        [
+          0.26678620891579585,
+          0.19554315144482828,
+          0.13317156724037235
+        ],
+        [
+          0.37800783307250313,
+          0.5107083226293746,
+          0.6411132274786598
+        ],
+        [
+          0.355205958011701,
+          0.29374852592579714,
+          0.22571520528096772
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeAtSentencing",
+      "parents": [
+        "TechnicalViolationRate"
+      ],
+      "values": [
+        [
+          0.418252182356541,
+          0.009522149578582856,
+          0.00012852540313580934
+        ],
+        [
+          0.2912726949690872,
+          0.5001831782708126,
+          0.5092318764466377
+        ],
+        [
+          0.2904751226743717,
+          0.49029467215060446,
+          0.4906395981502265
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift RecidivismStatus toward NoNewOffense (and away from Felony), but only if the same action does not make TechnicalViolationRate more likely to be MajorViolations. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "CognitiveBehavioralProgramming",
+        "value": "IndividualAndGroup"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "RecidivismStatus",
+          "safety_outcome": "TechnicalViolationRate",
+          "good_intervention": "CognitiveBehavioralProgramming",
+          "risky_intervention": "ContactFrequency",
+          "weak_intervention": "ElectronicMonitoring",
+          "good_mediator": "ProbationerEngagement",
+          "confounder": "OffenseSeverityLevel"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "CognitiveBehavioralProgramming",
+            "value": "IndividualAndGroup"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "CognitiveBehavioralProgramming",
+              "value": "GroupSessions",
+              "delta_target": -0.2041,
+              "delta_safety": 0.0
+            },
+            {
+              "variable": "CognitiveBehavioralProgramming",
+              "value": "IndividualAndGroup",
+              "delta_target": -0.3372,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "ContactFrequency",
+              "value": "Weekly",
+              "delta_target": -0.2657,
+              "delta_safety": 0.2225,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.5925,
+            "E_safety": 1.6432
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

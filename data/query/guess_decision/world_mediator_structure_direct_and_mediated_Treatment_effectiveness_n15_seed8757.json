@@ -1,0 +1,682 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "mediator_structure:direct_and_mediated",
+    "seed": 8757,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "direct_and_mediated"
+  },
+  "story": "A pulmonary research clinic within a large academic medical center maintains detailed patient records spanning several years. The lead investigator can access these records and request new observational or interventional data collection as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "AsthmaControlLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AirwayInflammationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineAsthmaSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SmokingHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MedicationAdherence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AllergenExposureLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidAllergicRhinitis",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ExerciseFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SeasonOfEnrollment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorExacerbationHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InhalerTechniqueQuality",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SocioeconomicTier",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "InhaledCorticosteroidRegimen",
+      "values": [
+        "None",
+        "LowDose",
+        "MediumHighDose"
+      ],
+      "desc": "Prescribed daily inhaled corticosteroid dose tier for asthma maintenance.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AsthmaControlLevel",
+      "values": [
+        "WellControlled",
+        "PartlyControlled",
+        "Uncontrolled"
+      ],
+      "desc": "Composite asthma control classification based on symptom frequency and limitation.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AirwayInflammationStatus",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Fractional exhaled nitric oxide category reflecting eosinophilic airway inflammation.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineAsthmaSeverity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "GINA-classified asthma severity at study enrollment before treatment assignment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Pediatric",
+        "Adult",
+        "OlderAdult"
+      ],
+      "desc": "Age category of the patient at time of enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SmokingHistory",
+      "values": [
+        "Never",
+        "Former",
+        "Current"
+      ],
+      "desc": "Patient self-reported lifetime cigarette smoking status.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MedicationAdherence",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of prescribed controller doses actually taken over the study period.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AllergenExposureLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Estimated household and occupational aeroallergen burden category.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Patient BMI classification at enrollment per WHO criteria.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ComorbidAllergicRhinitis",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Documented diagnosis of concurrent allergic rhinitis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ExerciseFrequency",
+      "values": [
+        "Sedentary",
+        "Moderate",
+        "Active"
+      ],
+      "desc": "Self-reported weekly physical activity level category.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SeasonOfEnrollment",
+      "values": [
+        "Spring",
+        "Summer",
+        "FallWinter"
+      ],
+      "desc": "Calendar season at the time of patient enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorExacerbationHistory",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of asthma exacerbations requiring oral steroids in the prior year.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InhalerTechniqueQuality",
+      "values": [
+        "Correct",
+        "Suboptimal"
+      ],
+      "desc": "Observed metered-dose inhaler technique rating during clinic assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SocioeconomicTier",
+      "values": [
+        "Low",
+        "Middle",
+        "High"
+      ],
+      "desc": "Household income bracket classification at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "InhaledCorticosteroidRegimen",
+      "AirwayInflammationStatus"
+    ],
+    [
+      "InhaledCorticosteroidRegimen",
+      "AsthmaControlLevel"
+    ],
+    [
+      "AirwayInflammationStatus",
+      "AsthmaControlLevel"
+    ],
+    [
+      "BaselineAsthmaSeverity",
+      "InhaledCorticosteroidRegimen"
+    ],
+    [
+      "BaselineAsthmaSeverity",
+      "AsthmaControlLevel"
+    ],
+    [
+      "BaselineAsthmaSeverity",
+      "SmokingHistory"
+    ],
+    [
+      "SmokingHistory",
+      "ComorbidAllergicRhinitis"
+    ],
+    [
+      "AllergenExposureLevel",
+      "SeasonOfEnrollment"
+    ],
+    [
+      "ComorbidAllergicRhinitis",
+      "InhaledCorticosteroidRegimen"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineAsthmaSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.19482145310568608
+        ],
+        [
+          0.26798574369466027
+        ],
+        [
+          0.5371928031996538
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.45177596922740393
+        ],
+        [
+          0.24399374632383522
+        ],
+        [
+          0.30423028444876093
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MedicationAdherence",
+      "parents": [],
+      "values": [
+        [
+          0.3361830776193581
+        ],
+        [
+          0.19782860726989454
+        ],
+        [
+          0.4659883151107473
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AllergenExposureLevel",
+      "parents": [],
+      "values": [
+        [
+          0.687656969328877
+        ],
+        [
+          0.1723062856877999
+        ],
+        [
+          0.14003674498332302
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [],
+      "values": [
+        [
+          0.5949083662131248
+        ],
+        [
+          0.2965279948981946
+        ],
+        [
+          0.10856363888868066
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ExerciseFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.37648270192761085
+        ],
+        [
+          0.31437534215821483
+        ],
+        [
+          0.30914195591417437
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorExacerbationHistory",
+      "parents": [],
+      "values": [
+        [
+          0.6334461989420332
+        ],
+        [
+          0.20014001691103056
+        ],
+        [
+          0.16641378414693628
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InhalerTechniqueQuality",
+      "parents": [],
+      "values": [
+        [
+          0.3188284501128289
+        ],
+        [
+          0.6811715498871711
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SocioeconomicTier",
+      "parents": [],
+      "values": [
+        [
+          0.36513761742804407
+        ],
+        [
+          0.17760305733214612
+        ],
+        [
+          0.45725932523980983
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SmokingHistory",
+      "parents": [
+        "BaselineAsthmaSeverity"
+      ],
+      "values": [
+        [
+          0.36163629643290157,
+          0.6959315552218849,
+          0.8930905535675634
+        ],
+        [
+          0.24584352650240612,
+          0.06872359787632258,
+          0.012811130342172147
+        ],
+        [
+          0.3925201770646923,
+          0.2353448469017926,
+          0.09409831609026463
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SeasonOfEnrollment",
+      "parents": [
+        "AllergenExposureLevel"
+      ],
+      "values": [
+        [
+          0.3450750868904221,
+          0.22669017125920118,
+          0.11074281524303811
+        ],
+        [
+          0.3037778348458977,
+          0.14410129378669087,
+          0.05083273327459692
+        ],
+        [
+          0.35114707826368013,
+          0.629208534954108,
+          0.8384244514823649
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComorbidAllergicRhinitis",
+      "parents": [
+        "SmokingHistory"
+      ],
+      "values": [
+        [
+          0.5467657112244614,
+          0.3106042746696036,
+          0.144031349710024
+        ],
+        [
+          0.45323428877553856,
+          0.6893957253303964,
+          0.8559686502899759
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "InhaledCorticosteroidRegimen",
+      "parents": [
+        "BaselineAsthmaSeverity",
+        "ComorbidAllergicRhinitis"
+      ],
+      "values": [
+        [
+          0.21768437888083472,
+          0.05260951698014617,
+          0.08818121571969825,
+          0.0659416034215571,
+          0.019192019794636677,
+          0.04842211203672349
+        ],
+        [
+          0.43306649815894876,
+          0.928388854675785,
+          0.1207390301915038,
+          0.8008835709544266,
+          0.018085751615676656,
+          0.4047602801906802
+        ],
+        [
+          0.34924912296021643,
+          0.019001628344068808,
+          0.791079754088798,
+          0.13317482562401628,
+          0.9627222285896867,
+          0.5468176077725962
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AirwayInflammationStatus",
+      "parents": [
+        "InhaledCorticosteroidRegimen"
+      ],
+      "values": [
+        [
+          0.17252501479341673,
+          0.32489538350922764,
+          0.8645434822904624
+        ],
+        [
+          0.30219814098375297,
+          0.33001062560862365,
+          0.11906079114754914
+        ],
+        [
+          0.5252768442228303,
+          0.3450939908821487,
+          0.0163957265619884
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AsthmaControlLevel",
+      "parents": [
+        "BaselineAsthmaSeverity",
+        "AirwayInflammationStatus",
+        "InhaledCorticosteroidRegimen"
+      ],
+      "values": [
+        [
+          0.8731530510029918,
+          0.9077994066560497,
+          0.9776004321556543,
+          0.4809883310604891,
+          0.6007458123888629,
+          0.8838611247133111,
+          0.16423049178992338,
+          0.28002474363372587,
+          0.712864371310899,
+          0.7243487907761962,
+          0.7954589869583868,
+          0.9545921847653684,
+          0.2061026653908445,
+          0.3372378857952045,
+          0.770559404204603,
+          0.048281568790546056,
+          0.08785132771960236,
+          0.46566023239910426,
+          0.2105835153628148,
+          0.3458630525047558,
+          0.7575387528857916,
+          0.0160764305977879,
+          0.03286323885731759,
+          0.2783910524292282,
+          0.002359161545566043,
+          0.0050883843401048545,
+          0.06514611286762845
+        ],
+        [
+          0.1120728347336053,
+          0.08476387299457401,
+          0.021915705147696318,
+          0.312683246198674,
+          0.2722376033335943,
+          0.10533799730174083,
+          0.2950149320511115,
+          0.3133788400347273,
+          0.22219767376367272,
+          0.21137122601282762,
+          0.1698158642153021,
+          0.04321322036098309,
+          0.3143534993071061,
+          0.32312857359601155,
+          0.1819958638586305,
+          0.18764848961016545,
+          0.23867036827058521,
+          0.31787415443659334,
+          0.33481451865670087,
+          0.33270199580174215,
+          0.1943606766999313,
+          0.11866886307990136,
+          0.15554497285007599,
+          0.3280871642119444,
+          0.04998088600137968,
+          0.07217830968691971,
+          0.21527534091015973
+        ],
+        [
+          0.01477411426340296,
+          0.007436720349376266,
+          0.00048386269664960996,
+          0.20632842274083693,
+          0.12701658427754275,
+          0.010800877984948077,
+          0.5407545761589652,
+          0.40659641633154675,
+          0.06493795492542843,
+          0.06427998321097617,
+          0.03472514882631115,
+          0.002194594873648508,
+          0.47954383530204936,
+          0.33963354060878403,
+          0.04744473193676639,
+          0.7640699415992885,
+          0.6734783040098123,
+          0.21646561316430235,
+          0.45460196598048436,
+          0.321434951693502,
+          0.04810057041427714,
+          0.8652547063223107,
+          0.8115917882926065,
+          0.39352178335882754,
+          0.9476599524530542,
+          0.9227333059729753,
+          0.7195785462222118
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does InhaledCorticosteroidRegimen change AsthmaControlLevel? Specifically, does the effect of InhaledCorticosteroidRegimen on AsthmaControlLevel flow entirely through AirwayInflammationStatus, or is there also a separate pathway that does not pass through AirwayInflammationStatus? Investigate using interventions and explain your conclusion.",
+      "answer": "also_direct_or_other",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "direct_and_mediated",
+        "roles": {
+          "treatment": "InhaledCorticosteroidRegimen",
+          "outcome": "AsthmaControlLevel",
+          "mediator": "AirwayInflammationStatus",
+          "confounder": "BaselineAsthmaSeverity"
+        },
+        "gold": {
+          "label": "also_direct_or_other",
+          "T": "InhaledCorticosteroidRegimen",
+          "M": "AirwayInflammationStatus",
+          "O": "AsthmaControlLevel",
+          "total_effect": -1.2612,
+          "max_residual_effect": 0.778
+        }
+      }
+    }
+  ]
+}

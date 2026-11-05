@@ -1,0 +1,483 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 10,
+    "topology": "mediator_structure:not_mediator",
+    "seed": 13303,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "not_mediator"
+  },
+  "story": "A community college mathematics department maintains detailed student records across its developmental and introductory math courses. The department's institutional research office can provide observational data extracts and coordinate prospective interventional studies upon request.",
+  "non_intervenable_variables": [
+    {
+      "name": "MathProficiencyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HomeworkCompletionRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InstructorFeedbackFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineMathSkill",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WeeklyStudyHours",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EnrollmentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorRemedialAttempts",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MathAnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TutoringCenterUsage",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "CourseFormat",
+      "values": [
+        "Traditional",
+        "Redesigned"
+      ],
+      "desc": "Whether the student is enrolled in the traditional or redesigned remedial math course.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MathProficiencyLevel",
+      "values": [
+        "Proficient",
+        "Developing",
+        "BelowBasic"
+      ],
+      "desc": "Student classification on the end-of-term standardized math proficiency exam.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "HomeworkCompletionRate",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Proportion of assigned homework problem sets submitted by the student during the term.",
+      "role": "proposed_M",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "InstructorFeedbackFrequency",
+      "values": [
+        "Frequent",
+        "Occasional",
+        "Rare"
+      ],
+      "desc": "How often the instructor provides individualized written or verbal feedback to the student.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineMathSkill",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Student score category on the diagnostic math placement test taken before enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WeeklyStudyHours",
+      "values": [
+        "FiveOrMore",
+        "TwoToFour",
+        "LessThanTwo"
+      ],
+      "desc": "Self-reported number of hours per week the student spends studying math outside class.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EnrollmentStatus",
+      "values": [
+        "FullTime",
+        "PartTime"
+      ],
+      "desc": "Whether the student is enrolled full-time or part-time at the institution.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorRemedialAttempts",
+      "values": [
+        "None",
+        "One",
+        "TwoOrMore"
+      ],
+      "desc": "Number of previous attempts the student has made at a remedial math course.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MathAnxietyLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Student score category on a validated math anxiety self-report questionnaire.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TutoringCenterUsage",
+      "values": [
+        "Regular",
+        "Sporadic",
+        "Never"
+      ],
+      "desc": "Frequency with which the student visits the campus math tutoring center during the term.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "CourseFormat",
+      "InstructorFeedbackFrequency"
+    ],
+    [
+      "CourseFormat",
+      "HomeworkCompletionRate"
+    ],
+    [
+      "CourseFormat",
+      "TutoringCenterUsage"
+    ],
+    [
+      "MathProficiencyLevel",
+      "PriorRemedialAttempts"
+    ],
+    [
+      "MathProficiencyLevel",
+      "TutoringCenterUsage"
+    ],
+    [
+      "InstructorFeedbackFrequency",
+      "MathProficiencyLevel"
+    ],
+    [
+      "BaselineMathSkill",
+      "CourseFormat"
+    ],
+    [
+      "BaselineMathSkill",
+      "MathProficiencyLevel"
+    ],
+    [
+      "EnrollmentStatus",
+      "TutoringCenterUsage"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineMathSkill",
+      "parents": [],
+      "values": [
+        [
+          0.15081451996014264
+        ],
+        [
+          0.5452617488016144
+        ],
+        [
+          0.30392373123824296
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WeeklyStudyHours",
+      "parents": [],
+      "values": [
+        [
+          0.424670522240947
+        ],
+        [
+          0.40642459259504804
+        ],
+        [
+          0.16890488516400493
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EnrollmentStatus",
+      "parents": [],
+      "values": [
+        [
+          0.18952282157515457
+        ],
+        [
+          0.8104771784248455
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MathAnxietyLevel",
+      "parents": [],
+      "values": [
+        [
+          0.3941690834394826
+        ],
+        [
+          0.3519812871463074
+        ],
+        [
+          0.25384962941421013
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CourseFormat",
+      "parents": [
+        "BaselineMathSkill"
+      ],
+      "values": [
+        [
+          0.5040019639583252,
+          0.1801388484758204,
+          0.04535486113306005
+        ],
+        [
+          0.49599803604167486,
+          0.8198611515241796,
+          0.9546451388669399
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "InstructorFeedbackFrequency",
+      "parents": [
+        "CourseFormat"
+      ],
+      "values": [
+        [
+          0.16161233808731315,
+          0.863735689226542
+        ],
+        [
+          0.3008478999811345,
+          0.12037951118729366
+        ],
+        [
+          0.5375397619315523,
+          0.015884799586164407
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HomeworkCompletionRate",
+      "parents": [
+        "CourseFormat"
+      ],
+      "values": [
+        [
+          0.2229206972494117,
+          0.8045159830304036
+        ],
+        [
+          0.3101162993369096,
+          0.16218810468763478
+        ],
+        [
+          0.46696300341367875,
+          0.03329591228196154
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MathProficiencyLevel",
+      "parents": [
+        "BaselineMathSkill",
+        "InstructorFeedbackFrequency"
+      ],
+      "values": [
+        [
+          0.9115032312139671,
+          0.5999224323163224,
+          0.27550593532749174,
+          0.7982192497333822,
+          0.3421011975181885,
+          0.09079940390663258,
+          0.33204817765622097,
+          0.032156847210096255,
+          0.005294382572949767
+        ],
+        [
+          0.08128250956323285,
+          0.2802880617808732,
+          0.3317339161265198,
+          0.16842180952316285,
+          0.3282340158082548,
+          0.24602128763737335,
+          0.33135775066901496,
+          0.16298551190583932,
+          0.06892019173674198
+        ],
+        [
+          0.007214259222800096,
+          0.11978950590280447,
+          0.39276014854598845,
+          0.03335894074345473,
+          0.3296647866735567,
+          0.663179308455994,
+          0.3365940716747641,
+          0.8048576408840644,
+          0.9257854256903082
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorRemedialAttempts",
+      "parents": [
+        "MathProficiencyLevel"
+      ],
+      "values": [
+        [
+          0.4311745470177157,
+          0.018758322845643733,
+          0.00029428637940406187
+        ],
+        [
+          0.2719378536816803,
+          0.07765331639444797,
+          0.007996236238029537
+        ],
+        [
+          0.2968875993006041,
+          0.9035883607599084,
+          0.9917094773825665
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TutoringCenterUsage",
+      "parents": [
+        "CourseFormat",
+        "EnrollmentStatus",
+        "MathProficiencyLevel"
+      ],
+      "values": [
+        [
+          0.3874321075668081,
+          0.008580998702511403,
+          8.631407872382886e-05,
+          0.5573548428168859,
+          0.01973829038749742,
+          0.00020800495209535397,
+          0.8231667463463335,
+          0.12505730088485065,
+          0.0019132566758379022,
+          0.8841037072861857,
+          0.22289042935496395,
+          0.004451099752858774
+        ],
+        [
+          0.2229399391581692,
+          0.06982937268758312,
+          0.009933218272478226,
+          0.211456320582982,
+          0.10590256061988602,
+          0.015782603160800403,
+          0.14166508897903957,
+          0.3043631758265122,
+          0.06585129627082759,
+          0.10031707377559897,
+          0.35766059901420455,
+          0.10100783001636787
+        ],
+        [
+          0.38962795327502264,
+          0.9215896286099056,
+          0.989980467648798,
+          0.2311888366001322,
+          0.8743591489926165,
+          0.9840093918871041,
+          0.03516816467462688,
+          0.5705795232886371,
+          0.9322354470533344,
+          0.015579218938215289,
+          0.41944897163083156,
+          0.8945410702307733
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "An analyst hypothesizes that HomeworkCompletionRate is the variable through which CourseFormat changes MathProficiencyLevel. Investigate the system and decide whether this hypothesis is supported, and explain why.",
+      "answer": "not_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "not_mediator",
+        "roles": {
+          "treatment": "CourseFormat",
+          "outcome": "MathProficiencyLevel",
+          "proposed_M": "HomeworkCompletionRate",
+          "true_mediator": "InstructorFeedbackFrequency",
+          "confounder": "BaselineMathSkill"
+        },
+        "gold": {
+          "label": "not_mediator",
+          "T": "CourseFormat",
+          "M_proposed": "HomeworkCompletionRate",
+          "M_true": "InstructorFeedbackFrequency",
+          "O": "MathProficiencyLevel",
+          "total_effect": -0.7337,
+          "residual_after_fix_proposed": 0.7337,
+          "do_proposed_effect_on_O": 0.0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,598 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "mediator_structure:mediated_only",
+    "seed": 7343,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "mediated_only"
+  },
+  "story": "A researcher at a large public university system spanning multiple campuses has access to institutional enrollment records, student demographic files, and program participation logs, and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "DegreeCompletion",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AcademicIdentity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ParentalEducationSupport",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HighSchoolGpa",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FinancialAidLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WorkHoursPerWeek",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CampusResidency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EnglishProficiency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PeerStudyGroupParticipation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InstitutionType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeclaredMajorTiming",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilyIncomeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AcademicAdvisingFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NumberOfSiblingsInCollege",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "StructuredMentoringProgram",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the student was enrolled in a faculty-led mentoring program.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DegreeCompletion",
+      "values": [
+        "Completed",
+        "NotCompleted"
+      ],
+      "desc": "Whether the student earned a bachelor's degree within six years.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AcademicIdentity",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Student's self-reported sense of belonging as a college scholar.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ParentalEducationSupport",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Degree of educational encouragement and guidance received from parents.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HighSchoolGpa",
+      "values": [
+        "AboveThreeFive",
+        "ThreeToThreeFive",
+        "BelowThree"
+      ],
+      "desc": "Student's cumulative grade point average at high school graduation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FinancialAidLevel",
+      "values": [
+        "Full",
+        "Partial",
+        "None"
+      ],
+      "desc": "Amount of need-based financial aid the student received per year.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WorkHoursPerWeek",
+      "values": [
+        "None",
+        "PartTime",
+        "FullTime"
+      ],
+      "desc": "Weekly hours of paid employment during the academic semester.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CampusResidency",
+      "values": [
+        "OnCampus",
+        "OffCampus"
+      ],
+      "desc": "Whether the student lived in on-campus housing during college.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EnglishProficiency",
+      "values": [
+        "NativeFluent",
+        "Intermediate"
+      ],
+      "desc": "Student's self-assessed proficiency in academic English at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerStudyGroupParticipation",
+      "values": [
+        "Regular",
+        "Occasional",
+        "Never"
+      ],
+      "desc": "Frequency of student participation in informal peer study groups.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InstitutionType",
+      "values": [
+        "FourYearPublic",
+        "FourYearPrivate"
+      ],
+      "desc": "Classification of the degree-granting college or university attended.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeclaredMajorTiming",
+      "values": [
+        "ByEndOfYear1",
+        "ByEndOfYear2",
+        "AfterYear2"
+      ],
+      "desc": "When the student officially declared an academic major.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyIncomeLevel",
+      "values": [
+        "AboveMedian",
+        "BelowMedian"
+      ],
+      "desc": "Household income bracket relative to national median at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AcademicAdvisingFrequency",
+      "values": [
+        "Frequent",
+        "Occasional",
+        "Rare"
+      ],
+      "desc": "How often the student met with an assigned academic advisor per term.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NumberOfSiblingsInCollege",
+      "values": [
+        "None",
+        "OneOrMore"
+      ],
+      "desc": "Count of siblings concurrently enrolled in a postsecondary institution.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "StructuredMentoringProgram",
+      "AcademicIdentity"
+    ],
+    [
+      "DegreeCompletion",
+      "WorkHoursPerWeek"
+    ],
+    [
+      "AcademicIdentity",
+      "DegreeCompletion"
+    ],
+    [
+      "AcademicIdentity",
+      "PeerStudyGroupParticipation"
+    ],
+    [
+      "ParentalEducationSupport",
+      "StructuredMentoringProgram"
+    ],
+    [
+      "ParentalEducationSupport",
+      "DegreeCompletion"
+    ],
+    [
+      "ParentalEducationSupport",
+      "FinancialAidLevel"
+    ],
+    [
+      "HighSchoolGpa",
+      "FinancialAidLevel"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ParentalEducationSupport",
+      "parents": [],
+      "values": [
+        [
+          0.09591745554074413
+        ],
+        [
+          0.6065942692339763
+        ],
+        [
+          0.29748827522527965
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HighSchoolGpa",
+      "parents": [],
+      "values": [
+        [
+          0.21000867466342946
+        ],
+        [
+          0.21227969525700388
+        ],
+        [
+          0.5777116300795667
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CampusResidency",
+      "parents": [],
+      "values": [
+        [
+          0.6519375632952081
+        ],
+        [
+          0.34806243670479187
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EnglishProficiency",
+      "parents": [],
+      "values": [
+        [
+          0.09892645656665958
+        ],
+        [
+          0.9010735434333405
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "InstitutionType",
+      "parents": [],
+      "values": [
+        [
+          0.5521302034610999
+        ],
+        [
+          0.4478697965389001
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DeclaredMajorTiming",
+      "parents": [],
+      "values": [
+        [
+          0.20445086381711952
+        ],
+        [
+          0.5641858040884615
+        ],
+        [
+          0.23136333209441898
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilyIncomeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.2858581743188003
+        ],
+        [
+          0.7141418256811998
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AcademicAdvisingFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.3519565136090638
+        ],
+        [
+          0.0981013595309563
+        ],
+        [
+          0.5499421268599798
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NumberOfSiblingsInCollege",
+      "parents": [],
+      "values": [
+        [
+          0.11200063545770762
+        ],
+        [
+          0.8879993645422923
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "StructuredMentoringProgram",
+      "parents": [
+        "ParentalEducationSupport"
+      ],
+      "values": [
+        [
+          0.5505034202821932,
+          0.2373435884569462,
+          0.07328415987642169
+        ],
+        [
+          0.44949657971780677,
+          0.7626564115430537,
+          0.9267158401235782
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FinancialAidLevel",
+      "parents": [
+        "ParentalEducationSupport",
+        "HighSchoolGpa"
+      ],
+      "values": [
+        [
+          0.2435015974653491,
+          0.11324014519576045,
+          0.043318731132420824,
+          0.26031413751434684,
+          0.10133369656984409,
+          0.03313884313081529,
+          0.20663725834651378,
+          0.07106429518081508,
+          0.021667658680545845
+        ],
+        [
+          0.33068419996237464,
+          0.5392890276626601,
+          0.7234465172870193,
+          0.5768211556587578,
+          0.7874207361651611,
+          0.903025140857919,
+          0.747108799112149,
+          0.9010236903826178,
+          0.9633991951449528
+        ],
+        [
+          0.4258142025722763,
+          0.34747082714157945,
+          0.23323475158055998,
+          0.16286470682689533,
+          0.11124556726499482,
+          0.06383601601126578,
+          0.046253942541337176,
+          0.027912014436567153,
+          0.014933146174501427
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AcademicIdentity",
+      "parents": [
+        "StructuredMentoringProgram"
+      ],
+      "values": [
+        [
+          0.1630981602500934,
+          0.8667031212076913
+        ],
+        [
+          0.28836447077539457,
+          0.1176341782861448
+        ],
+        [
+          0.548537368974512,
+          0.015662700506163946
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DegreeCompletion",
+      "parents": [
+        "ParentalEducationSupport",
+        "AcademicIdentity"
+      ],
+      "values": [
+        [
+          0.9910941719881159,
+          0.8299857471421538,
+          0.39259400223221347,
+          0.9604801102754065,
+          0.5052133989679484,
+          0.12464575443954358,
+          0.503461702754775,
+          0.040594574412051186,
+          0.0054960005995216095
+        ],
+        [
+          0.008905828011884174,
+          0.1700142528578462,
+          0.6074059977677866,
+          0.03951988972459348,
+          0.49478660103205174,
+          0.8753542455604564,
+          0.49653829724522497,
+          0.959405425587949,
+          0.9945039994004785
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PeerStudyGroupParticipation",
+      "parents": [
+        "AcademicIdentity"
+      ],
+      "values": [
+        [
+          0.38289454199480144,
+          0.22942112129296355,
+          0.12202606306163483
+        ],
+        [
+          0.2940071975269272,
+          0.30286661823738786,
+          0.27695539765958516
+        ],
+        [
+          0.32309826047827134,
+          0.46771226046964853,
+          0.60101853927878
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WorkHoursPerWeek",
+      "parents": [
+        "DegreeCompletion"
+      ],
+      "values": [
+        [
+          0.36219345658811447,
+          0.21966361349460736
+        ],
+        [
+          0.33564413626615586,
+          0.03823421142547622
+        ],
+        [
+          0.3021624071457297,
+          0.7421021750799165
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does StructuredMentoringProgram change DegreeCompletion? Specifically, does the effect of StructuredMentoringProgram on DegreeCompletion flow entirely through AcademicIdentity, or is there also a separate pathway that does not pass through AcademicIdentity? Investigate using interventions and explain your conclusion.",
+      "answer": "only_through_M",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "mediated_only",
+        "roles": {
+          "treatment": "StructuredMentoringProgram",
+          "outcome": "DegreeCompletion",
+          "mediator": "AcademicIdentity",
+          "confounder": "ParentalEducationSupport"
+        },
+        "gold": {
+          "label": "only_through_M",
+          "T": "StructuredMentoringProgram",
+          "M": "AcademicIdentity",
+          "O": "DegreeCompletion",
+          "total_effect": -0.453,
+          "max_residual_effect": 0.0
+        }
+      }
+    }
+  ]
+}

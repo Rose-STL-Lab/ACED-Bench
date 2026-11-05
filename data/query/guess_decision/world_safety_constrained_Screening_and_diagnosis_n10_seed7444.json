@@ -1,0 +1,726 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 7444,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A multi-site dermatology clinic network serving a metropolitan area maintains detailed patient records, imaging logs, and procedural data. The research team can access archived records and arrange prospective observational or interventional data collection across participating clinics.",
+  "non_intervenable_variables": [
+    {
+      "name": "MelanomaDetectionAccuracy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UnnecessaryBiopsyRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StructuralFeatureRecognition",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LesionComplexity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientSkinPhototype",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClinicCaseVolume",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "MelanomaDetectionAccuracy",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of histologically confirmed melanomas correctly identified at screening.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "UnnecessaryBiopsyRate",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Proportion of biopsied lesions found to be benign on histopathology.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AIDermoscopyAssist",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether an AI-based dermoscopic image analysis tool is used during screening.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AggressiveBiopsyProtocol",
+      "values": [
+        "None",
+        "Moderate",
+        "Aggressive"
+      ],
+      "desc": "Threshold level for recommending excisional biopsy of suspicious lesions.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DermatologistTrainingWorkshop",
+      "values": [
+        "None",
+        "Basic",
+        "Advanced"
+      ],
+      "desc": "Level of supplemental dermoscopy pattern-recognition training provided to clinicians.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "StructuralFeatureRecognition",
+      "values": [
+        "Accurate",
+        "Partial",
+        "Poor"
+      ],
+      "desc": "Degree to which dermoscopic structures like pigment networks are correctly identified.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "LesionComplexity",
+      "values": [
+        "Simple",
+        "Intermediate",
+        "Complex"
+      ],
+      "desc": "Morphological complexity of the evaluated skin lesion under dermoscopy.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DermoscopeType",
+      "values": [
+        "Nonpolarized",
+        "Polarized",
+        "Hybrid"
+      ],
+      "desc": "Type of dermoscope used during the skin lesion examination.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientSkinPhototype",
+      "values": [
+        "Light",
+        "Medium",
+        "Dark"
+      ],
+      "desc": "Fitzpatrick skin phototype classification of the patient being screened.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClinicCaseVolume",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Weekly number of dermoscopy screening examinations performed at the clinic.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "AIDermoscopyAssist",
+      "StructuralFeatureRecognition"
+    ],
+    [
+      "AggressiveBiopsyProtocol",
+      "MelanomaDetectionAccuracy"
+    ],
+    [
+      "AggressiveBiopsyProtocol",
+      "UnnecessaryBiopsyRate"
+    ],
+    [
+      "AggressiveBiopsyProtocol",
+      "DermoscopeType"
+    ],
+    [
+      "DermatologistTrainingWorkshop",
+      "MelanomaDetectionAccuracy"
+    ],
+    [
+      "StructuralFeatureRecognition",
+      "MelanomaDetectionAccuracy"
+    ],
+    [
+      "StructuralFeatureRecognition",
+      "DermatologistTrainingWorkshop"
+    ],
+    [
+      "LesionComplexity",
+      "MelanomaDetectionAccuracy"
+    ],
+    [
+      "LesionComplexity",
+      "UnnecessaryBiopsyRate"
+    ],
+    [
+      "LesionComplexity",
+      "PatientSkinPhototype"
+    ],
+    [
+      "DermoscopeType",
+      "AIDermoscopyAssist"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "AggressiveBiopsyProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.13250771040022447
+        ],
+        [
+          0.6815459704203968
+        ],
+        [
+          0.18594631917937884
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LesionComplexity",
+      "parents": [],
+      "values": [
+        [
+          0.09309782435079964
+        ],
+        [
+          0.6001339537262678
+        ],
+        [
+          0.30676822192293274
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClinicCaseVolume",
+      "parents": [],
+      "values": [
+        [
+          0.4139106880876626
+        ],
+        [
+          0.37135272396321284
+        ],
+        [
+          0.21473658794912454
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DermoscopeType",
+      "parents": [
+        "AggressiveBiopsyProtocol"
+      ],
+      "values": [
+        [
+          0.31384561201398714,
+          0.27048910288145084,
+          0.20999320505932553
+        ],
+        [
+          0.3932610673299766,
+          0.5485859089670346,
+          0.689334633283244
+        ],
+        [
+          0.29289332065603624,
+          0.18092498815151456,
+          0.10067216165743043
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UnnecessaryBiopsyRate",
+      "parents": [
+        "LesionComplexity",
+        "AggressiveBiopsyProtocol"
+      ],
+      "values": [
+        [
+          0.5770667267172203,
+          0.2621635890146118,
+          0.05446606684290277,
+          0.4088018902220637,
+          0.14499255767407743,
+          0.024167912469017647,
+          0.06878840016662079,
+          0.012431234033595761,
+          0.0015946977098857985
+        ],
+        [
+          0.27912894551450335,
+          0.32985491528382155,
+          0.195839476308646,
+          0.3186591436762579,
+          0.28401689738963204,
+          0.1468474270981689,
+          0.22157461466016795,
+          0.10464268750642657,
+          0.037078151450654386
+        ],
+        [
+          0.1438043277682764,
+          0.40798149570156667,
+          0.7496944568484513,
+          0.2725389661016783,
+          0.5709905449362905,
+          0.8289846604328134,
+          0.7096369851732113,
+          0.8829260784599777,
+          0.9613271508394597
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientSkinPhototype",
+      "parents": [
+        "LesionComplexity"
+      ],
+      "values": [
+        [
+          0.2654221442159425,
+          0.3424766089927581,
+          0.41766334027673013
+        ],
+        [
+          0.28858130630236334,
+          0.1887971952219075,
+          0.11674131005086336
+        ],
+        [
+          0.4459965494816942,
+          0.46872619578533453,
+          0.4655953496724066
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AIDermoscopyAssist",
+      "parents": [
+        "DermoscopeType"
+      ],
+      "values": [
+        [
+          0.42256557616674106,
+          0.8253931449423095,
+          0.9682898929924428
+        ],
+        [
+          0.5774344238332588,
+          0.17460685505769044,
+          0.03171010700755707
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "StructuralFeatureRecognition",
+      "parents": [
+        "AIDermoscopyAssist"
+      ],
+      "values": [
+        [
+          0.16585657395925701,
+          0.9082979382945
+        ],
+        [
+          0.30121582186165685,
+          0.08437515512355126
+        ],
+        [
+          0.532927604179086,
+          0.007326906581948829
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DermatologistTrainingWorkshop",
+      "parents": [
+        "StructuralFeatureRecognition"
+      ],
+      "values": [
+        [
+          0.35242581373850534,
+          0.11409700639736524,
+          0.028502134184683198
+        ],
+        [
+          0.3662289998683765,
+          0.4144336217619628,
+          0.3618710355953719
+        ],
+        [
+          0.2813451863931182,
+          0.47146937184067195,
+          0.6096268302199449
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MelanomaDetectionAccuracy",
+      "parents": [
+        "LesionComplexity",
+        "StructuralFeatureRecognition",
+        "AggressiveBiopsyProtocol",
+        "DermatologistTrainingWorkshop"
+      ],
+      "values": [
+        [
+          0.8185130498370716,
+          0.8462460654928987,
+          0.8937052434292934,
+          0.9510650184825352,
+          0.9584201607421097,
+          0.9739222713163711,
+          0.9851572999868792,
+          0.9880460898400779,
+          0.9919850024629909,
+          0.3677644855621585,
+          0.3979163585763397,
+          0.5344807732713911,
+          0.7863079687858034,
+          0.8025280740491562,
+          0.8692155859866778,
+          0.9326617311467905,
+          0.9376573827750517,
+          0.9580536912288808,
+          0.05705850850048042,
+          0.06443680250010973,
+          0.12288214031506728,
+          0.3566954225595758,
+          0.41401376290971753,
+          0.5332862834377806,
+          0.7363378103028443,
+          0.7642510486227632,
+          0.8403499038864716,
+          0.69543237755562,
+          0.7292372223884754,
+          0.8061798562385818,
+          0.913540029540828,
+          0.9257467698522519,
+          0.9511385711485565,
+          0.9762851279581937,
+          0.9786625031607615,
+          0.9847538329291206,
+          0.18583580457738608,
+          0.2194453402028794,
+          0.32557593959785724,
+          0.6347095107536612,
+          0.6684416578363984,
+          0.7753369047610649,
+          0.8797286110476584,
+          0.8904510415445915,
+          0.9206675552913303,
+          0.01952757119878853,
+          0.02321309841668855,
+          0.04532363665285756,
+          0.18222774248311616,
+          0.20388716067621535,
+          0.3335714945432502,
+          0.562168735764072,
+          0.608672148764473,
+          0.703950382766573,
+          0.1811302379284528,
+          0.20827150014508997,
+          0.3354376307701211,
+          0.6395805480347575,
+          0.6703735419837763,
+          0.766726922194831,
+          0.8742699182548748,
+          0.8901685086455137,
+          0.924542830052792,
+          0.013898778925471266,
+          0.01499778848494043,
+          0.033514579799929424,
+          0.13891601033373333,
+          0.16848074867288854,
+          0.2699188522957424,
+          0.5232847501571909,
+          0.5410924474447114,
+          0.6612223044646606,
+          0.0009206669406915372,
+          0.001031519964644885,
+          0.002386202924558935,
+          0.012960941893323903,
+          0.01606317636371609,
+          0.03187925772486314,
+          0.10486172490925537,
+          0.12205968773407713,
+          0.20470067027485286
+        ],
+        [
+          0.15355064682176509,
+          0.13239562120703824,
+          0.09508721272648285,
+          0.04687155489558752,
+          0.04005684682968279,
+          0.025390366459448418,
+          0.014649334683354394,
+          0.011814093600325154,
+          0.007949427284991236,
+          0.3224233203574233,
+          0.3307895773903166,
+          0.2992080277244882,
+          0.17632473712705762,
+          0.16623332795251722,
+          0.11587980875213112,
+          0.06329691869399423,
+          0.05876674550770195,
+          0.04031740137290604,
+          0.2024375235717074,
+          0.2205058057243978,
+          0.25940644033501986,
+          0.3471279539036646,
+          0.3189872306805237,
+          0.3058686665277888,
+          0.20953024872554746,
+          0.18635687281208727,
+          0.13641376367312094,
+          0.2250725854722072,
+          0.20678240927100167,
+          0.16037430366815159,
+          0.08030148426574069,
+          0.06907332677950502,
+          0.046523080728206614,
+          0.023095885525391137,
+          0.020842647125943997,
+          0.01501761568269476,
+          0.31598916512922554,
+          0.3099908300359241,
+          0.32475421036078145,
+          0.26067667094579405,
+          0.2412407146868095,
+          0.1813026577569281,
+          0.10714085770882081,
+          0.09830831201480061,
+          0.07427630981600739,
+          0.1360554208710365,
+          0.1430878233607954,
+          0.18871149019864278,
+          0.31159616826757114,
+          0.3175763614827418,
+          0.3313634356973844,
+          0.29097212659895116,
+          0.26694637486110917,
+          0.22787327794539486,
+          0.29734336434953623,
+          0.3116233920165864,
+          0.3313068764547454,
+          0.26122432369199067,
+          0.23809843242081705,
+          0.18676557262259535,
+          0.11283630962169953,
+          0.09864266543931009,
+          0.07030197221284283,
+          0.10683348820483254,
+          0.11146833522301094,
+          0.16619190566846975,
+          0.28230807669990254,
+          0.29542578952297627,
+          0.33045297756653513,
+          0.2972982021555116,
+          0.2892870644515705,
+          0.2474409949027419,
+          0.030592806967101524,
+          0.030310042762584293,
+          0.04689213844447485,
+          0.10919690928631248,
+          0.12095358553993363,
+          0.15673209257657042,
+          0.26102381714854583,
+          0.27315599757300807,
+          0.3213861323452737
+        ],
+        [
+          0.02793630334116329,
+          0.021358313300063103,
+          0.011207543844223771,
+          0.002063426621877208,
+          0.0015229924282074215,
+          0.0006873622241805729,
+          0.00019336532976646826,
+          0.00013981655959704553,
+          6.557025201783416e-05,
+          0.30981219408041805,
+          0.2712940640333438,
+          0.16631119900412075,
+          0.03736729408713902,
+          0.031238597998326692,
+          0.01490460526119108,
+          0.004041350159215313,
+          0.003575871717246148,
+          0.0016289073982130781,
+          0.7405039679278121,
+          0.7150573917754924,
+          0.6177114193499129,
+          0.2961766235367598,
+          0.2669990064097588,
+          0.1608450500344306,
+          0.05413194097160832,
+          0.04939207856514951,
+          0.02323633244040751,
+          0.07949503697217272,
+          0.06398036834052279,
+          0.03344584009326661,
+          0.00615848619343131,
+          0.005179903368243187,
+          0.002338348123236853,
+          0.0006189865164152607,
+          0.0004948497132943049,
+          0.00022855138818484051,
+          0.49817503029338844,
+          0.47056382976119654,
+          0.34966985004136125,
+          0.10461381830054473,
+          0.0903176274767921,
+          0.043360437482006915,
+          0.013130531243520817,
+          0.011240646440607925,
+          0.005056134892662392,
+          0.844417007930175,
+          0.833699078222516,
+          0.7659648731484997,
+          0.5061760892493127,
+          0.47853647784104286,
+          0.33506506975936545,
+          0.14685913763697678,
+          0.12438147637441777,
+          0.06817633928803209,
+          0.5215263977220109,
+          0.4801051078383237,
+          0.33325549277513344,
+          0.09919512827325179,
+          0.0915280255954066,
+          0.04650750518257352,
+          0.012893772123425556,
+          0.011188825915176111,
+          0.005155197734365174,
+          0.8792677328696963,
+          0.8735338762920487,
+          0.8002935145316008,
+          0.5787759129663641,
+          0.5360934618041352,
+          0.39962817013772245,
+          0.1794170476872976,
+          0.1696204881037181,
+          0.09133670063259755,
+          0.9684865260922069,
+          0.9686584372727708,
+          0.9507216586309662,
+          0.8778421488203635,
+          0.8629832380963504,
+          0.8113886496985664,
+          0.6341144579421988,
+          0.6047843146929148,
+          0.4739131973798735
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift MelanomaDetectionAccuracy toward High (and away from Low), but only if the same action does not make UnnecessaryBiopsyRate more likely to be High. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "AIDermoscopyAssist",
+        "value": "On"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "MelanomaDetectionAccuracy",
+          "safety_outcome": "UnnecessaryBiopsyRate",
+          "good_intervention": "AIDermoscopyAssist",
+          "risky_intervention": "AggressiveBiopsyProtocol",
+          "weak_intervention": "DermatologistTrainingWorkshop",
+          "good_mediator": "StructuralFeatureRecognition",
+          "confounder": "LesionComplexity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "AIDermoscopyAssist",
+            "value": "On"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "AIDermoscopyAssist",
+              "value": "On",
+              "delta_target": -0.4773,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "AggressiveBiopsyProtocol",
+              "value": "Aggressive",
+              "delta_target": -0.37,
+              "delta_safety": 0.3102,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.7246,
+            "E_safety": 1.532
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

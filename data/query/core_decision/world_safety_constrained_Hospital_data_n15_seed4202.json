@@ -1,0 +1,887 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 4202,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A large academic medical center maintains detailed perioperative records for all surgical patients. The research team has institutional approval to access existing records and to design prospective observational or interventional studies within the facility.",
+  "non_intervenable_variables": [
+    {
+      "name": "FunctionalRecoveryStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PostOpComplicationGrade",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DailyAmbulationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreOpFrailtyIndex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SurgeryType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidityBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreOpBodyMassCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PainAssessmentScore",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "FunctionalRecoveryStatus",
+      "values": [
+        "FullRecovery",
+        "PartialRecovery",
+        "PoorRecovery"
+      ],
+      "desc": "Patient-reported functional independence level at 30 days post-surgery.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PostOpComplicationGrade",
+      "values": [
+        "None",
+        "Minor",
+        "Major"
+      ],
+      "desc": "Severity classification of complications occurring within 30 days post-surgery.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "StructuredMobilizationProtocol",
+      "values": [
+        "None",
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Intensity tier of the assigned early mobilization program after surgery.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OpioidPainManagement",
+      "values": [
+        "None",
+        "LowDose",
+        "HighDose"
+      ],
+      "desc": "Prescribed opioid analgesic dosage category during the post-operative period.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NutritionalSupplementation",
+      "values": [
+        "None",
+        "Oral",
+        "Parenteral"
+      ],
+      "desc": "Type of nutritional supplementation provided during post-operative recovery.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DailyAmbulationLevel",
+      "values": [
+        "Adequate",
+        "Limited",
+        "Bedbound"
+      ],
+      "desc": "Average daily walking distance category recorded during inpatient stay.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PreOpFrailtyIndex",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Frailty classification based on pre-operative geriatric assessment score.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SurgeryType",
+      "values": [
+        "Orthopedic",
+        "Abdominal",
+        "Cardiac"
+      ],
+      "desc": "Broad category of the surgical procedure performed on the patient.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnesthesiaMethod",
+      "values": [
+        "General",
+        "Regional"
+      ],
+      "desc": "Primary anesthesia technique used during the surgical procedure.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Under50",
+        "50to70",
+        "Over70"
+      ],
+      "desc": "Age bracket of the patient at the time of surgery.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ComorbidityBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Charlson comorbidity index category derived from medical history review.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PostOpPhysiotherapyFrequency",
+      "values": [
+        "None",
+        "Daily",
+        "TwiceDaily"
+      ],
+      "desc": "Scheduled frequency of physiotherapy sessions during inpatient recovery.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DrainRemovalTiming",
+      "values": [
+        "Early",
+        "Standard"
+      ],
+      "desc": "Timing protocol for surgical drain removal after the operation.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PreOpBodyMassCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Body mass index classification recorded at the pre-operative assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PainAssessmentScore",
+      "values": [
+        "Low",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Visual analog scale pain category recorded on post-operative day one.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "StructuredMobilizationProtocol",
+      "DailyAmbulationLevel"
+    ],
+    [
+      "OpioidPainManagement",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "OpioidPainManagement",
+      "PostOpComplicationGrade"
+    ],
+    [
+      "NutritionalSupplementation",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "DailyAmbulationLevel",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "PreOpFrailtyIndex",
+      "FunctionalRecoveryStatus"
+    ],
+    [
+      "PreOpFrailtyIndex",
+      "PostOpComplicationGrade"
+    ],
+    [
+      "ComorbidityBurden",
+      "StructuredMobilizationProtocol"
+    ],
+    [
+      "ComorbidityBurden",
+      "NutritionalSupplementation"
+    ],
+    [
+      "DrainRemovalTiming",
+      "NutritionalSupplementation"
+    ],
+    [
+      "PainAssessmentScore",
+      "PostOpPhysiotherapyFrequency"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "OpioidPainManagement",
+      "parents": [],
+      "values": [
+        [
+          0.4620408251176572
+        ],
+        [
+          0.2374183216930281
+        ],
+        [
+          0.3005408531893148
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreOpFrailtyIndex",
+      "parents": [],
+      "values": [
+        [
+          0.09600646412023461
+        ],
+        [
+          0.3706662589747014
+        ],
+        [
+          0.533327276905064
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SurgeryType",
+      "parents": [],
+      "values": [
+        [
+          0.7924864226923309
+        ],
+        [
+          0.11189269566474183
+        ],
+        [
+          0.09562088164292717
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnesthesiaMethod",
+      "parents": [],
+      "values": [
+        [
+          0.6039815121631986
+        ],
+        [
+          0.3960184878368014
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.7790991407556963
+        ],
+        [
+          0.12958059279658665
+        ],
+        [
+          0.09132026644771704
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComorbidityBurden",
+      "parents": [],
+      "values": [
+        [
+          0.35841503888446075
+        ],
+        [
+          0.370171651624584
+        ],
+        [
+          0.27141330949095527
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DrainRemovalTiming",
+      "parents": [],
+      "values": [
+        [
+          0.5772943792647531
+        ],
+        [
+          0.4227056207352468
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PreOpBodyMassCategory",
+      "parents": [],
+      "values": [
+        [
+          0.31172268909198225
+        ],
+        [
+          0.4100569676744869
+        ],
+        [
+          0.27822034323353095
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PainAssessmentScore",
+      "parents": [],
+      "values": [
+        [
+          0.25824544944409183
+        ],
+        [
+          0.42052488664918364
+        ],
+        [
+          0.3212296639067246
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostOpComplicationGrade",
+      "parents": [
+        "PreOpFrailtyIndex",
+        "OpioidPainManagement"
+      ],
+      "values": [
+        [
+          0.582325716290019,
+          0.2636308643417765,
+          0.05481688292735451,
+          0.4087300245462088,
+          0.13238273739615763,
+          0.023064469987645865,
+          0.061223790099062855,
+          0.01308874483427728,
+          0.0017202123062444508
+        ],
+        [
+          0.2763981116658888,
+          0.3255501411517739,
+          0.21017169985472206,
+          0.33099045100113567,
+          0.28670852317760825,
+          0.13550783592491886,
+          0.20574924861573704,
+          0.10106097551709194,
+          0.04162583477237329
+        ],
+        [
+          0.1412761720440923,
+          0.41081899450644954,
+          0.7350114172179234,
+          0.2602795244526554,
+          0.5809087394262341,
+          0.8414276940874353,
+          0.7330269612852001,
+          0.8858502796486307,
+          0.9566539529213822
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StructuredMobilizationProtocol",
+      "parents": [
+        "ComorbidityBurden"
+      ],
+      "values": [
+        [
+          0.28977347483270977,
+          0.8697746461383921,
+          0.9879615550824425
+        ],
+        [
+          0.3178823632854676,
+          0.02096036342417298,
+          0.0005230176798487586
+        ],
+        [
+          0.39234416188182253,
+          0.10926499043743489,
+          0.01151542723770881
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NutritionalSupplementation",
+      "parents": [
+        "ComorbidityBurden",
+        "DrainRemovalTiming"
+      ],
+      "values": [
+        [
+          0.30882824924799207,
+          0.3124806830672653,
+          0.10918618150734315,
+          0.10498493285382794,
+          0.032223957999037725,
+          0.02926591659194712
+        ],
+        [
+          0.37736743152244595,
+          0.5930901159348946,
+          0.5302279387235335,
+          0.7919030566026698,
+          0.6219011300687763,
+          0.8773132899884256
+        ],
+        [
+          0.313804319229562,
+          0.09442920099784023,
+          0.36058587976912326,
+          0.1031120105435023,
+          0.3458749119321859,
+          0.09342079341962728
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PostOpPhysiotherapyFrequency",
+      "parents": [
+        "PainAssessmentScore"
+      ],
+      "values": [
+        [
+          0.30580467156390884,
+          0.01868213003491934,
+          0.0005111750659274668
+        ],
+        [
+          0.33827827573281816,
+          0.8608813666584542,
+          0.9812360677921281
+        ],
+        [
+          0.355917052703273,
+          0.12043650330662643,
+          0.01825275714194429
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DailyAmbulationLevel",
+      "parents": [
+        "StructuredMobilizationProtocol"
+      ],
+      "values": [
+        [
+          0.1670004134131066,
+          0.7040926899199502,
+          0.9090853892088447
+        ],
+        [
+          0.30367912398679975,
+          0.227235776483849,
+          0.08330245761381753
+        ],
+        [
+          0.5293204626000937,
+          0.06867153359620085,
+          0.007612153177337645
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FunctionalRecoveryStatus",
+      "parents": [
+        "PreOpFrailtyIndex",
+        "DailyAmbulationLevel",
+        "OpioidPainManagement",
+        "NutritionalSupplementation"
+      ],
+      "values": [
+        [
+          0.8303675331239101,
+          0.8331304138551,
+          0.8932556002981065,
+          0.954792828607935,
+          0.9560809942966053,
+          0.9702756518554599,
+          0.9857586779198555,
+          0.9872588256317101,
+          0.9920554495224677,
+          0.35494303098997987,
+          0.38680266947610564,
+          0.5556576231107282,
+          0.7804778676073488,
+          0.8082171982774129,
+          0.8607936129877315,
+          0.9282896206611446,
+          0.9355979755847225,
+          0.9622054858259088,
+          0.053162954221838365,
+          0.06228127363362391,
+          0.12387096126158753,
+          0.3708949407696409,
+          0.40692193118237047,
+          0.5322897656442865,
+          0.7358765795543707,
+          0.7623985612947695,
+          0.8421408275928511,
+          0.7006713904403279,
+          0.7244695059003381,
+          0.8112558173632456,
+          0.9191692609078025,
+          0.9255072427378012,
+          0.9521754845994095,
+          0.9749952361115566,
+          0.9769519693845529,
+          0.9846642975604147,
+          0.18245733836948835,
+          0.20537711287183827,
+          0.3319135746888672,
+          0.627738794886972,
+          0.6609256007847503,
+          0.7550542481491003,
+          0.8813480970100701,
+          0.8917591805248349,
+          0.9245012342505474,
+          0.019729574626086138,
+          0.021846417463325406,
+          0.043237954933894485,
+          0.1858847284885862,
+          0.21464102381727368,
+          0.31849622251476073,
+          0.5750028603359313,
+          0.605240630432823,
+          0.7211045032337707,
+          0.18663123077413177,
+          0.2131105625429005,
+          0.3280756184172506,
+          0.6358246712435535,
+          0.6667707372136379,
+          0.7612789199139578,
+          0.8795682848878097,
+          0.8944554196984725,
+          0.926134589225029,
+          0.013567892716627245,
+          0.016983751168580842,
+          0.03439593410013021,
+          0.13707964128752526,
+          0.16866242067165477,
+          0.26900007182722924,
+          0.5051446767636096,
+          0.5370092851824646,
+          0.6526110606592266,
+          0.0009515307320093298,
+          0.0011261778540519489,
+          0.0023418896811062,
+          0.013423879782610825,
+          0.0159740289537299,
+          0.03221633108695268,
+          0.10730143379340804,
+          0.11931378503141395,
+          0.20052229313257638
+        ],
+        [
+          0.14208968628154262,
+          0.14352922017161082,
+          0.0960109492047396,
+          0.04316557221231893,
+          0.042241056768877655,
+          0.028980676277215026,
+          0.014052231169155948,
+          0.012587881986177977,
+          0.007882697218725981,
+          0.33747461470992846,
+          0.3370092828586666,
+          0.28947757126572476,
+          0.1815967762124445,
+          0.15840387473386672,
+          0.12255079229633875,
+          0.06731095012181723,
+          0.06079528749343222,
+          0.036259316617762084,
+          0.20335916005584517,
+          0.206424502469897,
+          0.27555739447265726,
+          0.3294871157387773,
+          0.3312899658307682,
+          0.3021470651781126,
+          0.2059311514445968,
+          0.1895826650156209,
+          0.13404750983374875,
+          0.22161262159380912,
+          0.21281902784192167,
+          0.15726359608291324,
+          0.07456653234384451,
+          0.06942196418789341,
+          0.04552982760984131,
+          0.024408111833967936,
+          0.02254496161056347,
+          0.015105682860242328,
+          0.3131708744547177,
+          0.3168258943676605,
+          0.3325781397919044,
+          0.2666172424654758,
+          0.24275763005016718,
+          0.19660715264712242,
+          0.10561419687438363,
+          0.09808690161208314,
+          0.07018980726305482,
+          0.1325065055588095,
+          0.12813326452560728,
+          0.1910668717265933,
+          0.31372536059644246,
+          0.3135126677025922,
+          0.3333667943129833,
+          0.28720777673378267,
+          0.27545210025475825,
+          0.21504241310214867,
+          0.3099752857840294,
+          0.3129367254885947,
+          0.3346919536586173,
+          0.2590079175017722,
+          0.23891632686219702,
+          0.1927534067244922,
+          0.1073751408643339,
+          0.09494093805708205,
+          0.06838930612677281,
+          0.10774586544605638,
+          0.11899348865217972,
+          0.17468209559391712,
+          0.2884574015875509,
+          0.3082295209252405,
+          0.32505832653691313,
+          0.30680159253873857,
+          0.30496997909566226,
+          0.2545285953717613,
+          0.029810644824282816,
+          0.034444892547969015,
+          0.04732559027924976,
+          0.108964450074402,
+          0.11645126075537958,
+          0.16269895233824205,
+          0.25432278605523295,
+          0.2664059029419243,
+          0.31961439619674537
+        ],
+        [
+          0.027542780594547275,
+          0.023340365973289215,
+          0.010733450497154025,
+          0.0020415991797461228,
+          0.0016779489345170413,
+          0.0007436718673250233,
+          0.00018909091098851677,
+          0.0001532923821120687,
+          6.185325880639855e-05,
+          0.30758235430009156,
+          0.27618804766522786,
+          0.15486480562354715,
+          0.03792535618020657,
+          0.033378926988720345,
+          0.016655594715929773,
+          0.004399429217038126,
+          0.003606736921845373,
+          0.001535197556329083,
+          0.7434778857223165,
+          0.7312942238964791,
+          0.6005716442657552,
+          0.2996179434915818,
+          0.26178810298686134,
+          0.16556316917760103,
+          0.05819226900103245,
+          0.048018773689609585,
+          0.023811662573400092,
+          0.07771598796586311,
+          0.0627114662577402,
+          0.03148058655384111,
+          0.006264206748353069,
+          0.005070793074305394,
+          0.002294687790749278,
+          0.0005966520544754324,
+          0.0005030690048836416,
+          0.00023001957934289384,
+          0.504371787175794,
+          0.47779699276050125,
+          0.33550828551922834,
+          0.10564396264755214,
+          0.09631676916508254,
+          0.04833859920377717,
+          0.01303770611554637,
+          0.0101539178630818,
+          0.005308958486397707,
+          0.8477639198151045,
+          0.8500203180110673,
+          0.7656951733395122,
+          0.5003899109149714,
+          0.47184630848013415,
+          0.348136983172256,
+          0.13778936293028607,
+          0.11930726931241875,
+          0.06385308366408071,
+          0.5033934834418389,
+          0.4739527119685048,
+          0.3372324279241321,
+          0.10516741125467431,
+          0.094312935924165,
+          0.045967673361550075,
+          0.013056574247856485,
+          0.010603642244445528,
+          0.005476104648198147,
+          0.8786862418373164,
+          0.8640227601792394,
+          0.7909219703059527,
+          0.5744629571249238,
+          0.5231080584031048,
+          0.4059416016358576,
+          0.1880537306976517,
+          0.15802073572187317,
+          0.09286034396901202,
+          0.9692378244437078,
+          0.9644289295979789,
+          0.950332520039644,
+          0.8776116701429872,
+          0.8675747102908905,
+          0.8050847165748052,
+          0.6383757801513591,
+          0.6142803120266617,
+          0.47986331067067833
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift FunctionalRecoveryStatus toward FullRecovery (and away from PoorRecovery), but only if the same action does not make PostOpComplicationGrade more likely to be Major. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "StructuredMobilizationProtocol",
+        "value": "Enhanced"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "FunctionalRecoveryStatus",
+          "safety_outcome": "PostOpComplicationGrade",
+          "good_intervention": "StructuredMobilizationProtocol",
+          "risky_intervention": "OpioidPainManagement",
+          "weak_intervention": "NutritionalSupplementation",
+          "good_mediator": "DailyAmbulationLevel",
+          "confounder": "PreOpFrailtyIndex"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "StructuredMobilizationProtocol",
+            "value": "Enhanced"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "StructuredMobilizationProtocol",
+              "value": "Standard",
+              "delta_target": -0.3473,
+              "delta_safety": 0.0
+            },
+            {
+              "variable": "StructuredMobilizationProtocol",
+              "value": "Enhanced",
+              "delta_target": -0.4955,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "OpioidPainManagement",
+              "value": "HighDose",
+              "delta_target": -0.5059,
+              "delta_safety": 0.3402,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.9901,
+            "E_safety": 1.5377
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

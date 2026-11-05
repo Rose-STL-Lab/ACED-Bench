@@ -1,0 +1,685 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "mediator_structure:which_mediator",
+    "seed": 15919,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "which_mediator"
+  },
+  "story": "A large public university system enrolls students across multiple campuses and delivery formats. The institutional research office has access to student records and can request observational or interventional samples from consenting participants each semester.",
+  "non_intervenable_variables": [
+    {
+      "name": "FinalCourseGrade",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InstructorInteractionFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WeeklyScreenTime",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StudyGroupParticipation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorGpa",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmploymentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CampusResidency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CourseLoad",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InternetReliability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AcademicYear",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TechProficiency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FirstGenerationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreferredLearningStyle",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MidtermExamScore",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "CourseModality",
+      "values": [
+        "InPerson",
+        "Online"
+      ],
+      "desc": "Whether the undergraduate course section is delivered online or in person.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FinalCourseGrade",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Student's final letter-grade band in the undergraduate course.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "InstructorInteractionFrequency",
+      "values": [
+        "Frequent",
+        "Occasional",
+        "Rare"
+      ],
+      "desc": "How often a student communicates with the instructor during the semester.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "WeeklyScreenTime",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Average weekly hours a student spends on screens for all purposes.",
+      "role": "decoy_M1",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "StudyGroupParticipation",
+      "values": [
+        "Regular",
+        "Sporadic",
+        "None"
+      ],
+      "desc": "Extent of student involvement in peer study groups outside class.",
+      "role": "decoy_M2",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorGpa",
+      "values": [
+        "AboveThree",
+        "TwoToThree",
+        "BelowTwo"
+      ],
+      "desc": "Student's cumulative GPA before enrolling in the course.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmploymentStatus",
+      "values": [
+        "NotWorking",
+        "PartTime",
+        "FullTime"
+      ],
+      "desc": "Student's paid employment load during the semester.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CampusResidency",
+      "values": [
+        "OnCampus",
+        "OffCampus"
+      ],
+      "desc": "Whether the student lives on or off the university campus.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CourseLoad",
+      "values": [
+        "Light",
+        "Standard",
+        "Heavy"
+      ],
+      "desc": "Total number of credit hours the student is taking this semester.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InternetReliability",
+      "values": [
+        "Reliable",
+        "Intermittent"
+      ],
+      "desc": "Consistency of the student's home internet connection.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AcademicYear",
+      "values": [
+        "Freshman",
+        "Sophomore",
+        "UpperClass"
+      ],
+      "desc": "Student's year of enrollment in the undergraduate program.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TechProficiency",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Student's self-reported comfort level with learning management systems.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FirstGenerationStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the student is the first in their family to attend college.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PreferredLearningStyle",
+      "values": [
+        "Visual",
+        "Auditory",
+        "ReadWrite"
+      ],
+      "desc": "Student's self-identified dominant learning style preference.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MidtermExamScore",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Student's score band on the midterm examination in the course.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "CourseModality",
+      "InstructorInteractionFrequency"
+    ],
+    [
+      "CourseModality",
+      "WeeklyScreenTime"
+    ],
+    [
+      "InstructorInteractionFrequency",
+      "FinalCourseGrade"
+    ],
+    [
+      "StudyGroupParticipation",
+      "FinalCourseGrade"
+    ],
+    [
+      "PriorGpa",
+      "CourseModality"
+    ],
+    [
+      "PriorGpa",
+      "FinalCourseGrade"
+    ],
+    [
+      "PriorGpa",
+      "FirstGenerationStatus"
+    ],
+    [
+      "TechProficiency",
+      "CourseLoad"
+    ],
+    [
+      "PreferredLearningStyle",
+      "InternetReliability"
+    ],
+    [
+      "MidtermExamScore",
+      "PreferredLearningStyle"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "StudyGroupParticipation",
+      "parents": [],
+      "values": [
+        [
+          0.2682703047630615
+        ],
+        [
+          0.3209336414422142
+        ],
+        [
+          0.41079605379472434
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorGpa",
+      "parents": [],
+      "values": [
+        [
+          0.11895517917343004
+        ],
+        [
+          0.4579148792256786
+        ],
+        [
+          0.42312994160089146
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmploymentStatus",
+      "parents": [],
+      "values": [
+        [
+          0.09098295485013878
+        ],
+        [
+          0.39646717182737695
+        ],
+        [
+          0.5125498733224843
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CampusResidency",
+      "parents": [],
+      "values": [
+        [
+          0.09787691068641358
+        ],
+        [
+          0.9021230893135864
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AcademicYear",
+      "parents": [],
+      "values": [
+        [
+          0.4768259873159616
+        ],
+        [
+          0.09779738916908519
+        ],
+        [
+          0.4253766235149533
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TechProficiency",
+      "parents": [],
+      "values": [
+        [
+          0.30717181505676394
+        ],
+        [
+          0.3219173685130567
+        ],
+        [
+          0.3709108164301794
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MidtermExamScore",
+      "parents": [],
+      "values": [
+        [
+          0.21534538927179755
+        ],
+        [
+          0.4253227382650337
+        ],
+        [
+          0.3593318724631687
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CourseModality",
+      "parents": [
+        "PriorGpa"
+      ],
+      "values": [
+        [
+          0.6429378317879785,
+          0.05685849093739781,
+          0.00201435536920436
+        ],
+        [
+          0.3570621682120216,
+          0.9431415090626022,
+          0.9979856446307955
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FirstGenerationStatus",
+      "parents": [
+        "PriorGpa"
+      ],
+      "values": [
+        [
+          0.5919309740509892,
+          0.5980903793021242,
+          0.6042189767264574
+        ],
+        [
+          0.4080690259490109,
+          0.4019096206978759,
+          0.3957810232735426
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CourseLoad",
+      "parents": [
+        "TechProficiency"
+      ],
+      "values": [
+        [
+          0.38873241254152124,
+          0.8793230751157399,
+          0.9832671076550764
+        ],
+        [
+          0.28625776096327143,
+          0.09557485134709519,
+          0.015774489645769836
+        ],
+        [
+          0.3250098264952072,
+          0.025102073537164843,
+          0.0009584026991538828
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreferredLearningStyle",
+      "parents": [
+        "MidtermExamScore"
+      ],
+      "values": [
+        [
+          0.22818859311594944,
+          0.7019862672847549,
+          0.9164425091107555
+        ],
+        [
+          0.42164611933821605,
+          0.03769212490186664,
+          0.0014298650783214966
+        ],
+        [
+          0.35016528754583454,
+          0.26032160781337843,
+          0.08212762581092307
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InstructorInteractionFrequency",
+      "parents": [
+        "CourseModality"
+      ],
+      "values": [
+        [
+          0.16905140313226297,
+          0.865060803233616
+        ],
+        [
+          0.2980512645865144,
+          0.1181602368689449
+        ],
+        [
+          0.5328973322812226,
+          0.016778959897438932
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WeeklyScreenTime",
+      "parents": [
+        "CourseModality"
+      ],
+      "values": [
+        [
+          0.21421633407203383,
+          0.7573237578340674
+        ],
+        [
+          0.3136454525980518,
+          0.1981215578295635
+        ],
+        [
+          0.4721382133299143,
+          0.04455468433636922
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InternetReliability",
+      "parents": [
+        "PreferredLearningStyle"
+      ],
+      "values": [
+        [
+          0.5219085989386927,
+          0.9106106370210841,
+          0.989590134379678
+        ],
+        [
+          0.4780914010613072,
+          0.08938936297891581,
+          0.01040986562032199
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FinalCourseGrade",
+      "parents": [
+        "PriorGpa",
+        "InstructorInteractionFrequency",
+        "StudyGroupParticipation"
+      ],
+      "values": [
+        [
+          0.9668739482784671,
+          0.9109608051005988,
+          0.8402115653374793,
+          0.8258081336007111,
+          0.5967177704218481,
+          0.39701161876577784,
+          0.6162109453799979,
+          0.2576960492962228,
+          0.11875865798104301,
+          0.9245456648504529,
+          0.8167899071651463,
+          0.661657116554328,
+          0.6706639040746686,
+          0.34231031312258936,
+          0.16397870871552064,
+          0.33295255315605743,
+          0.08842228046367046,
+          0.03157520665294129,
+          0.6497816296394203,
+          0.3162496673381269,
+          0.15857016038844665,
+          0.16175816760999165,
+          0.03507140756849661,
+          0.011099745140801663,
+          0.031086648920927475,
+          0.004871455248982379,
+          0.0015574023581019106
+        ],
+        [
+          0.03204710186161591,
+          0.08128560752531803,
+          0.13618210920477736,
+          0.14990601491286526,
+          0.2837634502131036,
+          0.3356004095766796,
+          0.268003065487815,
+          0.3402181904474414,
+          0.2583559854380029,
+          0.07029209380508238,
+          0.15245883176939887,
+          0.24782795299174826,
+          0.2421317859564902,
+          0.3306856454501397,
+          0.30615954877605256,
+          0.3336683261983589,
+          0.23974164397308603,
+          0.15578886705388997,
+          0.2581162460291561,
+          0.34259514829874804,
+          0.3092704647587251,
+          0.29496744562810584,
+          0.17282989515426236,
+          0.09732134976305439,
+          0.16377777936299495,
+          0.06660812854583031,
+          0.0356729867519929
+        ],
+        [
+          0.001078949859917059,
+          0.007753587374083078,
+          0.023606325457743493,
+          0.024285851486423517,
+          0.11951877936504825,
+          0.2673879716575425,
+          0.115785989132187,
+          0.4020857602563358,
+          0.622885356580954,
+          0.0051622413444648305,
+          0.03075126106545474,
+          0.09051493045392377,
+          0.08720430996884125,
+          0.32700404142727085,
+          0.5298617425084268,
+          0.33337912064558356,
+          0.6718360755632435,
+          0.8126359262931687,
+          0.09210212433142358,
+          0.3411551843631251,
+          0.5321593748528282,
+          0.5432743867619025,
+          0.792098697277241,
+          0.891578905096144,
+          0.8051355717160775,
+          0.9285204162051873,
+          0.9627696108899053
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "Among the variables [InstructorInteractionFrequency, WeeklyScreenTime, StudyGroupParticipation], which one is on the actual causal pathway from CourseModality to FinalCourseGrade? Identify the single variable and explain how you ruled out the others.",
+      "answer": "which_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "which_mediator",
+        "roles": {
+          "treatment": "CourseModality",
+          "outcome": "FinalCourseGrade",
+          "true_mediator": "InstructorInteractionFrequency",
+          "decoy_M1": "WeeklyScreenTime",
+          "decoy_M2": "StudyGroupParticipation",
+          "confounder": "PriorGpa"
+        },
+        "gold": {
+          "label": "which_mediator",
+          "T": "CourseModality",
+          "O": "FinalCourseGrade",
+          "true_mediator": "InstructorInteractionFrequency",
+          "candidates": [
+            "InstructorInteractionFrequency",
+            "WeeklyScreenTime",
+            "StudyGroupParticipation"
+          ],
+          "candidate_do_effects": {
+            "InstructorInteractionFrequency": 1.0634,
+            "WeeklyScreenTime": 0.0,
+            "StudyGroupParticipation": 0.6385
+          },
+          "total_effect": -0.6711
+        }
+      }
+    }
+  ]
+}

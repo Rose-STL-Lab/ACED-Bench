@@ -1,0 +1,684 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "mediator_structure:which_mediator",
+    "seed": 5525,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "which_mediator"
+  },
+  "story": "A researcher works within a multi-site HIV treatment clinic network spanning several urban and peri-urban areas. The researcher has access to patient records and can request both observational and interventional data samples from participating clinics.",
+  "non_intervenable_variables": [
+    {
+      "name": "ViralLoadCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PillTakingConsistency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerceivedSelfEfficacy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClinicAttendanceFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineDepressionSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SexAtBirth",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineCD4Stratum",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ARTRegimenType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DisclosureStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FoodSecurityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TravelTimeToClinic",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorARTExperience",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "AdherenceSupportIntervention",
+      "values": [
+        "None",
+        "SMSReminders",
+        "SMSPlusCounseling"
+      ],
+      "desc": "Level of structured adherence support assigned to the patient.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ViralLoadCategory",
+      "values": [
+        "Suppressed",
+        "LowLevel",
+        "Unsuppressed"
+      ],
+      "desc": "Categorized plasma HIV-1 RNA level at 12-month follow-up.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PillTakingConsistency",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of prescribed ART doses taken over 30-day MEMS cap monitoring.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PerceivedSelfEfficacy",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Patient-reported confidence in managing daily ART regimen.",
+      "role": "decoy_M1",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ClinicAttendanceFrequency",
+      "values": [
+        "Regular",
+        "Irregular",
+        "Missed"
+      ],
+      "desc": "Pattern of scheduled HIV clinic visit attendance over six months.",
+      "role": "decoy_M2",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineDepressionSeverity",
+      "values": [
+        "None",
+        "Mild",
+        "ModerateToSevere"
+      ],
+      "desc": "PHQ-9 depression screening category at study enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "18to29",
+        "30to49",
+        "50plus"
+      ],
+      "desc": "Age category of the participant at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SexAtBirth",
+      "values": [
+        "Female",
+        "Male"
+      ],
+      "desc": "Biological sex recorded in medical chart at enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineCD4Stratum",
+      "values": [
+        "Above350",
+        "200to350",
+        "Below200"
+      ],
+      "desc": "CD4 T-cell count category at ART initiation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ARTRegimenType",
+      "values": [
+        "INSTI-Based",
+        "NNRTI-Based"
+      ],
+      "desc": "Class of anchor drug in the prescribed ART combination.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Current use of alcohol or recreational substances reported at baseline.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DisclosureStatus",
+      "values": [
+        "Disclosed",
+        "NotDisclosed"
+      ],
+      "desc": "Whether the patient has shared HIV status with a household member.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FoodSecurityLevel",
+      "values": [
+        "Secure",
+        "Insecure"
+      ],
+      "desc": "Household food security classification using a validated screener.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TravelTimeToClinic",
+      "values": [
+        "Under30min",
+        "30to60min",
+        "Over60min"
+      ],
+      "desc": "Estimated one-way travel duration from home to HIV care facility.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorARTExperience",
+      "values": [
+        "Naive",
+        "Experienced"
+      ],
+      "desc": "Whether the patient had any previous ART exposure before this regimen.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "AdherenceSupportIntervention",
+      "PillTakingConsistency"
+    ],
+    [
+      "AdherenceSupportIntervention",
+      "PerceivedSelfEfficacy"
+    ],
+    [
+      "AdherenceSupportIntervention",
+      "AgeGroup"
+    ],
+    [
+      "PillTakingConsistency",
+      "ViralLoadCategory"
+    ],
+    [
+      "ClinicAttendanceFrequency",
+      "ViralLoadCategory"
+    ],
+    [
+      "BaselineDepressionSeverity",
+      "AdherenceSupportIntervention"
+    ],
+    [
+      "BaselineDepressionSeverity",
+      "ViralLoadCategory"
+    ],
+    [
+      "BaselineCD4Stratum",
+      "SubstanceUseStatus"
+    ],
+    [
+      "TravelTimeToClinic",
+      "FoodSecurityLevel"
+    ],
+    [
+      "PriorARTExperience",
+      "FoodSecurityLevel"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ClinicAttendanceFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.4815398244328321
+        ],
+        [
+          0.32171841034417376
+        ],
+        [
+          0.19674176522299403
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineDepressionSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.14560412497824737
+        ],
+        [
+          0.30036965531335363
+        ],
+        [
+          0.5540262197083989
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SexAtBirth",
+      "parents": [],
+      "values": [
+        [
+          0.5155804851308616
+        ],
+        [
+          0.4844195148691385
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineCD4Stratum",
+      "parents": [],
+      "values": [
+        [
+          0.665127636531181
+        ],
+        [
+          0.23601347144605692
+        ],
+        [
+          0.09885889202276205
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ARTRegimenType",
+      "parents": [],
+      "values": [
+        [
+          0.7539257904251395
+        ],
+        [
+          0.2460742095748605
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DisclosureStatus",
+      "parents": [],
+      "values": [
+        [
+          0.5058845937735751
+        ],
+        [
+          0.494115406226425
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TravelTimeToClinic",
+      "parents": [],
+      "values": [
+        [
+          0.6805704707840039
+        ],
+        [
+          0.1217219466890087
+        ],
+        [
+          0.19770758252698742
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorARTExperience",
+      "parents": [],
+      "values": [
+        [
+          0.8501372355451294
+        ],
+        [
+          0.1498627644548706
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AdherenceSupportIntervention",
+      "parents": [
+        "BaselineDepressionSeverity"
+      ],
+      "values": [
+        [
+          0.2928757798873957,
+          0.708580221287308,
+          0.9329969486027526
+        ],
+        [
+          0.42880356418471716,
+          0.1541619648632519,
+          0.030163498916732603
+        ],
+        [
+          0.27832065592788713,
+          0.1372578138494401,
+          0.03683955248051492
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubstanceUseStatus",
+      "parents": [
+        "BaselineCD4Stratum"
+      ],
+      "values": [
+        [
+          0.5519156798913887,
+          0.7003654584480341,
+          0.8160277812073674
+        ],
+        [
+          0.4480843201086114,
+          0.29963454155196595,
+          0.1839722187926325
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FoodSecurityLevel",
+      "parents": [
+        "PriorARTExperience",
+        "TravelTimeToClinic"
+      ],
+      "values": [
+        [
+          0.558667109357309,
+          0.20224258308708223,
+          0.04831795792623655,
+          0.6736258994403831,
+          0.29246121693574606,
+          0.07645258487698109
+        ],
+        [
+          0.4413328906426911,
+          0.7977574169129177,
+          0.9516820420737635,
+          0.32637410055961696,
+          0.7075387830642539,
+          0.9235474151230189
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PillTakingConsistency",
+      "parents": [
+        "AdherenceSupportIntervention"
+      ],
+      "values": [
+        [
+          0.16288866110754815,
+          0.3264471787776356,
+          0.8680369991583456
+        ],
+        [
+          0.29904260594689536,
+          0.33630181917415536,
+          0.11710182201784511
+        ],
+        [
+          0.5380687329455565,
+          0.33725100204820896,
+          0.01486117882380917
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerceivedSelfEfficacy",
+      "parents": [
+        "AdherenceSupportIntervention"
+      ],
+      "values": [
+        [
+          0.209442894991863,
+          0.3342032765571475,
+          0.7657898963977259
+        ],
+        [
+          0.3239736920830806,
+          0.33636470327371226,
+          0.18965499467058994
+        ],
+        [
+          0.46658341292505634,
+          0.32943202016914025,
+          0.04455510893168413
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [
+        "AdherenceSupportIntervention"
+      ],
+      "values": [
+        [
+          0.3445063541671722,
+          0.34039084949604925,
+          0.3098732450475563
+        ],
+        [
+          0.37627764353629384,
+          0.26172235609267,
+          0.1677253822414578
+        ],
+        [
+          0.2792160022965339,
+          0.3978867944112808,
+          0.5224013727109859
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ViralLoadCategory",
+      "parents": [
+        "BaselineDepressionSeverity",
+        "PillTakingConsistency",
+        "ClinicAttendanceFrequency"
+      ],
+      "values": [
+        [
+          0.9683544567918486,
+          0.914508625077938,
+          0.835939604484193,
+          0.8385181408611405,
+          0.6042325755640385,
+          0.3949821705509638,
+          0.6007945472256828,
+          0.27581661211050434,
+          0.1268105263361889,
+          0.9290282002190015,
+          0.806020879795595,
+          0.6607704949456996,
+          0.6789853786372986,
+          0.3421490730244274,
+          0.16245904535463315,
+          0.33710049915895085,
+          0.09400692207929137,
+          0.03110586078538204,
+          0.6797690000426867,
+          0.3396710674476512,
+          0.158889540205107,
+          0.158666273360119,
+          0.03349400176294389,
+          0.010805236995798048,
+          0.030366721775709135,
+          0.005292985021321793,
+          0.0016201315440315513
+        ],
+        [
+          0.03065877221635843,
+          0.07798695395636608,
+          0.1422921519318604,
+          0.13993973175796628,
+          0.27385915183131126,
+          0.33361868624014196,
+          0.27653198873898277,
+          0.3381173208889134,
+          0.2868803676351316,
+          0.06598557538362287,
+          0.1612801233065929,
+          0.2517232021735959,
+          0.23487719138698715,
+          0.3243308908237173,
+          0.29101753795347246,
+          0.3324232436692323,
+          0.2490880761640794,
+          0.15944422445253173,
+          0.23446089989294058,
+          0.31816615775504525,
+          0.31386761628875753,
+          0.303010954839961,
+          0.15782121881821232,
+          0.10011088080099866,
+          0.15436384275330936,
+          0.0705275140173345,
+          0.03908314643616514
+        ],
+        [
+          0.0009867709917928346,
+          0.0075044209656958665,
+          0.021768243583946627,
+          0.02154212738089336,
+          0.1219082726046501,
+          0.2713991432088942,
+          0.12267346403533437,
+          0.3860660670005824,
+          0.5863091060286795,
+          0.004986224397375638,
+          0.03269899689781201,
+          0.0875063028807044,
+          0.08613742997571433,
+          0.3335200361518553,
+          0.5465234166918944,
+          0.33047625717181683,
+          0.6569050017566291,
+          0.8094499147620862,
+          0.08577010006437272,
+          0.34216277479730356,
+          0.5272428435061355,
+          0.53832277179992,
+          0.8086847794188439,
+          0.8890838822032033,
+          0.8152694354709816,
+          0.9241795009613437,
+          0.9592967220198033
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "Among the variables [PillTakingConsistency, PerceivedSelfEfficacy, ClinicAttendanceFrequency], which one is on the actual causal pathway from AdherenceSupportIntervention to ViralLoadCategory? Identify the single variable and explain how you ruled out the others.",
+      "answer": "which_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "which_mediator",
+        "roles": {
+          "treatment": "AdherenceSupportIntervention",
+          "outcome": "ViralLoadCategory",
+          "true_mediator": "PillTakingConsistency",
+          "decoy_M1": "PerceivedSelfEfficacy",
+          "decoy_M2": "ClinicAttendanceFrequency",
+          "confounder": "BaselineDepressionSeverity"
+        },
+        "gold": {
+          "label": "which_mediator",
+          "T": "AdherenceSupportIntervention",
+          "O": "ViralLoadCategory",
+          "true_mediator": "PillTakingConsistency",
+          "candidates": [
+            "PillTakingConsistency",
+            "PerceivedSelfEfficacy",
+            "ClinicAttendanceFrequency"
+          ],
+          "candidate_do_effects": {
+            "PillTakingConsistency": 1.0556,
+            "PerceivedSelfEfficacy": 0.0,
+            "ClinicAttendanceFrequency": 0.5263
+          },
+          "total_effect": -0.6763
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "mediator_structure:not_mediator",
+    "seed": 8656,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "not_mediator"
+  },
+  "story": "A university-affiliated memory clinic maintains detailed electronic records on all patients referred for cognitive evaluation. The research team has institutional approval to access these records and to recruit participants for prospective observational or interventional studies.",
+  "non_intervenable_variables": [
+    {
+      "name": "DiagnosticAccuracy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CognitiveDomainCoverage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineCognitiveDecline",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ApoeE4CarrierStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClinicianExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrimaryLanguageMatch",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ScreeningProtocolType",
+      "values": [
+        "BriefScreen",
+        "ComprehensiveBattery"
+      ],
+      "desc": "Type of cognitive screening protocol administered to the patient.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DiagnosticAccuracy",
+      "values": [
+        "Correct",
+        "PartiallyCorrect",
+        "Incorrect"
+      ],
+      "desc": "Concordance of clinical diagnosis with neuropathological or biomarker-confirmed status.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PatientAnxietyLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported anxiety level of the patient during cognitive testing.",
+      "role": "proposed_M",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CognitiveDomainCoverage",
+      "values": [
+        "Narrow",
+        "Broad"
+      ],
+      "desc": "Number of distinct cognitive domains assessed during the screening session.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineCognitiveDecline",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Severity of cognitive impairment at time of study enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under70",
+        "70to80",
+        "Over80"
+      ],
+      "desc": "Age range of the patient at time of cognitive assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Highest level of formal education completed by the patient.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ApoeE4CarrierStatus",
+      "values": [
+        "NonCarrier",
+        "Carrier"
+      ],
+      "desc": "Presence or absence of at least one APOE ε4 allele.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClinicianExperience",
+      "values": [
+        "Junior",
+        "Senior"
+      ],
+      "desc": "Years of clinical experience of the administering neuropsychologist.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PrimaryLanguageMatch",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the assessment was administered in the patient's primary language.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ScreeningProtocolType",
+      "CognitiveDomainCoverage"
+    ],
+    [
+      "ScreeningProtocolType",
+      "PatientAnxietyLevel"
+    ],
+    [
+      "ScreeningProtocolType",
+      "ApoeE4CarrierStatus"
+    ],
+    [
+      "CognitiveDomainCoverage",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "BaselineCognitiveDecline",
+      "ScreeningProtocolType"
+    ],
+    [
+      "BaselineCognitiveDecline",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "AgeGroup",
+      "ScreeningProtocolType"
+    ],
+    [
+      "ClinicianExperience",
+      "PrimaryLanguageMatch"
+    ],
+    [
+      "ClinicianExperience",
+      "ApoeE4CarrierStatus"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineCognitiveDecline",
+      "parents": [],
+      "values": [
+        [
+          0.5328495391321205
+        ],
+        [
+          0.3710542451389135
+        ],
+        [
+          0.09609621572896605
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.687932578505457
+        ],
+        [
+          0.09489017974625685
+        ],
+        [
+          0.21717724174828618
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.13381409840757955
+        ],
+        [
+          0.20311626329592794
+        ],
+        [
+          0.6630696382964926
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClinicianExperience",
+      "parents": [],
+      "values": [
+        [
+          0.35347679203180565
+        ],
+        [
+          0.6465232079681944
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ScreeningProtocolType",
+      "parents": [
+        "BaselineCognitiveDecline",
+        "AgeGroup"
+      ],
+      "values": [
+        [
+          0.4710352163697642,
+          0.5534304913741179,
+          0.6329913176425066,
+          0.8745340524704356,
+          0.906547229096325,
+          0.9310362393868005,
+          0.9820014694968422,
+          0.987001438352401,
+          0.990625681664312
+        ],
+        [
+          0.5289647836302358,
+          0.44656950862588213,
+          0.3670086823574933,
+          0.12546594752956444,
+          0.09345277090367496,
+          0.06896376061319946,
+          0.01799853050315773,
+          0.012998561647599102,
+          0.009374318335688135
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PrimaryLanguageMatch",
+      "parents": [
+        "ClinicianExperience"
+      ],
+      "values": [
+        [
+          0.5652648109141579,
+          0.2558395062342707
+        ],
+        [
+          0.4347351890858422,
+          0.7441604937657293
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CognitiveDomainCoverage",
+      "parents": [
+        "ScreeningProtocolType"
+      ],
+      "values": [
+        [
+          0.22235195317444986,
+          0.9820667885353414
+        ],
+        [
+          0.7776480468255501,
+          0.01793321146465877
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PatientAnxietyLevel",
+      "parents": [
+        "ScreeningProtocolType"
+      ],
+      "values": [
+        [
+          0.20307570797339786,
+          0.8060136533430836
+        ],
+        [
+          0.3298043011836576,
+          0.16032499089170976
+        ],
+        [
+          0.4671199908429444,
+          0.0336613557652065
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ApoeE4CarrierStatus",
+      "parents": [
+        "ScreeningProtocolType",
+        "ClinicianExperience"
+      ],
+      "values": [
+        [
+          0.5032515528191628,
+          0.9089140673595214,
+          0.37275210005426995,
+          0.8540857570092286
+        ],
+        [
+          0.4967484471808372,
+          0.09108593264047853,
+          0.62724789994573,
+          0.14591424299077144
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DiagnosticAccuracy",
+      "parents": [
+        "BaselineCognitiveDecline",
+        "CognitiveDomainCoverage"
+      ],
+      "values": [
+        [
+          0.9038434747489802,
+          0.2769549613948719,
+          0.8072390215409753,
+          0.0900627461650705,
+          0.33638415930015936,
+          0.004890409006957983
+        ],
+        [
+          0.08867066900313955,
+          0.3252306545857193,
+          0.1592640785695986,
+          0.24402661632958605,
+          0.3446181249678686,
+          0.06746410732259404
+        ],
+        [
+          0.007485856247880293,
+          0.3978143840194087,
+          0.033496899889426134,
+          0.6659106375053434,
+          0.318997715731972,
+          0.9276454836704481
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "An analyst hypothesizes that PatientAnxietyLevel is the variable through which ScreeningProtocolType changes DiagnosticAccuracy. Investigate the system and decide whether this hypothesis is supported, and explain why.",
+      "answer": "not_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "not_mediator",
+        "roles": {
+          "treatment": "ScreeningProtocolType",
+          "outcome": "DiagnosticAccuracy",
+          "proposed_M": "PatientAnxietyLevel",
+          "true_mediator": "CognitiveDomainCoverage",
+          "confounder": "BaselineCognitiveDecline"
+        },
+        "gold": {
+          "label": "not_mediator",
+          "T": "ScreeningProtocolType",
+          "M_proposed": "PatientAnxietyLevel",
+          "M_true": "CognitiveDomainCoverage",
+          "O": "DiagnosticAccuracy",
+          "total_effect": -0.8609,
+          "residual_after_fix_proposed": 0.8609,
+          "do_proposed_effect_on_O": 0.0
+        }
+      }
+    }
+  ]
+}

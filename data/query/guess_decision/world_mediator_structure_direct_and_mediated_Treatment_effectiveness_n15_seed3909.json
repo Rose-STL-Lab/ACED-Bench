@@ -1,0 +1,667 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "mediator_structure:direct_and_mediated",
+    "seed": 3909,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "direct_and_mediated"
+  },
+  "story": "A large academic medical center maintains detailed electronic health records for patients treated in its outpatient psychiatry clinics. The research team has access to these records and can request both observational and interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "DepressionRemissionStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SerotoninReuptakeInhibition",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineDepressionSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BiologicalSex",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "Cyp2d6MetabolizerStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidAnxietyPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorAntidepressantTrials",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SleepQualityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MedicationAdherenceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SideEffectBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "SsriDoseTier",
+      "values": [
+        "None",
+        "StandardDose",
+        "HighDose"
+      ],
+      "desc": "Assigned SSRI dosage level in the pharmacotherapy protocol.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DepressionRemissionStatus",
+      "values": [
+        "FullRemission",
+        "PartialResponse",
+        "NonResponse"
+      ],
+      "desc": "Categorical depression outcome at 12-week endpoint per HAM-D criteria.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SerotoninReuptakeInhibition",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Degree of serotonin transporter occupancy measured via PET imaging.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineDepressionSeverity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Pre-treatment depression severity classification per HAM-D score.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Young",
+        "MiddleAged",
+        "Older"
+      ],
+      "desc": "Age category of the patient at study enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BiologicalSex",
+      "values": [
+        "Female",
+        "Male"
+      ],
+      "desc": "Biological sex recorded in the patient medical chart.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "Cyp2d6MetabolizerStatus",
+      "values": [
+        "Poor",
+        "Intermediate",
+        "Extensive"
+      ],
+      "desc": "CYP2D6 enzyme metabolizer phenotype from pharmacogenomic testing.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ComorbidAnxietyPresence",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has a concurrent generalized anxiety disorder diagnosis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorAntidepressantTrials",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of previous antidepressant medication trials before enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ConcurrentPsychotherapy",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is simultaneously receiving structured psychotherapy.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SleepQualityLevel",
+      "values": [
+        "Good",
+        "Fair",
+        "Poor"
+      ],
+      "desc": "Self-reported sleep quality category from the Pittsburgh Sleep Quality Index.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MedicationAdherenceLevel",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of prescribed doses taken as measured by pill count.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SideEffectBurden",
+      "values": [
+        "None",
+        "Mild",
+        "Significant"
+      ],
+      "desc": "Severity of reported adverse effects on a standardized side-effect scale.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexCategory",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "BMI classification at baseline physical examination.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has a documented history of substance use disorder.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SsriDoseTier",
+      "SerotoninReuptakeInhibition"
+    ],
+    [
+      "SsriDoseTier",
+      "DepressionRemissionStatus"
+    ],
+    [
+      "SerotoninReuptakeInhibition",
+      "DepressionRemissionStatus"
+    ],
+    [
+      "SerotoninReuptakeInhibition",
+      "PatientAgeGroup"
+    ],
+    [
+      "SerotoninReuptakeInhibition",
+      "SideEffectBurden"
+    ],
+    [
+      "BaselineDepressionSeverity",
+      "SsriDoseTier"
+    ],
+    [
+      "BaselineDepressionSeverity",
+      "DepressionRemissionStatus"
+    ],
+    [
+      "BaselineDepressionSeverity",
+      "ComorbidAnxietyPresence"
+    ],
+    [
+      "SubstanceUseHistory",
+      "ComorbidAnxietyPresence"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "BaselineDepressionSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.27020549854341375
+        ],
+        [
+          0.636984581042253
+        ],
+        [
+          0.09280992041433322
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BiologicalSex",
+      "parents": [],
+      "values": [
+        [
+          0.4560618788255899
+        ],
+        [
+          0.5439381211744102
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "Cyp2d6MetabolizerStatus",
+      "parents": [],
+      "values": [
+        [
+          0.17186036272615293
+        ],
+        [
+          0.7342920858596785
+        ],
+        [
+          0.09384755141416853
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorAntidepressantTrials",
+      "parents": [],
+      "values": [
+        [
+          0.2252501748024181
+        ],
+        [
+          0.49058001394476425
+        ],
+        [
+          0.2841698112528177
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ConcurrentPsychotherapy",
+      "parents": [],
+      "values": [
+        [
+          0.6380008231268757
+        ],
+        [
+          0.36199917687312444
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SleepQualityLevel",
+      "parents": [],
+      "values": [
+        [
+          0.591983535213286
+        ],
+        [
+          0.2294137787333648
+        ],
+        [
+          0.17860268605334928
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MedicationAdherenceLevel",
+      "parents": [],
+      "values": [
+        [
+          0.10139200393171505
+        ],
+        [
+          0.7866167066239268
+        ],
+        [
+          0.11199128944435818
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BodyMassIndexCategory",
+      "parents": [],
+      "values": [
+        [
+          0.09416828500621265
+        ],
+        [
+          0.2619277206296125
+        ],
+        [
+          0.6439039943641749
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubstanceUseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.5750123658033272
+        ],
+        [
+          0.42498763419667285
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SsriDoseTier",
+      "parents": [
+        "BaselineDepressionSeverity"
+      ],
+      "values": [
+        [
+          0.31339064047536674,
+          0.4548678280975844,
+          0.48742537085619103
+        ],
+        [
+          0.31751432256115536,
+          0.46334535115812286,
+          0.4991947510091654
+        ],
+        [
+          0.369095036963478,
+          0.0817868207442926,
+          0.013379878134643529
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComorbidAnxietyPresence",
+      "parents": [
+        "BaselineDepressionSeverity",
+        "SubstanceUseHistory"
+      ],
+      "values": [
+        [
+          0.4510390244111478,
+          0.17005993843362624,
+          0.6008562536436307,
+          0.27295232067446557,
+          0.7339080278925945,
+          0.4075296043038379
+        ],
+        [
+          0.5489609755888523,
+          0.8299400615663737,
+          0.39914374635636923,
+          0.7270476793255344,
+          0.26609197210740554,
+          0.5924703956961621
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SerotoninReuptakeInhibition",
+      "parents": [
+        "SsriDoseTier"
+      ],
+      "values": [
+        [
+          0.16795701799852578,
+          0.32795733181417125,
+          0.865853640695858
+        ],
+        [
+          0.2922428513617277,
+          0.34899359040010336,
+          0.11714623996704744
+        ],
+        [
+          0.5398001306397465,
+          0.3230490777857253,
+          0.01700011933709445
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DepressionRemissionStatus",
+      "parents": [
+        "BaselineDepressionSeverity",
+        "SerotoninReuptakeInhibition",
+        "SsriDoseTier"
+      ],
+      "values": [
+        [
+          0.8713581415123084,
+          0.903679563281137,
+          0.9792754095039311,
+          0.45941403488958554,
+          0.6005981031926503,
+          0.889608912651366,
+          0.15975785229950198,
+          0.26749905224572007,
+          0.7160800267752642,
+          0.7295456274354805,
+          0.8117488445773192,
+          0.9528017116499935,
+          0.21257780446207233,
+          0.3244977915997963,
+          0.7685169599675555,
+          0.04768373971368476,
+          0.08606232412077498,
+          0.48663906335049256,
+          0.2009016903121049,
+          0.34563203056495234,
+          0.759961517533771,
+          0.016075102910123353,
+          0.03323568799244585,
+          0.26561524040135337,
+          0.0024651535633883723,
+          0.0051022717429572316,
+          0.06621434379952358
+        ],
+        [
+          0.11356881930934343,
+          0.0881972374060492,
+          0.020274071591013403,
+          0.32349230713154586,
+          0.2698220193344869,
+          0.0997538349433238,
+          0.29447015755874906,
+          0.3324904872230688,
+          0.2180997785902989,
+          0.20460713906088504,
+          0.15746870506032953,
+          0.04500058851520355,
+          0.3265560664673555,
+          0.3401516789555075,
+          0.18780229726194994,
+          0.18871974583621848,
+          0.24345574148550106,
+          0.30328816463387814,
+          0.31582314909382103,
+          0.3297863812948343,
+          0.19024117503835816,
+          0.12148847589095271,
+          0.16923013387777103,
+          0.33573536400608883,
+          0.04603869265709741,
+          0.06616119711595043,
+          0.21941049970768142
+        ],
+        [
+          0.015073039178348104,
+          0.008123199312813825,
+          0.0004505189050556156,
+          0.21709365797886854,
+          0.12957987747286284,
+          0.010637252405310065,
+          0.5457719901417489,
+          0.4000104605312111,
+          0.06582019463443678,
+          0.06584723350363446,
+          0.03078245036235139,
+          0.002197699834802913,
+          0.4608661290705723,
+          0.3353505294446962,
+          0.04368074277049454,
+          0.7635965144500967,
+          0.6704819343937239,
+          0.21007277201562932,
+          0.4832751605940742,
+          0.3245815881402134,
+          0.04979730742787085,
+          0.8624364211989238,
+          0.7975341781297831,
+          0.39864939559255785,
+          0.9514961537795141,
+          0.9287365311410923,
+          0.714375156492795
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [
+        "SerotoninReuptakeInhibition"
+      ],
+      "values": [
+        [
+          0.34219982560645934,
+          0.45894280931348386,
+          0.46649481545007326
+        ],
+        [
+          0.26861575833437396,
+          0.018100485453913025,
+          0.0009243967808587893
+        ],
+        [
+          0.3891844160591667,
+          0.5229567052326032,
+          0.5325807877690679
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SideEffectBurden",
+      "parents": [
+        "SerotoninReuptakeInhibition"
+      ],
+      "values": [
+        [
+          0.3499181304351878,
+          0.39221061689973746,
+          0.3139586760534845
+        ],
+        [
+          0.2860931388687168,
+          0.01677714702220173,
+          0.0007026337737261052
+        ],
+        [
+          0.36398873069609544,
+          0.5910122360780609,
+          0.6853386901727894
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does SsriDoseTier change DepressionRemissionStatus? Specifically, does the effect of SsriDoseTier on DepressionRemissionStatus flow entirely through SerotoninReuptakeInhibition, or is there also a separate pathway that does not pass through SerotoninReuptakeInhibition? Investigate using interventions and explain your conclusion.",
+      "answer": "also_direct_or_other",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "direct_and_mediated",
+        "roles": {
+          "treatment": "SsriDoseTier",
+          "outcome": "DepressionRemissionStatus",
+          "mediator": "SerotoninReuptakeInhibition",
+          "confounder": "BaselineDepressionSeverity"
+        },
+        "gold": {
+          "label": "also_direct_or_other",
+          "T": "SsriDoseTier",
+          "M": "SerotoninReuptakeInhibition",
+          "O": "DepressionRemissionStatus",
+          "total_effect": -1.1904,
+          "max_residual_effect": 0.9401
+        }
+      }
+    }
+  ]
+}

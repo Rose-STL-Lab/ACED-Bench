@@ -1,0 +1,729 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 7646,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A children's hospital system maintains detailed electronic health records across its three urban campuses. The research team has institutional approval to access existing records and to design prospective observational or interventional studies as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "PediatricLengthOfStay",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UnplannedReadmission",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DischargeMilestonesAchieved",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IllnessSeverityAtAdmission",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidityCount",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PediatricLengthOfStay",
+      "values": [
+        "Short",
+        "Moderate",
+        "Prolonged"
+      ],
+      "desc": "Total days the child remains admitted in the pediatric ward.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "UnplannedReadmission",
+      "values": [
+        "None",
+        "Within30Days"
+      ],
+      "desc": "Whether the child is readmitted unexpectedly within thirty days of discharge.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "StructuredDischargePlanning",
+      "values": [
+        "None",
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Level of formalized multidisciplinary discharge planning protocol applied.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AggressiveEarlyMobilization",
+      "values": [
+        "None",
+        "Moderate",
+        "Intensive"
+      ],
+      "desc": "Degree of early physical mobilization therapy initiated post-admission.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ParentEducationSessions",
+      "values": [
+        "None",
+        "Single",
+        "Multiple"
+      ],
+      "desc": "Number of structured education sessions provided to parents during admission.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DischargeMilestonesAchieved",
+      "values": [
+        "AllMet",
+        "PartiallyMet",
+        "FewMet"
+      ],
+      "desc": "Proportion of predefined clinical discharge criteria the child has met.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "IllnessSeverityAtAdmission",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Clinical severity score assigned to the child at the time of admission.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Infant",
+        "Toddler",
+        "SchoolAge"
+      ],
+      "desc": "Age category of the pediatric patient at time of hospitalization.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "values": [
+        "Low",
+        "Adequate",
+        "High"
+      ],
+      "desc": "Ratio of nursing staff to patients on the pediatric ward during the stay.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ComorbidityCount",
+      "values": [
+        "None",
+        "One",
+        "TwoOrMore"
+      ],
+      "desc": "Number of chronic comorbid conditions documented for the child.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "StructuredDischargePlanning",
+      "DischargeMilestonesAchieved"
+    ],
+    [
+      "StructuredDischargePlanning",
+      "NurseToPatientRatio"
+    ],
+    [
+      "AggressiveEarlyMobilization",
+      "PediatricLengthOfStay"
+    ],
+    [
+      "AggressiveEarlyMobilization",
+      "UnplannedReadmission"
+    ],
+    [
+      "ParentEducationSessions",
+      "PediatricLengthOfStay"
+    ],
+    [
+      "ParentEducationSessions",
+      "AggressiveEarlyMobilization"
+    ],
+    [
+      "ParentEducationSessions",
+      "PatientAgeGroup"
+    ],
+    [
+      "ParentEducationSessions",
+      "ComorbidityCount"
+    ],
+    [
+      "DischargeMilestonesAchieved",
+      "PediatricLengthOfStay"
+    ],
+    [
+      "IllnessSeverityAtAdmission",
+      "PediatricLengthOfStay"
+    ],
+    [
+      "IllnessSeverityAtAdmission",
+      "UnplannedReadmission"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "StructuredDischargePlanning",
+      "parents": [],
+      "values": [
+        [
+          0.5368111998392463
+        ],
+        [
+          0.14951238078705936
+        ],
+        [
+          0.3136764193736943
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ParentEducationSessions",
+      "parents": [],
+      "values": [
+        [
+          0.37676292031140285
+        ],
+        [
+          0.23197704640010214
+        ],
+        [
+          0.39126003328849507
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "IllnessSeverityAtAdmission",
+      "parents": [],
+      "values": [
+        [
+          0.0952677441968532
+        ],
+        [
+          0.5990086361394144
+        ],
+        [
+          0.3057236196637326
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DischargeMilestonesAchieved",
+      "parents": [
+        "StructuredDischargePlanning"
+      ],
+      "values": [
+        [
+          0.15487207436452233,
+          0.7240416579468608,
+          0.9119152863490262
+        ],
+        [
+          0.2998858662410649,
+          0.21574395415573955,
+          0.08066328599482313
+        ],
+        [
+          0.5452420593944127,
+          0.06021438789739961,
+          0.007421427656150594
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NurseToPatientRatio",
+      "parents": [
+        "StructuredDischargePlanning"
+      ],
+      "values": [
+        [
+          0.4256531188909747,
+          0.2822863795376478,
+          0.100740511042023
+        ],
+        [
+          0.31436387519947384,
+          0.06090931346375037,
+          0.00635060202033547
+        ],
+        [
+          0.25998300590955153,
+          0.6568043069986018,
+          0.8929088869376415
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AggressiveEarlyMobilization",
+      "parents": [
+        "ParentEducationSessions"
+      ],
+      "values": [
+        [
+          0.43827843175469294,
+          0.039943454935178695,
+          0.0012948068475238312
+        ],
+        [
+          0.29026947617568827,
+          0.90070264162255,
+          0.9940891568930891
+        ],
+        [
+          0.2714520920696186,
+          0.059353903442271407,
+          0.004616036259387067
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [
+        "ParentEducationSessions"
+      ],
+      "values": [
+        [
+          0.31787631588424753,
+          0.06002531002054963,
+          0.004059565781457781
+        ],
+        [
+          0.3759257666107846,
+          0.017359229144583325,
+          0.00028709637464528406
+        ],
+        [
+          0.30619791750496783,
+          0.9226154608348671,
+          0.9956533378438969
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComorbidityCount",
+      "parents": [
+        "ParentEducationSessions"
+      ],
+      "values": [
+        [
+          0.4873882846845292,
+          0.6420793531432295,
+          0.6443458975079619
+        ],
+        [
+          0.277856676817237,
+          0.027846803298102265,
+          0.0021259184492602554
+        ],
+        [
+          0.23475503849823376,
+          0.33007384355866826,
+          0.3535281840427778
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PediatricLengthOfStay",
+      "parents": [
+        "IllnessSeverityAtAdmission",
+        "DischargeMilestonesAchieved",
+        "AggressiveEarlyMobilization",
+        "ParentEducationSessions"
+      ],
+      "values": [
+        [
+          0.8165732129156568,
+          0.8287756425136213,
+          0.8842115999289588,
+          0.9545551962142919,
+          0.9580669300499498,
+          0.973529231703956,
+          0.9865323380419775,
+          0.9873866973210065,
+          0.9921960642209384,
+          0.37845462234347904,
+          0.4059917088972528,
+          0.5464089435890107,
+          0.785200981951106,
+          0.7960174710967354,
+          0.8590516137935889,
+          0.932334667381921,
+          0.9374533646159667,
+          0.9563397449147505,
+          0.05314951124168099,
+          0.06352391421170252,
+          0.12139748538002587,
+          0.3635630704756125,
+          0.40221336537920316,
+          0.5521430571818466,
+          0.7331269658923335,
+          0.7575620681603285,
+          0.8399392172431539,
+          0.6813188017579423,
+          0.7233932165983153,
+          0.8044409484536486,
+          0.9177486007756318,
+          0.9278087623681545,
+          0.9499954104799724,
+          0.9769695442707004,
+          0.9759082045084765,
+          0.9849692797625839,
+          0.19394169576816053,
+          0.20783331584717693,
+          0.3272983073276768,
+          0.6256162401568758,
+          0.6634774261597647,
+          0.7649941121593478,
+          0.8771585102641141,
+          0.8946361762062445,
+          0.9300654199179567,
+          0.01992624878829551,
+          0.0218986039427637,
+          0.04814277473028392,
+          0.18384052910994952,
+          0.21658236541785708,
+          0.3439474968746282,
+          0.5784914010623419,
+          0.6177877833104426,
+          0.7195791563161995,
+          0.18286568492009397,
+          0.2226308732941533,
+          0.3446689713479518,
+          0.6468913768576645,
+          0.6569198896492587,
+          0.763766711737456,
+          0.8788291026857848,
+          0.8912042563607412,
+          0.9261943471229103,
+          0.012806975684000074,
+          0.015631624114681726,
+          0.0311278945267064,
+          0.1422517953015972,
+          0.15961446969667004,
+          0.2722132752117494,
+          0.5224031789223512,
+          0.5258729470896776,
+          0.6571982518247678,
+          0.0009205759174418507,
+          0.0011072484774450303,
+          0.002324771807017357,
+          0.013081412019139258,
+          0.01677886531263356,
+          0.03140500595565561,
+          0.10264448187388782,
+          0.12013743023439094,
+          0.2072330349472785
+        ],
+        [
+          0.15470984151419598,
+          0.1475116943452731,
+          0.1045211427674508,
+          0.04344057324539686,
+          0.040321593006519094,
+          0.025760722079678135,
+          0.013280530784278736,
+          0.012463126566915455,
+          0.007741920370078348,
+          0.3271121992628342,
+          0.32382180551309325,
+          0.28537712489397415,
+          0.17814373567761682,
+          0.1698547099686955,
+          0.12361272978527882,
+          0.0633941615216023,
+          0.05897807288016904,
+          0.041950683070956514,
+          0.19841432910893483,
+          0.21440324774792416,
+          0.25825812126479136,
+          0.3241868989957171,
+          0.3249425602401716,
+          0.2903510304384305,
+          0.2108347383232257,
+          0.1959604071779107,
+          0.13692154645161378,
+          0.23676812492906993,
+          0.2099559750267249,
+          0.1626695502138932,
+          0.07614854872769555,
+          0.06749855005969092,
+          0.04773125234355138,
+          0.022430920577326374,
+          0.0235973103598214,
+          0.014807054504968513,
+          0.3064927634439728,
+          0.3029584115045542,
+          0.3309285474433141,
+          0.26674818275011875,
+          0.24737235980515757,
+          0.18704254186010338,
+          0.10915893977492439,
+          0.09437484525709595,
+          0.0651693328515789,
+          0.1352220431132915,
+          0.13445609374158699,
+          0.19227529193455795,
+          0.302208346082308,
+          0.30196324604043673,
+          0.3429679600855914,
+          0.2836100686137247,
+          0.2655045634279183,
+          0.2151909152966427,
+          0.30897738980898815,
+          0.3095047353030916,
+          0.3154030747507974,
+          0.2491443229753165,
+          0.2544375205808697,
+          0.19177064228024376,
+          0.1076361581173339,
+          0.09737006483216598,
+          0.06886791471000026,
+          0.10650954939121307,
+          0.11775711857307475,
+          0.1532159670219711,
+          0.2842896574183541,
+          0.29461475094009026,
+          0.3232065813388218,
+          0.2926508689657803,
+          0.30710284608854965,
+          0.253004781423102,
+          0.03138587665630235,
+          0.03316362121450272,
+          0.046071585657822614,
+          0.10486595169615143,
+          0.123915125895385,
+          0.15782136423940252,
+          0.252194608242198,
+          0.26075705040243047,
+          0.30621952465542107
+        ],
+        [
+          0.02871694557014707,
+          0.023712663141105608,
+          0.011267257303590244,
+          0.002004230540311398,
+          0.001611476943531229,
+          0.0007100462163659927,
+          0.00018713117374387532,
+          0.0001501761120781754,
+          6.201540898323371e-05,
+          0.2944331783936867,
+          0.270186485589654,
+          0.1682139315170151,
+          0.03665528237127712,
+          0.034127818934569155,
+          0.017335656421132415,
+          0.004271171096476856,
+          0.003568562503864157,
+          0.0017095720142929435,
+          0.748436159649384,
+          0.7220728380403733,
+          0.6203443933551827,
+          0.31225003052867034,
+          0.27284407438062525,
+          0.15750591237972286,
+          0.05603829578444083,
+          0.046477524661760805,
+          0.023139236305232416,
+          0.08191307331298765,
+          0.06665080837495986,
+          0.032889501332458215,
+          0.006102850496672707,
+          0.004692687572154445,
+          0.002273337176476173,
+          0.0005995351519731758,
+          0.0004944851317020371,
+          0.00022366573244756983,
+          0.4995655407878666,
+          0.4892082726482687,
+          0.3417731452290091,
+          0.10763557709300552,
+          0.08915021403507785,
+          0.047963345980548897,
+          0.013682549960961462,
+          0.010988978536659502,
+          0.004765247230464419,
+          0.8448517080984129,
+          0.8436453023156493,
+          0.7595819333351582,
+          0.5139511248077425,
+          0.48145438854170636,
+          0.31308454303978034,
+          0.13789853032393348,
+          0.11670765326163904,
+          0.0652299283871577,
+          0.5081569252709178,
+          0.4678643914027552,
+          0.33992795390125086,
+          0.10396430016701894,
+          0.08864258976987145,
+          0.044462645982300236,
+          0.013534739196881128,
+          0.011425678807092854,
+          0.004937738167089526,
+          0.8806834749247868,
+          0.8666112573122436,
+          0.8156561384513225,
+          0.5734585472800486,
+          0.5457707793632397,
+          0.4045801434494287,
+          0.1849459521118685,
+          0.16702420682177269,
+          0.08979696675213024,
+          0.9676935474262558,
+          0.9657291303080523,
+          0.95160364253516,
+          0.8820526362847092,
+          0.8593060087919814,
+          0.8107736298049419,
+          0.6451609098839142,
+          0.6191055193631786,
+          0.4865474403973003
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UnplannedReadmission",
+      "parents": [
+        "IllnessSeverityAtAdmission",
+        "AggressiveEarlyMobilization"
+      ],
+      "values": [
+        [
+          0.7990737547484361,
+          0.4121615568412478,
+          0.06805801195227816,
+          0.5806138810136021,
+          0.1893754167759167,
+          0.025678183973067134,
+          0.08807080974949168,
+          0.015260523337651006,
+          0.0016486269430010373
+        ],
+        [
+          0.20092624525156383,
+          0.5878384431587523,
+          0.9319419880477219,
+          0.4193861189863979,
+          0.8106245832240834,
+          0.9743218160269328,
+          0.9119291902505083,
+          0.9847394766623491,
+          0.9983513730569988
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift PediatricLengthOfStay toward Short (and away from Prolonged), but only if the same action does not make UnplannedReadmission more likely to be Within30Days. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "StructuredDischargePlanning",
+        "value": "Enhanced"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "PediatricLengthOfStay",
+          "safety_outcome": "UnplannedReadmission",
+          "good_intervention": "StructuredDischargePlanning",
+          "risky_intervention": "AggressiveEarlyMobilization",
+          "weak_intervention": "ParentEducationSessions",
+          "good_mediator": "DischargeMilestonesAchieved",
+          "confounder": "IllnessSeverityAtAdmission"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "StructuredDischargePlanning",
+            "value": "Enhanced"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "StructuredDischargePlanning",
+              "value": "Standard",
+              "delta_target": -0.2711,
+              "delta_safety": 0.0
+            },
+            {
+              "variable": "StructuredDischargePlanning",
+              "value": "Enhanced",
+              "delta_target": -0.3959,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "AggressiveEarlyMobilization",
+              "value": "Intensive",
+              "delta_target": -0.3722,
+              "delta_safety": 0.1704,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.6723,
+            "E_safety": 0.8072
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

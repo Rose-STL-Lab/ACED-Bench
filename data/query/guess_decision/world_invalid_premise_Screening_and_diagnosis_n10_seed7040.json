@@ -1,0 +1,489 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "invalid_premise",
+    "seed": 7040,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": null
+  },
+  "story": "A national tuberculosis control program operates across a network of public health facilities at varying levels of care. The program maintains detailed patient records and can request both observational and interventional data collection from participating sites.",
+  "non_intervenable_variables": [
+    {
+      "name": "DiagnosticTimeliness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HivCoinfectionStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SputumSubmissionCompleteness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TbSymptomBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorTbHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ChestRadiographAvailability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FacilityLevelOfCare",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientSmokingStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DiagnosticTimeliness",
+      "values": [
+        "Timely",
+        "Delayed",
+        "Missed"
+      ],
+      "desc": "Whether pulmonary TB diagnosis occurred within guideline-recommended timeframe.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "HivCoinfectionStatus",
+      "values": [
+        "Negative",
+        "Positive"
+      ],
+      "desc": "Patient HIV serostatus at time of TB screening encounter.",
+      "role": "non_intervenable_x",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ScreeningAlgorithmType",
+      "values": [
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Screening protocol used: symptom-only versus symptom plus molecular rapid test.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SputumSubmissionCompleteness",
+      "values": [
+        "Complete",
+        "Partial",
+        "None"
+      ],
+      "desc": "Whether patient provided all requested sputum specimens for testing.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "TbSymptomBurden",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Number and severity of cardinal pulmonary TB symptoms at presentation.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Young",
+        "MiddleAge",
+        "Elderly"
+      ],
+      "desc": "Patient age category at time of screening encounter.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorTbHistory",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether patient has a documented previous episode of tuberculosis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ChestRadiographAvailability",
+      "values": [
+        "Unavailable",
+        "Available"
+      ],
+      "desc": "Whether chest X-ray equipment was accessible at the screening facility.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FacilityLevelOfCare",
+      "values": [
+        "Primary",
+        "Secondary",
+        "Tertiary"
+      ],
+      "desc": "Health facility tier where the patient underwent TB screening.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientSmokingStatus",
+      "values": [
+        "Never",
+        "Former",
+        "Current"
+      ],
+      "desc": "Self-reported tobacco smoking history at time of screening visit.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "HivCoinfectionStatus",
+      "DiagnosticTimeliness"
+    ],
+    [
+      "ScreeningAlgorithmType",
+      "SputumSubmissionCompleteness"
+    ],
+    [
+      "SputumSubmissionCompleteness",
+      "DiagnosticTimeliness"
+    ],
+    [
+      "SputumSubmissionCompleteness",
+      "FacilityLevelOfCare"
+    ],
+    [
+      "TbSymptomBurden",
+      "DiagnosticTimeliness"
+    ],
+    [
+      "TbSymptomBurden",
+      "PatientSmokingStatus"
+    ],
+    [
+      "AgeGroup",
+      "HivCoinfectionStatus"
+    ],
+    [
+      "ChestRadiographAvailability",
+      "FacilityLevelOfCare"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ScreeningAlgorithmType",
+      "parents": [],
+      "values": [
+        [
+          0.4525283430622655
+        ],
+        [
+          0.5474716569377345
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TbSymptomBurden",
+      "parents": [],
+      "values": [
+        [
+          0.35462215626610866
+        ],
+        [
+          0.3134682374371701
+        ],
+        [
+          0.33190960629672134
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.809739059234078
+        ],
+        [
+          0.09513047038296099
+        ],
+        [
+          0.09513047038296099
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorTbHistory",
+      "parents": [],
+      "values": [
+        [
+          0.6876153340537993
+        ],
+        [
+          0.3123846659462008
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ChestRadiographAvailability",
+      "parents": [],
+      "values": [
+        [
+          0.5926053355421074
+        ],
+        [
+          0.40739466445789263
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SputumSubmissionCompleteness",
+      "parents": [
+        "ScreeningAlgorithmType"
+      ],
+      "values": [
+        [
+          0.16702349147783366,
+          0.8657429849450198
+        ],
+        [
+          0.28920693819747006,
+          0.11803704480924467
+        ],
+        [
+          0.5437695703246962,
+          0.016219970245735564
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientSmokingStatus",
+      "parents": [
+        "TbSymptomBurden"
+      ],
+      "values": [
+        [
+          0.3714371519338581,
+          0.18409818722701168,
+          0.04119206346823914
+        ],
+        [
+          0.2204024233038685,
+          0.6764704100691359,
+          0.9373053767354351
+        ],
+        [
+          0.4081604247622734,
+          0.13943140270385246,
+          0.021502559796325725
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HivCoinfectionStatus",
+      "parents": [
+        "AgeGroup"
+      ],
+      "values": [
+        [
+          0.6510540106667528,
+          0.04611668979032378,
+          0.0012511898716146496
+        ],
+        [
+          0.34894598933324716,
+          0.9538833102096762,
+          0.9987488101283852
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FacilityLevelOfCare",
+      "parents": [
+        "ChestRadiographAvailability",
+        "SputumSubmissionCompleteness"
+      ],
+      "values": [
+        [
+          0.3721360554162677,
+          0.28885939043393405,
+          0.21624547701584443,
+          0.3264314177952492,
+          0.23669563926488552,
+          0.16552076664090642
+        ],
+        [
+          0.23449606559182318,
+          0.23310024737038074,
+          0.22347333481540108,
+          0.006498240964529069,
+          0.006034156232959276,
+          0.005403824253795674
+        ],
+        [
+          0.39336787899190917,
+          0.47804036219568524,
+          0.5602811881687545,
+          0.6670703412402217,
+          0.7572702045021553,
+          0.8290754091052979
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DiagnosticTimeliness",
+      "parents": [
+        "HivCoinfectionStatus",
+        "TbSymptomBurden",
+        "SputumSubmissionCompleteness"
+      ],
+      "values": [
+        [
+          0.924433221610331,
+          0.6677278936572006,
+          0.41194346893445205,
+          0.8889700587469856,
+          0.5490893880434715,
+          0.25827814184719744,
+          0.721129708603888,
+          0.21547075794569487,
+          0.0677494279220661,
+          0.4743405969912825,
+          0.06579186038023188,
+          0.015935627096110096,
+          0.34373759907363893,
+          0.0330351375374427,
+          0.007600533831413199,
+          0.09359634875202118,
+          0.0052412566164284765,
+          0.00113591365946679
+        ],
+        [
+          0.07061584997988044,
+          0.2417906084195641,
+          0.323162038375253,
+          0.09986316607454872,
+          0.29135319253978387,
+          0.33752277646402773,
+          0.21192948943656195,
+          0.3151133782486327,
+          0.22457016204349609,
+          0.31353297309037104,
+          0.22009403992642898,
+          0.11902958261690089,
+          0.3313648914957138,
+          0.1559020419347926,
+          0.08604788062565649,
+          0.23799469668758022,
+          0.06992186537197782,
+          0.033075996721843776
+        ],
+        [
+          0.004950928409788517,
+          0.09048149792323526,
+          0.2648944926902948,
+          0.011166775178465448,
+          0.15955741941674464,
+          0.4041990816887749,
+          0.06694080195954998,
+          0.4694158638056725,
+          0.7076804100344378,
+          0.2121264299183464,
+          0.7141140996933392,
+          0.865034790286989,
+          0.32489750943064744,
+          0.8110628205277647,
+          0.9063515855429303,
+          0.6684089545603986,
+          0.9248368780115936,
+          0.9657880896186896
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting HivCoinfectionStatus as a way to shift DiagnosticTimeliness toward Timely (and away from Missed). Decide whether this is a sensible experiment to run in this study, and if not, recommend a different intervention you would actually deploy to shift DiagnosticTimeliness toward Timely.",
+      "answer": {
+        "is_valid_intervention": false,
+        "alternative": {
+          "variable": "ScreeningAlgorithmType",
+          "value": "Enhanced"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": null,
+        "roles": {
+          "target": "DiagnosticTimeliness",
+          "non_intervenable_x": "HivCoinfectionStatus",
+          "intervenable_alt": "ScreeningAlgorithmType",
+          "alt_mediator": "SputumSubmissionCompleteness",
+          "confounder": "TbSymptomBurden"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "non_intervenable_var": "HivCoinfectionStatus",
+          "non_intervenable_predictive_gap": 0.8776,
+          "alternative": {
+            "variable": "ScreeningAlgorithmType",
+            "value": "Enhanced"
+          },
+          "alternative_effect": -0.2693,
+          "acceptable_alternatives": [
+            {
+              "variable": "ScreeningAlgorithmType",
+              "value": "Enhanced",
+              "improvement": 0.2693
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

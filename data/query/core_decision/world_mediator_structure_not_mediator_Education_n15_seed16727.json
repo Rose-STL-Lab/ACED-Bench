@@ -1,0 +1,615 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "mediator_structure:not_mediator",
+    "seed": 16727,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "not_mediator"
+  },
+  "story": "A large suburban school district maintains detailed administrative and classroom records for students receiving special education services. The researcher has access to these records and can request additional observational or interventional data collection across participating schools.",
+  "non_intervenable_variables": [
+    {
+      "name": "IepGoalAttainment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ParentEngagementLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InstructionalDifferentiation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DisabilitySeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StudentGradeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorYearServiceMinutes",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RelatedServicesAccess",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClassroomSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TeacherSpecialEdExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StudentPrimaryLanguage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BehaviorInterventionPlan",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AssistiveTechnologyUse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SchoolUrbanicity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TransitionPlanningStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "CoTeachingModel",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the classroom uses a general-special education co-teaching arrangement.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "IepGoalAttainment",
+      "values": [
+        "FullyMet",
+        "PartiallyMet",
+        "NotMet"
+      ],
+      "desc": "Degree to which annual IEP goals are achieved by the student.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ParentEngagementLevel",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Frequency of parent participation in IEP meetings and school communications.",
+      "role": "proposed_M",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "InstructionalDifferentiation",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Extent of individualized instructional strategies delivered during classroom lessons.",
+      "role": "true_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "DisabilitySeverity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Classification of the student's primary disability severity per evaluation records.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "StudentGradeLevel",
+      "values": [
+        "Elementary",
+        "Middle",
+        "High"
+      ],
+      "desc": "Grade band in which the student is currently enrolled.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorYearServiceMinutes",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Total weekly special education service minutes documented in the previous IEP.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RelatedServicesAccess",
+      "values": [
+        "None",
+        "Some",
+        "Comprehensive"
+      ],
+      "desc": "Range of related services such as speech, OT, or counseling on the IEP.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClassroomSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Number of students in the general education classroom setting.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TeacherSpecialEdExperience",
+      "values": [
+        "Novice",
+        "Experienced"
+      ],
+      "desc": "Years of teaching experience held by the special education teacher.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "StudentPrimaryLanguage",
+      "values": [
+        "English",
+        "NonEnglish"
+      ],
+      "desc": "Whether the student's primary home language is English or another language.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BehaviorInterventionPlan",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the student has a formal behavior intervention plan in place.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AssistiveTechnologyUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the student uses assistive technology tools specified in the IEP.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SchoolUrbanicity",
+      "values": [
+        "Urban",
+        "Suburban",
+        "Rural"
+      ],
+      "desc": "Geographic classification of the school's location.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TransitionPlanningStatus",
+      "values": [
+        "NotApplicable",
+        "InProgress"
+      ],
+      "desc": "Whether post-secondary transition planning has been initiated for the student.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "CoTeachingModel",
+      "InstructionalDifferentiation"
+    ],
+    [
+      "CoTeachingModel",
+      "ParentEngagementLevel"
+    ],
+    [
+      "IepGoalAttainment",
+      "BehaviorInterventionPlan"
+    ],
+    [
+      "ParentEngagementLevel",
+      "TeacherSpecialEdExperience"
+    ],
+    [
+      "InstructionalDifferentiation",
+      "IepGoalAttainment"
+    ],
+    [
+      "InstructionalDifferentiation",
+      "TeacherSpecialEdExperience"
+    ],
+    [
+      "DisabilitySeverity",
+      "CoTeachingModel"
+    ],
+    [
+      "DisabilitySeverity",
+      "IepGoalAttainment"
+    ],
+    [
+      "ClassroomSize",
+      "SchoolUrbanicity"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "DisabilitySeverity",
+      "parents": [],
+      "values": [
+        [
+          0.2779510636986087
+        ],
+        [
+          0.42378754771388855
+        ],
+        [
+          0.2982613885875027
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StudentGradeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.5107638502414305
+        ],
+        [
+          0.3907466650953688
+        ],
+        [
+          0.09848948466320066
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorYearServiceMinutes",
+      "parents": [],
+      "values": [
+        [
+          0.4186265324259491
+        ],
+        [
+          0.32207777759913153
+        ],
+        [
+          0.2592956899749193
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RelatedServicesAccess",
+      "parents": [],
+      "values": [
+        [
+          0.4837395440989867
+        ],
+        [
+          0.24478552100791162
+        ],
+        [
+          0.2714749348931017
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClassroomSize",
+      "parents": [],
+      "values": [
+        [
+          0.45751779656712716
+        ],
+        [
+          0.23654861855043216
+        ],
+        [
+          0.30593358488244066
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "StudentPrimaryLanguage",
+      "parents": [],
+      "values": [
+        [
+          0.767520735419998
+        ],
+        [
+          0.23247926458000212
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AssistiveTechnologyUse",
+      "parents": [],
+      "values": [
+        [
+          0.16841775808445766
+        ],
+        [
+          0.8315822419155423
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TransitionPlanningStatus",
+      "parents": [],
+      "values": [
+        [
+          0.39805561625783686
+        ],
+        [
+          0.6019443837421631
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CoTeachingModel",
+      "parents": [
+        "DisabilitySeverity"
+      ],
+      "values": [
+        [
+          0.6100732056793159,
+          0.020413158610657265,
+          0.00027746943039251836
+        ],
+        [
+          0.3899267943206842,
+          0.9795868413893428,
+          0.9997225305696075
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SchoolUrbanicity",
+      "parents": [
+        "ClassroomSize"
+      ],
+      "values": [
+        [
+          0.26428026920552494,
+          0.6213086499157398,
+          0.854129447509284
+        ],
+        [
+          0.48108910131216853,
+          0.15233667996895156,
+          0.028207012436531943
+        ],
+        [
+          0.25463062948230647,
+          0.22635467011530863,
+          0.11766354005418404
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InstructionalDifferentiation",
+      "parents": [
+        "CoTeachingModel"
+      ],
+      "values": [
+        [
+          0.16781916613939318,
+          0.8668626946213692
+        ],
+        [
+          0.2960284449446096,
+          0.11723134797255232
+        ],
+        [
+          0.5361523889159971,
+          0.015905957406078468
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ParentEngagementLevel",
+      "parents": [
+        "CoTeachingModel"
+      ],
+      "values": [
+        [
+          0.20175529475354503,
+          0.8043753779322566
+        ],
+        [
+          0.3245459873642222,
+          0.16309570128247536
+        ],
+        [
+          0.47369871788223267,
+          0.032528920785268006
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "IepGoalAttainment",
+      "parents": [
+        "DisabilitySeverity",
+        "InstructionalDifferentiation"
+      ],
+      "values": [
+        [
+          0.9140243589404133,
+          0.6080285467462099,
+          0.27876206544903814,
+          0.8034485917014889,
+          0.3354456784506365,
+          0.08800173151305345,
+          0.32997404642114947,
+          0.03317628303093062,
+          0.005183598037684484
+        ],
+        [
+          0.07881502357648673,
+          0.2733109310127266,
+          0.3205416263644101,
+          0.16250366670077285,
+          0.3272309275795268,
+          0.26115142159456184,
+          0.3261496022975035,
+          0.16373935662867697,
+          0.06859244632233005
+        ],
+        [
+          0.007160617483099826,
+          0.11866052224106352,
+          0.40069630818655166,
+          0.03404774159773811,
+          0.3373233939698367,
+          0.6508468468923848,
+          0.3438763512813471,
+          0.8030843603403923,
+          0.9262239556399855
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TeacherSpecialEdExperience",
+      "parents": [
+        "InstructionalDifferentiation",
+        "ParentEngagementLevel"
+      ],
+      "values": [
+        [
+          0.4343563713147003,
+          0.035677847577157286,
+          0.0017794108372204552,
+          0.7703210429003159,
+          0.13911360478568088,
+          0.007725538821474518,
+          0.9360967528099384,
+          0.4137588616241746,
+          0.03288679390525657
+        ],
+        [
+          0.5656436286852998,
+          0.9643221524228427,
+          0.9982205891627796,
+          0.2296789570996842,
+          0.8608863952143192,
+          0.9922744611785256,
+          0.06390324719006156,
+          0.5862411383758254,
+          0.9671132060947435
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BehaviorInterventionPlan",
+      "parents": [
+        "IepGoalAttainment"
+      ],
+      "values": [
+        [
+          0.34915488087776797,
+          0.30894389225525903,
+          0.2714325411556845
+        ],
+        [
+          0.6508451191222321,
+          0.6910561077447409,
+          0.7285674588443155
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "An analyst hypothesizes that ParentEngagementLevel is the variable through which CoTeachingModel changes IepGoalAttainment. Investigate the system and decide whether this hypothesis is supported, and explain why.",
+      "answer": "not_mediator",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "not_mediator",
+        "roles": {
+          "treatment": "CoTeachingModel",
+          "outcome": "IepGoalAttainment",
+          "proposed_M": "ParentEngagementLevel",
+          "true_mediator": "InstructionalDifferentiation",
+          "confounder": "DisabilitySeverity"
+        },
+        "gold": {
+          "label": "not_mediator",
+          "T": "CoTeachingModel",
+          "M_proposed": "ParentEngagementLevel",
+          "M_true": "InstructionalDifferentiation",
+          "O": "IepGoalAttainment",
+          "total_effect": -0.7028,
+          "residual_after_fix_proposed": 0.7028,
+          "do_proposed_effect_on_O": 0.0
+        }
+      }
+    }
+  ]
+}

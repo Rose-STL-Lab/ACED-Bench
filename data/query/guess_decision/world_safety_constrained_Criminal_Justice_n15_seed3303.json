@@ -1,0 +1,734 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 3303,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A county court system operates a specialized drug court division. The supervising researcher has access to participant records and can request both observational data extracts and interventional program assignments within the division.",
+  "non_intervenable_variables": [
+    {
+      "name": "RecidivismStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CommunityPublicSafetyIncidents",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineAddictionSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ParticipantAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorCriminalHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingStability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmploymentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CoOccurringMentalHealthDiagnosis",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "RecidivismStatus",
+      "values": [
+        "NoReoffense",
+        "Misdemeanor",
+        "Felony"
+      ],
+      "desc": "Most serious reoffense category within 24 months of program entry.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CommunityPublicSafetyIncidents",
+      "values": [
+        "None",
+        "Minor",
+        "Serious"
+      ],
+      "desc": "Severity of new public-safety incidents attributed to the participant.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "IntensiveJudicialSupervision",
+      "values": [
+        "None",
+        "Biweekly",
+        "Weekly"
+      ],
+      "desc": "Frequency of scheduled status hearings before the drug-court judge.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RapidDetoxProtocol",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether the participant is enrolled in an accelerated medical detoxification program.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerMentorAssignment",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a trained recovery peer mentor is assigned to the participant.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseFrequency",
+      "values": [
+        "Abstinent",
+        "Occasional",
+        "Frequent"
+      ],
+      "desc": "Self-reported and urinalysis-confirmed frequency of illicit substance use.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineAddictionSeverity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Addiction severity index score category at program intake assessment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MedicationAssistedTreatment",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Level of prescribed pharmacotherapy for opioid or alcohol use disorder.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ParticipantAgeGroup",
+      "values": [
+        "Young",
+        "MiddleAge",
+        "Older"
+      ],
+      "desc": "Age bracket of the participant at time of drug-court enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorCriminalHistory",
+      "values": [
+        "None",
+        "Minor",
+        "Extensive"
+      ],
+      "desc": "Extent of documented criminal convictions before current case.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CognitiveBehavioralTherapyDose",
+      "values": [
+        "None",
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Number of weekly cognitive-behavioral therapy sessions scheduled in the program.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingStability",
+      "values": [
+        "Stable",
+        "Unstable",
+        "Homeless"
+      ],
+      "desc": "Participant's residential stability classification at program midpoint.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmploymentStatus",
+      "values": [
+        "Employed",
+        "PartTime",
+        "Unemployed"
+      ],
+      "desc": "Participant's employment situation during the drug-court program period.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RandomDrugTestingFrequency",
+      "values": [
+        "Monthly",
+        "Biweekly",
+        "Weekly"
+      ],
+      "desc": "Scheduled frequency of randomized urinalysis drug screenings.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CoOccurringMentalHealthDiagnosis",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Presence of a diagnosed co-occurring mental health disorder at intake.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "IntensiveJudicialSupervision",
+      "SubstanceUseFrequency"
+    ],
+    [
+      "RapidDetoxProtocol",
+      "RecidivismStatus"
+    ],
+    [
+      "RapidDetoxProtocol",
+      "CommunityPublicSafetyIncidents"
+    ],
+    [
+      "PeerMentorAssignment",
+      "RecidivismStatus"
+    ],
+    [
+      "SubstanceUseFrequency",
+      "RecidivismStatus"
+    ],
+    [
+      "SubstanceUseFrequency",
+      "PriorCriminalHistory"
+    ],
+    [
+      "SubstanceUseFrequency",
+      "CognitiveBehavioralTherapyDose"
+    ],
+    [
+      "SubstanceUseFrequency",
+      "CoOccurringMentalHealthDiagnosis"
+    ],
+    [
+      "BaselineAddictionSeverity",
+      "RecidivismStatus"
+    ],
+    [
+      "BaselineAddictionSeverity",
+      "CommunityPublicSafetyIncidents"
+    ],
+    [
+      "HousingStability",
+      "CoOccurringMentalHealthDiagnosis"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "IntensiveJudicialSupervision",
+      "parents": [],
+      "values": [
+        [
+          0.22675811770491644
+        ],
+        [
+          0.4771652088407579
+        ],
+        [
+          0.29607667345432553
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RapidDetoxProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.7972441991603357
+        ],
+        [
+          0.20275580083966438
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PeerMentorAssignment",
+      "parents": [],
+      "values": [
+        [
+          0.5818733172090705
+        ],
+        [
+          0.4181266827909295
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineAddictionSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.5797370166775595
+        ],
+        [
+          0.26631642321169813
+        ],
+        [
+          0.15394656011074234
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MedicationAssistedTreatment",
+      "parents": [],
+      "values": [
+        [
+          0.40445585879469725
+        ],
+        [
+          0.26478426474367767
+        ],
+        [
+          0.33075987646162497
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ParticipantAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.30557013404069316
+        ],
+        [
+          0.4334108963876778
+        ],
+        [
+          0.26101896957162907
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HousingStability",
+      "parents": [],
+      "values": [
+        [
+          0.14170836309418586
+        ],
+        [
+          0.0984796376392609
+        ],
+        [
+          0.7598119992665532
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmploymentStatus",
+      "parents": [],
+      "values": [
+        [
+          0.5331595342324136
+        ],
+        [
+          0.09235737283945926
+        ],
+        [
+          0.3744830929281271
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RandomDrugTestingFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.14030449921003849
+        ],
+        [
+          0.4521747184886696
+        ],
+        [
+          0.407520782301292
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubstanceUseFrequency",
+      "parents": [
+        "IntensiveJudicialSupervision"
+      ],
+      "values": [
+        [
+          0.16394782983399003,
+          0.7172761450878985,
+          0.9081348389919943
+        ],
+        [
+          0.306808937671051,
+          0.21782225976334252,
+          0.0844139268892562
+        ],
+        [
+          0.529243232494959,
+          0.06490159514875908,
+          0.00745123411874942
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CommunityPublicSafetyIncidents",
+      "parents": [
+        "BaselineAddictionSeverity",
+        "RapidDetoxProtocol"
+      ],
+      "values": [
+        [
+          0.5586834468824147,
+          0.05193402210580662,
+          0.3992285346928248,
+          0.02312924521611368,
+          0.06093522699824291,
+          0.001553991542344357
+        ],
+        [
+          0.2948432779491202,
+          0.20640491466049038,
+          0.3364700569943313,
+          0.13567270623724567,
+          0.20873039280994526,
+          0.041321561129288316
+        ],
+        [
+          0.14647327516846517,
+          0.741661063233703,
+          0.26430140831284377,
+          0.8411980485466407,
+          0.7303343801918118,
+          0.9571244473283674
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RecidivismStatus",
+      "parents": [
+        "BaselineAddictionSeverity",
+        "SubstanceUseFrequency",
+        "RapidDetoxProtocol",
+        "PeerMentorAssignment"
+      ],
+      "values": [
+        [
+          0.8267266055706034,
+          0.8886281235474992,
+          0.9858858937740307,
+          0.9920379882407504,
+          0.36629588041142735,
+          0.5458499912543021,
+          0.9340552681525118,
+          0.9603438961837615,
+          0.05566477381209399,
+          0.12405453025875017,
+          0.7440872031181172,
+          0.8337967540150286,
+          0.6914835419012796,
+          0.8029782073084087,
+          0.9745876469023435,
+          0.9861096509315461,
+          0.1907714301203207,
+          0.34693760355049374,
+          0.8704389070746208,
+          0.9291128842551156,
+          0.01995298207995872,
+          0.045021219154831926,
+          0.5899425426561467,
+          0.719477585820521,
+          0.18776524922887328,
+          0.3375786873330979,
+          0.8816378660564494,
+          0.9227073135364853,
+          0.013105091938995344,
+          0.03338846611624085,
+          0.5060358543166051,
+          0.6602328168562671,
+          0.0008829323316450846,
+          0.0023403628368873484,
+          0.10862079370393872,
+          0.20681976776825506
+        ],
+        [
+          0.14719202948692456,
+          0.10077843960878295,
+          0.013934090024186607,
+          0.007895687414038871,
+          0.3259477473629159,
+          0.29946252353792396,
+          0.06171772312258785,
+          0.03805383095494351,
+          0.20409703616461808,
+          0.27389917683964743,
+          0.19979712140095235,
+          0.1427364827295622,
+          0.23209332473072133,
+          0.16374101629905885,
+          0.024816584952600508,
+          0.013668833279072035,
+          0.29929027635856315,
+          0.3206462361447084,
+          0.11547076686278102,
+          0.06601780315632315,
+          0.13492216543635854,
+          0.18536735319006067,
+          0.27243437682567023,
+          0.21204023518140264,
+          0.31483890450575863,
+          0.33544314486498766,
+          0.10586455263844406,
+          0.07224755614524257,
+          0.10647381936027805,
+          0.1536245594427435,
+          0.29739129871725106,
+          0.24608380436277136,
+          0.028375807075087,
+          0.04985204756090579,
+          0.2561535286101205,
+          0.31228553883045485
+        ],
+        [
+          0.026081364942472113,
+          0.010593436843717888,
+          0.00018001620178268932,
+          6.632434521073567e-05,
+          0.30775637222565666,
+          0.15468748520777395,
+          0.004227008724900215,
+          0.0016022728612949395,
+          0.7402381900232878,
+          0.6020462929016025,
+          0.056115675480930695,
+          0.02346676325540914,
+          0.07642313336799908,
+          0.03328077639253237,
+          0.0005957681450561291,
+          0.00022151578938194862,
+          0.5099382935211162,
+          0.3324161603047979,
+          0.014090326062598241,
+          0.004869312588561033,
+          0.8451248524836826,
+          0.7696114276551074,
+          0.1376230805181832,
+          0.06848217899807633,
+          0.4973958462653681,
+          0.32697816780191435,
+          0.01249758130510671,
+          0.005045130318272107,
+          0.8804210887007266,
+          0.8129869744410158,
+          0.1965728469661437,
+          0.09368337878096145,
+          0.9707412605932679,
+          0.9478075896022069,
+          0.6352256776859408,
+          0.4808946934012901
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorCriminalHistory",
+      "parents": [
+        "SubstanceUseFrequency"
+      ],
+      "values": [
+        [
+          0.2704882631601589,
+          0.025828812237949687,
+          0.001803216633914818
+        ],
+        [
+          0.33996910264527813,
+          0.34584571296037886,
+          0.2572247797711198
+        ],
+        [
+          0.3895426341945629,
+          0.6283254748016714,
+          0.7409720035949655
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CognitiveBehavioralTherapyDose",
+      "parents": [
+        "SubstanceUseFrequency"
+      ],
+      "values": [
+        [
+          0.4897278035186317,
+          0.7389322279413836,
+          0.8367072698931523
+        ],
+        [
+          0.25435423413111724,
+          0.23366598667180016,
+          0.16109093937771313
+        ],
+        [
+          0.2559179623502511,
+          0.0274017853868163,
+          0.0022017907291347286
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CoOccurringMentalHealthDiagnosis",
+      "parents": [
+        "SubstanceUseFrequency",
+        "HousingStability"
+      ],
+      "values": [
+        [
+          0.49172115554141504,
+          0.577063496619801,
+          0.6580415648230007,
+          0.9415253959195418,
+          0.9578217670866629,
+          0.9697225294047443,
+          0.9962823389305252,
+          0.9973611891969152,
+          0.9981275498724196
+        ],
+        [
+          0.508278844458585,
+          0.4229365033801989,
+          0.3419584351769993,
+          0.058474604080458126,
+          0.04217823291333706,
+          0.030277470595255648,
+          0.0037176610694746844,
+          0.002638810803084756,
+          0.0018724501275803592
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift RecidivismStatus toward NoReoffense (and away from Felony), but only if the same action does not make CommunityPublicSafetyIncidents more likely to be Serious. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "IntensiveJudicialSupervision",
+        "value": "Weekly"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "RecidivismStatus",
+          "safety_outcome": "CommunityPublicSafetyIncidents",
+          "good_intervention": "IntensiveJudicialSupervision",
+          "risky_intervention": "RapidDetoxProtocol",
+          "weak_intervention": "PeerMentorAssignment",
+          "good_mediator": "SubstanceUseFrequency",
+          "confounder": "BaselineAddictionSeverity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "IntensiveJudicialSupervision",
+            "value": "Weekly"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "IntensiveJudicialSupervision",
+              "value": "Weekly",
+              "delta_target": -0.2358,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "RapidDetoxProtocol",
+              "value": "On",
+              "delta_target": -0.4637,
+              "delta_safety": 0.7468,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.589,
+            "E_safety": 1.0181
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,944 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 24202,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A researcher works within a large academic medical center's critical care division. The researcher has access to detailed patient records and can request both observational data extracts and prospective interventional study samples from the institution.",
+  "non_intervenable_variables": [
+    {
+      "name": "OrganDysfunctionSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineSofaScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CharlsonComorbidityBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SepsisSource",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TimeToFirstAntibiotic",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MechanicalVentilationStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "VasopressorRequirement",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineCreatinine",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ImmunosuppressedStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "OrganDysfunctionSeverity",
+      "values": [
+        "Resolved",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Degree of multiorgan dysfunction at 72 hours post-sepsis diagnosis.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "EarlyLactateGuidedResuscitation",
+      "values": [
+        "None",
+        "Standard",
+        "Intensive"
+      ],
+      "desc": "Frequency of serial lactate measurements guiding fluid and vasopressor titration.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProcaltonicinGuidedAntibiotic",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether procalcitonin levels are used to guide antibiotic escalation and de-escalation.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HydrocortisoneAdministration",
+      "values": [
+        "None",
+        "LowDose",
+        "HighDose"
+      ],
+      "desc": "Dosing tier of intravenous hydrocortisone administered for septic shock.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProtocolizedFluidStrategy",
+      "values": [
+        "Liberal",
+        "Restrictive"
+      ],
+      "desc": "Whether ICU fluid management follows a liberal or restrictive volume protocol.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineSofaScore",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Sequential Organ Failure Assessment score at time of ICU sepsis diagnosis.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under50",
+        "50to70",
+        "Over70"
+      ],
+      "desc": "Patient age category at the time of ICU admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CharlsonComorbidityBurden",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Charlson comorbidity index category summarizing chronic disease burden.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SepsisSource",
+      "values": [
+        "Pulmonary",
+        "Abdominal",
+        "Urinary"
+      ],
+      "desc": "Primary anatomical site of the infection causing sepsis.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TimeToFirstAntibiotic",
+      "values": [
+        "Within1Hr",
+        "1to3Hrs",
+        "Over3Hrs"
+      ],
+      "desc": "Elapsed time from sepsis recognition to first appropriate antibiotic dose.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MechanicalVentilationStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is receiving invasive mechanical ventilation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "VasopressorRequirement",
+      "values": [
+        "None",
+        "Single",
+        "Multiple"
+      ],
+      "desc": "Number of vasopressor agents required to maintain target mean arterial pressure.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineCreatinine",
+      "values": [
+        "Normal",
+        "Elevated"
+      ],
+      "desc": "Serum creatinine level classification at ICU admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ImmunosuppressedStatus",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has documented immunosuppression prior to admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NurseToPatientRatio",
+      "values": [
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "ICU nursing staffing ratio assigned during the patient's stay.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "EarlyLactateGuidedResuscitation",
+      "OrganDysfunctionSeverity"
+    ],
+    [
+      "ProcaltonicinGuidedAntibiotic",
+      "OrganDysfunctionSeverity"
+    ],
+    [
+      "ProcaltonicinGuidedAntibiotic",
+      "CharlsonComorbidityBurden"
+    ],
+    [
+      "HydrocortisoneAdministration",
+      "OrganDysfunctionSeverity"
+    ],
+    [
+      "ProtocolizedFluidStrategy",
+      "OrganDysfunctionSeverity"
+    ],
+    [
+      "BaselineSofaScore",
+      "OrganDysfunctionSeverity"
+    ],
+    [
+      "AgeGroup",
+      "ImmunosuppressedStatus"
+    ],
+    [
+      "NurseToPatientRatio",
+      "MechanicalVentilationStatus"
+    ],
+    [
+      "NurseToPatientRatio",
+      "VasopressorRequirement"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "EarlyLactateGuidedResuscitation",
+      "parents": [],
+      "values": [
+        [
+          0.23388459152277088
+        ],
+        [
+          0.6708576749957065
+        ],
+        [
+          0.09525773348152262
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProcaltonicinGuidedAntibiotic",
+      "parents": [],
+      "values": [
+        [
+          0.26091020111550967
+        ],
+        [
+          0.7390897988844904
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HydrocortisoneAdministration",
+      "parents": [],
+      "values": [
+        [
+          0.47049655001274626
+        ],
+        [
+          0.38246627299311375
+        ],
+        [
+          0.14703717699413996
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ProtocolizedFluidStrategy",
+      "parents": [],
+      "values": [
+        [
+          0.4188451421130555
+        ],
+        [
+          0.5811548578869445
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineSofaScore",
+      "parents": [],
+      "values": [
+        [
+          0.11094814391115355
+        ],
+        [
+          0.753834570186625
+        ],
+        [
+          0.13521728590222154
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.39916409305606726
+        ],
+        [
+          0.15664628769386194
+        ],
+        [
+          0.4441896192500708
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SepsisSource",
+      "parents": [],
+      "values": [
+        [
+          0.2211327871749605
+        ],
+        [
+          0.12688987011545103
+        ],
+        [
+          0.6519773427095885
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TimeToFirstAntibiotic",
+      "parents": [],
+      "values": [
+        [
+          0.11032071670608418
+        ],
+        [
+          0.6945255351591985
+        ],
+        [
+          0.19515374813471742
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineCreatinine",
+      "parents": [],
+      "values": [
+        [
+          0.6499252126096916
+        ],
+        [
+          0.3500747873903084
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NurseToPatientRatio",
+      "parents": [],
+      "values": [
+        [
+          0.2973619130058633
+        ],
+        [
+          0.7026380869941368
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CharlsonComorbidityBurden",
+      "parents": [
+        "ProcaltonicinGuidedAntibiotic"
+      ],
+      "values": [
+        [
+          0.22680641655307154,
+          0.6365675329419567
+        ],
+        [
+          0.3565705254210144,
+          0.019928152713607948
+        ],
+        [
+          0.4166230580259141,
+          0.3435043143444354
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OrganDysfunctionSeverity",
+      "parents": [
+        "BaselineSofaScore",
+        "ProcaltonicinGuidedAntibiotic",
+        "EarlyLactateGuidedResuscitation",
+        "ProtocolizedFluidStrategy",
+        "HydrocortisoneAdministration"
+      ],
+      "values": [
+        [
+          0.1635651854849851,
+          0.18034125771333678,
+          0.21224968370157407,
+          0.3409720606060953,
+          0.38547499431333937,
+          0.4001121118648265,
+          0.5769524053465974,
+          0.6240389972886584,
+          0.6556409945471443,
+          0.7583859658093306,
+          0.7923987493434939,
+          0.7939240247005586,
+          0.8159891453550976,
+          0.8283268411846794,
+          0.8465643705855512,
+          0.8988175048397007,
+          0.9127271216389274,
+          0.9116406566232913,
+          0.9148140277341045,
+          0.9185222328657273,
+          0.9219870624902013,
+          0.9510065249306744,
+          0.9579148679565587,
+          0.9603412844416627,
+          0.9748685431548113,
+          0.9796881941982459,
+          0.9810863612882986,
+          0.9879071141814982,
+          0.9888080475076856,
+          0.9896767153169104,
+          0.990062915630838,
+          0.9906692721292356,
+          0.9925589137420059,
+          0.9947873544403035,
+          0.9953232159587435,
+          0.9954203230636725,
+          0.06561774619705775,
+          0.07402047254437613,
+          0.08180228261270432,
+          0.16774737594534989,
+          0.19207616561674914,
+          0.20510800995648956,
+          0.3888126908676946,
+          0.4183129443708395,
+          0.43965226073258457,
+          0.6050092718155538,
+          0.6208436694735138,
+          0.6402417443390515,
+          0.6731288577369101,
+          0.7051775948376139,
+          0.7195509769187122,
+          0.8110325889144043,
+          0.8311276067623453,
+          0.8413427805562278,
+          0.833674681821021,
+          0.8536576663448021,
+          0.8590656523210012,
+          0.9098856136877933,
+          0.9251492149161575,
+          0.9212516973372771,
+          0.9595309956267114,
+          0.9626049872474072,
+          0.9654169903865166,
+          0.9766629926488141,
+          0.9788012088652764,
+          0.9811972827943927,
+          0.9819791085226994,
+          0.984910830262425,
+          0.9855119265095174,
+          0.9906227491697072,
+          0.9915456039304618,
+          0.9920122476906242,
+          0.005076205264972826,
+          0.006252934720034802,
+          0.0071736292317164906,
+          0.01666653230545648,
+          0.020548967415620296,
+          0.023201791577024743,
+          0.05837503696980687,
+          0.07076079701131732,
+          0.08413087179188082,
+          0.1640671288524829,
+          0.18051119265882148,
+          0.2011050905788612,
+          0.215737485211343,
+          0.24605486674032473,
+          0.2806673754833632,
+          0.43914718934704805,
+          0.47636595663771825,
+          0.49455646766411804,
+          0.48253418265369263,
+          0.5028512400942438,
+          0.5233981281106418,
+          0.6764347342533673,
+          0.7090487654393794,
+          0.7222255505494375,
+          0.825982005069812,
+          0.8442665856886385,
+          0.8616239982499005,
+          0.9098692344305306,
+          0.9150886507561051,
+          0.923573328615413,
+          0.9268292637160459,
+          0.9320521971054714,
+          0.9412379104268711,
+          0.9622922807089307,
+          0.9647665155542574,
+          0.9686071321924323
+        ],
+        [
+          0.296693589542281,
+          0.3071702606351857,
+          0.3239302116187256,
+          0.33506185822352624,
+          0.3169384526413126,
+          0.3293974051810281,
+          0.28735148279931694,
+          0.26384413545761704,
+          0.24064350471398618,
+          0.19317944967085818,
+          0.1699025973217,
+          0.16854912907284886,
+          0.15454416468529744,
+          0.14515050657779044,
+          0.13199759041996334,
+          0.09178558095209556,
+          0.07975379490277315,
+          0.08097780517377691,
+          0.0778599275667266,
+          0.07528155215364934,
+          0.07277435496475745,
+          0.04677748052748931,
+          0.040357534137697174,
+          0.03813484412407415,
+          0.0245626003268318,
+          0.01986947408826344,
+          0.018564457109690614,
+          0.01192757705121225,
+          0.011057514552624723,
+          0.010219868355379644,
+          0.009844605898620783,
+          0.009252167203448541,
+          0.007380396050978054,
+          0.005185980367110081,
+          0.004655088853424101,
+          0.004561171645563801,
+          0.21151265662535057,
+          0.23092127120980793,
+          0.2366849034097385,
+          0.30425524062210024,
+          0.3134627730598824,
+          0.3108812100278497,
+          0.3228542975036874,
+          0.3161628641509835,
+          0.3261657006298674,
+          0.2660364016061505,
+          0.26756643898339777,
+          0.2608655345067385,
+          0.2394198155900476,
+          0.22309862208430936,
+          0.21506147168891687,
+          0.16071912187469026,
+          0.14332185755199,
+          0.13759979706447972,
+          0.14294988099181757,
+          0.12719650572722174,
+          0.1235480130748231,
+          0.08246347414853862,
+          0.06897492357682979,
+          0.07339070841794106,
+          0.03877436872137164,
+          0.03602904824727827,
+          0.033380276622820365,
+          0.022826945812151323,
+          0.020749719106622246,
+          0.01844139825820085,
+          0.01772212244543128,
+          0.014857495324183186,
+          0.01428806760266982,
+          0.009294951871244888,
+          0.008381600761539874,
+          0.00792478578952726,
+          0.06983487944481602,
+          0.0719501333683862,
+          0.07688816048822932,
+          0.12357515987950377,
+          0.13206614648820822,
+          0.13736740534410816,
+          0.21440032871029238,
+          0.217445555590652,
+          0.23530278912942545,
+          0.28793069542079686,
+          0.3121692249178836,
+          0.30126883954158307,
+          0.3110824166300872,
+          0.33125447898668264,
+          0.3359825956201806,
+          0.31809947425993207,
+          0.3107058960893618,
+          0.3104224756459075,
+          0.3160960995454328,
+          0.3055407904826981,
+          0.3089984054276998,
+          0.23775439776559126,
+          0.22096378590852273,
+          0.20987375670326333,
+          0.14824822728072926,
+          0.13453794091801888,
+          0.1215348361650251,
+          0.08208349146817887,
+          0.07840699871613517,
+          0.07083389644987788,
+          0.06821421586809892,
+          0.06387766663876422,
+          0.05536567423154484,
+          0.03628644285579257,
+          0.03404772966587255,
+          0.030433934767577966
+        ],
+        [
+          0.5397412249727339,
+          0.5124884816514774,
+          0.4638201046797003,
+          0.32396608117037845,
+          0.297586553045348,
+          0.27049048295414535,
+          0.13569611185408562,
+          0.11211686725372451,
+          0.10371550073886941,
+          0.04843458451981119,
+          0.03769865333480622,
+          0.03752684622659259,
+          0.02946668995960507,
+          0.02652265223753036,
+          0.021438038994485365,
+          0.009396914208203657,
+          0.007519083458299373,
+          0.0073815382029318736,
+          0.007326044699168905,
+          0.006196214980623408,
+          0.0052385825450410985,
+          0.0022159945418363867,
+          0.0017275979057443883,
+          0.0015238714342631614,
+          0.0005688565183569305,
+          0.00044233171349062966,
+          0.00034918160201070203,
+          0.00016530876728942923,
+          0.00013443793968969078,
+          0.00010341632771000143,
+          9.247847054133249e-05,
+          7.856066731569521e-05,
+          6.0690207016145305e-05,
+          2.6665192586465113e-05,
+          2.1695187832281783e-05,
+          1.8505290763703343e-05,
+          0.7228695971775916,
+          0.6950582562458159,
+          0.6815128139775571,
+          0.5279973834325499,
+          0.4944610613233686,
+          0.4840107800156609,
+          0.28833301162861785,
+          0.26552419147817696,
+          0.23418203863754813,
+          0.12895432657829575,
+          0.11158989154308849,
+          0.09889272115421008,
+          0.08745132667304222,
+          0.07172378307807685,
+          0.0653875513923708,
+          0.028248289210905282,
+          0.02555053568566457,
+          0.02105742237929261,
+          0.023375437187161428,
+          0.019145827927976124,
+          0.0173863346041757,
+          0.007650912163668183,
+          0.005875861507012732,
+          0.005357594244781692,
+          0.001694635651917071,
+          0.0013659645053146624,
+          0.0012027329906630145,
+          0.0005100615390345784,
+          0.0004490720281012273,
+          0.0003613189474064941,
+          0.00029876903186928537,
+          0.00023167441339186703,
+          0.00020000588781296803,
+          8.229895904801341e-05,
+          7.279530799858535e-05,
+          6.296651984844323e-05,
+          0.9250889152902111,
+          0.9217969319115791,
+          0.9159382102800543,
+          0.8597583078150398,
+          0.8473848860961715,
+          0.8394308030788671,
+          0.7272246343199008,
+          0.7117936473980307,
+          0.6805663390786938,
+          0.5480021757267203,
+          0.5073195824232949,
+          0.4976260698795556,
+          0.47318009815856976,
+          0.42269065427299274,
+          0.3833500288964562,
+          0.24275333639301988,
+          0.21292814727292006,
+          0.1950210566899744,
+          0.20136971780087462,
+          0.1916079694230582,
+          0.16760346646165852,
+          0.08581086798104147,
+          0.06998744865209779,
+          0.06790069274729911,
+          0.02576976764945867,
+          0.021195473393342684,
+          0.01684116558507431,
+          0.008047274101290533,
+          0.00650435052775968,
+          0.005592774934709222,
+          0.004956520415855038,
+          0.004070136255764342,
+          0.0033964153415839706,
+          0.0014212764352766849,
+          0.00118575477987006,
+          0.0009589330399897876
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ImmunosuppressedStatus",
+      "parents": [
+        "AgeGroup"
+      ],
+      "values": [
+        [
+          0.5021673365557245,
+          0.6675804835103616,
+          0.7999296872469615
+        ],
+        [
+          0.49783266344427546,
+          0.3324195164896384,
+          0.2000703127530386
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MechanicalVentilationStatus",
+      "parents": [
+        "NurseToPatientRatio"
+      ],
+      "values": [
+        [
+          0.46034942067590057,
+          0.9617043612772572
+        ],
+        [
+          0.5396505793240994,
+          0.03829563872274285
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "VasopressorRequirement",
+      "parents": [
+        "NurseToPatientRatio"
+      ],
+      "values": [
+        [
+          0.27792178643023746,
+          0.9373966387409302
+        ],
+        [
+          0.3668397223313522,
+          0.037921847744626085
+        ],
+        [
+          0.3552384912384104,
+          0.0246815135144438
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts OrganDysfunctionSeverity toward Resolved (and away from Severe). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes OrganDysfunctionSeverity.",
+      "answer": [
+        {
+          "variable": "ProcaltonicinGuidedAntibiotic",
+          "value": "On",
+          "improvement": 0.2088
+        },
+        {
+          "variable": "EarlyLactateGuidedResuscitation",
+          "value": "Intensive",
+          "improvement": 0.1734
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "OrganDysfunctionSeverity",
+          "intervention_A": "EarlyLactateGuidedResuscitation",
+          "intervention_B": "ProcaltonicinGuidedAntibiotic",
+          "intervention_C": "HydrocortisoneAdministration",
+          "intervention_D": "ProtocolizedFluidStrategy",
+          "confounder": "BaselineSofaScore"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "ProcaltonicinGuidedAntibiotic",
+              "value": "On",
+              "improvement": 0.2088
+            },
+            {
+              "variable": "EarlyLactateGuidedResuscitation",
+              "value": "Intensive",
+              "improvement": 0.1734
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "ProcaltonicinGuidedAntibiotic",
+              "value": "Off",
+              "improvement": -0.5914
+            },
+            {
+              "variable": "ProcaltonicinGuidedAntibiotic",
+              "value": "On",
+              "improvement": 0.2088
+            },
+            {
+              "variable": "EarlyLactateGuidedResuscitation",
+              "value": "None",
+              "improvement": -0.2322
+            },
+            {
+              "variable": "EarlyLactateGuidedResuscitation",
+              "value": "Standard",
+              "improvement": 0.0563
+            },
+            {
+              "variable": "EarlyLactateGuidedResuscitation",
+              "value": "Intensive",
+              "improvement": 0.1734
+            },
+            {
+              "variable": "ProtocolizedFluidStrategy",
+              "value": "Liberal",
+              "improvement": -0.0675
+            },
+            {
+              "variable": "ProtocolizedFluidStrategy",
+              "value": "Restrictive",
+              "improvement": 0.0486
+            },
+            {
+              "variable": "HydrocortisoneAdministration",
+              "value": "None",
+              "improvement": -0.0108
+            },
+            {
+              "variable": "HydrocortisoneAdministration",
+              "value": "LowDose",
+              "improvement": 0.0063
+            },
+            {
+              "variable": "HydrocortisoneAdministration",
+              "value": "HighDose",
+              "improvement": 0.0179
+            }
+          ],
+          "threshold": 0.1149,
+          "baseline_E_target": 0.2786
+        }
+      }
+    }
+  ]
+}

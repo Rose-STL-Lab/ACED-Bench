@@ -1,0 +1,1154 @@
+{
+  "meta": {
+    "topic": "Social Science",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 24404,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A metropolitan planning institute studies neighborhood dynamics across diverse urban districts. The research team has access to administrative records, survey databases, and census data, and can request both observational and interventional samples from participating communities.",
+  "non_intervenable_variables": [
+    {
+      "name": "ResidentCivicParticipation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NeighborhoodSocioeconomicTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingTenureMix",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ResidentialStability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PopulationDensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EthnicDiversityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalNonprofitPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WalkabilityScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MedianResidentAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerceivedSafetyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PublicTransitAccess",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ResidentCivicParticipation",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Aggregate level of residents attending meetings, voting locally, and volunteering.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "CommunityEventProgramming",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of organized neighborhood gatherings such as block parties or forums.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalNeighborhoodPlatform",
+      "values": [
+        "None",
+        "BasicForum",
+        "FullApp"
+      ],
+      "desc": "Type of online platform provided for neighborhood communication and coordination.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BlockCaptainNetwork",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether trained volunteer block captains are assigned to each residential block.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MicroGrantForLocalProjects",
+      "values": [
+        "None",
+        "Small",
+        "Large"
+      ],
+      "desc": "Size of small grants available to resident-led neighborhood improvement projects.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NeighborhoodSocioeconomicTier",
+      "values": [
+        "UpperMiddle",
+        "Middle",
+        "LowerIncome"
+      ],
+      "desc": "Median household income bracket characterizing the neighborhood.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingTenureMix",
+      "values": [
+        "MostlyOwners",
+        "Mixed",
+        "MostlyRenters"
+      ],
+      "desc": "Proportion of owner-occupied versus renter-occupied housing units in the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ResidentialStability",
+      "values": [
+        "Stable",
+        "Moderate",
+        "Transient"
+      ],
+      "desc": "Average length of time residents have lived in the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PopulationDensity",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of residents per square mile in the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EthnicDiversityLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Degree of racial and ethnic heterogeneity among neighborhood residents.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LocalNonprofitPresence",
+      "values": [
+        "None",
+        "Few",
+        "Many"
+      ],
+      "desc": "Count of active nonprofit organizations headquartered within the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WalkabilityScore",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Composite score of pedestrian infrastructure and proximity to public spaces.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MedianResidentAge",
+      "values": [
+        "Young",
+        "MiddleAged",
+        "Older"
+      ],
+      "desc": "Median age category of the adult population in the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PerceivedSafetyLevel",
+      "values": [
+        "Safe",
+        "Moderate",
+        "Unsafe"
+      ],
+      "desc": "Resident-reported perception of personal safety in the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PublicTransitAccess",
+      "values": [
+        "Good",
+        "Limited",
+        "None"
+      ],
+      "desc": "Availability and frequency of public transit stops within the neighborhood.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "CommunityEventProgramming",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "CommunityEventProgramming",
+      "ResidentialStability"
+    ],
+    [
+      "DigitalNeighborhoodPlatform",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "BlockCaptainNetwork",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "MicroGrantForLocalProjects",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "NeighborhoodSocioeconomicTier",
+      "ResidentCivicParticipation"
+    ],
+    [
+      "PopulationDensity",
+      "LocalNonprofitPresence"
+    ],
+    [
+      "WalkabilityScore",
+      "LocalNonprofitPresence"
+    ],
+    [
+      "PublicTransitAccess",
+      "WalkabilityScore"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "CommunityEventProgramming",
+      "parents": [],
+      "values": [
+        [
+          0.27649421770731847
+        ],
+        [
+          0.11089785335372347
+        ],
+        [
+          0.612607928938958
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DigitalNeighborhoodPlatform",
+      "parents": [],
+      "values": [
+        [
+          0.139859071490327
+        ],
+        [
+          0.5057553379310697
+        ],
+        [
+          0.35438559057860336
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BlockCaptainNetwork",
+      "parents": [],
+      "values": [
+        [
+          0.5031109152449517
+        ],
+        [
+          0.4968890847550484
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MicroGrantForLocalProjects",
+      "parents": [],
+      "values": [
+        [
+          0.35473167091555946
+        ],
+        [
+          0.30227247863090306
+        ],
+        [
+          0.3429958504535375
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NeighborhoodSocioeconomicTier",
+      "parents": [],
+      "values": [
+        [
+          0.09617638442374046
+        ],
+        [
+          0.5332430312983282
+        ],
+        [
+          0.3705805842779314
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HousingTenureMix",
+      "parents": [],
+      "values": [
+        [
+          0.1497110857529907
+        ],
+        [
+          0.09886178207253353
+        ],
+        [
+          0.7514271321744758
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PopulationDensity",
+      "parents": [],
+      "values": [
+        [
+          0.37063183418808876
+        ],
+        [
+          0.191426324989199
+        ],
+        [
+          0.43794184082271237
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EthnicDiversityLevel",
+      "parents": [],
+      "values": [
+        [
+          0.3218656721384761
+        ],
+        [
+          0.1820643546595584
+        ],
+        [
+          0.4960699732019656
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MedianResidentAge",
+      "parents": [],
+      "values": [
+        [
+          0.14527427753684963
+        ],
+        [
+          0.690926609732534
+        ],
+        [
+          0.16379911273061648
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerceivedSafetyLevel",
+      "parents": [],
+      "values": [
+        [
+          0.4239076370019442
+        ],
+        [
+          0.4742669751722761
+        ],
+        [
+          0.10182538782577961
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PublicTransitAccess",
+      "parents": [],
+      "values": [
+        [
+          0.2201962272186235
+        ],
+        [
+          0.1253918790287599
+        ],
+        [
+          0.6544118937526165
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ResidentialStability",
+      "parents": [
+        "CommunityEventProgramming"
+      ],
+      "values": [
+        [
+          0.3717610531227006,
+          0.11389910394259985,
+          0.017431690235316037
+        ],
+        [
+          0.2745633358317795,
+          0.05431173867078882,
+          0.005366704018080514
+        ],
+        [
+          0.3536756110455199,
+          0.8317891573866113,
+          0.9772016057466034
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ResidentCivicParticipation",
+      "parents": [
+        "NeighborhoodSocioeconomicTier",
+        "DigitalNeighborhoodPlatform",
+        "BlockCaptainNetwork",
+        "MicroGrantForLocalProjects",
+        "CommunityEventProgramming"
+      ],
+      "values": [
+        [
+          0.16839006471869847,
+          0.19156267144694597,
+          0.2138096134481461,
+          0.25900728515213467,
+          0.29083637859965383,
+          0.3244943064814678,
+          0.353317276657809,
+          0.371553877890694,
+          0.3970194022723346,
+          0.806281888123427,
+          0.8385883736809708,
+          0.8455846063971779,
+          0.8680238110401355,
+          0.8808690826363169,
+          0.8903125591062127,
+          0.8945392414304015,
+          0.9108441472802434,
+          0.9138517724674458,
+          0.7122178152358198,
+          0.7467913766617644,
+          0.7508462367440074,
+          0.794607214472331,
+          0.8162841523384332,
+          0.834892735702979,
+          0.8323024573375555,
+          0.8505087034045024,
+          0.8575068772544042,
+          0.9670756963644048,
+          0.9705665343151685,
+          0.9743376836615003,
+          0.9773106279942466,
+          0.9792924833472532,
+          0.9815708438636441,
+          0.9839065069408062,
+          0.9846973540700369,
+          0.9860952244663238,
+          0.9112502746753492,
+          0.9226250373723569,
+          0.924288174829143,
+          0.9382294198255777,
+          0.9432104991641895,
+          0.9490125561410705,
+          0.9540984840834387,
+          0.9573507175480531,
+          0.9618910272227905,
+          0.9907255848927955,
+          0.991459994832741,
+          0.9917516481110881,
+          0.993266731811687,
+          0.9941976890499342,
+          0.9945089430174613,
+          0.9947450729695051,
+          0.9952571833199981,
+          0.9958757259894543,
+          0.06423451803151124,
+          0.07695641912366445,
+          0.08621419041818487,
+          0.10951602851229336,
+          0.13921530419096698,
+          0.15280699701320766,
+          0.16817262548182954,
+          0.18982135261986072,
+          0.2121660586423387,
+          0.6815510490574791,
+          0.7182891381433669,
+          0.7311275904969154,
+          0.7536864499509688,
+          0.783630542924975,
+          0.8044187713364871,
+          0.8082337502827377,
+          0.841340028774982,
+          0.8516336901513696,
+          0.5323428352394841,
+          0.5880582166332707,
+          0.5913832290429764,
+          0.6422843030701821,
+          0.6884458954920569,
+          0.6945303061982746,
+          0.7366027817877068,
+          0.7570581009883081,
+          0.7546030925015486,
+          0.9404327062811687,
+          0.9512160587092131,
+          0.9493168258454198,
+          0.9613651347999532,
+          0.9631115997146024,
+          0.9651910623710159,
+          0.9676821523156914,
+          0.9720476843213985,
+          0.9753679300057974,
+          0.8322650259676907,
+          0.8538279975999296,
+          0.8650711955187685,
+          0.8869405241540744,
+          0.9002196183737116,
+          0.9053235220651636,
+          0.9138662966688839,
+          0.9210167042240196,
+          0.924880206425232,
+          0.9824615787588696,
+          0.9827969451260737,
+          0.9853287220257989,
+          0.9883814330998149,
+          0.9894611757167797,
+          0.9897067083503216,
+          0.9906130347666565,
+          0.9920597513916787,
+          0.992175764699926,
+          0.005078152317410638,
+          0.005768574930858755,
+          0.0069074904113651005,
+          0.010244027274936543,
+          0.012001225222700793,
+          0.014886202383321332,
+          0.015757334511828775,
+          0.021484017103640136,
+          0.022723335891659962,
+          0.22095573740666966,
+          0.25966178924798594,
+          0.2715145648572035,
+          0.3404364789604129,
+          0.37074579718335043,
+          0.40819957751609054,
+          0.43900538537086925,
+          0.44870314334980194,
+          0.4910264599129062,
+          0.1243452510315571,
+          0.1433712747537407,
+          0.15351017307329848,
+          0.19632255223266515,
+          0.24182209306247715,
+          0.24368601338964513,
+          0.28002469799389756,
+          0.309281051033336,
+          0.3373647008661345,
+          0.7729703569288464,
+          0.7914932680074703,
+          0.8077867821210508,
+          0.8380995623526806,
+          0.8554264944594768,
+          0.8679029219799798,
+          0.8734538649536144,
+          0.8909868755236509,
+          0.9029734596698338,
+          0.4637687812491134,
+          0.5145017289001997,
+          0.5426048363297288,
+          0.5962865724265864,
+          0.6352945232525198,
+          0.6632705407747439,
+          0.6736262907604674,
+          0.6895070100095408,
+          0.7030762710435589,
+          0.9245258642907301,
+          0.9338076276522419,
+          0.9416110573539997,
+          0.9476038160997418,
+          0.954238080798804,
+          0.9576179950392039,
+          0.96149985660686,
+          0.9663433853051888,
+          0.9695247227850069
+        ],
+        [
+          0.29996804335257543,
+          0.3151102735273755,
+          0.3010193757202222,
+          0.3325709389625047,
+          0.32140643891907583,
+          0.3401413495808805,
+          0.3245372685935099,
+          0.32633125227006776,
+          0.3258275039718211,
+          0.16301056428792216,
+          0.13714034854430054,
+          0.13302744763897562,
+          0.11647921302001718,
+          0.10580058487875085,
+          0.09934852627463038,
+          0.09580907445910752,
+          0.08151775914053913,
+          0.07891470405626601,
+          0.21976247883169556,
+          0.1997694137656308,
+          0.19791123620651957,
+          0.17236470650488708,
+          0.15419637917179402,
+          0.14103311705124186,
+          0.14452777239566306,
+          0.13038012118099582,
+          0.12637432628766448,
+          0.03194643800397532,
+          0.028609157752203,
+          0.024979595739061083,
+          0.022193950575374714,
+          0.020331096252297683,
+          0.018097037707058627,
+          0.01582113170284668,
+          0.015069224173439671,
+          0.013694658016019953,
+          0.08122623394714154,
+          0.07166549949794558,
+          0.0700894824319305,
+          0.05813909211581426,
+          0.0536639124154682,
+          0.04843008013877033,
+          0.04373957727363542,
+          0.040689452103139775,
+          0.0366194975626257,
+          0.00918300038691578,
+          0.008464480571343214,
+          0.008187413733964165,
+          0.006687236995900326,
+          0.0057667931293846455,
+          0.005459968306238558,
+          0.005229276759468784,
+          0.0047203886836409545,
+          0.00410571874662641,
+          0.20244755288725358,
+          0.2306328980335887,
+          0.24282360341397927,
+          0.2732710981356964,
+          0.2815882010708476,
+          0.2944352574345646,
+          0.28860652218026694,
+          0.3023733721310671,
+          0.3090650793001223,
+          0.23171717548582263,
+          0.2101454325685379,
+          0.20677755067833872,
+          0.19950720508087472,
+          0.17960264838641707,
+          0.16214065062026023,
+          0.16036704175282715,
+          0.13518442494870503,
+          0.1272679200573813,
+          0.2964341791947991,
+          0.2736383220848553,
+          0.28193281370045886,
+          0.26022077937825094,
+          0.23591009983878355,
+          0.2331575706659545,
+          0.20316320497499227,
+          0.1908276145272626,
+          0.19936319542208927,
+          0.05631702287347223,
+          0.046208102671783706,
+          0.0483821029131636,
+          0.03709835160640762,
+          0.0355989332892958,
+          0.03365911078789565,
+          0.031365177227994784,
+          0.027237678448609262,
+          0.02396464965989401,
+          0.14476880454839852,
+          0.12639107283747839,
+          0.1182907853474513,
+          0.10196213756311792,
+          0.09080866118344885,
+          0.0868040919279146,
+          0.07872371389652501,
+          0.07334318353469017,
+          0.0695704677019695,
+          0.017225390619889244,
+          0.016942345410209652,
+          0.01446670314801053,
+          0.0114731287558657,
+          0.01042633767456234,
+          0.010185661002887973,
+          0.009302759497043048,
+          0.007869862932469891,
+          0.007764909689123311,
+          0.06326138111221088,
+          0.07589622174679768,
+          0.08071659762903599,
+          0.09111780840543154,
+          0.10445058207889893,
+          0.11319663132071568,
+          0.11934974283262549,
+          0.13475227543941665,
+          0.1417606267707144,
+          0.32987368950359075,
+          0.33920779708922516,
+          0.33431468287287425,
+          0.33646953291827103,
+          0.33700318299912607,
+          0.3384596693139717,
+          0.3160650074286381,
+          0.3228465801940798,
+          0.31608189719938673,
+          0.2793964519179271,
+          0.2791009571129396,
+          0.289847745935827,
+          0.3013457888129349,
+          0.30633676518277964,
+          0.33652908457102604,
+          0.3168580391668781,
+          0.32812699175694654,
+          0.326105501102109,
+          0.1847133125357825,
+          0.17186886217195016,
+          0.16049630564030942,
+          0.1379072029532064,
+          0.12658222390059126,
+          0.11675618768575356,
+          0.11186176632351977,
+          0.09830213649066318,
+          0.08759070397687377,
+          0.31690030524909485,
+          0.30496512408215065,
+          0.2970240885570593,
+          0.2788013617295064,
+          0.2549865242789121,
+          0.24259954471327552,
+          0.23779005551898302,
+          0.23229821294753428,
+          0.2271773497500723,
+          0.07063949701247624,
+          0.06248441882693412,
+          0.0552523348417854,
+          0.05004897113294742,
+          0.04384544737489764,
+          0.04065627365767267,
+          0.037026001160283845,
+          0.0325834321784664,
+          0.029548622142717376
+        ],
+        [
+          0.5316418919287261,
+          0.4933270550256786,
+          0.4851710108316316,
+          0.4084217758853606,
+          0.3877571824812702,
+          0.3353643439376517,
+          0.3221454547486811,
+          0.30211486983923813,
+          0.27715309375584424,
+          0.03070754758865068,
+          0.024271277774728713,
+          0.021387945963846407,
+          0.015496975939847338,
+          0.013330332484932282,
+          0.010338914619156925,
+          0.009651684110490838,
+          0.007638093579217394,
+          0.007233523476288187,
+          0.06801970593248466,
+          0.05343920957260482,
+          0.05124252704947314,
+          0.03302807902278194,
+          0.029519468489772785,
+          0.024074147245779196,
+          0.023169770266781516,
+          0.01911117541450199,
+          0.016118796457931205,
+          0.000977865631619776,
+          0.0008243079326286104,
+          0.0006827205994386379,
+          0.0004954214303786506,
+          0.0003764204004490592,
+          0.0003321184292972548,
+          0.00027236135634716043,
+          0.00023342175652352767,
+          0.00021011751765621678,
+          0.007523491377509403,
+          0.005709463129697513,
+          0.0056223427389265335,
+          0.0036314880586079575,
+          0.003125588420342374,
+          0.002557363720159075,
+          0.0021619386429260097,
+          0.0019598303488070293,
+          0.0014894752145837734,
+          9.141472028859696e-05,
+          7.552459591561236e-05,
+          6.093815494779194e-05,
+          4.603119241275275e-05,
+          3.551782068121978e-05,
+          3.108867630026936e-05,
+          2.5650271026108776e-05,
+          2.2427996360828085e-05,
+          1.8555263919323374e-05,
+          0.7333179290812352,
+          0.6924106828427468,
+          0.6709622061678359,
+          0.6172128733520102,
+          0.5791964947381855,
+          0.5527577455522277,
+          0.5432208523379035,
+          0.5078052752490723,
+          0.47876886205753894,
+          0.08673177545669819,
+          0.0715654292880952,
+          0.06209485882474582,
+          0.04680634496815656,
+          0.03676680868860797,
+          0.03344057804325247,
+          0.031399207964435225,
+          0.023475546276312993,
+          0.02109838979124915,
+          0.1712229855657168,
+          0.13830346128187396,
+          0.12668395725656478,
+          0.09749491755156696,
+          0.07564400466915938,
+          0.07231212313577096,
+          0.060234013237300946,
+          0.05211428448442935,
+          0.04603371207636226,
+          0.0032502708453590284,
+          0.0025758386190033187,
+          0.002301071241416646,
+          0.0015365135936392642,
+          0.0012894669961017915,
+          0.0011498268410883865,
+          0.0009526704563137189,
+          0.0007146372299920942,
+          0.0006674203343085926,
+          0.022966169483910785,
+          0.019780929562592097,
+          0.016638019133780244,
+          0.011097338282807722,
+          0.008971720442839618,
+          0.007872386006921793,
+          0.007409989434591086,
+          0.005640112241290278,
+          0.005549325872798435,
+          0.0003130306212411023,
+          0.00026070946371667175,
+          0.00020457482619075712,
+          0.0001454381443196003,
+          0.0001124866086580299,
+          0.000107630646790381,
+          8.420573630032611e-05,
+          7.038567585151291e-05,
+          5.9325610950783445e-05,
+          0.9316604665703785,
+          0.9183352033223436,
+          0.912375911959599,
+          0.8986381643196318,
+          0.8835481926984003,
+          0.8719171662959629,
+          0.8648929226555457,
+          0.8437637074569433,
+          0.8355160373376256,
+          0.4491705730897395,
+          0.40113041366278895,
+          0.3941707522699223,
+          0.32309398812131607,
+          0.2922510198175235,
+          0.25334075316993765,
+          0.24492960720049262,
+          0.22845027645611826,
+          0.19289164288770697,
+          0.5962582970505158,
+          0.5775277681333197,
+          0.5566420809908745,
+          0.5023316589544,
+          0.45184114175474327,
+          0.4197849020393288,
+          0.40311726283922433,
+          0.36259195720971754,
+          0.3365297980317564,
+          0.04231633053537121,
+          0.036637869820579504,
+          0.03171691223863973,
+          0.023993234694113144,
+          0.017991281639932015,
+          0.015340890334266487,
+          0.014684368722865758,
+          0.010710987985685967,
+          0.009435836353292445,
+          0.2193309135017917,
+          0.18053314701764955,
+          0.16037107511321194,
+          0.12491206584390711,
+          0.10971895246856804,
+          0.09412991451198047,
+          0.08858365372054958,
+          0.07819477704292489,
+          0.06974637920636877,
+          0.004834638696793695,
+          0.003707953520823886,
+          0.003136607804214985,
+          0.0023472127673107757,
+          0.0019164718262982504,
+          0.0017257313031234177,
+          0.0014741422328561173,
+          0.0010731825163446417,
+          0.0009266550722757102
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WalkabilityScore",
+      "parents": [
+        "PublicTransitAccess"
+      ],
+      "values": [
+        [
+          0.2923185995218478,
+          0.4803586470548404,
+          0.5851569515307881
+        ],
+        [
+          0.42723251856418065,
+          0.4873334524741059,
+          0.4120839871549647
+        ],
+        [
+          0.2804488819139715,
+          0.032307900471053766,
+          0.002759061314247211
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LocalNonprofitPresence",
+      "parents": [
+        "PopulationDensity",
+        "WalkabilityScore"
+      ],
+      "values": [
+        [
+          0.36742392631252785,
+          0.511589982003186,
+          0.5107413103158666,
+          0.4067875179878607,
+          0.7910820144057854,
+          0.8603806197778702,
+          0.34162508719716367,
+          0.8308585967541222,
+          0.9605271223083126
+        ],
+        [
+          0.29007550719722547,
+          0.44292678446059613,
+          0.4849279136209494,
+          0.05078682573148118,
+          0.10831067124236382,
+          0.1291833793927186,
+          0.006744861421480068,
+          0.017989400014532565,
+          0.022806859079948883
+        ],
+        [
+          0.3425005664902466,
+          0.04548323353621795,
+          0.00433077606318411,
+          0.5424256562806581,
+          0.10060731435185065,
+          0.010436000829411221,
+          0.6516300513813562,
+          0.15115200323134523,
+          0.016666018611738477
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts ResidentCivicParticipation toward High (and away from Low). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes ResidentCivicParticipation.",
+      "answer": [
+        {
+          "variable": "DigitalNeighborhoodPlatform",
+          "value": "FullApp",
+          "improvement": 0.2549
+        },
+        {
+          "variable": "BlockCaptainNetwork",
+          "value": "Yes",
+          "improvement": 0.2737
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "ResidentCivicParticipation",
+          "intervention_A": "CommunityEventProgramming",
+          "intervention_B": "DigitalNeighborhoodPlatform",
+          "intervention_C": "BlockCaptainNetwork",
+          "intervention_D": "MicroGrantForLocalProjects",
+          "confounder": "NeighborhoodSocioeconomicTier"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "DigitalNeighborhoodPlatform",
+              "value": "FullApp",
+              "improvement": 0.2549
+            },
+            {
+              "variable": "BlockCaptainNetwork",
+              "value": "Yes",
+              "improvement": 0.2737
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "DigitalNeighborhoodPlatform",
+              "value": "None",
+              "improvement": -0.6422
+            },
+            {
+              "variable": "DigitalNeighborhoodPlatform",
+              "value": "BasicForum",
+              "improvement": -0.001
+            },
+            {
+              "variable": "DigitalNeighborhoodPlatform",
+              "value": "FullApp",
+              "improvement": 0.2549
+            },
+            {
+              "variable": "BlockCaptainNetwork",
+              "value": "No",
+              "improvement": -0.2703
+            },
+            {
+              "variable": "BlockCaptainNetwork",
+              "value": "Yes",
+              "improvement": 0.2737
+            },
+            {
+              "variable": "MicroGrantForLocalProjects",
+              "value": "None",
+              "improvement": -0.0822
+            },
+            {
+              "variable": "MicroGrantForLocalProjects",
+              "value": "Small",
+              "improvement": 0.0139
+            },
+            {
+              "variable": "MicroGrantForLocalProjects",
+              "value": "Large",
+              "improvement": 0.0728
+            },
+            {
+              "variable": "CommunityEventProgramming",
+              "value": "None",
+              "improvement": -0.0318
+            },
+            {
+              "variable": "CommunityEventProgramming",
+              "value": "Monthly",
+              "improvement": -0.0008
+            },
+            {
+              "variable": "CommunityEventProgramming",
+              "value": "Weekly",
+              "improvement": 0.0145
+            }
+          ],
+          "threshold": 0.1639,
+          "baseline_E_target": 0.3971
+        }
+      }
+    }
+  ]
+}

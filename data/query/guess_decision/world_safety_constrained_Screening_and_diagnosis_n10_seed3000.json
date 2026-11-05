@@ -1,0 +1,644 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 3000,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A large metropolitan breast imaging center conducts routine and diagnostic mammography services. The researcher has access to comprehensive screening records and can request both observational data extracts and prospective interventional study samples from the center's patient population.",
+  "non_intervenable_variables": [
+    {
+      "name": "EarlyStageDetectionRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FalsePositiveRecallRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LesionCharacterizationQuality",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BreastTissueDensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RadiologyReadingWorkload",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "EarlyStageDetectionRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of breast cancers detected at stage 0 or stage I.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FalsePositiveRecallRate",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Proportion of screening exams resulting in unnecessary diagnostic callbacks.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "DigitalBreastTomosynthesis",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether 3D tomosynthesis imaging is used alongside standard 2D mammography.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ShortenedScreeningInterval",
+      "values": [
+        "Biennial",
+        "Annual",
+        "Semiannual"
+      ],
+      "desc": "Frequency at which routine mammography screening exams are scheduled.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PreScreeningRiskQuestionnaire",
+      "values": [
+        "None",
+        "Basic"
+      ],
+      "desc": "Whether a brief family history and risk factor questionnaire is administered before imaging.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LesionCharacterizationQuality",
+      "values": [
+        "Excellent",
+        "Adequate",
+        "Poor"
+      ],
+      "desc": "Radiologist-rated clarity and completeness of suspicious lesion characterization on images.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BreastTissueDensity",
+      "values": [
+        "FattyScattered",
+        "HeterogeneouslyDense",
+        "ExtremelyDense"
+      ],
+      "desc": "BI-RADS breast composition category assigned from the mammogram.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "40to49",
+        "50to64",
+        "65plus"
+      ],
+      "desc": "Age bracket of the woman at the time of mammography screening.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ComputerAidedDetectionUse",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether CAD software flags regions of interest for radiologist review.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RadiologyReadingWorkload",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of mammography cases a radiologist interprets per session.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "FalsePositiveRecallRate",
+      "PatientAgeGroup"
+    ],
+    [
+      "DigitalBreastTomosynthesis",
+      "LesionCharacterizationQuality"
+    ],
+    [
+      "DigitalBreastTomosynthesis",
+      "PatientAgeGroup"
+    ],
+    [
+      "ShortenedScreeningInterval",
+      "EarlyStageDetectionRate"
+    ],
+    [
+      "ShortenedScreeningInterval",
+      "FalsePositiveRecallRate"
+    ],
+    [
+      "PreScreeningRiskQuestionnaire",
+      "EarlyStageDetectionRate"
+    ],
+    [
+      "LesionCharacterizationQuality",
+      "EarlyStageDetectionRate"
+    ],
+    [
+      "BreastTissueDensity",
+      "EarlyStageDetectionRate"
+    ],
+    [
+      "BreastTissueDensity",
+      "FalsePositiveRecallRate"
+    ],
+    [
+      "PatientAgeGroup",
+      "ComputerAidedDetectionUse"
+    ],
+    [
+      "RadiologyReadingWorkload",
+      "DigitalBreastTomosynthesis"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ShortenedScreeningInterval",
+      "parents": [],
+      "values": [
+        [
+          0.7168160530744476
+        ],
+        [
+          0.17278303602977643
+        ],
+        [
+          0.11040091089577603
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreScreeningRiskQuestionnaire",
+      "parents": [],
+      "values": [
+        [
+          0.39484558985709023
+        ],
+        [
+          0.6051544101429097
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BreastTissueDensity",
+      "parents": [],
+      "values": [
+        [
+          0.5301996636340758
+        ],
+        [
+          0.22671107061707102
+        ],
+        [
+          0.24308926574885328
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RadiologyReadingWorkload",
+      "parents": [],
+      "values": [
+        [
+          0.6114637542437216
+        ],
+        [
+          0.25157475713040983
+        ],
+        [
+          0.1369614886258687
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FalsePositiveRecallRate",
+      "parents": [
+        "BreastTissueDensity",
+        "ShortenedScreeningInterval"
+      ],
+      "values": [
+        [
+          0.5768566027890462,
+          0.2663238432911443,
+          0.05488979459228865,
+          0.4129654628690096,
+          0.13334737628846505,
+          0.022779806531936977,
+          0.0684573830926875,
+          0.012291044140447214,
+          0.0016217641835347355
+        ],
+        [
+          0.29053942567464025,
+          0.32792074407905913,
+          0.19866634682447282,
+          0.309951244164202,
+          0.2787981236738969,
+          0.13630474369628393,
+          0.222243621925387,
+          0.10509582692335066,
+          0.041780487982678485
+        ],
+        [
+          0.1326039715363136,
+          0.40575541262979653,
+          0.7464438585832385,
+          0.27708329296678846,
+          0.5878545000376381,
+          0.8409154497717791,
+          0.7092989949819256,
+          0.8826131289362021,
+          0.9565977478337868
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DigitalBreastTomosynthesis",
+      "parents": [
+        "RadiologyReadingWorkload"
+      ],
+      "values": [
+        [
+          0.5218345160621561,
+          0.8753105624846462,
+          0.9783340986319551
+        ],
+        [
+          0.47816548393784386,
+          0.12468943751535375,
+          0.02166590136804495
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LesionCharacterizationQuality",
+      "parents": [
+        "DigitalBreastTomosynthesis"
+      ],
+      "values": [
+        [
+          0.15934363070634266,
+          0.9125931356171031
+        ],
+        [
+          0.2973592209491562,
+          0.07979521050378134
+        ],
+        [
+          0.5432971483445012,
+          0.0076116538791155776
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [
+        "DigitalBreastTomosynthesis",
+        "FalsePositiveRecallRate"
+      ],
+      "values": [
+        [
+          0.35055690530024025,
+          0.609795018750654,
+          0.7773502443927834,
+          0.1360028932862329,
+          0.25934316167026494,
+          0.41877246877218655
+        ],
+        [
+          0.39033272147170456,
+          0.3384633027190204,
+          0.2150778751680754,
+          0.7538062554338254,
+          0.7165354356307306,
+          0.5767562061264602
+        ],
+        [
+          0.2591103732280551,
+          0.051741678530325574,
+          0.007571880439141238,
+          0.11019085127994176,
+          0.024121402699004476,
+          0.004471325101353185
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EarlyStageDetectionRate",
+      "parents": [
+        "BreastTissueDensity",
+        "LesionCharacterizationQuality",
+        "ShortenedScreeningInterval",
+        "PreScreeningRiskQuestionnaire"
+      ],
+      "values": [
+        [
+          0.8166135674443096,
+          0.8882798879587529,
+          0.9520578201658914,
+          0.9718537726172206,
+          0.986673343963963,
+          0.9921063393830467,
+          0.3537689138255821,
+          0.541642766004515,
+          0.7886929965926394,
+          0.8605814270884805,
+          0.9322233164789356,
+          0.9585278597372013,
+          0.054769626065265496,
+          0.11557697272156077,
+          0.3640178100643967,
+          0.5433079834851595,
+          0.7377316616028318,
+          0.8379207161650388,
+          0.6828901815347479,
+          0.7939762488837852,
+          0.9149748846249458,
+          0.950455648537828,
+          0.9745322836569659,
+          0.9849764472455849,
+          0.19633613329926905,
+          0.34675546889121983,
+          0.6262036193724788,
+          0.7752332228965667,
+          0.8800091699084429,
+          0.9230414768361195,
+          0.01773768683303814,
+          0.04590365406938221,
+          0.18863507020588552,
+          0.32511988368114314,
+          0.56952406999294,
+          0.723902625965522,
+          0.1877550046711393,
+          0.3450649484819978,
+          0.6256061490694554,
+          0.7726506564940553,
+          0.8762762019687482,
+          0.927359998224127,
+          0.013032960427214862,
+          0.03174294518525386,
+          0.14081877015338748,
+          0.2739138716395829,
+          0.5173274060997634,
+          0.6616469117013486,
+          0.0009078515458239949,
+          0.002253624122025515,
+          0.012622082986960638,
+          0.03335998274068325,
+          0.09995696887741794,
+          0.20955331736633098
+        ],
+        [
+          0.1551890722408464,
+          0.10002644088371984,
+          0.045942957110519184,
+          0.027410726416735958,
+          0.01315717332715637,
+          0.007831936933598049,
+          0.34476172680193345,
+          0.29478556271778883,
+          0.17446647066135385,
+          0.12294473539954623,
+          0.06361903409098438,
+          0.0399070168173696,
+          0.201081258579456,
+          0.25633431997983497,
+          0.33863020403545013,
+          0.2950675598048069,
+          0.20614155891531874,
+          0.13947934380406563,
+          0.23806074815426853,
+          0.17258634629288996,
+          0.07911297620376373,
+          0.047275608244139775,
+          0.02484003409475581,
+          0.014798596297303712,
+          0.3043182429047491,
+          0.3337609152179041,
+          0.2658573941120262,
+          0.17766935393709848,
+          0.10581332168442276,
+          0.07179764146597821,
+          0.12628807972741227,
+          0.17798146295870698,
+          0.3032928992492456,
+          0.34116823032583604,
+          0.28879078334434194,
+          0.20893632054773884,
+          0.2964989460567692,
+          0.334637308572257,
+          0.2636841456208632,
+          0.1787957632421689,
+          0.11079430897910865,
+          0.06756664653662633,
+          0.11210953559781119,
+          0.16859865306197402,
+          0.2776654454591176,
+          0.3149896279178367,
+          0.30727467312338935,
+          0.24323875632451106,
+          0.03026383987012943,
+          0.045105628110159966,
+          0.10243114513367868,
+          0.15603668674864443,
+          0.2633537241449468,
+          0.30595772555265516
+        ],
+        [
+          0.028197360314843923,
+          0.011693671157527192,
+          0.0019992227235893483,
+          0.0007355009660433771,
+          0.00016948270888064203,
+          6.172368335525613e-05,
+          0.3014693593724845,
+          0.16357167127769623,
+          0.03684053274600675,
+          0.016473837511973243,
+          0.004157649430079939,
+          0.001565123445428949,
+          0.7441491153552786,
+          0.6280887072986042,
+          0.2973519859001531,
+          0.16162445671003345,
+          0.056126779481849375,
+          0.022599940030895604,
+          0.0790490703109837,
+          0.03343740482332498,
+          0.005912139171290443,
+          0.0022687432180322474,
+          0.0006276822482784029,
+          0.00022495645711141803,
+          0.4993456237959819,
+          0.3194836158908761,
+          0.10793898651549513,
+          0.04709742316633484,
+          0.014177508407134403,
+          0.005160881697902318,
+          0.8559742334395496,
+          0.7761148829719109,
+          0.5080720305448689,
+          0.3337118859930209,
+          0.1416851466627181,
+          0.06716105348673906,
+          0.5157460492720914,
+          0.3202977429457452,
+          0.11070970530968133,
+          0.0485535802637758,
+          0.012929489052143096,
+          0.005073355239246827,
+          0.874857503974974,
+          0.7996584017527721,
+          0.581515784387495,
+          0.41109650044258034,
+          0.17539792077684738,
+          0.09511433197414026,
+          0.9688283085840466,
+          0.9526407477678145,
+          0.8849467718793608,
+          0.8106033305106723,
+          0.6366893069776353,
+          0.4844889570810139
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComputerAidedDetectionUse",
+      "parents": [
+        "PatientAgeGroup"
+      ],
+      "values": [
+        [
+          0.43072526282547047,
+          0.7970778868086124,
+          0.9532540158043417
+        ],
+        [
+          0.5692747371745295,
+          0.20292211319138762,
+          0.046745984195658404
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift EarlyStageDetectionRate toward High (and away from Low), but only if the same action does not make FalsePositiveRecallRate more likely to be High. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "DigitalBreastTomosynthesis",
+        "value": "On"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "EarlyStageDetectionRate",
+          "safety_outcome": "FalsePositiveRecallRate",
+          "good_intervention": "DigitalBreastTomosynthesis",
+          "risky_intervention": "ShortenedScreeningInterval",
+          "weak_intervention": "PreScreeningRiskQuestionnaire",
+          "good_mediator": "LesionCharacterizationQuality",
+          "confounder": "BreastTissueDensity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "DigitalBreastTomosynthesis",
+            "value": "On"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "DigitalBreastTomosynthesis",
+              "value": "On",
+              "delta_target": -0.497,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "ShortenedScreeningInterval",
+              "value": "Annual",
+              "delta_target": -0.3164,
+              "delta_safety": 0.3141,
+              "reason": "worsens safety"
+            },
+            {
+              "variable": "ShortenedScreeningInterval",
+              "value": "Semiannual",
+              "delta_target": -0.6179,
+              "delta_safety": 0.7098,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.8783,
+            "E_safety": 1.0745
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

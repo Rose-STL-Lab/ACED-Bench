@@ -1,0 +1,735 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 10,
+    "topology": "safety_constrained",
+    "seed": 3101,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A nephrology department within a large academic medical center maintains detailed patient records spanning several years. The research team can access these records and request both observational and interventional study samples as needed.",
+  "non_intervenable_variables": [
+    {
+      "name": "BloodPressureControl",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AcuteKidneyInjuryRisk",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ArterialCompliance",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineHypertensionSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ChronicKidneyDiseaseStage",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "BloodPressureControl",
+      "values": [
+        "WellControlled",
+        "PartiallyControlled",
+        "Uncontrolled"
+      ],
+      "desc": "Degree to which systolic and diastolic readings meet guideline targets.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AcuteKidneyInjuryRisk",
+      "values": [
+        "NoInjury",
+        "MildElevation",
+        "SignificantInjury"
+      ],
+      "desc": "Presence and severity of acute kidney function deterioration during treatment.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AmlodipineRegimen",
+      "values": [
+        "None",
+        "StandardDose",
+        "EscalatedDose"
+      ],
+      "desc": "Prescribed amlodipine calcium channel blocker dosing level.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HighDoseAceInhibitor",
+      "values": [
+        "None",
+        "ModerateDose",
+        "MaxDose"
+      ],
+      "desc": "Prescribed ACE inhibitor dosing intensity for blood pressure management.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LifestyleCounseling",
+      "values": [
+        "None",
+        "BriefSession",
+        "IntensiveProgram"
+      ],
+      "desc": "Level of structured dietary and exercise counseling provided to patient.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ArterialCompliance",
+      "values": [
+        "Normal",
+        "MildlyReduced",
+        "Stiffened"
+      ],
+      "desc": "Measured elasticity and distensibility of large arterial walls.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineHypertensionSeverity",
+      "values": [
+        "Stage1",
+        "Stage2",
+        "ResistantHypertension"
+      ],
+      "desc": "Classification of hypertension severity at study enrollment.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Under50",
+        "50to65",
+        "Over65"
+      ],
+      "desc": "Patient age category at time of enrollment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SodiumRestrictionAdherence",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported level of daily dietary sodium intake restriction.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ChronicKidneyDiseaseStage",
+      "values": [
+        "NoCKD",
+        "EarlyStage",
+        "ModerateStage"
+      ],
+      "desc": "Baseline chronic kidney disease classification per eGFR measurement.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "BloodPressureControl",
+      "PatientAgeGroup"
+    ],
+    [
+      "BloodPressureControl",
+      "SodiumRestrictionAdherence"
+    ],
+    [
+      "AmlodipineRegimen",
+      "ArterialCompliance"
+    ],
+    [
+      "HighDoseAceInhibitor",
+      "BloodPressureControl"
+    ],
+    [
+      "HighDoseAceInhibitor",
+      "AcuteKidneyInjuryRisk"
+    ],
+    [
+      "LifestyleCounseling",
+      "BloodPressureControl"
+    ],
+    [
+      "LifestyleCounseling",
+      "AmlodipineRegimen"
+    ],
+    [
+      "ArterialCompliance",
+      "BloodPressureControl"
+    ],
+    [
+      "ArterialCompliance",
+      "HighDoseAceInhibitor"
+    ],
+    [
+      "BaselineHypertensionSeverity",
+      "BloodPressureControl"
+    ],
+    [
+      "BaselineHypertensionSeverity",
+      "AcuteKidneyInjuryRisk"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "LifestyleCounseling",
+      "parents": [],
+      "values": [
+        [
+          0.3803736973772174
+        ],
+        [
+          0.44912742586944043
+        ],
+        [
+          0.17049887675334213
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BaselineHypertensionSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.8195100866810194
+        ],
+        [
+          0.0902449566594902
+        ],
+        [
+          0.0902449566594902
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ChronicKidneyDiseaseStage",
+      "parents": [],
+      "values": [
+        [
+          0.1306189860816312
+        ],
+        [
+          0.777036818764964
+        ],
+        [
+          0.09234419515340463
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AmlodipineRegimen",
+      "parents": [
+        "LifestyleCounseling"
+      ],
+      "values": [
+        [
+          0.38368701171732655,
+          0.4989664204290187,
+          0.45075356748420414
+        ],
+        [
+          0.30721749592791325,
+          0.49278711911143874,
+          0.5490935998732863
+        ],
+        [
+          0.3090954923547601,
+          0.008246460459542622,
+          0.00015283264250938537
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ArterialCompliance",
+      "parents": [
+        "AmlodipineRegimen"
+      ],
+      "values": [
+        [
+          0.15806144491291776,
+          0.7226010235541875,
+          0.9063838068061287
+        ],
+        [
+          0.3072465112295922,
+          0.21488025315080375,
+          0.0857701976038124
+        ],
+        [
+          0.53469204385749,
+          0.06251872329500867,
+          0.007845995590058883
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HighDoseAceInhibitor",
+      "parents": [
+        "ArterialCompliance"
+      ],
+      "values": [
+        [
+          0.2854662746753338,
+          0.20950022286264872,
+          0.09051764310478495
+        ],
+        [
+          0.35900252849582087,
+          0.7431895905803548,
+          0.9057759706745544
+        ],
+        [
+          0.3555311968288454,
+          0.04731018655699649,
+          0.003706386220660652
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "BloodPressureControl",
+      "parents": [
+        "BaselineHypertensionSeverity",
+        "ArterialCompliance",
+        "HighDoseAceInhibitor",
+        "LifestyleCounseling"
+      ],
+      "values": [
+        [
+          0.8177287798439836,
+          0.8347847271866058,
+          0.8925038937931761,
+          0.9533937583875568,
+          0.9595163434468553,
+          0.9723562860068605,
+          0.9862471605113038,
+          0.9871564965087813,
+          0.991369924817053,
+          0.3621202735158736,
+          0.4109128422770151,
+          0.5466509321723666,
+          0.7834337869929059,
+          0.8068141905757309,
+          0.86392253528639,
+          0.9278480890896743,
+          0.9402353407332952,
+          0.958490151319386,
+          0.057413891042909386,
+          0.06948751193804542,
+          0.1229681350970298,
+          0.35591015781187485,
+          0.4087060101711903,
+          0.5487684105800001,
+          0.734898984382582,
+          0.7663574212196504,
+          0.8442548884004332,
+          0.687528327062086,
+          0.7064544250040034,
+          0.7955138756402564,
+          0.9215059797247334,
+          0.923063867706052,
+          0.9492670301920397,
+          0.9766125112889351,
+          0.9780026934939228,
+          0.9857169446212954,
+          0.1884425850286328,
+          0.2094585418994135,
+          0.3231240505909973,
+          0.6328144794261308,
+          0.6653148216018294,
+          0.7679093979153799,
+          0.879066489952556,
+          0.8968677124802324,
+          0.9305638146676136,
+          0.019302822815794724,
+          0.022977053967021415,
+          0.0492686291947829,
+          0.19014471990633425,
+          0.20338001338458012,
+          0.32920111213870357,
+          0.5684723314214974,
+          0.6116983205975619,
+          0.7192772180345248,
+          0.1754776769950171,
+          0.22102410608770354,
+          0.33536132271000957,
+          0.6458208048545108,
+          0.6743773964353452,
+          0.7620766140270018,
+          0.8825243819309491,
+          0.8866709333473722,
+          0.9254904580043659,
+          0.013511107622068532,
+          0.01559749003328623,
+          0.03295869100711207,
+          0.13468882200842686,
+          0.1684106226149234,
+          0.2823676545875948,
+          0.5106831575258542,
+          0.5247042260286001,
+          0.6796799727090744,
+          0.0008343098708670093,
+          0.0011472602804323197,
+          0.0023279428766421035,
+          0.012983291048466229,
+          0.017007060553380467,
+          0.032193366194587555,
+          0.09768114902166833,
+          0.11710439234829836,
+          0.21121371661954644
+        ],
+        [
+          0.1527172281727508,
+          0.1431068304057371,
+          0.09669151586290337,
+          0.04472690352525368,
+          0.03897181947771765,
+          0.026896804943162652,
+          0.01356406006102415,
+          0.012692274703732994,
+          0.008559463042478774,
+          0.3297506143478391,
+          0.3204746711073953,
+          0.29928080511457944,
+          0.17951231334355464,
+          0.15879461856592195,
+          0.11933328447107103,
+          0.06768539802930679,
+          0.056447266558381615,
+          0.03991340075356782,
+          0.2084807459932868,
+          0.21613197538444365,
+          0.271145852821731,
+          0.3476068685093884,
+          0.3231006703921763,
+          0.2855558600548299,
+          0.20960300004435772,
+          0.18708955631537036,
+          0.13210724773838833,
+          0.23390761222482567,
+          0.22778731052119272,
+          0.17193279795671956,
+          0.07206899893445004,
+          0.07193123741019349,
+          0.048196759811282824,
+          0.022800284903332347,
+          0.02150791114108076,
+          0.014068174558630034,
+          0.2919476404049039,
+          0.3101768214169855,
+          0.3341719880813153,
+          0.2655880985705011,
+          0.23854357989548655,
+          0.1845538082745121,
+          0.10746749515231033,
+          0.09198945852903222,
+          0.06464939924420499,
+          0.12279594002004424,
+          0.13324779123314232,
+          0.18630748020312513,
+          0.2979745320639952,
+          0.32671134240886834,
+          0.3291138805916259,
+          0.2872092823981408,
+          0.2709229270613594,
+          0.216794272139522,
+          0.3060693085151361,
+          0.3101510515233998,
+          0.33589135605053316,
+          0.25351317138342855,
+          0.240384341452761,
+          0.18888793684042415,
+          0.10412309057826853,
+          0.1024463445274772,
+          0.06960059151516912,
+          0.11123014497387652,
+          0.11670722838330728,
+          0.16265865828323986,
+          0.27420109076328486,
+          0.31004233998947006,
+          0.31869644478234416,
+          0.30276466260314566,
+          0.3058585572959642,
+          0.23502324085317886,
+          0.029098187414599564,
+          0.032334717422047236,
+          0.04786596484000294,
+          0.11596498174218314,
+          0.12129752112443876,
+          0.15922376083398676,
+          0.2537317972203094,
+          0.2775976101536387,
+          0.32425689484268555
+        ],
+        [
+          0.029553991983265533,
+          0.0221084424076572,
+          0.010804590343920652,
+          0.001879338087189483,
+          0.0015118370754270737,
+          0.0007469090499769658,
+          0.00018877942767208387,
+          0.00015122878748574696,
+          7.061214046822786e-05,
+          0.3081291121362874,
+          0.2686124866155897,
+          0.15406826271305388,
+          0.03705389966353951,
+          0.03439119085834732,
+          0.016744180242538927,
+          0.004466512881018778,
+          0.0033173927083233897,
+          0.0015964479270461657,
+          0.7341053629638038,
+          0.7143805126775109,
+          0.6058860120812393,
+          0.2964829736787367,
+          0.2681933194366333,
+          0.16567572936516986,
+          0.05549801557306025,
+          0.046553022464979145,
+          0.023637863861178457,
+          0.07856406071308829,
+          0.06575826447480389,
+          0.03255332640302392,
+          0.006425021340816596,
+          0.005004894883754564,
+          0.002536209996677407,
+          0.0005872038077325884,
+          0.0004893953649964788,
+          0.0002148808200745127,
+          0.5196097745664633,
+          0.480364636683601,
+          0.34270396132768743,
+          0.1015974220033681,
+          0.09614159850268404,
+          0.04753679381010801,
+          0.013466014895133861,
+          0.01114282899073519,
+          0.004786786088181422,
+          0.8579012371641611,
+          0.8437751547998362,
+          0.7644238906020919,
+          0.5118807480296705,
+          0.4699086442065516,
+          0.34168500726967055,
+          0.14431838618036175,
+          0.1173787523410786,
+          0.06392850982595319,
+          0.5184530144898468,
+          0.4688248423888966,
+          0.3287473212394572,
+          0.10066602376206076,
+          0.08523826211189384,
+          0.04903544913257407,
+          0.01335252749078228,
+          0.010882722125150575,
+          0.004908950480464992,
+          0.875258747404055,
+          0.8676952815834065,
+          0.804382650709648,
+          0.5911100872282884,
+          0.5215470373956065,
+          0.39893590063006107,
+          0.1865521798710001,
+          0.16943721667543585,
+          0.08529678643774675,
+          0.9700675027145333,
+          0.9665180222975205,
+          0.949806092283355,
+          0.8710517272093506,
+          0.8616954183221809,
+          0.8085828729714257,
+          0.6485870537580223,
+          0.6052979974980629,
+          0.4645293885377681
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AcuteKidneyInjuryRisk",
+      "parents": [
+        "BaselineHypertensionSeverity",
+        "HighDoseAceInhibitor"
+      ],
+      "values": [
+        [
+          0.5665056241042262,
+          0.26762041717464996,
+          0.05533787880021613,
+          0.4047651105110765,
+          0.1436228400645913,
+          0.02443759489824683,
+          0.06484384957361468,
+          0.014206390878214833,
+          0.0015263544441708637
+        ],
+        [
+          0.29176120437716185,
+          0.32775322928246964,
+          0.20395986925298837,
+          0.3321877218079925,
+          0.29020251724956375,
+          0.13761544649001858,
+          0.22041477647140936,
+          0.11312993139249466,
+          0.03807399561443824
+        ],
+        [
+          0.141733171518612,
+          0.4046263535428805,
+          0.7407022519467954,
+          0.26304716768093106,
+          0.5661746426858449,
+          0.8379469586117345,
+          0.714741373954976,
+          0.8726636777292905,
+          0.9603996499413908
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [
+        "BloodPressureControl"
+      ],
+      "values": [
+        [
+          0.31214758560561845,
+          0.330561214702593,
+          0.33527477791093974
+        ],
+        [
+          0.31519444770506655,
+          0.22154334754518523,
+          0.14914061886783508
+        ],
+        [
+          0.37265796668931495,
+          0.4478954377522218,
+          0.5155846032212251
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SodiumRestrictionAdherence",
+      "parents": [
+        "BloodPressureControl"
+      ],
+      "values": [
+        [
+          0.38012246960362434,
+          0.9088858479939268,
+          0.9930236320972642
+        ],
+        [
+          0.3080692981250823,
+          0.02823761209631386,
+          0.0011826928208876462
+        ],
+        [
+          0.31180823227129334,
+          0.06287653990975939,
+          0.005793675081848329
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift BloodPressureControl toward WellControlled (and away from Uncontrolled), but only if the same action does not make AcuteKidneyInjuryRisk more likely to be SignificantInjury. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "AmlodipineRegimen",
+        "value": "EscalatedDose"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "BloodPressureControl",
+          "safety_outcome": "AcuteKidneyInjuryRisk",
+          "good_intervention": "AmlodipineRegimen",
+          "risky_intervention": "HighDoseAceInhibitor",
+          "weak_intervention": "LifestyleCounseling",
+          "good_mediator": "ArterialCompliance",
+          "confounder": "BaselineHypertensionSeverity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "AmlodipineRegimen",
+            "value": "EscalatedDose"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "AmlodipineRegimen",
+              "value": "EscalatedDose",
+              "delta_target": -0.2887,
+              "delta_safety": 0.0355
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "HighDoseAceInhibitor",
+              "value": "MaxDose",
+              "delta_target": -0.2986,
+              "delta_safety": 0.5152,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.446,
+            "E_safety": 1.2064
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

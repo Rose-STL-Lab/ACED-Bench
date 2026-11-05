@@ -1,0 +1,1078 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "subgroup_robust",
+    "seed": 34404,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A national vocational training authority oversees apprenticeship programs across multiple trade sectors and regions. The research team has access to administrative records and can request both observational and interventional data samples from participating training centers.",
+  "non_intervenable_variables": [
+    {
+      "name": "ApprenticeshipOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorEducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmployerSupportQuality",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TradeCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LiteracyAssessmentScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CommuteDistance",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorWorkExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PeerCohortSize",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ApprenticeshipOutcome",
+      "values": [
+        "Completed",
+        "Delayed",
+        "DroppedOut"
+      ],
+      "desc": "Final status of the apprentice at end of program cycle.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorEducationLevel",
+      "values": [
+        "HighSchoolDiploma",
+        "NoHighSchoolDiploma"
+      ],
+      "desc": "Whether the apprentice holds a high school diploma at enrollment.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalSimulationTraining",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Extent of virtual reality and digital simulation modules assigned.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "StructuredMentorPairing",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of scheduled one-on-one sessions with an assigned trade mentor.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AcceleratedSkillBootcamp",
+      "values": [
+        "None",
+        "OneWeek",
+        "TwoWeek"
+      ],
+      "desc": "Duration of intensive pre-apprenticeship skills bootcamp attended.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "EmployerSupportQuality",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Rating of the host employer's training infrastructure and supervision resources.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under25",
+        "25andOver"
+      ],
+      "desc": "Age category of the apprentice at program enrollment date.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TradeCategory",
+      "values": [
+        "Construction",
+        "Manufacturing",
+        "ServiceTrades"
+      ],
+      "desc": "Broad occupational sector of the apprenticeship program.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WeeklyWorkshopHours",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of hours per week spent in off-the-job classroom workshops.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "LiteracyAssessmentScore",
+      "values": [
+        "BelowBasic",
+        "Basic",
+        "Proficient"
+      ],
+      "desc": "Standardized literacy assessment result at program intake.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CommuteDistance",
+      "values": [
+        "Short",
+        "Long"
+      ],
+      "desc": "Distance category between apprentice residence and training site.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FinancialStipendLevel",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Level of financial stipend or wage subsidy provided during training.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorWorkExperience",
+      "values": [
+        "NoneOrMinimal",
+        "Substantial"
+      ],
+      "desc": "Extent of paid employment history before apprenticeship entry.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerCohortSize",
+      "values": [
+        "Small",
+        "Large"
+      ],
+      "desc": "Number of fellow apprentices in the same training cohort.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SafetyTrainingCompletion",
+      "values": [
+        "Incomplete",
+        "Complete"
+      ],
+      "desc": "Whether mandatory workplace safety certification modules were finished.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PriorEducationLevel",
+      "ApprenticeshipOutcome"
+    ],
+    [
+      "DigitalSimulationTraining",
+      "ApprenticeshipOutcome"
+    ],
+    [
+      "StructuredMentorPairing",
+      "ApprenticeshipOutcome"
+    ],
+    [
+      "AcceleratedSkillBootcamp",
+      "ApprenticeshipOutcome"
+    ],
+    [
+      "EmployerSupportQuality",
+      "ApprenticeshipOutcome"
+    ],
+    [
+      "EmployerSupportQuality",
+      "LiteracyAssessmentScore"
+    ],
+    [
+      "LiteracyAssessmentScore",
+      "DigitalSimulationTraining"
+    ],
+    [
+      "FinancialStipendLevel",
+      "CommuteDistance"
+    ],
+    [
+      "SafetyTrainingCompletion",
+      "StructuredMentorPairing"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PriorEducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.46056494130617937
+        ],
+        [
+          0.5394350586938207
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AcceleratedSkillBootcamp",
+      "parents": [],
+      "values": [
+        [
+          0.09930276490736684
+        ],
+        [
+          0.4690030927582825
+        ],
+        [
+          0.4316941423343506
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmployerSupportQuality",
+      "parents": [],
+      "values": [
+        [
+          0.27577374938517907
+        ],
+        [
+          0.39066762608331873
+        ],
+        [
+          0.3335586245315023
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.2675602917643477
+        ],
+        [
+          0.7324397082356523
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TradeCategory",
+      "parents": [],
+      "values": [
+        [
+          0.4923560593035789
+        ],
+        [
+          0.26506969394817137
+        ],
+        [
+          0.2425742467482497
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WeeklyWorkshopHours",
+      "parents": [],
+      "values": [
+        [
+          0.1878354753468458
+        ],
+        [
+          0.10554143197868583
+        ],
+        [
+          0.7066230926744683
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FinancialStipendLevel",
+      "parents": [],
+      "values": [
+        [
+          0.5563077192903277
+        ],
+        [
+          0.0994355926053801
+        ],
+        [
+          0.34425668810429216
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorWorkExperience",
+      "parents": [],
+      "values": [
+        [
+          0.7046990809339568
+        ],
+        [
+          0.2953009190660432
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PeerCohortSize",
+      "parents": [],
+      "values": [
+        [
+          0.16244185815071546
+        ],
+        [
+          0.8375581418492845
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SafetyTrainingCompletion",
+      "parents": [],
+      "values": [
+        [
+          0.09787934855812172
+        ],
+        [
+          0.9021206514418784
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "LiteracyAssessmentScore",
+      "parents": [
+        "EmployerSupportQuality"
+      ],
+      "values": [
+        [
+          0.36308734035613466,
+          0.9021542279657926,
+          0.9932585678624309
+        ],
+        [
+          0.2657480567309354,
+          0.046139326014995305,
+          0.003549639464496193
+        ],
+        [
+          0.37116460291292985,
+          0.051706446019212246,
+          0.0031917926730729304
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CommuteDistance",
+      "parents": [
+        "FinancialStipendLevel"
+      ],
+      "values": [
+        [
+          0.5723514554605251,
+          0.05615222456064273,
+          0.002637589602284006
+        ],
+        [
+          0.4276485445394749,
+          0.9438477754393574,
+          0.9973624103977159
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "StructuredMentorPairing",
+      "parents": [
+        "SafetyTrainingCompletion"
+      ],
+      "values": [
+        [
+          0.37862234001066086,
+          0.29409468318501153
+        ],
+        [
+          0.33751667326067136,
+          0.21930140586766392
+        ],
+        [
+          0.2838609867286678,
+          0.4866039109473245
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DigitalSimulationTraining",
+      "parents": [
+        "LiteracyAssessmentScore"
+      ],
+      "values": [
+        [
+          0.3128609882670321,
+          0.030431079027729235,
+          0.0013635999791967483
+        ],
+        [
+          0.3813030525479329,
+          0.9064140873284074,
+          0.992628421947495
+        ],
+        [
+          0.305835959185035,
+          0.0631548336438633,
+          0.006007978073308251
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ApprenticeshipOutcome",
+      "parents": [
+        "EmployerSupportQuality",
+        "PriorEducationLevel",
+        "DigitalSimulationTraining",
+        "StructuredMentorPairing",
+        "AcceleratedSkillBootcamp"
+      ],
+      "values": [
+        [
+          0.36373215183732366,
+          0.44800390813923174,
+          0.183770610927491,
+          0.48740267593323844,
+          0.5439754098956635,
+          0.2753319576094993,
+          0.7618948791541342,
+          0.8028006146707107,
+          0.6071551704567901,
+          0.5083401475274538,
+          0.5800126102155281,
+          0.3118777652407963,
+          0.6017667264960502,
+          0.6587470730334783,
+          0.38535112100099334,
+          0.8349465865476948,
+          0.8610738303713077,
+          0.7208441391753514,
+          0.6356755550213028,
+          0.6903305849532124,
+          0.4190606660014093,
+          0.7226891129466441,
+          0.7717355803880837,
+          0.5558780444998247,
+          0.891912099148628,
+          0.9134599914840031,
+          0.8139397961162003,
+          0.10649412257418574,
+          0.1434810861692807,
+          0.43930806799061506,
+          0.16997413860321037,
+          0.21449922545538247,
+          0.5277406904657452,
+          0.4761660197339896,
+          0.5332806002728694,
+          0.7997271343512048,
+          0.18410833880567162,
+          0.2478298824575433,
+          0.5767147707563149,
+          0.2819568527134698,
+          0.3346321363409552,
+          0.6459666592922669,
+          0.6035066129393057,
+          0.6595888374084886,
+          0.8727460447121694,
+          0.6329996881464847,
+          0.6828507846456537,
+          0.8816159909154657,
+          0.7198281696067349,
+          0.7658773022660763,
+          0.9080961195599452,
+          0.8866546724256333,
+          0.9104270174381421,
+          0.965987826203279,
+          0.19737165830236528,
+          0.23894203033662978,
+          0.07627789657691923,
+          0.27742942886818117,
+          0.3509991724925925,
+          0.12420434050504885,
+          0.6111814170796876,
+          0.6656441248850596,
+          0.4140662102827985,
+          0.30179255549028655,
+          0.37101093317022954,
+          0.13487130751526266,
+          0.3829123015541711,
+          0.4715174490240517,
+          0.21223528126717126,
+          0.7107915859727364,
+          0.769039024149339,
+          0.5513604227171698,
+          0.41575492944782244,
+          0.5034838483245989,
+          0.24323511237748552,
+          0.5393409133939141,
+          0.6018601010275219,
+          0.34267695571364093,
+          0.8082687806490744,
+          0.8390978167908633,
+          0.6724017065243025,
+          0.03799998285144242,
+          0.056593020671673225,
+          0.23162024336865955,
+          0.06830120362570752,
+          0.0920884270709391,
+          0.34337681674200854,
+          0.26755905644688177,
+          0.3252377962713562,
+          0.6635481638916005,
+          0.07952620898177142,
+          0.10726483640158219,
+          0.3766640760172326,
+          0.12481929578716332,
+          0.16736825031751587,
+          0.479904713619421,
+          0.3907662040762296,
+          0.4696914107158738,
+          0.7571018399186675,
+          0.44541787594029725,
+          0.5167222060525876,
+          0.792322525451045,
+          0.5491192920609467,
+          0.6140048833485479,
+          0.8405540006758824,
+          0.7971324999890873,
+          0.8344913218904726,
+          0.9401422189567498,
+          0.018118285299804023,
+          0.028190095561169456,
+          0.006561288216883542,
+          0.032827477629147166,
+          0.04730758179138736,
+          0.01172338124824238,
+          0.17112999159036218,
+          0.22081635003903455,
+          0.06659474048038262,
+          0.038345946382848994,
+          0.05452438394309578,
+          0.012878359475529778,
+          0.06413034233256008,
+          0.09246593467171095,
+          0.02193387681309249,
+          0.27429652054158216,
+          0.341342611838232,
+          0.11322407749118253,
+          0.07110630027274929,
+          0.10472563425257378,
+          0.028298595162746683,
+          0.12328431239907314,
+          0.1555353863426936,
+          0.04495987113143366,
+          0.39126466660448944,
+          0.4747817790305809,
+          0.20515349582553954,
+          0.00271073879444554,
+          0.004401185411843295,
+          0.026430276406179933,
+          0.0052893347327975055,
+          0.007706500098050604,
+          0.04636045855296092,
+          0.03189600823384801,
+          0.0457895445381823,
+          0.21345498971067214,
+          0.006526462348944914,
+          0.008710532607167084,
+          0.051777705979891,
+          0.010990758041737209,
+          0.015022340815140062,
+          0.0886389306356435,
+          0.06427638944851566,
+          0.09475425699595236,
+          0.32413971082451654,
+          0.07232022781192418,
+          0.10745775813374892,
+          0.3716505657089628,
+          0.12182362068996307,
+          0.16181902213776567,
+          0.478187264104654,
+          0.4041126422768463,
+          0.4669408886345828,
+          0.7598683311911135
+        ],
+        [
+          0.3432841799889873,
+          0.30736214209849533,
+          0.3093903958730473,
+          0.3058514472281228,
+          0.29632760452404444,
+          0.33170037047441425,
+          0.19291921906902149,
+          0.1655369993994378,
+          0.27545949894524047,
+          0.3047521866660333,
+          0.2818847299691944,
+          0.31406266092425417,
+          0.27117263957550597,
+          0.2499465330485818,
+          0.3340431667281923,
+          0.14239020426582122,
+          0.12310916961078068,
+          0.21266530937707423,
+          0.26078993383003657,
+          0.23298452140899675,
+          0.3310883293693957,
+          0.21033453736372967,
+          0.18131011852819082,
+          0.28401593072799425,
+          0.09682378806245423,
+          0.0792877314105741,
+          0.15457072230117833,
+          0.25870460952360147,
+          0.28637602018523645,
+          0.3156550248655849,
+          0.30824997187032577,
+          0.30790972065979,
+          0.309632892022014,
+          0.31415101874000056,
+          0.3057205592095201,
+          0.16674625102188328,
+          0.3080735576923095,
+          0.31217981717182325,
+          0.28112824108229395,
+          0.3267014781368142,
+          0.3310963242890591,
+          0.26029110399177063,
+          0.2685398899578276,
+          0.2531343788259403,
+          0.11111989871828647,
+          0.26090506109898937,
+          0.24199041290275555,
+          0.10469680994186811,
+          0.21144523281213834,
+          0.18875866714473435,
+          0.08431870596595237,
+          0.10248164539414298,
+          0.08209799916390945,
+          0.032960554982688434,
+          0.30163011355075564,
+          0.3154400489099651,
+          0.23631599123814517,
+          0.3121640936515394,
+          0.3238500354217548,
+          0.25778269879650556,
+          0.26264896851736746,
+          0.23920879655394836,
+          0.3234499096412489,
+          0.3168645058469655,
+          0.3261486346355772,
+          0.2747691023624227,
+          0.33702262211421546,
+          0.32561726582936906,
+          0.31705160618106026,
+          0.2236787522498896,
+          0.18729550516748486,
+          0.28908237913806173,
+          0.33808715421468954,
+          0.303188864339319,
+          0.33360771415017937,
+          0.30044775151730385,
+          0.27614071075848856,
+          0.32122270193081526,
+          0.16128576408942008,
+          0.13696409256062614,
+          0.23621080635056074,
+          0.1763970052924275,
+          0.192156969703256,
+          0.3338960358639022,
+          0.2153550722215756,
+          0.24244727832416713,
+          0.3309488490655658,
+          0.32389639175294016,
+          0.34429725678478407,
+          0.24598169796787928,
+          0.2368729298660683,
+          0.27270136626846403,
+          0.33675203002425397,
+          0.27045718808005326,
+          0.28763749664372396,
+          0.30571697239732226,
+          0.3371281860605064,
+          0.3209403675429661,
+          0.19589750434858938,
+          0.3131580115447558,
+          0.3034767529446066,
+          0.16802429904300253,
+          0.2938392188704705,
+          0.26014345923673565,
+          0.13529500209156922,
+          0.1676714101834948,
+          0.1428352747032459,
+          0.056497258245584554,
+          0.12893011854886632,
+          0.1431740163844932,
+          0.07432295169319518,
+          0.16524511000698094,
+          0.18010663180432623,
+          0.0957943858250384,
+          0.293590551212802,
+          0.31950038023989796,
+          0.21225730980783358,
+          0.17376632119420368,
+          0.1907542837282696,
+          0.11101693828116665,
+          0.23060578873942889,
+          0.24801192271733186,
+          0.13410833635851774,
+          0.3209906035198995,
+          0.3332796639529754,
+          0.2766119635228774,
+          0.2306907313183854,
+          0.24183406211356523,
+          0.14514387811407264,
+          0.2668951001692496,
+          0.29261940797079444,
+          0.17832470927403601,
+          0.334959708331583,
+          0.31346929314790895,
+          0.31121375755596103,
+          0.05058445226402232,
+          0.06066930220160127,
+          0.14900108388315098,
+          0.07304668452347052,
+          0.0823906539727937,
+          0.1838434399669189,
+          0.1711091524893384,
+          0.18656021890610425,
+          0.3265328436525467,
+          0.07738501396792036,
+          0.09240444672717711,
+          0.200620834407392,
+          0.09846920675952495,
+          0.11271432228364811,
+          0.24624313031620215,
+          0.2120471764185806,
+          0.2565252552686213,
+          0.33711317468841806,
+          0.22927307991006263,
+          0.2570586901525834,
+          0.32744508875700273,
+          0.290949707996974,
+          0.2854687340531635,
+          0.30567250907425525,
+          0.3240301665685712,
+          0.3245967037559609,
+          0.1925107734293287
+        ],
+        [
+          0.2929836681736891,
+          0.2446339497622729,
+          0.5068389931994618,
+          0.20674587683863876,
+          0.15969698558029208,
+          0.39296767191608645,
+          0.045185901776844256,
+          0.03166238592985157,
+          0.11738533059796938,
+          0.18690766580651286,
+          0.13810265981527756,
+          0.3740595738349495,
+          0.1270606339284438,
+          0.0913063939179398,
+          0.28060571227081443,
+          0.02266320918648402,
+          0.01581700001791174,
+          0.06649055144757425,
+          0.10353451114866069,
+          0.07668489363779066,
+          0.2498510046291951,
+          0.06697634968962646,
+          0.04695430108372552,
+          0.16010602477218092,
+          0.01126411278891777,
+          0.007252277105422919,
+          0.031489481582621465,
+          0.6348012679022128,
+          0.5701428936454829,
+          0.24503690714380008,
+          0.5217758895264639,
+          0.47759105388482753,
+          0.1626264175122408,
+          0.20968296152600982,
+          0.16099884051761046,
+          0.03352661462691199,
+          0.5078181035020188,
+          0.4399903003706334,
+          0.14215698816139105,
+          0.391341669149716,
+          0.33427153936998566,
+          0.0937422367159624,
+          0.12795349710286666,
+          0.08727678376557106,
+          0.01613405656954409,
+          0.1060952507545261,
+          0.07515880245159078,
+          0.013687199142666277,
+          0.06872659758112681,
+          0.0453640305891893,
+          0.00758517447410252,
+          0.010863682180223821,
+          0.007474983397948481,
+          0.0010516188140324227,
+          0.500998228146879,
+          0.44561792075340506,
+          0.6874061121849355,
+          0.4104064774802793,
+          0.3251507920856528,
+          0.6180129606984455,
+          0.12616961440294486,
+          0.0951470785609919,
+          0.26248388007595264,
+          0.381342938662748,
+          0.30284043219419327,
+          0.5903595901223146,
+          0.28006507633161337,
+          0.2028652851465793,
+          0.4707131125517685,
+          0.06552966177737399,
+          0.04366547068317616,
+          0.15955719814476846,
+          0.24615791633748807,
+          0.19332728733608207,
+          0.42315717347233517,
+          0.1602113350887821,
+          0.12199918821398958,
+          0.3361003423555438,
+          0.030445455261505636,
+          0.023938090648510508,
+          0.09138748712513689,
+          0.78560301185613,
+          0.7512500096250708,
+          0.4344837207674382,
+          0.7163437241527169,
+          0.6654642946048938,
+          0.3256743341924256,
+          0.408544551800178,
+          0.33046494694385975,
+          0.09047013814052021,
+          0.6836008611521602,
+          0.6200337973299538,
+          0.2865838939585134,
+          0.6047235161327835,
+          0.5449942530387601,
+          0.2143783139832567,
+          0.27210560986326404,
+          0.20936822174116015,
+          0.047000655732743174,
+          0.24142411251494694,
+          0.17980104100280586,
+          0.03965317550595242,
+          0.15704148906858295,
+          0.1258516574147166,
+          0.02415099723254837,
+          0.035196089827417856,
+          0.022673403406281604,
+          0.003360522797665764,
+          0.8529515961513296,
+          0.8286358880543374,
+          0.9191157600899214,
+          0.8019274123638719,
+          0.7725857864042864,
+          0.8924822329267192,
+          0.5352794571968358,
+          0.4596832697210674,
+          0.7211479497117839,
+          0.7878877324229472,
+          0.7547213323286346,
+          0.8761047022433036,
+          0.7052638689280111,
+          0.6595221426109572,
+          0.8439577868283898,
+          0.4047128759385183,
+          0.32537772420879263,
+          0.61016395898594,
+          0.6982029684088653,
+          0.6534403036338611,
+          0.8265575267231806,
+          0.6098205874316772,
+          0.551845205686512,
+          0.7767154195945304,
+          0.27377562506392744,
+          0.21174892782151022,
+          0.4836327466184993,
+          0.9467048089415321,
+          0.9349295123865554,
+          0.8245686397106691,
+          0.9216639807437319,
+          0.9099028459291557,
+          0.7697961014801202,
+          0.7969948392768136,
+          0.7676502365557135,
+          0.46001216663678113,
+          0.9160885236831348,
+          0.8988850206656559,
+          0.7476014596127171,
+          0.8905400351987379,
+          0.8722633369012118,
+          0.6651179390481544,
+          0.7236764341329038,
+          0.6487204877354263,
+          0.33874711448706535,
+          0.6984066922780132,
+          0.6354835517136677,
+          0.30090434553403445,
+          0.5872266713130629,
+          0.5527122438090708,
+          0.21614022682109074,
+          0.2718571911545825,
+          0.2084624076094562,
+          0.0476208953795577
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift ApprenticeshipOutcome toward Completed (and away from DroppedOut). The deployment will reach individuals with PriorEducationLevel=HighSchoolDiploma as well as PriorEducationLevel=NoHighSchoolDiploma, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "StructuredMentorPairing",
+        "value": "Weekly",
+        "min_improvement": 0.2735,
+        "improvement_low": 0.2954,
+        "improvement_high": 0.2735
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "ApprenticeshipOutcome",
+          "group": "PriorEducationLevel",
+          "intervention_avg": "DigitalSimulationTraining",
+          "intervention_rob": "StructuredMentorPairing",
+          "intervention_bad": "AcceleratedSkillBootcamp",
+          "confounder": "EmployerSupportQuality"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "StructuredMentorPairing",
+            "value": "Weekly",
+            "min_improvement": 0.2735,
+            "improvement_low": 0.2954,
+            "improvement_high": 0.2735
+          },
+          "avg_best_but_uneven": {
+            "variable": "DigitalSimulationTraining",
+            "value": "Full",
+            "min_improvement": 0.1774,
+            "improvement_low": 0.1774,
+            "improvement_high": 0.4712
+          },
+          "harmful_in_subgroup": {
+            "variable": "AcceleratedSkillBootcamp",
+            "value": "TwoWeek",
+            "min_improvement": -0.2016,
+            "improvement_low": -0.2016,
+            "improvement_high": 0.2546
+          },
+          "subgroups": [
+            "HighSchoolDiploma",
+            "NoHighSchoolDiploma"
+          ],
+          "group_variable": "PriorEducationLevel",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "DigitalSimulationTraining",
+              "value": "Full",
+              "improvement_low": 0.1774,
+              "improvement_high": 0.4712,
+              "min_improvement": 0.1774
+            },
+            {
+              "variable": "StructuredMentorPairing",
+              "value": "Weekly",
+              "improvement_low": 0.2954,
+              "improvement_high": 0.2735,
+              "min_improvement": 0.2735
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

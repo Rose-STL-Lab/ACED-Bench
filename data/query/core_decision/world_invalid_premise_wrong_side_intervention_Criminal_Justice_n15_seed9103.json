@@ -1,0 +1,605 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "invalid_premise:wrong_side_intervention",
+    "seed": 9103,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "wrong_side_intervention"
+  },
+  "story": "A metropolitan police department maintains detailed records on officer encounters, equipment status, personnel history, and administrative oversight. The researcher has access to these administrative records and can request observational or interventional data samples from participating precincts.",
+  "non_intervenable_variables": [
+    {
+      "name": "OfficerUseOfForceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerSituationalAwareness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrecinctViolenceTier",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerTenureYears",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ShiftType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EncounterEscalationContext",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OfficerPriorComplaints",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CivilianDemographicRisk",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EquipmentFunctionality",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "OfficerUseOfForceLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Degree of physical force used by officer during encounters",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ComplianceScoreDisplay",
+      "values": [
+        "Hidden",
+        "Shown"
+      ],
+      "desc": "Whether an officer's camera-compliance percentage is displayed on their dashboard",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CameraActivationPolicy",
+      "values": [
+        "Voluntary",
+        "Mandatory"
+      ],
+      "desc": "Policy rule governing when officers must activate body cameras",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerSituationalAwareness",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Officer's self-reported awareness of being recorded during encounters",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PrecinctViolenceTier",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Classification of precinct based on historical violent crime rates",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerTenureYears",
+      "values": [
+        "Junior",
+        "MidCareer",
+        "Senior"
+      ],
+      "desc": "Length of time the officer has served on the police force",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ShiftType",
+      "values": [
+        "Day",
+        "Evening",
+        "Night"
+      ],
+      "desc": "Time-of-day classification for the officer's assigned patrol shift",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EncounterEscalationContext",
+      "values": [
+        "Calm",
+        "Tense",
+        "Hostile"
+      ],
+      "desc": "Initial demeanor and threat level at the start of a civilian encounter",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SupervisorReviewFrequency",
+      "values": [
+        "Rare",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "How often a supervisor reviews an officer's recorded footage",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CameraFootageRetentionDays",
+      "values": [
+        "30days",
+        "90days",
+        "180days"
+      ],
+      "desc": "Number of days body-camera footage is stored before deletion",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OfficerPriorComplaints",
+      "values": [
+        "None",
+        "Few",
+        "Many"
+      ],
+      "desc": "Count category of civilian complaints filed against the officer historically",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TrainingHoursDeescalation",
+      "values": [
+        "None",
+        "Basic",
+        "Advanced"
+      ],
+      "desc": "Level of de-escalation training hours the officer has completed",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PartnerAssignment",
+      "values": [
+        "Solo",
+        "Paired"
+      ],
+      "desc": "Whether the officer patrols alone or with a partner",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CivilianDemographicRisk",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Neighborhood demographic vulnerability index for the encounter location",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EquipmentFunctionality",
+      "values": [
+        "FullyOperational",
+        "PartialMalfunction"
+      ],
+      "desc": "Operational status of the officer's body-camera hardware at encounter time",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "OfficerUseOfForceLevel",
+      "ComplianceScoreDisplay"
+    ],
+    [
+      "CameraActivationPolicy",
+      "OfficerSituationalAwareness"
+    ],
+    [
+      "OfficerSituationalAwareness",
+      "OfficerUseOfForceLevel"
+    ],
+    [
+      "PrecinctViolenceTier",
+      "OfficerUseOfForceLevel"
+    ],
+    [
+      "CameraFootageRetentionDays",
+      "EncounterEscalationContext"
+    ],
+    [
+      "OfficerPriorComplaints",
+      "CameraActivationPolicy"
+    ],
+    [
+      "PartnerAssignment",
+      "TrainingHoursDeescalation"
+    ],
+    [
+      "EquipmentFunctionality",
+      "SupervisorReviewFrequency"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PrecinctViolenceTier",
+      "parents": [],
+      "values": [
+        [
+          0.09427108669886107
+        ],
+        [
+          0.6531662364113011
+        ],
+        [
+          0.25256267688983786
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerTenureYears",
+      "parents": [],
+      "values": [
+        [
+          0.2780688668199557
+        ],
+        [
+          0.1102687178180356
+        ],
+        [
+          0.6116624153620087
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ShiftType",
+      "parents": [],
+      "values": [
+        [
+          0.47697184495440803
+        ],
+        [
+          0.09825388230567435
+        ],
+        [
+          0.4247742727399177
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CameraFootageRetentionDays",
+      "parents": [],
+      "values": [
+        [
+          0.6463342942329745
+        ],
+        [
+          0.1815955115162392
+        ],
+        [
+          0.17207019425078626
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerPriorComplaints",
+      "parents": [],
+      "values": [
+        [
+          0.5243990828232956
+        ],
+        [
+          0.09633887986835092
+        ],
+        [
+          0.3792620373083535
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PartnerAssignment",
+      "parents": [],
+      "values": [
+        [
+          0.511405760008575
+        ],
+        [
+          0.4885942399914251
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CivilianDemographicRisk",
+      "parents": [],
+      "values": [
+        [
+          0.2224813984997895
+        ],
+        [
+          0.19053722819302432
+        ],
+        [
+          0.5869813733071861
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EquipmentFunctionality",
+      "parents": [],
+      "values": [
+        [
+          0.21774531441886938
+        ],
+        [
+          0.7822546855811306
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EncounterEscalationContext",
+      "parents": [
+        "CameraFootageRetentionDays"
+      ],
+      "values": [
+        [
+          0.35557455727369236,
+          0.06523057171654058,
+          0.005311191313960499
+        ],
+        [
+          0.3707612791916648,
+          0.16447817754417568,
+          0.03238489192954621
+        ],
+        [
+          0.27366416353464285,
+          0.7702912507392837,
+          0.9623039167564932
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CameraActivationPolicy",
+      "parents": [
+        "OfficerPriorComplaints"
+      ],
+      "values": [
+        [
+          0.5841362671549,
+          0.4142563533018472,
+          0.26258594185557316
+        ],
+        [
+          0.4158637328451001,
+          0.5857436466981527,
+          0.7374140581444268
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TrainingHoursDeescalation",
+      "parents": [
+        "PartnerAssignment"
+      ],
+      "values": [
+        [
+          0.37878424179148806,
+          0.17686369377471192
+        ],
+        [
+          0.36694246150902216,
+          0.06197405140409845
+        ],
+        [
+          0.25427329669948984,
+          0.7611622548211897
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SupervisorReviewFrequency",
+      "parents": [
+        "EquipmentFunctionality"
+      ],
+      "values": [
+        [
+          0.32761618706008666,
+          0.04137283569696075
+        ],
+        [
+          0.3299972383438786,
+          0.5468478359695986
+        ],
+        [
+          0.3423865745960347,
+          0.4117793283334406
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerSituationalAwareness",
+      "parents": [
+        "CameraActivationPolicy"
+      ],
+      "values": [
+        [
+          0.15945016463359807,
+          0.868391621585088
+        ],
+        [
+          0.2972547432951565,
+          0.11504046488267446
+        ],
+        [
+          0.5432950920712454,
+          0.016567913532237487
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OfficerUseOfForceLevel",
+      "parents": [
+        "PrecinctViolenceTier",
+        "OfficerSituationalAwareness"
+      ],
+      "values": [
+        [
+          0.8570107670722121,
+          0.4595428176962366,
+          0.21879766586496313,
+          0.81033193377924,
+          0.3424799385185213,
+          0.1278366920986431,
+          0.5393272203274596,
+          0.08732289975800313,
+          0.02357734043619321
+        ],
+        [
+          0.12597107787933937,
+          0.32376123009177493,
+          0.3266491015334828,
+          0.15674689487502835,
+          0.32849586060213215,
+          0.27794684199129666,
+          0.2950859028059006,
+          0.23223836336527168,
+          0.13736265271492307
+        ],
+        [
+          0.017018155048448575,
+          0.21669595221198848,
+          0.4545532326015541,
+          0.03292117134573152,
+          0.3290242008793465,
+          0.5942164659100602,
+          0.16558687686663978,
+          0.6804387368767251,
+          0.8390600068488838
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ComplianceScoreDisplay",
+      "parents": [
+        "OfficerUseOfForceLevel"
+      ],
+      "values": [
+        [
+          0.8278831090396791,
+          0.5021292752684424,
+          0.01789167036654937
+        ],
+        [
+          0.17211689096032087,
+          0.4978707247315577,
+          0.9821083296334506
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting ComplianceScoreDisplay=Shown as a way to shift OfficerUseOfForceLevel toward Low (and away from High). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift OfficerUseOfForceLevel toward Low.",
+      "answer": {
+        "is_valid_intervention": false,
+        "invalid_reason": "wrong_side_intervention",
+        "alternative": {
+          "variable": "CameraActivationPolicy",
+          "value": "Mandatory"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "wrong_side_intervention",
+        "roles": {
+          "target": "OfficerUseOfForceLevel",
+          "proposed_intervention": "ComplianceScoreDisplay",
+          "intervenable_alt": "CameraActivationPolicy",
+          "alt_mediator": "OfficerSituationalAwareness",
+          "confounder": "PrecinctViolenceTier"
+        },
+        "gold": {
+          "is_valid_intervention": false,
+          "alternative": {
+            "variable": "CameraActivationPolicy",
+            "value": "Mandatory"
+          },
+          "alternative_effect": -0.3501,
+          "acceptable_alternatives": [
+            {
+              "variable": "CameraActivationPolicy",
+              "value": "Mandatory",
+              "improvement": 0.3501
+            }
+          ],
+          "accept_threshold": 0.1,
+          "invalid_reason": "wrong_side_intervention",
+          "proposed_intervention": {
+            "variable": "ComplianceScoreDisplay",
+            "value": "Shown"
+          },
+          "proposed_predictive_gap": 1.1644,
+          "proposed_do_effect": 0.0
+        }
+      }
+    }
+  ]
+}

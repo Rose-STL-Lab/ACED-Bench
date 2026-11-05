@@ -1,0 +1,792 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 5121,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A researcher at a large academic rehabilitation hospital has access to detailed patient records spanning multiple units. The institution permits requests for both observational chart reviews and prospective interventional study designs.",
+  "non_intervenable_variables": [
+    {
+      "name": "FunctionalIndependence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FallIncidence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UpperLimbMotorControl",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StrokeSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DaysPostStroke",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreStrokeMobility",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CognitiveFunctionBaseline",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnticoagulantUse",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "FunctionalIndependence",
+      "values": [
+        "FullIndependence",
+        "ModerateAssistance",
+        "FullDependence"
+      ],
+      "desc": "Level of independence in daily living activities at discharge.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FallIncidence",
+      "values": [
+        "NoFalls",
+        "OneFall",
+        "MultipleFalls"
+      ],
+      "desc": "Number of fall events recorded during the rehabilitation stay.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "TaskSpecificTraining",
+      "values": [
+        "None",
+        "Moderate",
+        "Intensive"
+      ],
+      "desc": "Dose of repetitive task-oriented practice sessions per week.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HighIntensityTreadmill",
+      "values": [
+        "Off",
+        "Light",
+        "Full"
+      ],
+      "desc": "Level of body-weight-supported treadmill training intensity assigned.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PassiveRangeOfMotion",
+      "values": [
+        "None",
+        "Daily"
+      ],
+      "desc": "Whether daily passive range-of-motion exercises are administered.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "UpperLimbMotorControl",
+      "values": [
+        "Good",
+        "Moderate",
+        "Poor"
+      ],
+      "desc": "Degree of volitional upper extremity movement measured by Fugl-Meyer score.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "StrokeSeverity",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Initial neurological deficit severity classified by NIHSS at admission.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under60",
+        "60to75",
+        "Over75"
+      ],
+      "desc": "Patient age bracket at time of stroke onset.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DaysPostStroke",
+      "values": [
+        "Acute",
+        "Subacute",
+        "Chronic"
+      ],
+      "desc": "Time elapsed between stroke onset and rehabilitation admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PreStrokeMobility",
+      "values": [
+        "Independent",
+        "LimitedMobility"
+      ],
+      "desc": "Walking ability classification prior to the stroke event.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CognitiveFunctionBaseline",
+      "values": [
+        "Intact",
+        "MildImpairment",
+        "ModerateImpairment"
+      ],
+      "desc": "Baseline cognitive status assessed by Montreal Cognitive Assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SpeechLanguageTherapy",
+      "values": [
+        "None",
+        "Weekly",
+        "Daily"
+      ],
+      "desc": "Frequency of scheduled speech-language pathology sessions.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AnticoagulantUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is prescribed anticoagulant medication during rehab.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyEngagement",
+      "values": [
+        "Low",
+        "High"
+      ],
+      "desc": "Degree of family participation in rehabilitation education sessions.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NutritionalSupport",
+      "values": [
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Level of dietitian-guided nutritional supplementation provided.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "FunctionalIndependence",
+      "FamilyEngagement"
+    ],
+    [
+      "TaskSpecificTraining",
+      "UpperLimbMotorControl"
+    ],
+    [
+      "HighIntensityTreadmill",
+      "FunctionalIndependence"
+    ],
+    [
+      "HighIntensityTreadmill",
+      "FallIncidence"
+    ],
+    [
+      "PassiveRangeOfMotion",
+      "FunctionalIndependence"
+    ],
+    [
+      "UpperLimbMotorControl",
+      "FunctionalIndependence"
+    ],
+    [
+      "UpperLimbMotorControl",
+      "AgeGroup"
+    ],
+    [
+      "StrokeSeverity",
+      "FunctionalIndependence"
+    ],
+    [
+      "StrokeSeverity",
+      "FallIncidence"
+    ],
+    [
+      "DaysPostStroke",
+      "AgeGroup"
+    ],
+    [
+      "PreStrokeMobility",
+      "CognitiveFunctionBaseline"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "TaskSpecificTraining",
+      "parents": [],
+      "values": [
+        [
+          0.46986897211749806
+        ],
+        [
+          0.20069560864456945
+        ],
+        [
+          0.32943541923793246
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HighIntensityTreadmill",
+      "parents": [],
+      "values": [
+        [
+          0.27699750977068266
+        ],
+        [
+          0.3312894943019314
+        ],
+        [
+          0.3917129959273859
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PassiveRangeOfMotion",
+      "parents": [],
+      "values": [
+        [
+          0.6008257351896725
+        ],
+        [
+          0.39917426481032753
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "StrokeSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.3370019029162181
+        ],
+        [
+          0.32910506659481215
+        ],
+        [
+          0.3338930304889697
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DaysPostStroke",
+      "parents": [],
+      "values": [
+        [
+          0.5155138735508941
+        ],
+        [
+          0.3629429901331308
+        ],
+        [
+          0.12154313631597521
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PreStrokeMobility",
+      "parents": [],
+      "values": [
+        [
+          0.9059635277531723
+        ],
+        [
+          0.0940364722468276
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SpeechLanguageTherapy",
+      "parents": [],
+      "values": [
+        [
+          0.1688640291039505
+        ],
+        [
+          0.3052164325999271
+        ],
+        [
+          0.5259195382961225
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AnticoagulantUse",
+      "parents": [],
+      "values": [
+        [
+          0.14718332449723837
+        ],
+        [
+          0.8528166755027615
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NutritionalSupport",
+      "parents": [],
+      "values": [
+        [
+          0.6724712735374406
+        ],
+        [
+          0.3275287264625593
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "UpperLimbMotorControl",
+      "parents": [
+        "TaskSpecificTraining"
+      ],
+      "values": [
+        [
+          0.16479566765584516,
+          0.7264991629969354,
+          0.9075032730714925
+        ],
+        [
+          0.31006568439705856,
+          0.20842346883315502,
+          0.08497642843644873
+        ],
+        [
+          0.5251386479470963,
+          0.06507736816990954,
+          0.0075202984920587955
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FallIncidence",
+      "parents": [
+        "StrokeSeverity",
+        "HighIntensityTreadmill"
+      ],
+      "values": [
+        [
+          0.5730349864560683,
+          0.2651835605402866,
+          0.05380376075983318,
+          0.4089586918430861,
+          0.14067943743920272,
+          0.02347751446501866,
+          0.06966680791731956,
+          0.012725044352592307,
+          0.0015400810221359025
+        ],
+        [
+          0.28234300737953466,
+          0.32892426511789624,
+          0.20644077477959819,
+          0.32580623857623536,
+          0.2906487445285941,
+          0.13878680487937378,
+          0.21255665153552097,
+          0.10483738951785462,
+          0.03672984997204029
+        ],
+        [
+          0.14462200616439705,
+          0.4058921743418171,
+          0.7397554644605687,
+          0.2652350695806786,
+          0.5686718180322031,
+          0.8377356806556076,
+          0.7177765405471594,
+          0.882437566129553,
+          0.9617300690058238
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CognitiveFunctionBaseline",
+      "parents": [
+        "PreStrokeMobility"
+      ],
+      "values": [
+        [
+          0.3906577665212392,
+          0.4363703788305503
+        ],
+        [
+          0.26578001903911136,
+          0.019701642819509674
+        ],
+        [
+          0.3435622144396494,
+          0.54392797834994
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FunctionalIndependence",
+      "parents": [
+        "StrokeSeverity",
+        "UpperLimbMotorControl",
+        "HighIntensityTreadmill",
+        "PassiveRangeOfMotion"
+      ],
+      "values": [
+        [
+          0.8271962332489059,
+          0.881969355843556,
+          0.9539703195316842,
+          0.9701622692431138,
+          0.9865719159119845,
+          0.9913827189432841,
+          0.3722849806913971,
+          0.531326094949246,
+          0.7925259146890995,
+          0.8647229425895199,
+          0.9323234431986519,
+          0.9593241321081368,
+          0.05480757198408714,
+          0.1226848275374085,
+          0.361730740294877,
+          0.538086378162163,
+          0.7504672243808077,
+          0.8403033074899264,
+          0.704202725083103,
+          0.8127276824364544,
+          0.9210272487845723,
+          0.9529655422662435,
+          0.9743650093195104,
+          0.9839861156328501,
+          0.18535494875731603,
+          0.31828340468529326,
+          0.6449565312256227,
+          0.76878876249978,
+          0.8784762662175707,
+          0.925014061434784,
+          0.01915302634278327,
+          0.04550189637072897,
+          0.18501862985151374,
+          0.3231973020873093,
+          0.5706397388498056,
+          0.7153801799233542,
+          0.17609142209830844,
+          0.32657073011985677,
+          0.6264138278648801,
+          0.7619059882038195,
+          0.8855870367835809,
+          0.9278888253400399,
+          0.012475718330418535,
+          0.03266033210677317,
+          0.14585388998328197,
+          0.2695186351155843,
+          0.5113612396900457,
+          0.6569091593437895,
+          0.000843106325367721,
+          0.002352671830571307,
+          0.012850112592458184,
+          0.0327352963135249,
+          0.10109840846947213,
+          0.20671785713088192
+        ],
+        [
+          0.1462255448361257,
+          0.10614764677372127,
+          0.04405559346407408,
+          0.02910371061871821,
+          0.013242744077887447,
+          0.00854543828684407,
+          0.3292023263144905,
+          0.3067771899364614,
+          0.17072198651061093,
+          0.11913824541677667,
+          0.06358986273576558,
+          0.03915673094507325,
+          0.20818270739763411,
+          0.27350364004031946,
+          0.33530554097991616,
+          0.3026254991972789,
+          0.19562745288392516,
+          0.13791230678377694,
+          0.2200146056776579,
+          0.15577368388920457,
+          0.07287720358860005,
+          0.04468655397599062,
+          0.02503857158287837,
+          0.01578161718433397,
+          0.29561165416234636,
+          0.3448521839624909,
+          0.2534849937000881,
+          0.1824907233018341,
+          0.1076638836360732,
+          0.07014846302537459,
+          0.13633830799901034,
+          0.18403866365748306,
+          0.30323536448421284,
+          0.33679635287777615,
+          0.2872977604511282,
+          0.2196137354948457,
+          0.30647709634870257,
+          0.33698967337435554,
+          0.2690440961397563,
+          0.19090178051644247,
+          0.10154107277002707,
+          0.06698269459879953,
+          0.10350831026507383,
+          0.15767598449822892,
+          0.2905932652224591,
+          0.3164626833218979,
+          0.30284463973067527,
+          0.25550530983764624,
+          0.02855253642367864,
+          0.048003678102750455,
+          0.10135655931123498,
+          0.15728666340300132,
+          0.2524348345434082,
+          0.3105894601266738
+        ],
+        [
+          0.026578221914968305,
+          0.01188299738272268,
+          0.001974087004241755,
+          0.0007340201381680602,
+          0.0001853400101281689,
+          7.184276987171368e-05,
+          0.29851269299411237,
+          0.16189671511429268,
+          0.03675209880028953,
+          0.016138811993703473,
+          0.0040866940655825456,
+          0.001519136946789831,
+          0.7370097206182787,
+          0.603811532422272,
+          0.3029637187252069,
+          0.15928812264055828,
+          0.05390532273526719,
+          0.021784385726296707,
+          0.07578266923923899,
+          0.03149863367434107,
+          0.006095547626827789,
+          0.0023479037577658567,
+          0.0005964190976111112,
+          0.00023226718281586545,
+          0.5190333970803376,
+          0.33686441135221584,
+          0.1015584750742892,
+          0.048720514198385766,
+          0.013859850146356085,
+          0.004837475539841447,
+          0.8445086656582065,
+          0.7704594399717879,
+          0.5117460056642734,
+          0.3400063450349146,
+          0.14206250069906623,
+          0.06500608458180011,
+          0.517431481552989,
+          0.3364395965057877,
+          0.1045420759953637,
+          0.047192231279737984,
+          0.012871890446391969,
+          0.00512848006116063,
+          0.8840159714045077,
+          0.809663683394998,
+          0.5635528447942589,
+          0.41401868156251775,
+          0.18579412057927902,
+          0.08758553081856439,
+          0.9706043572509536,
+          0.9496436500666782,
+          0.8857933280963068,
+          0.8099780402834738,
+          0.6464667569871196,
+          0.4826926827424443
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [
+        "UpperLimbMotorControl",
+        "DaysPostStroke"
+      ],
+      "values": [
+        [
+          0.3488948303989795,
+          0.02965452856462762,
+          0.001284997857028372,
+          0.21362557534451615,
+          0.010634572007851863,
+          0.0004204864279274846,
+          0.08163356261571209,
+          0.0034607522322076967,
+          0.00013561716005868965
+        ],
+        [
+          0.4075828671626918,
+          0.8870302950591354,
+          0.984183035764845,
+          0.774281585361296,
+          0.9869422576806155,
+          0.9991938533980363,
+          0.9179916589301258,
+          0.9964752941289341,
+          0.9998542949976225
+        ],
+        [
+          0.2435223024383287,
+          0.08331517637623694,
+          0.01453196637812684,
+          0.012092839294187729,
+          0.002423170311532664,
+          0.00038566017403624463,
+          0.0003747784541621417,
+          6.395363885808657e-05,
+          1.0087842318713607e-05
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilyEngagement",
+      "parents": [
+        "FunctionalIndependence"
+      ],
+      "values": [
+        [
+          0.6454507978954206,
+          0.8926952490944082,
+          0.9743703805541832
+        ],
+        [
+          0.35454920210457946,
+          0.10730475090559181,
+          0.025629619445816872
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift FunctionalIndependence toward FullIndependence (and away from FullDependence), but only if the same action does not make FallIncidence more likely to be MultipleFalls. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "TaskSpecificTraining",
+        "value": "Intensive"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "FunctionalIndependence",
+          "safety_outcome": "FallIncidence",
+          "good_intervention": "TaskSpecificTraining",
+          "risky_intervention": "HighIntensityTreadmill",
+          "weak_intervention": "PassiveRangeOfMotion",
+          "good_mediator": "UpperLimbMotorControl",
+          "confounder": "StrokeSeverity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "TaskSpecificTraining",
+            "value": "Intensive"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "TaskSpecificTraining",
+              "value": "Intensive",
+              "delta_target": -0.3038,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "HighIntensityTreadmill",
+              "value": "Full",
+              "delta_target": -0.3105,
+              "delta_safety": 0.3332,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.5791,
+            "E_safety": 1.4865
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

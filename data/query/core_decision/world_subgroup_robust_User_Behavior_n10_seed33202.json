@@ -1,0 +1,775 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 33202,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A mobile application development studio maintains detailed analytics logs across its user base. The research team has access to historical behavioral records and can design observational or interventional studies with consenting participants.",
+  "non_intervenable_variables": [
+    {
+      "name": "NotificationTapRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AppUsageFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceNotificationLoad",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "OperatingSystem",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NotificationPermissionScope",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AccountAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DoNotDisturbUsage",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "NotificationTapRate",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Proportion of received notifications a user opens within one hour.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AppUsageFrequency",
+      "values": [
+        "PowerUser",
+        "CasualUser"
+      ],
+      "desc": "Whether the user opens the app daily or less than weekly.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PersonalizedTimingDelivery",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether notifications are sent at individually predicted optimal times.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SummaryDigestFormat",
+      "values": [
+        "None",
+        "DailyDigest",
+        "TwiceDailyDigest"
+      ],
+      "desc": "Whether individual notifications are bundled into scheduled digest messages.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "RichMediaNotification",
+      "values": [
+        "PlainText",
+        "ImageAttached",
+        "VideoAttached"
+      ],
+      "desc": "Level of embedded media content included in the notification payload.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DeviceNotificationLoad",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Total number of notifications the user receives daily across all apps.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "OperatingSystem",
+      "values": [
+        "iOS",
+        "Android"
+      ],
+      "desc": "Mobile operating system installed on the user's primary device.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NotificationPermissionScope",
+      "values": [
+        "AllEnabled",
+        "PartialEnabled"
+      ],
+      "desc": "Extent of notification categories the user has permitted in app settings.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AccountAge",
+      "values": [
+        "Under6Months",
+        "Over6Months"
+      ],
+      "desc": "Duration since the user first created their account in the app.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DoNotDisturbUsage",
+      "values": [
+        "NeverOn",
+        "SometimesOn",
+        "AlwaysOn"
+      ],
+      "desc": "How often the user's device has Do Not Disturb mode activated.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "AppUsageFrequency",
+      "NotificationTapRate"
+    ],
+    [
+      "AppUsageFrequency",
+      "SummaryDigestFormat"
+    ],
+    [
+      "PersonalizedTimingDelivery",
+      "NotificationTapRate"
+    ],
+    [
+      "SummaryDigestFormat",
+      "NotificationTapRate"
+    ],
+    [
+      "SummaryDigestFormat",
+      "RichMediaNotification"
+    ],
+    [
+      "RichMediaNotification",
+      "NotificationTapRate"
+    ],
+    [
+      "DeviceNotificationLoad",
+      "NotificationTapRate"
+    ],
+    [
+      "DeviceNotificationLoad",
+      "SummaryDigestFormat"
+    ],
+    [
+      "NotificationPermissionScope",
+      "PersonalizedTimingDelivery"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "AppUsageFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.7414117894866786
+        ],
+        [
+          0.2585882105133213
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DeviceNotificationLoad",
+      "parents": [],
+      "values": [
+        [
+          0.12488656282661392
+        ],
+        [
+          0.5514827502267879
+        ],
+        [
+          0.3236306869465982
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OperatingSystem",
+      "parents": [],
+      "values": [
+        [
+          0.7678516335099369
+        ],
+        [
+          0.23214836649006315
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NotificationPermissionScope",
+      "parents": [],
+      "values": [
+        [
+          0.7768052943367008
+        ],
+        [
+          0.2231947056632992
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AccountAge",
+      "parents": [],
+      "values": [
+        [
+          0.1829307862752108
+        ],
+        [
+          0.8170692137247892
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DoNotDisturbUsage",
+      "parents": [],
+      "values": [
+        [
+          0.46277819896738515
+        ],
+        [
+          0.19348027330670592
+        ],
+        [
+          0.343741527725909
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SummaryDigestFormat",
+      "parents": [
+        "AppUsageFrequency",
+        "DeviceNotificationLoad"
+      ],
+      "values": [
+        [
+          0.2115570709717992,
+          0.2160114654723658,
+          0.19544838447451035,
+          0.2213211773859001,
+          0.20890023890341594,
+          0.17963228770214082
+        ],
+        [
+          0.4240842852295162,
+          0.5802954664089587,
+          0.7036427214126008,
+          0.5195426245619651,
+          0.6571808336052768,
+          0.7573176758565473
+        ],
+        [
+          0.3643586437986847,
+          0.20369306811867538,
+          0.10090889411288892,
+          0.2591361980521348,
+          0.13391892749130727,
+          0.06305003644131175
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PersonalizedTimingDelivery",
+      "parents": [
+        "NotificationPermissionScope"
+      ],
+      "values": [
+        [
+          0.46274735388825794,
+          0.9553942485465989
+        ],
+        [
+          0.5372526461117421,
+          0.04460575145340114
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RichMediaNotification",
+      "parents": [
+        "SummaryDigestFormat"
+      ],
+      "values": [
+        [
+          0.39880665513433816,
+          0.2553071212536479,
+          0.09036056116347974
+        ],
+        [
+          0.279797374383667,
+          0.6754119241324588,
+          0.9013828100804696
+        ],
+        [
+          0.32139597048199486,
+          0.06928095461389343,
+          0.00825662875605057
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NotificationTapRate",
+      "parents": [
+        "DeviceNotificationLoad",
+        "AppUsageFrequency",
+        "PersonalizedTimingDelivery",
+        "SummaryDigestFormat",
+        "RichMediaNotification"
+      ],
+      "values": [
+        [
+          0.3550611477741886,
+          0.43917663601882934,
+          0.1841151412211553,
+          0.4609548794599982,
+          0.5373564235562795,
+          0.2629247768995846,
+          0.7687152849253611,
+          0.7980739501249549,
+          0.6113431690170467,
+          0.6481679854251768,
+          0.6806303001716504,
+          0.4289259475756646,
+          0.7095337544251777,
+          0.7637897728985364,
+          0.534524908823545,
+          0.8901143036041819,
+          0.9019022562142229,
+          0.8049983457843399,
+          0.10700217145872162,
+          0.13965773568189288,
+          0.4560312171049706,
+          0.16068224974208623,
+          0.20741868667097327,
+          0.5244870063463668,
+          0.4791472246446282,
+          0.5521054991583817,
+          0.7963879587975455,
+          0.6351443656374053,
+          0.690622553918581,
+          0.8740841277939867,
+          0.7168022715615868,
+          0.7611119489296392,
+          0.914257064879933,
+          0.8937997441888901,
+          0.9063950049925333,
+          0.9658512879046599,
+          0.18013556301795797,
+          0.23304123663010337,
+          0.07087436159585143,
+          0.2698791132908563,
+          0.34493543022976914,
+          0.11839795456357652,
+          0.6155093361756359,
+          0.6618063429958486,
+          0.4032899369811289,
+          0.44149126626142104,
+          0.5030542197448326,
+          0.23315676822966422,
+          0.547856900692372,
+          0.6114460590594928,
+          0.3368552936319824,
+          0.8076433515727639,
+          0.8410436724370756,
+          0.663248945092504,
+          0.039865630179256,
+          0.05736755946472296,
+          0.23918116673278392,
+          0.06445412407363679,
+          0.09271053682712603,
+          0.33422060351581295,
+          0.27158290977720767,
+          0.3309791073188082,
+          0.6610901111503831,
+          0.42810361571973976,
+          0.5189635489855201,
+          0.7895102236809486,
+          0.5392912203389095,
+          0.6099563114181792,
+          0.8291654426651704,
+          0.8013915033424723,
+          0.8409675164140424,
+          0.9367665025238155,
+          0.0198612561751712,
+          0.02846700929754524,
+          0.006212060762689814,
+          0.03314527641955629,
+          0.04724090109585953,
+          0.010784942150474005,
+          0.1687782471345931,
+          0.21797653531025293,
+          0.06727406728583717,
+          0.07097429361939377,
+          0.10700137992455573,
+          0.02713236193498133,
+          0.12340693558796746,
+          0.15595387958758689,
+          0.044128886119669884,
+          0.4040118396542428,
+          0.4755014909024688,
+          0.2200890053184016,
+          0.0029530238929949765,
+          0.004165416504461527,
+          0.025644514865828808,
+          0.0049264188518549305,
+          0.007784286614785294,
+          0.045599263840085814,
+          0.033511539255599895,
+          0.048514440694857934,
+          0.2093213481766058,
+          0.07896687775192433,
+          0.10502362189220965,
+          0.3748496423233081,
+          0.12336715968736253,
+          0.15793491811158647,
+          0.47830023196182775,
+          0.41342434274273304,
+          0.4591554422431369,
+          0.7673784191565723
+        ],
+        [
+          0.3388949456493956,
+          0.31657627674532335,
+          0.31679445953056795,
+          0.32474411545087145,
+          0.3060319690451231,
+          0.3350177001678072,
+          0.18545220878958327,
+          0.16626241302193756,
+          0.2654491626864434,
+          0.24864023776855754,
+          0.24019400456192194,
+          0.3353295727881221,
+          0.22407569034612335,
+          0.18757088173865052,
+          0.3052128290511015,
+          0.09854436256335629,
+          0.0899457063704898,
+          0.1616292523897634,
+          0.24560780935333082,
+          0.27206650239353825,
+          0.31324890647155795,
+          0.2926651646987611,
+          0.30363073390431317,
+          0.30598056687848596,
+          0.30546013271648537,
+          0.2888677675386736,
+          0.16962119238382173,
+          0.2606957639896946,
+          0.23063037111380547,
+          0.11215967531712082,
+          0.2211706947731459,
+          0.19172533874345712,
+          0.07870051517016037,
+          0.09617829394596408,
+          0.08628048882200122,
+          0.03304897510075368,
+          0.31847884244329266,
+          0.3260774889915447,
+          0.22702978724878978,
+          0.31889224740809463,
+          0.32460112673164043,
+          0.2830548812630322,
+          0.2614252281751844,
+          0.24566986893204226,
+          0.320859165684299,
+          0.3217979997458444,
+          0.30254878225590004,
+          0.3284078761539222,
+          0.2865513619677332,
+          0.269521461183424,
+          0.3358498448792241,
+          0.16049070677636174,
+          0.13633558241580307,
+          0.2444702798725422,
+          0.16522226023987824,
+          0.21186587878629887,
+          0.31845749026971387,
+          0.22815169056492612,
+          0.24298517000980854,
+          0.3292362455606244,
+          0.33650718346419445,
+          0.3466046235660356,
+          0.24675603892993642,
+          0.3326783775341739,
+          0.2966992429640122,
+          0.1720721291807213,
+          0.2943826304152472,
+          0.2673216670912821,
+          0.14638004660401918,
+          0.16518977981812483,
+          0.13748614929984013,
+          0.05984886735941738,
+          0.1275464946781848,
+          0.1478405792959834,
+          0.07357300701250427,
+          0.15460444838307916,
+          0.1888275099387704,
+          0.10112147148984071,
+          0.2884454180048256,
+          0.3219256684888193,
+          0.20439516405021846,
+          0.23123644226181891,
+          0.2563957902757639,
+          0.14357862709278268,
+          0.26470238781883504,
+          0.3065647682682341,
+          0.18115835081878998,
+          0.321050864174978,
+          0.3203409478353127,
+          0.31504472676304784,
+          0.053438638237907635,
+          0.062405863828492315,
+          0.151918025343732,
+          0.07054212163230257,
+          0.08454598360537026,
+          0.1939174218438879,
+          0.16781993377630555,
+          0.1846696270713408,
+          0.32178727475298996,
+          0.2343265618220221,
+          0.2466618698121958,
+          0.3257497756562923,
+          0.2693777422281928,
+          0.3008032068807476,
+          0.31674827420303153,
+          0.31827674849043175,
+          0.3261909765266574,
+          0.18907289887776743
+        ],
+        [
+          0.3060439065764158,
+          0.24424708723584743,
+          0.4990903992482767,
+          0.21430100508913028,
+          0.15661160739859736,
+          0.40205752293260827,
+          0.04583250628505567,
+          0.03566363685310769,
+          0.12320766829650995,
+          0.10319177680626553,
+          0.07917569526642759,
+          0.2357444796362133,
+          0.06639055522869883,
+          0.04863934536281304,
+          0.16026226212535358,
+          0.011341333832461746,
+          0.008152037415287356,
+          0.03337240182589669,
+          0.6473900191879476,
+          0.5882757619245689,
+          0.23071987642347166,
+          0.5466525855591526,
+          0.48895057942471354,
+          0.1695324267751472,
+          0.21539264263888638,
+          0.15902673330294456,
+          0.03399084881863283,
+          0.10415987037290013,
+          0.0787470749676135,
+          0.013756196888892486,
+          0.06202703366526735,
+          0.04716271232690375,
+          0.007042419949906588,
+          0.010021961865145933,
+          0.007324506185465404,
+          0.0010997369945864852,
+          0.5013855945387493,
+          0.4408812743783519,
+          0.7020958511553587,
+          0.41122863930104914,
+          0.3304634430385905,
+          0.5985471641733913,
+          0.12306543564917978,
+          0.09252378807210909,
+          0.2758508973345721,
+          0.2367107339927347,
+          0.19439699799926735,
+          0.4384353556164136,
+          0.16559173733989477,
+          0.11903247975708331,
+          0.32729486148879355,
+          0.03186594165087433,
+          0.022620745147121483,
+          0.09228077503495373,
+          0.7949121095808659,
+          0.7307665617489781,
+          0.44236134299750207,
+          0.7073941853614371,
+          0.6643042931630654,
+          0.3365431509235627,
+          0.3919099067585978,
+          0.3224162691151562,
+          0.09215384991968052,
+          0.23921800674608626,
+          0.1843372080504676,
+          0.038417647138330215,
+          0.16632614924584332,
+          0.1227220214905387,
+          0.024454510730810362,
+          0.033418716839402896,
+          0.021546334286117557,
+          0.003384630116766991,
+          0.852592249146644,
+          0.8236924114064713,
+          0.9202149322248059,
+          0.8122502751973645,
+          0.7639315889653701,
+          0.8880935863596854,
+          0.5427763348605813,
+          0.4600977962009277,
+          0.7283307686639445,
+          0.6977892641187873,
+          0.6366028297996803,
+          0.8292890109722361,
+          0.6118906765931976,
+          0.537481352144179,
+          0.7747127630615401,
+          0.2749372961707792,
+          0.20415756126221843,
+          0.46486626791855057,
+          0.9436083378690974,
+          0.9334287196670462,
+          0.8224374597904391,
+          0.9245314595158426,
+          0.9076697297798445,
+          0.7604833143160262,
+          0.7986685269680945,
+          0.7668159322338012,
+          0.46889137707040424,
+          0.6867065604260536,
+          0.6483145082955946,
+          0.2994005820203996,
+          0.6072550980844447,
+          0.541261875007666,
+          0.2049514938351409,
+          0.26829890876683504,
+          0.21465358123020561,
+          0.043548681965660155
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift NotificationTapRate toward High (and away from Low). The deployment will reach individuals with AppUsageFrequency=PowerUser as well as AppUsageFrequency=CasualUser, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "SummaryDigestFormat",
+        "value": "TwiceDailyDigest",
+        "min_improvement": 0.374,
+        "improvement_low": 0.478,
+        "improvement_high": 0.374
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "NotificationTapRate",
+          "group": "AppUsageFrequency",
+          "intervention_avg": "PersonalizedTimingDelivery",
+          "intervention_rob": "SummaryDigestFormat",
+          "intervention_bad": "RichMediaNotification",
+          "confounder": "DeviceNotificationLoad"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "SummaryDigestFormat",
+            "value": "TwiceDailyDigest",
+            "min_improvement": 0.374,
+            "improvement_low": 0.478,
+            "improvement_high": 0.374
+          },
+          "avg_best_but_uneven": {
+            "variable": "PersonalizedTimingDelivery",
+            "value": "On",
+            "min_improvement": 0.2185,
+            "improvement_low": 0.2185,
+            "improvement_high": 0.4752
+          },
+          "harmful_in_subgroup": {
+            "variable": "RichMediaNotification",
+            "value": "VideoAttached",
+            "min_improvement": -0.3104,
+            "improvement_low": -0.3104,
+            "improvement_high": 0.3936
+          },
+          "subgroups": [
+            "PowerUser",
+            "CasualUser"
+          ],
+          "group_variable": "AppUsageFrequency",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "PersonalizedTimingDelivery",
+              "value": "On",
+              "improvement_low": 0.2185,
+              "improvement_high": 0.4752,
+              "min_improvement": 0.2185
+            },
+            {
+              "variable": "SummaryDigestFormat",
+              "value": "TwiceDailyDigest",
+              "improvement_low": 0.478,
+              "improvement_high": 0.374,
+              "min_improvement": 0.374
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

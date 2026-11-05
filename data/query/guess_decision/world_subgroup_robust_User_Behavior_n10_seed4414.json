@@ -1,0 +1,775 @@
+{
+  "meta": {
+    "topic": "User Behavior",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 4414,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A digital streaming service's analytics division maintains detailed subscriber records. The research team can access historical observational data and can also design and request new interventional studies through the platform's experimentation infrastructure.",
+  "non_intervenable_variables": [
+    {
+      "name": "ChurnOutcome",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubscriptionTenure",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MonthlyUsageFrequency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PaymentPlan",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SupportTicketHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ContentCatalogSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DeviceType",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ChurnOutcome",
+      "values": [
+        "Retained",
+        "AtRisk",
+        "Churned"
+      ],
+      "desc": "Subscriber retention status at end of billing cycle.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SubscriptionTenure",
+      "values": [
+        "LongTerm",
+        "NewSubscriber"
+      ],
+      "desc": "Whether the subscriber has been active for over twelve months.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PersonalizedDiscountOffer",
+      "values": [
+        "None",
+        "Moderate",
+        "Steep"
+      ],
+      "desc": "Level of personalized discount applied at renewal time.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ProactiveEngagementOutreach",
+      "values": [
+        "None",
+        "Monthly",
+        "Weekly"
+      ],
+      "desc": "Frequency of proactive check-in messages sent to subscriber.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AutoRenewalNudge",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether an automatic renewal reminder prompt is displayed.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MonthlyUsageFrequency",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of times subscriber accessed the service per month.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PaymentPlan",
+      "values": [
+        "Annual",
+        "Monthly"
+      ],
+      "desc": "Billing cadence the subscriber selected at sign-up.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SupportTicketHistory",
+      "values": [
+        "None",
+        "Few",
+        "Many"
+      ],
+      "desc": "Count of customer support tickets filed in the past quarter.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ContentCatalogSize",
+      "values": [
+        "Small",
+        "Large"
+      ],
+      "desc": "Number of content items available in the subscriber's region.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DeviceType",
+      "values": [
+        "Mobile",
+        "Desktop"
+      ],
+      "desc": "Primary device category used by the subscriber to access service.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SubscriptionTenure",
+      "ChurnOutcome"
+    ],
+    [
+      "SubscriptionTenure",
+      "DeviceType"
+    ],
+    [
+      "PersonalizedDiscountOffer",
+      "ChurnOutcome"
+    ],
+    [
+      "ProactiveEngagementOutreach",
+      "ChurnOutcome"
+    ],
+    [
+      "AutoRenewalNudge",
+      "ChurnOutcome"
+    ],
+    [
+      "AutoRenewalNudge",
+      "SupportTicketHistory"
+    ],
+    [
+      "MonthlyUsageFrequency",
+      "ChurnOutcome"
+    ],
+    [
+      "MonthlyUsageFrequency",
+      "SupportTicketHistory"
+    ],
+    [
+      "SupportTicketHistory",
+      "PersonalizedDiscountOffer"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "SubscriptionTenure",
+      "parents": [],
+      "values": [
+        [
+          0.409218732683353
+        ],
+        [
+          0.590781267316647
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ProactiveEngagementOutreach",
+      "parents": [],
+      "values": [
+        [
+          0.4033337928770056
+        ],
+        [
+          0.41391564630723227
+        ],
+        [
+          0.18275056081576224
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AutoRenewalNudge",
+      "parents": [],
+      "values": [
+        [
+          0.8540343428843646
+        ],
+        [
+          0.14596565711563536
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MonthlyUsageFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.3314560649963436
+        ],
+        [
+          0.14028387980614518
+        ],
+        [
+          0.5282600551975113
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PaymentPlan",
+      "parents": [],
+      "values": [
+        [
+          0.1900015488682248
+        ],
+        [
+          0.8099984511317752
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ContentCatalogSize",
+      "parents": [],
+      "values": [
+        [
+          0.4508952179451549
+        ],
+        [
+          0.549104782054845
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DeviceType",
+      "parents": [
+        "SubscriptionTenure"
+      ],
+      "values": [
+        [
+          0.5907211047806886,
+          0.48844152513511846
+        ],
+        [
+          0.4092788952193115,
+          0.5115584748648816
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SupportTicketHistory",
+      "parents": [
+        "MonthlyUsageFrequency",
+        "AutoRenewalNudge"
+      ],
+      "values": [
+        [
+          0.25473833781098215,
+          0.29441397630686833,
+          0.01318927576259371,
+          0.055254230124966594,
+          0.0002882868716996526,
+          0.0018172682448078113
+        ],
+        [
+          0.36694141204408726,
+          0.06520826938909996,
+          0.9305246074301212,
+          0.5993966069890011,
+          0.9961764620289647,
+          0.9655444734832325
+        ],
+        [
+          0.3783202501449306,
+          0.6403777543040317,
+          0.05628611680728505,
+          0.34534916288603235,
+          0.0035352510993357272,
+          0.03263825827195968
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PersonalizedDiscountOffer",
+      "parents": [
+        "SupportTicketHistory"
+      ],
+      "values": [
+        [
+          0.2566770780695341,
+          0.39198907752004186,
+          0.4257634784892354
+        ],
+        [
+          0.3090585237621184,
+          0.0161897103806842,
+          0.0006031773069592255
+        ],
+        [
+          0.4342643981683474,
+          0.591821212099274,
+          0.5736333442038053
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ChurnOutcome",
+      "parents": [
+        "MonthlyUsageFrequency",
+        "SubscriptionTenure",
+        "PersonalizedDiscountOffer",
+        "ProactiveEngagementOutreach",
+        "AutoRenewalNudge"
+      ],
+      "values": [
+        [
+          0.35916474142078625,
+          0.18451901629085748,
+          0.4627223623254258,
+          0.26238309215470285,
+          0.7655802701530869,
+          0.6025003440647256,
+          0.4940200138919913,
+          0.30496679655630704,
+          0.5911830099632237,
+          0.394571358088532,
+          0.8320771801707233,
+          0.7179779415620301,
+          0.642638504254888,
+          0.4466334536230204,
+          0.718827628206525,
+          0.5301000886757844,
+          0.8866072865165117,
+          0.8027126527595561,
+          0.10244641420084177,
+          0.4232691487512078,
+          0.16697676762867286,
+          0.5504183032898889,
+          0.4656729998036531,
+          0.7933909947651663,
+          0.1742782775654786,
+          0.5628361130203314,
+          0.2770140941615076,
+          0.6551973291840606,
+          0.6107959666630665,
+          0.8689784127664841,
+          0.6249435844919641,
+          0.8778789213162184,
+          0.7203208274035658,
+          0.905340351626433,
+          0.8895126283716576,
+          0.9653180111507315,
+          0.1957573015555188,
+          0.08157635208784272,
+          0.2700613098085964,
+          0.12080222517322242,
+          0.6050125761894438,
+          0.4153916926917905,
+          0.29741816024278206,
+          0.14365707787065907,
+          0.4068946233996006,
+          0.2103771471494651,
+          0.7218569463381224,
+          0.5306861001963394,
+          0.4383290278036007,
+          0.24143026794207204,
+          0.5394369200508788,
+          0.33342784354067995,
+          0.8123996498162516,
+          0.6569308409464478,
+          0.041007031448308764,
+          0.23890052751356697,
+          0.06171360200776644,
+          0.3344073355075804,
+          0.2603328131255968,
+          0.6709669820401858,
+          0.07547975155981557,
+          0.3758296495491621,
+          0.11678138264395566,
+          0.45834136474955156,
+          0.41179991415360306,
+          0.7647134438023684,
+          0.432826329644871,
+          0.7992096082705733,
+          0.5391791670196817,
+          0.8429701211431869,
+          0.8028430542103865,
+          0.9395717530491198,
+          0.01994779606055927,
+          0.006542263442781248,
+          0.033177584456885054,
+          0.010632438354189007,
+          0.15981669796478382,
+          0.06401943448076604,
+          0.03814698605971631,
+          0.013642842964126886,
+          0.06469778347916957,
+          0.021377885179227982,
+          0.2732013647811863,
+          0.12357640115701368,
+          0.0815089324870017,
+          0.028776440286912005,
+          0.11927169905260922,
+          0.04998236104878994,
+          0.40044387197833115,
+          0.20987651894160295,
+          0.002885637490218452,
+          0.027087445467755593,
+          0.005319528603833089,
+          0.0470098268516589,
+          0.03210798020155987,
+          0.20599652076415895,
+          0.005995521006788169,
+          0.053858169078971445,
+          0.0107838857412436,
+          0.09032632896013951,
+          0.06489434127042697,
+          0.3418872591342276,
+          0.08341502780386272,
+          0.37118452879233305,
+          0.12014175127292497,
+          0.4671908866476232,
+          0.3988607815990646,
+          0.7714557240150431
+        ],
+        [
+          0.34066895149274223,
+          0.3031765069034242,
+          0.3308022289320253,
+          0.3369519409164527,
+          0.1898304278017962,
+          0.2814215966853199,
+          0.31389055046344205,
+          0.3379612752575992,
+          0.28038166426261507,
+          0.3204438082254463,
+          0.14568618051278326,
+          0.21348883873216487,
+          0.2505957074089305,
+          0.3135638265198743,
+          0.21686098269745907,
+          0.30920860936668637,
+          0.10258434336356584,
+          0.16438419698250004,
+          0.251777032148765,
+          0.3336690836197371,
+          0.28994057694793307,
+          0.2957918076015552,
+          0.32536891412773195,
+          0.17369813803993941,
+          0.3138380063312005,
+          0.29358270385302654,
+          0.33612516621759314,
+          0.24929150082262655,
+          0.26782125093410125,
+          0.1151504160273972,
+          0.26484436755597485,
+          0.10864143686750818,
+          0.21479344477916473,
+          0.08690824307532377,
+          0.09897536864909891,
+          0.03355485509825393,
+          0.3068208436892292,
+          0.2265694246809863,
+          0.33450821646945006,
+          0.2653355418376921,
+          0.27431444900840335,
+          0.3191753791134575,
+          0.3382296746844244,
+          0.28429690192411977,
+          0.3284157463775076,
+          0.3123832018190044,
+          0.21289480875305164,
+          0.3116119612838807,
+          0.3167774394820539,
+          0.3064690546518448,
+          0.2939580782424145,
+          0.3337600290176275,
+          0.1547286196808282,
+          0.25351087512186876,
+          0.17150891997237167,
+          0.31739935858178814,
+          0.21507605702416996,
+          0.33220288203263754,
+          0.3359436390637403,
+          0.23823828783424406,
+          0.23311118094759187,
+          0.33666779229340854,
+          0.2801015556149623,
+          0.3357187475712687,
+          0.31831870702482296,
+          0.18983194681063187,
+          0.32952089387871086,
+          0.16424859962824073,
+          0.2982793830261463,
+          0.135738912541876,
+          0.1641910172437561,
+          0.05696721653122403,
+          0.1266381613406771,
+          0.07644627393953728,
+          0.153651235362913,
+          0.09835201871376933,
+          0.2981772352102112,
+          0.22080510526022018,
+          0.1811497228575882,
+          0.11213197545920156,
+          0.22537976945280114,
+          0.13280793891041692,
+          0.32721217930852,
+          0.27020996823574955,
+          0.24287570742104486,
+          0.15587154340324075,
+          0.26547301796271916,
+          0.1852575977721479,
+          0.3231157973433507,
+          0.3053608334295511,
+          0.0558725696653957,
+          0.14345973147119231,
+          0.06779905333387513,
+          0.1966038650048257,
+          0.16082751084851918,
+          0.32655975945332527,
+          0.07444831794763761,
+          0.20467045551051408,
+          0.09563295797030899,
+          0.2597415665033724,
+          0.2167166858384621,
+          0.3335969722642632,
+          0.23043316175626646,
+          0.33387857378200797,
+          0.27273243334675196,
+          0.3148599757900198,
+          0.3210426661025565,
+          0.18226758350096767
+        ],
+        [
+          0.30016630708647146,
+          0.5123044768057183,
+          0.20647540874254902,
+          0.40066496692884457,
+          0.044589302045116914,
+          0.11607805924995453,
+          0.1920894356445666,
+          0.3570719281860937,
+          0.1284353257741613,
+          0.28498483368602173,
+          0.022236639316493355,
+          0.06853321970580512,
+          0.10676578833618161,
+          0.23980271985710527,
+          0.06431138909601589,
+          0.1606913019575292,
+          0.010808370119922478,
+          0.03290315025794382,
+          0.6457765536503932,
+          0.24306176762905513,
+          0.5430826554233941,
+          0.15378988910855587,
+          0.20895808606861493,
+          0.032910867194894194,
+          0.5118837161033208,
+          0.14358118312664214,
+          0.38686073962089923,
+          0.09551116999331295,
+          0.12138278240283217,
+          0.015871171206118483,
+          0.11021204795206099,
+          0.013479641816273227,
+          0.06488572781726949,
+          0.007751405298243305,
+          0.011512002979243569,
+          0.001127133751014713,
+          0.49742185475525214,
+          0.691854223231171,
+          0.3954304737219536,
+          0.6138622329890855,
+          0.1206729748021529,
+          0.26543292819475184,
+          0.36435216507279355,
+          0.5720460202052211,
+          0.26468963022289194,
+          0.4772396510315304,
+          0.06524824490882598,
+          0.1577019385197799,
+          0.24489353271434533,
+          0.4521006774060831,
+          0.1666050017067067,
+          0.33281212744169253,
+          0.03287173050292022,
+          0.0895582839316835,
+          0.7874840485793195,
+          0.443700113904645,
+          0.7232103409680637,
+          0.33338978245978207,
+          0.4037235478106629,
+          0.09079473012557004,
+          0.6914090674925926,
+          0.2875025581574294,
+          0.603117061741082,
+          0.20593988767917973,
+          0.26988137882157387,
+          0.045454609386999786,
+          0.23765277647641814,
+          0.036541792101185924,
+          0.16254144995417194,
+          0.021290966314937224,
+          0.03296592854585747,
+          0.003461030419656136,
+          0.8534140425987636,
+          0.9170114626176814,
+          0.8131711801802018,
+          0.8910155429320418,
+          0.5420060668250051,
+          0.7151754602590138,
+          0.7807032910826954,
+          0.8742251815766716,
+          0.7099224470680293,
+          0.8458141759103551,
+          0.3995864559102936,
+          0.6062136306072368,
+          0.6756153600919534,
+          0.8153520163098473,
+          0.6152552829846716,
+          0.7647600411790622,
+          0.2764403306783182,
+          0.48476264762884597,
+          0.9412417928443858,
+          0.8294528230610521,
+          0.9268814180622916,
+          0.7563863081435154,
+          0.8070645089499209,
+          0.46744371978251587,
+          0.9195561610455742,
+          0.7414713754105144,
+          0.8935831562884474,
+          0.649932104536488,
+          0.7183889728911109,
+          0.32451576860150927,
+          0.6861518104398707,
+          0.294936897425659,
+          0.607125815380323,
+          0.21794913756235695,
+          0.280096552298379,
+          0.04627669248398926
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift ChurnOutcome toward Retained (and away from Churned). The deployment will reach individuals with SubscriptionTenure=LongTerm as well as SubscriptionTenure=NewSubscriber, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "ProactiveEngagementOutreach",
+        "value": "Weekly",
+        "min_improvement": 0.3811,
+        "improvement_low": 0.4174,
+        "improvement_high": 0.3811
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "ChurnOutcome",
+          "group": "SubscriptionTenure",
+          "intervention_avg": "PersonalizedDiscountOffer",
+          "intervention_rob": "ProactiveEngagementOutreach",
+          "intervention_bad": "AutoRenewalNudge",
+          "confounder": "MonthlyUsageFrequency"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "ProactiveEngagementOutreach",
+            "value": "Weekly",
+            "min_improvement": 0.3811,
+            "improvement_low": 0.4174,
+            "improvement_high": 0.3811
+          },
+          "avg_best_but_uneven": {
+            "variable": "PersonalizedDiscountOffer",
+            "value": "Steep",
+            "min_improvement": 0.1417,
+            "improvement_low": 0.1417,
+            "improvement_high": 0.3013
+          },
+          "harmful_in_subgroup": {
+            "variable": "AutoRenewalNudge",
+            "value": "On",
+            "min_improvement": -0.2178,
+            "improvement_low": -0.2178,
+            "improvement_high": 0.4172
+          },
+          "subgroups": [
+            "LongTerm",
+            "NewSubscriber"
+          ],
+          "group_variable": "SubscriptionTenure",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "PersonalizedDiscountOffer",
+              "value": "Steep",
+              "improvement_low": 0.1417,
+              "improvement_high": 0.3013,
+              "min_improvement": 0.1417
+            },
+            {
+              "variable": "ProactiveEngagementOutreach",
+              "value": "Weekly",
+              "improvement_low": 0.4174,
+              "improvement_high": 0.3811,
+              "min_improvement": 0.3811
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

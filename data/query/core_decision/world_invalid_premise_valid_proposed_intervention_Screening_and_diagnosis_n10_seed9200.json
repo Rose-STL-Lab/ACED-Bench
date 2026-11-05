@@ -1,0 +1,487 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 10,
+    "topology": "invalid_premise:valid_proposed_intervention",
+    "seed": 9200,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "valid_proposed_intervention"
+  },
+  "story": "A geriatric assessment center within a large academic medical system maintains comprehensive patient records. The research team can access archived data and request new observational or interventional samples from consenting participants.",
+  "non_intervenable_variables": [
+    {
+      "name": "DiagnosticAccuracy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CognitiveDomainCoverage",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TestLanguageMatch",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorCognitiveBaseline",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SensoryImpairment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InformantAvailability",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DiagnosticAccuracy",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Classification correctness of Alzheimer's cognitive status determination.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "AdaptiveDigitalScreening",
+      "values": [
+        "None",
+        "Standard",
+        "Full"
+      ],
+      "desc": "Computerized adaptive cognitive test battery administered to patients.",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ClinicalInterviewProtocol",
+      "values": [
+        "None",
+        "Brief",
+        "Comprehensive"
+      ],
+      "desc": "Structured clinician-led interview for cognitive complaint evaluation.",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CognitiveDomainCoverage",
+      "values": [
+        "Broad",
+        "Narrow"
+      ],
+      "desc": "Number of distinct cognitive domains assessed during screening.",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Highest formal education attainment of the patient.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAge",
+      "values": [
+        "Under65",
+        "65to75",
+        "Over75"
+      ],
+      "desc": "Age category of the patient at time of assessment.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TestLanguageMatch",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether assessment was administered in the patient's primary language.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorCognitiveBaseline",
+      "values": [
+        "Unavailable",
+        "Available"
+      ],
+      "desc": "Existence of a previously recorded cognitive performance baseline.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SensoryImpairment",
+      "values": [
+        "None",
+        "Mild",
+        "Significant"
+      ],
+      "desc": "Degree of hearing or vision impairment present during testing.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InformantAvailability",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a knowledgeable informant participated in the evaluation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "AdaptiveDigitalScreening",
+      "CognitiveDomainCoverage"
+    ],
+    [
+      "AdaptiveDigitalScreening",
+      "PriorCognitiveBaseline"
+    ],
+    [
+      "ClinicalInterviewProtocol",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "CognitiveDomainCoverage",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "EducationLevel",
+      "DiagnosticAccuracy"
+    ],
+    [
+      "EducationLevel",
+      "InformantAvailability"
+    ],
+    [
+      "PatientAge",
+      "AdaptiveDigitalScreening"
+    ],
+    [
+      "SensoryImpairment",
+      "PriorCognitiveBaseline"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ClinicalInterviewProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.09216225096324202
+        ],
+        [
+          0.7721105829764134
+        ],
+        [
+          0.13572716606034468
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.19611240483977893
+        ],
+        [
+          0.25088162489443844
+        ],
+        [
+          0.5530059702657827
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAge",
+      "parents": [],
+      "values": [
+        [
+          0.08791844949987458
+        ],
+        [
+          0.08791844949987458
+        ],
+        [
+          0.8241631010002508
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TestLanguageMatch",
+      "parents": [],
+      "values": [
+        [
+          0.6426100965397439
+        ],
+        [
+          0.35738990346025606
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SensoryImpairment",
+      "parents": [],
+      "values": [
+        [
+          0.25168661184469127
+        ],
+        [
+          0.6148617469730331
+        ],
+        [
+          0.13345164118227565
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InformantAvailability",
+      "parents": [
+        "EducationLevel"
+      ],
+      "values": [
+        [
+          0.4602375215102987,
+          0.14529520818387484,
+          0.032780532471366766
+        ],
+        [
+          0.5397624784897013,
+          0.8547047918161251,
+          0.9672194675286333
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AdaptiveDigitalScreening",
+      "parents": [
+        "PatientAge"
+      ],
+      "values": [
+        [
+          0.3706392839468092,
+          0.35331945764847333,
+          0.2581800702258905
+        ],
+        [
+          0.2918544516718337,
+          0.5177500524443115,
+          0.7040654508869199
+        ],
+        [
+          0.3375062643813571,
+          0.1289304899072151,
+          0.03775447888718963
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CognitiveDomainCoverage",
+      "parents": [
+        "AdaptiveDigitalScreening"
+      ],
+      "values": [
+        [
+          0.22675980103208296,
+          0.4949879194836645,
+          0.9820261943608591
+        ],
+        [
+          0.7732401989679171,
+          0.5050120805163355,
+          0.017973805639140816
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorCognitiveBaseline",
+      "parents": [
+        "SensoryImpairment",
+        "AdaptiveDigitalScreening"
+      ],
+      "values": [
+        [
+          0.5304557688463535,
+          0.9682846218986142,
+          0.9987894566829821,
+          0.03478973544055434,
+          0.4934320626708849,
+          0.9634019959984823,
+          0.001148647001707392,
+          0.030140807351909434,
+          0.4564802532904576
+        ],
+        [
+          0.4695442311536465,
+          0.031715378101385756,
+          0.0012105433170178548,
+          0.9652102645594457,
+          0.5065679373291151,
+          0.03659800400151771,
+          0.9988513529982926,
+          0.9698591926480906,
+          0.5435197467095424
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DiagnosticAccuracy",
+      "parents": [
+        "EducationLevel",
+        "CognitiveDomainCoverage",
+        "ClinicalInterviewProtocol"
+      ],
+      "values": [
+        [
+          0.886470173093017,
+          0.8729084473492886,
+          0.8129962214309119,
+          0.24615734912684822,
+          0.2066832473117249,
+          0.12588194048398513,
+          0.8196750118614048,
+          0.8062702835709337,
+          0.7090268544531856,
+          0.13562226099583857,
+          0.12350949643359298,
+          0.06587441412925436,
+          0.5684293028222488,
+          0.5404390114683565,
+          0.39172754124046405,
+          0.029536626505740796,
+          0.022602862406320513,
+          0.010949885042957234
+        ],
+        [
+          0.10125304743149201,
+          0.11251103537913391,
+          0.15590916037901664,
+          0.3258578280722358,
+          0.3213785640972088,
+          0.26934990544682336,
+          0.15279133875363102,
+          0.16215503856412278,
+          0.22370926922217535,
+          0.2868303288436598,
+          0.27674473675768935,
+          0.20475862264864553,
+          0.2852924711056859,
+          0.3031853607507348,
+          0.3293799111625432,
+          0.15769457167986153,
+          0.14459439567194218,
+          0.10161155071756374
+        ],
+        [
+          0.012276779475490855,
+          0.014580517271577496,
+          0.031094618190071418,
+          0.427984822800916,
+          0.4719381885910663,
+          0.6047681540691915,
+          0.027533649384964144,
+          0.03157467786494359,
+          0.06726387632463911,
+          0.5775474101605017,
+          0.5997457668087177,
+          0.7293669632221,
+          0.1462782260720654,
+          0.15637562778090872,
+          0.27889254759699267,
+          0.8127688018143977,
+          0.8328027419217373,
+          0.8874385642394791
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting AdaptiveDigitalScreening=Full as a way to shift DiagnosticAccuracy toward High (and away from Low). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift DiagnosticAccuracy toward High.",
+      "answer": {
+        "is_valid_intervention": true,
+        "invalid_reason": null,
+        "proposed_intervention": {
+          "variable": "AdaptiveDigitalScreening",
+          "value": "Full"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "valid_proposed_intervention",
+        "roles": {
+          "target": "DiagnosticAccuracy",
+          "proposed_intervention": "AdaptiveDigitalScreening",
+          "intervenable_alt": "ClinicalInterviewProtocol",
+          "alt_mediator": "CognitiveDomainCoverage",
+          "confounder": "EducationLevel"
+        },
+        "gold": {
+          "is_valid_intervention": true,
+          "valid_reason": "proposed_intervention_meaningfully_improves_target",
+          "proposed_intervention": {
+            "variable": "AdaptiveDigitalScreening",
+            "value": "Full"
+          },
+          "proposed_effect": -0.6227,
+          "acceptable_alternatives": [
+            {
+              "variable": "AdaptiveDigitalScreening",
+              "value": "Full",
+              "improvement": 0.6227
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

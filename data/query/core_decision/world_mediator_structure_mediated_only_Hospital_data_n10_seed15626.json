@@ -1,0 +1,446 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "mediator_structure:mediated_only",
+    "seed": 15626,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "mediated_only"
+  },
+  "story": "A metropolitan hospital network maintains detailed records on acute care episodes. The research team has institutional access to these records and can request both observational extracts and prospective interventional samples from participating facilities.",
+  "non_intervenable_variables": [
+    {
+      "name": "DoorToNeedleCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "StrokeTeamReadiness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HospitalStrokeVolume",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineNIHSS",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TimeOfArrival",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CTScannerAvailability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AnticoagulantUse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TransportMode",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "PrenotificationProtocol",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether EMS sends advance stroke alert before patient arrival.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DoorToNeedleCategory",
+      "values": [
+        "Under45min",
+        "45to60min",
+        "Over60min"
+      ],
+      "desc": "Categorized elapsed time from ED arrival to thrombolytic administration.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "StrokeTeamReadiness",
+      "values": [
+        "FullyAssembled",
+        "PartiallyAssembled",
+        "NotAssembled"
+      ],
+      "desc": "Degree to which the stroke response team is staged at patient arrival.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "HospitalStrokeVolume",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Annual number of acute ischemic stroke cases treated at the facility.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "Under65",
+        "65to80",
+        "Over80"
+      ],
+      "desc": "Age bracket of the stroke patient at time of presentation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BaselineNIHSS",
+      "values": [
+        "Mild",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Initial stroke severity measured by NIH Stroke Scale score.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TimeOfArrival",
+      "values": [
+        "Daytime",
+        "Nighttime"
+      ],
+      "desc": "Whether the patient arrived during daytime or nighttime hours.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CTScannerAvailability",
+      "values": [
+        "Immediate",
+        "Delayed"
+      ],
+      "desc": "Whether a CT scanner is immediately open upon patient arrival.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AnticoagulantUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is on anticoagulant medication prior to admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TransportMode",
+      "values": [
+        "EMS",
+        "WalkIn"
+      ],
+      "desc": "Whether the patient arrived via emergency medical services or self-presented.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PrenotificationProtocol",
+      "StrokeTeamReadiness"
+    ],
+    [
+      "StrokeTeamReadiness",
+      "DoorToNeedleCategory"
+    ],
+    [
+      "StrokeTeamReadiness",
+      "PatientAgeGroup"
+    ],
+    [
+      "StrokeTeamReadiness",
+      "BaselineNIHSS"
+    ],
+    [
+      "HospitalStrokeVolume",
+      "PrenotificationProtocol"
+    ],
+    [
+      "HospitalStrokeVolume",
+      "DoorToNeedleCategory"
+    ],
+    [
+      "PatientAgeGroup",
+      "CTScannerAvailability"
+    ],
+    [
+      "CTScannerAvailability",
+      "BaselineNIHSS"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "HospitalStrokeVolume",
+      "parents": [],
+      "values": [
+        [
+          0.24295884652406102
+        ],
+        [
+          0.3377808988228822
+        ],
+        [
+          0.41926025465305666
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TimeOfArrival",
+      "parents": [],
+      "values": [
+        [
+          0.46551249424481084
+        ],
+        [
+          0.5344875057551892
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AnticoagulantUse",
+      "parents": [],
+      "values": [
+        [
+          0.6387312364370128
+        ],
+        [
+          0.3612687635629873
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TransportMode",
+      "parents": [],
+      "values": [
+        [
+          0.7681598736140723
+        ],
+        [
+          0.23184012638592766
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PrenotificationProtocol",
+      "parents": [
+        "HospitalStrokeVolume"
+      ],
+      "values": [
+        [
+          0.6476713841895876,
+          0.9718191892007911,
+          0.9984566230083441
+        ],
+        [
+          0.35232861581041236,
+          0.02818081079920896,
+          0.0015433769916557828
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "StrokeTeamReadiness",
+      "parents": [
+        "PrenotificationProtocol"
+      ],
+      "values": [
+        [
+          0.16231410127226406,
+          0.8666355180819839
+        ],
+        [
+          0.29370573741606193,
+          0.1181575198471149
+        ],
+        [
+          0.543980161311674,
+          0.015206962070901185
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DoorToNeedleCategory",
+      "parents": [
+        "HospitalStrokeVolume",
+        "StrokeTeamReadiness"
+      ],
+      "values": [
+        [
+          0.9080109244965261,
+          0.6093414801978818,
+          0.26901611301280887,
+          0.8133843437375409,
+          0.3343858833408423,
+          0.09286962766425585,
+          0.3345564272334461,
+          0.03193437863639477,
+          0.0049762589736860475
+        ],
+        [
+          0.08399383282987427,
+          0.2715455624002185,
+          0.3324262895317272,
+          0.15449678102600303,
+          0.339945956076195,
+          0.24841867499491954,
+          0.32262694201092385,
+          0.16509252814416756,
+          0.07065232314719083
+        ],
+        [
+          0.00799524267359967,
+          0.11911295740189967,
+          0.39855759745546393,
+          0.0321188752364562,
+          0.32566816058296266,
+          0.6587116973408247,
+          0.34281663075563007,
+          0.8029730932194378,
+          0.9243714178791231
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [
+        "StrokeTeamReadiness"
+      ],
+      "values": [
+        [
+          0.2753461834417386,
+          0.3808114136380211,
+          0.3986174420727059
+        ],
+        [
+          0.394981147372899,
+          0.11907261262059866,
+          0.027168323790222524
+        ],
+        [
+          0.32967266918536237,
+          0.5001159737413803,
+          0.5742142341370716
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CTScannerAvailability",
+      "parents": [
+        "PatientAgeGroup"
+      ],
+      "values": [
+        [
+          0.45409668069699183,
+          0.13511051944875155,
+          0.028501431304636393
+        ],
+        [
+          0.5459033193030082,
+          0.8648894805512485,
+          0.9714985686953636
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineNIHSS",
+      "parents": [
+        "CTScannerAvailability",
+        "StrokeTeamReadiness"
+      ],
+      "values": [
+        [
+          0.3675165412482606,
+          0.22166163146410015,
+          0.07186316877554833,
+          0.20181276005985513,
+          0.08835746963275694,
+          0.02523702540709342
+        ],
+        [
+          0.3073803301894987,
+          0.02973202891535321,
+          0.0015458780242495558,
+          0.2638766905161692,
+          0.01852808420184287,
+          0.0008487118178507056
+        ],
+        [
+          0.3251031285622408,
+          0.7486063396205466,
+          0.9265909532002021,
+          0.5343105494239757,
+          0.8931144461654003,
+          0.9739142627750559
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does PrenotificationProtocol change DoorToNeedleCategory? Specifically, does the effect of PrenotificationProtocol on DoorToNeedleCategory flow entirely through StrokeTeamReadiness, or is there also a separate pathway that does not pass through StrokeTeamReadiness? Investigate using interventions and explain your conclusion.",
+      "answer": "only_through_M",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "mediated_only",
+        "roles": {
+          "treatment": "PrenotificationProtocol",
+          "outcome": "DoorToNeedleCategory",
+          "mediator": "StrokeTeamReadiness",
+          "confounder": "HospitalStrokeVolume"
+        },
+        "gold": {
+          "label": "only_through_M",
+          "T": "PrenotificationProtocol",
+          "M": "StrokeTeamReadiness",
+          "O": "DoorToNeedleCategory",
+          "total_effect": -0.6943,
+          "max_residual_effect": 0.0
+        }
+      }
+    }
+  ]
+}

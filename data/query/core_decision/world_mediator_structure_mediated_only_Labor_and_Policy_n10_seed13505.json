@@ -1,0 +1,464 @@
+{
+  "meta": {
+    "topic": "Labor & Policy",
+    "n_nodes": 10,
+    "topology": "mediator_structure:mediated_only",
+    "seed": 13505,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "mediator_structure",
+    "sub_variant": "mediated_only"
+  },
+  "story": "A federal occupational safety and health administration office oversees regulated workplaces across multiple districts. The researcher has access to historical compliance and incident records and can request both observational and interventional data samples from participating facilities.",
+  "non_intervenable_variables": [
+    {
+      "name": "InjurySeverityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HazardRemediationRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FirmSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IndustryHazardClass",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FacilityAge",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "UnionPresence",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SafetyTrainingHours",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "WorkforceTurnoverRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RegionType",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "InspectionFrequency",
+      "values": [
+        "None",
+        "Annual",
+        "Quarterly"
+      ],
+      "desc": "Frequency of scheduled OSHA compliance inspections at a facility.",
+      "role": "treatment",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "InjurySeverityLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Classification of recorded workplace injuries by medical severity.",
+      "role": "outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "HazardRemediationRate",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Proportion of identified safety hazards corrected within the reporting period.",
+      "role": "mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "FirmSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Number of employees at the facility categorized by headcount tier.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "IndustryHazardClass",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "NAICS-based classification of inherent occupational hazard level for the industry.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FacilityAge",
+      "values": [
+        "Under10Yrs",
+        "10to30Yrs",
+        "Over30Yrs"
+      ],
+      "desc": "Age of the physical facility since original construction or major renovation.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "UnionPresence",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a recognized labor union represents workers at the facility.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SafetyTrainingHours",
+      "values": [
+        "Minimal",
+        "Standard",
+        "Extensive"
+      ],
+      "desc": "Annual hours of formal safety training provided per employee.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WorkforceTurnoverRate",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Annual rate of employee separations relative to average headcount.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RegionType",
+      "values": [
+        "Urban",
+        "Rural"
+      ],
+      "desc": "Geographic classification of the facility location by population density.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "InspectionFrequency",
+      "HazardRemediationRate"
+    ],
+    [
+      "HazardRemediationRate",
+      "InjurySeverityLevel"
+    ],
+    [
+      "HazardRemediationRate",
+      "RegionType"
+    ],
+    [
+      "FirmSize",
+      "InspectionFrequency"
+    ],
+    [
+      "FirmSize",
+      "InjurySeverityLevel"
+    ],
+    [
+      "FirmSize",
+      "IndustryHazardClass"
+    ],
+    [
+      "SafetyTrainingHours",
+      "UnionPresence"
+    ],
+    [
+      "WorkforceTurnoverRate",
+      "UnionPresence"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "FirmSize",
+      "parents": [],
+      "values": [
+        [
+          0.09929416467641707
+        ],
+        [
+          0.11849854483758157
+        ],
+        [
+          0.7822072904860013
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FacilityAge",
+      "parents": [],
+      "values": [
+        [
+          0.48957199176999194
+        ],
+        [
+          0.09746410862393119
+        ],
+        [
+          0.4129638996060769
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SafetyTrainingHours",
+      "parents": [],
+      "values": [
+        [
+          0.6131408701146284
+        ],
+        [
+          0.2903172592116211
+        ],
+        [
+          0.09654187067375043
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "WorkforceTurnoverRate",
+      "parents": [],
+      "values": [
+        [
+          0.09540390348755812
+        ],
+        [
+          0.3872132766284891
+        ],
+        [
+          0.5173828198839528
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InspectionFrequency",
+      "parents": [
+        "FirmSize"
+      ],
+      "values": [
+        [
+          0.2708787221602286,
+          0.24370231236000392,
+          0.1911959286579892
+        ],
+        [
+          0.3444380331902147,
+          0.19607089446909304,
+          0.09733059799948839
+        ],
+        [
+          0.3846832446495567,
+          0.5602267931709031,
+          0.7114734733425224
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "IndustryHazardClass",
+      "parents": [
+        "FirmSize"
+      ],
+      "values": [
+        [
+          0.24077296018510191,
+          0.15705357391195018,
+          0.06375272956689568
+        ],
+        [
+          0.4528512901531857,
+          0.8251215457588461,
+          0.9356018990451177
+        ],
+        [
+          0.3063757496617124,
+          0.017824880329203742,
+          0.0006453713879865491
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "UnionPresence",
+      "parents": [
+        "WorkforceTurnoverRate",
+        "SafetyTrainingHours"
+      ],
+      "values": [
+        [
+          0.4514710267986962,
+          0.4388443783904532,
+          0.4262964225275854,
+          0.9162623975300458,
+          0.912255437969119,
+          0.908075976044704,
+          0.9931725842120784,
+          0.9928170318670652,
+          0.9924431042563481
+        ],
+        [
+          0.5485289732013038,
+          0.5611556216095468,
+          0.5737035774724147,
+          0.08373760246995414,
+          0.08774456203088109,
+          0.09192402395529597,
+          0.006827415787921595,
+          0.007182968132934843,
+          0.007556895743651998
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HazardRemediationRate",
+      "parents": [
+        "InspectionFrequency"
+      ],
+      "values": [
+        [
+          0.16214959012135471,
+          0.33748199846338744,
+          0.8681582958439936
+        ],
+        [
+          0.2875438487866345,
+          0.32290035595016475,
+          0.11559421907685458
+        ],
+        [
+          0.5503065610920108,
+          0.33961764558644786,
+          0.0162474850791519
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InjurySeverityLevel",
+      "parents": [
+        "FirmSize",
+        "HazardRemediationRate"
+      ],
+      "values": [
+        [
+          0.9127771481641729,
+          0.5936329793914663,
+          0.2729603406714972,
+          0.8045927817928085,
+          0.3276015796873823,
+          0.09427079061298535,
+          0.3165397269560242,
+          0.03048422004001508,
+          0.005545738185142363
+        ],
+        [
+          0.07995192503860196,
+          0.2785507318826148,
+          0.3328883968574897,
+          0.16344873512257233,
+          0.3292008924707761,
+          0.2501314475303966,
+          0.34192900702677215,
+          0.16198870915635255,
+          0.07370028293161462
+        ],
+        [
+          0.0072709267972251345,
+          0.12781628872591885,
+          0.394151262471013,
+          0.0319584830846191,
+          0.3431975278418416,
+          0.655597761856618,
+          0.3415312660172036,
+          0.8075270708036324,
+          0.9207539788832431
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RegionType",
+      "parents": [
+        "HazardRemediationRate"
+      ],
+      "values": [
+        [
+          0.5944754618404379,
+          0.5277474752353905,
+          0.4600130895464808
+        ],
+        [
+          0.4055245381595621,
+          0.4722525247646096,
+          0.5399869104535193
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_mediator_structure",
+      "difficulty": "hard",
+      "question": "How does InspectionFrequency change InjurySeverityLevel? Specifically, does the effect of InspectionFrequency on InjurySeverityLevel flow entirely through HazardRemediationRate, or is there also a separate pathway that does not pass through HazardRemediationRate? Investigate using interventions and explain your conclusion.",
+      "answer": "only_through_M",
+      "metadata": {
+        "archetype": "mediator_structure",
+        "sub_variant": "mediated_only",
+        "roles": {
+          "treatment": "InspectionFrequency",
+          "outcome": "InjurySeverityLevel",
+          "mediator": "HazardRemediationRate",
+          "confounder": "FirmSize"
+        },
+        "gold": {
+          "label": "only_through_M",
+          "T": "InspectionFrequency",
+          "M": "HazardRemediationRate",
+          "O": "InjurySeverityLevel",
+          "total_effect": -0.6355,
+          "max_residual_effect": 0.0
+        }
+      }
+    }
+  ]
+}

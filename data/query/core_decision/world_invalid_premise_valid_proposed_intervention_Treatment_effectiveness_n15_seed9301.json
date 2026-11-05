@@ -1,0 +1,597 @@
+{
+  "meta": {
+    "topic": "Treatment effectiveness",
+    "n_nodes": 15,
+    "topology": "invalid_premise:valid_proposed_intervention",
+    "seed": 9301,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "valid_proposed_intervention"
+  },
+  "story": "A researcher works within a large public health clinic network serving HIV-positive patients across multiple urban and rural sites. The researcher has access to patient records and can request observational or interventional samples from participating clinics.",
+  "non_intervenable_variables": [
+    {
+      "name": "ViralSuppressionStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DoseTimingConsistency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BaselineCD4Category",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RegimenComplexity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DisclosureStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DistanceToClinic",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DepressionScreenResult",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FoodSecurityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TreatmentDuration",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ViralSuppressionStatus",
+      "values": [
+        "Suppressed",
+        "Unsuppressed"
+      ],
+      "desc": "Whether patient viral load is below 200 copies per mL at follow-up",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "SmsReminderProgram",
+      "values": [
+        "None",
+        "Daily"
+      ],
+      "desc": "Enrollment in daily SMS medication reminder service",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PillOrganizer",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Provision of a weekly compartmentalized pill organizer box",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DoseTimingConsistency",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Regularity of taking ART within the same two-hour window each day",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "BaselineCD4Category",
+      "values": [
+        "Above350",
+        "200to350",
+        "Below200"
+      ],
+      "desc": "CD4 cell count category at treatment initiation",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RegimenComplexity",
+      "values": [
+        "SingleTablet",
+        "MultiTablet"
+      ],
+      "desc": "Whether prescribed regimen is a single-tablet or multi-tablet daily combination",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClinicVisitFrequency",
+      "values": [
+        "Monthly",
+        "Quarterly",
+        "Biannual"
+      ],
+      "desc": "Scheduled frequency of clinical follow-up appointments",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DisclosureStatus",
+      "values": [
+        "Disclosed",
+        "NotDisclosed"
+      ],
+      "desc": "Whether the patient has disclosed HIV status to household members",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "values": [
+        "None",
+        "Past",
+        "Current"
+      ],
+      "desc": "Patient self-reported history of alcohol or recreational drug use",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DistanceToClinic",
+      "values": [
+        "Near",
+        "Moderate",
+        "Far"
+      ],
+      "desc": "Travel distance category from patient residence to dispensing clinic",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DepressionScreenResult",
+      "values": [
+        "None",
+        "Mild",
+        "ModerateOrSevere"
+      ],
+      "desc": "PHQ-9 depression screening severity classification at enrollment",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FoodSecurityLevel",
+      "values": [
+        "Secure",
+        "Insecure"
+      ],
+      "desc": "Household food security status based on standardized questionnaire",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "18to29",
+        "30to49",
+        "50plus"
+      ],
+      "desc": "Patient age bracket at study enrollment",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerSupportGroup",
+      "values": [
+        "NotEnrolled",
+        "Enrolled"
+      ],
+      "desc": "Participation in a facility-based HIV peer support group",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TreatmentDuration",
+      "values": [
+        "Under1Year",
+        "1to5Years",
+        "Over5Years"
+      ],
+      "desc": "Length of time since antiretroviral therapy was first initiated",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "SmsReminderProgram",
+      "DoseTimingConsistency"
+    ],
+    [
+      "SmsReminderProgram",
+      "FoodSecurityLevel"
+    ],
+    [
+      "PillOrganizer",
+      "ViralSuppressionStatus"
+    ],
+    [
+      "PillOrganizer",
+      "TreatmentDuration"
+    ],
+    [
+      "DoseTimingConsistency",
+      "ViralSuppressionStatus"
+    ],
+    [
+      "BaselineCD4Category",
+      "ViralSuppressionStatus"
+    ],
+    [
+      "ClinicVisitFrequency",
+      "PeerSupportGroup"
+    ],
+    [
+      "DepressionScreenResult",
+      "RegimenComplexity"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "SmsReminderProgram",
+      "parents": [],
+      "values": [
+        [
+          0.9028876070212808
+        ],
+        [
+          0.09711239297871922
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PillOrganizer",
+      "parents": [],
+      "values": [
+        [
+          0.6334462947244877
+        ],
+        [
+          0.3665537052755123
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BaselineCD4Category",
+      "parents": [],
+      "values": [
+        [
+          0.24765063004739
+        ],
+        [
+          0.49234749780807824
+        ],
+        [
+          0.2600018721445318
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ClinicVisitFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.26336889773800276
+        ],
+        [
+          0.645506310727362
+        ],
+        [
+          0.09112479153463528
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DisclosureStatus",
+      "parents": [],
+      "values": [
+        [
+          0.5933127362045004
+        ],
+        [
+          0.40668726379549963
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SubstanceUseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.16183356460196252
+        ],
+        [
+          0.5124677915052828
+        ],
+        [
+          0.3256986438927547
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DistanceToClinic",
+      "parents": [],
+      "values": [
+        [
+          0.40302648436363336
+        ],
+        [
+          0.43841435570433074
+        ],
+        [
+          0.15855915993203595
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DepressionScreenResult",
+      "parents": [],
+      "values": [
+        [
+          0.6352949991338458
+        ],
+        [
+          0.1622168361878441
+        ],
+        [
+          0.20248816467831005
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.7145210378432403
+        ],
+        [
+          0.18789980741179932
+        ],
+        [
+          0.09757915474496029
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DoseTimingConsistency",
+      "parents": [
+        "SmsReminderProgram"
+      ],
+      "values": [
+        [
+          0.16682585227216606,
+          0.8604327481979247
+        ],
+        [
+          0.2938428269821779,
+          0.12302037789819248
+        ],
+        [
+          0.539331320745656,
+          0.016546873903882882
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FoodSecurityLevel",
+      "parents": [
+        "SmsReminderProgram"
+      ],
+      "values": [
+        [
+          0.48707435246616426,
+          0.03942042297022306
+        ],
+        [
+          0.5129256475338357,
+          0.960579577029777
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TreatmentDuration",
+      "parents": [
+        "PillOrganizer"
+      ],
+      "values": [
+        [
+          0.25909649349646113,
+          0.1512389117443408
+        ],
+        [
+          0.27256689822301183,
+          0.6575692252122507
+        ],
+        [
+          0.468336608280527,
+          0.19119186304340857
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PeerSupportGroup",
+      "parents": [
+        "ClinicVisitFrequency"
+      ],
+      "values": [
+        [
+          0.6484629667201973,
+          0.7672621456137546,
+          0.8548975696473752
+        ],
+        [
+          0.3515370332798027,
+          0.2327378543862454,
+          0.14510243035262493
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RegimenComplexity",
+      "parents": [
+        "DepressionScreenResult"
+      ],
+      "values": [
+        [
+          0.4536413494228469,
+          0.696699621884094,
+          0.8640366847521057
+        ],
+        [
+          0.5463586505771532,
+          0.303300378115906,
+          0.13596331524789423
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ViralSuppressionStatus",
+      "parents": [
+        "BaselineCD4Category",
+        "DoseTimingConsistency",
+        "PillOrganizer"
+      ],
+      "values": [
+        [
+          0.9843444682846886,
+          0.9618879266467657,
+          0.7225791068389573,
+          0.5035198501503336,
+          0.3528045331948947,
+          0.16767878966221295,
+          0.9696350615632852,
+          0.9178822162209925,
+          0.5582941586831232,
+          0.32474335981843166,
+          0.19759619644047893,
+          0.08033658897288654,
+          0.7900564161906882,
+          0.6059258334567214,
+          0.1349398699250103,
+          0.05360426683006225,
+          0.03337964461129488,
+          0.011764084986113652
+        ],
+        [
+          0.015655531715311366,
+          0.03811207335323419,
+          0.27742089316104257,
+          0.4964801498496665,
+          0.6471954668051053,
+          0.832321210337787,
+          0.030364938436714842,
+          0.08211778377900737,
+          0.44170584131687685,
+          0.6752566401815684,
+          0.8024038035595211,
+          0.9196634110271135,
+          0.2099435838093119,
+          0.3940741665432786,
+          0.8650601300749897,
+          0.9463957331699377,
+          0.966620355388705,
+          0.9882359150138862
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting SmsReminderProgram=Daily as a way to shift ViralSuppressionStatus toward Suppressed (and away from Unsuppressed). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift ViralSuppressionStatus toward Suppressed.",
+      "answer": {
+        "is_valid_intervention": true,
+        "invalid_reason": null,
+        "proposed_intervention": {
+          "variable": "SmsReminderProgram",
+          "value": "Daily"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "valid_proposed_intervention",
+        "roles": {
+          "target": "ViralSuppressionStatus",
+          "proposed_intervention": "SmsReminderProgram",
+          "intervenable_alt": "PillOrganizer",
+          "alt_mediator": "DoseTimingConsistency",
+          "confounder": "BaselineCD4Category"
+        },
+        "gold": {
+          "is_valid_intervention": true,
+          "valid_reason": "proposed_intervention_meaningfully_improves_target",
+          "proposed_intervention": {
+            "variable": "SmsReminderProgram",
+            "value": "Daily"
+          },
+          "proposed_effect": -0.4252,
+          "acceptable_alternatives": [
+            {
+              "variable": "SmsReminderProgram",
+              "value": "Daily",
+              "improvement": 0.4252
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

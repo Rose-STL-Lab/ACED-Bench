@@ -1,0 +1,792 @@
+{
+  "meta": {
+    "topic": "Education",
+    "n_nodes": 15,
+    "topology": "subgroup_robust",
+    "seed": 34000,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A large community college system serving multiple campuses across a metropolitan area maintains detailed student enrollment and academic records. The institutional research office can request both observational data extracts and conduct structured interventional studies across campuses.",
+  "non_intervenable_variables": [
+    {
+      "name": "CoursePassStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MathReadiness",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorMathAttempts",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EnrollmentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HomeworkCompletionRate",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InstructorExperience",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ClassSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MathAnxietyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FinancialAidStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AttendanceRate",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "CoursePassStatus",
+      "values": [
+        "Pass",
+        "NearPass",
+        "Fail"
+      ],
+      "desc": "Final remedial math course outcome classification at semester end.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MathReadiness",
+      "values": [
+        "HigherReadiness",
+        "LowerReadiness"
+      ],
+      "desc": "Placement-test-based classification of incoming math skill level.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AcceleratedCorequisiteModel",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Enrollment level in corequisite college-level math alongside remediation.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ScaffoldedModularPathway",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Degree of modular skill-building curriculum with incremental assessments.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PureOnlineSelfPaced",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Assignment to a fully online self-paced remedial math format.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorMathAttempts",
+      "values": [
+        "FirstTime",
+        "Repeat"
+      ],
+      "desc": "Number of previous enrollments in a remedial math course.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "WeeklyTutoringHours",
+      "values": [
+        "None",
+        "Low",
+        "High"
+      ],
+      "desc": "Hours per week a student attends math tutoring center sessions.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "EnrollmentStatus",
+      "values": [
+        "FullTime",
+        "PartTime"
+      ],
+      "desc": "Whether the student is enrolled full-time or part-time this semester.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HomeworkCompletionRate",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Proportion of assigned homework sets submitted during the course.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InstructorExperience",
+      "values": [
+        "Novice",
+        "Experienced"
+      ],
+      "desc": "Years of teaching experience classification for the assigned instructor.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ClassSize",
+      "values": [
+        "Small",
+        "Large"
+      ],
+      "desc": "Number of students enrolled in the specific course section.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MathAnxietyLevel",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Self-reported math anxiety score category at course entry.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CalculatorPolicyAccess",
+      "values": [
+        "Restricted",
+        "Permitted"
+      ],
+      "desc": "Whether graphing calculator use is permitted during assessments.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FinancialAidStatus",
+      "values": [
+        "Receiving",
+        "NotReceiving"
+      ],
+      "desc": "Whether the student currently receives need-based financial aid.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AttendanceRate",
+      "values": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "desc": "Proportion of scheduled class sessions the student attended.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "MathReadiness",
+      "CoursePassStatus"
+    ],
+    [
+      "AcceleratedCorequisiteModel",
+      "CoursePassStatus"
+    ],
+    [
+      "ScaffoldedModularPathway",
+      "CoursePassStatus"
+    ],
+    [
+      "PureOnlineSelfPaced",
+      "CoursePassStatus"
+    ],
+    [
+      "PriorMathAttempts",
+      "CoursePassStatus"
+    ],
+    [
+      "PriorMathAttempts",
+      "FinancialAidStatus"
+    ],
+    [
+      "EnrollmentStatus",
+      "ScaffoldedModularPathway"
+    ],
+    [
+      "HomeworkCompletionRate",
+      "MathAnxietyLevel"
+    ],
+    [
+      "FinancialAidStatus",
+      "AttendanceRate"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MathReadiness",
+      "parents": [],
+      "values": [
+        [
+          0.34391532553045023
+        ],
+        [
+          0.6560846744695498
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AcceleratedCorequisiteModel",
+      "parents": [],
+      "values": [
+        [
+          0.09289670496380875
+        ],
+        [
+          0.3623349091522213
+        ],
+        [
+          0.54476838588397
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PureOnlineSelfPaced",
+      "parents": [],
+      "values": [
+        [
+          0.2817605643629363
+        ],
+        [
+          0.7182394356370637
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorMathAttempts",
+      "parents": [],
+      "values": [
+        [
+          0.4935453961784922
+        ],
+        [
+          0.5064546038215079
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "WeeklyTutoringHours",
+      "parents": [],
+      "values": [
+        [
+          0.717459780835967
+        ],
+        [
+          0.1592192712966232
+        ],
+        [
+          0.12332094786740991
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EnrollmentStatus",
+      "parents": [],
+      "values": [
+        [
+          0.09754564126768324
+        ],
+        [
+          0.9024543587323167
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HomeworkCompletionRate",
+      "parents": [],
+      "values": [
+        [
+          0.5643524145860624
+        ],
+        [
+          0.09429608626566881
+        ],
+        [
+          0.3413514991482688
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "InstructorExperience",
+      "parents": [],
+      "values": [
+        [
+          0.3918447832403066
+        ],
+        [
+          0.6081552167596934
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ClassSize",
+      "parents": [],
+      "values": [
+        [
+          0.4626916062984382
+        ],
+        [
+          0.5373083937015618
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CalculatorPolicyAccess",
+      "parents": [],
+      "values": [
+        [
+          0.5742086495523886
+        ],
+        [
+          0.4257913504476115
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FinancialAidStatus",
+      "parents": [
+        "PriorMathAttempts"
+      ],
+      "values": [
+        [
+          0.5305824488076114,
+          0.6215566900497597
+        ],
+        [
+          0.4694175511923887,
+          0.37844330995024045
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ScaffoldedModularPathway",
+      "parents": [
+        "EnrollmentStatus"
+      ],
+      "values": [
+        [
+          0.29296470268708613,
+          0.673791673794813
+        ],
+        [
+          0.31657094970629174,
+          0.005251341765564005
+        ],
+        [
+          0.39046434760662213,
+          0.3209569844396231
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MathAnxietyLevel",
+      "parents": [
+        "HomeworkCompletionRate"
+      ],
+      "values": [
+        [
+          0.2730289404602224,
+          0.3237027574913433,
+          0.3785342420582005
+        ],
+        [
+          0.28723477265983643,
+          0.25453570458744695,
+          0.2224751277396425
+        ],
+        [
+          0.43973628687994104,
+          0.42176153792120974,
+          0.3989906302021569
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AttendanceRate",
+      "parents": [
+        "FinancialAidStatus"
+      ],
+      "values": [
+        [
+          0.4820826917925491,
+          0.038062468933339345
+        ],
+        [
+          0.24895786167845746,
+          0.557571773968019
+        ],
+        [
+          0.26895944652899356,
+          0.40436575709864164
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CoursePassStatus",
+      "parents": [
+        "PriorMathAttempts",
+        "MathReadiness",
+        "AcceleratedCorequisiteModel",
+        "ScaffoldedModularPathway",
+        "PureOnlineSelfPaced"
+      ],
+      "values": [
+        [
+          0.3707390138601428,
+          0.1902676835361176,
+          0.4741104230023376,
+          0.2727829811771802,
+          0.7586812546150371,
+          0.6062848894787425,
+          0.5221516474132456,
+          0.2879962734096381,
+          0.5941501877826671,
+          0.40553250338819685,
+          0.8434573508880379,
+          0.7290791808519259,
+          0.6385538651066561,
+          0.44892642555715395,
+          0.7194703197082659,
+          0.5458256639366386,
+          0.8873208405288805,
+          0.8078724964628295,
+          0.1101174791760382,
+          0.4174845249975502,
+          0.16424462490793862,
+          0.5457122651528487,
+          0.4750075471088443,
+          0.8110456600214653,
+          0.18786901895970415,
+          0.5767286497734284,
+          0.26791191666416,
+          0.6659854436445704,
+          0.5924930225841678,
+          0.8674727466835166,
+          0.6229600970414908,
+          0.8766518670790395,
+          0.7221463171107247,
+          0.9082878911745103,
+          0.8934963989770501,
+          0.9657630038920144,
+          0.018378373635173344,
+          0.005790136448807455,
+          0.033133141102005034,
+          0.011384162730415686,
+          0.16581073217550865,
+          0.064695036918927,
+          0.038732935333896074,
+          0.012330912056536811,
+          0.06540024441977876,
+          0.022840609230790333,
+          0.27303680358569954,
+          0.12136122369115698,
+          0.07224289035802636,
+          0.02802145719033269,
+          0.12095621835179994,
+          0.04605819176124033,
+          0.3964532419023182,
+          0.21293003649278314,
+          0.002770292879431276,
+          0.02650548013249026,
+          0.005018440955668804,
+          0.046515170418703636,
+          0.03370181244514734,
+          0.21125271773672308,
+          0.005863997071924763,
+          0.05272989896630786,
+          0.010669251354935839,
+          0.08977431542497606,
+          0.06291823407283223,
+          0.31970153271969726,
+          0.07945615309639047,
+          0.37812827305149543,
+          0.12520915358179965,
+          0.47719490740752607,
+          0.4138971785469126,
+          0.7577031833446299
+        ],
+        [
+          0.3423192002300248,
+          0.3039257501547107,
+          0.3134088439912709,
+          0.3316427505802644,
+          0.19378294819720218,
+          0.2694058220784776,
+          0.2963008380099586,
+          0.33436683020682145,
+          0.27462190666874836,
+          0.32071358130125116,
+          0.1336490716276753,
+          0.20719801002329136,
+          0.257764882512494,
+          0.3230164756182056,
+          0.21688627318422937,
+          0.29112075780989244,
+          0.10140045398967695,
+          0.16016160640294783,
+          0.250648452293451,
+          0.3324980327326059,
+          0.2917754272871552,
+          0.2882663008842859,
+          0.3142483162198971,
+          0.15737152929444997,
+          0.31239854801637595,
+          0.28220521728476866,
+          0.3167094147540227,
+          0.2450360570218223,
+          0.286289243788996,
+          0.11777978553993122,
+          0.26838801701377535,
+          0.11015747115854366,
+          0.21386113918441496,
+          0.08385109876007392,
+          0.0950616266430889,
+          0.03315759857979539,
+          0.11844586227194673,
+          0.07793065547187124,
+          0.1498460072725745,
+          0.09473647248749936,
+          0.2978485587655045,
+          0.2074962861528169,
+          0.17271294897591138,
+          0.10961877217466263,
+          0.22754185106037886,
+          0.14785701894839723,
+          0.32201305943347136,
+          0.28204260514244217,
+          0.22750615868563578,
+          0.14811154534547497,
+          0.2826852659986583,
+          0.19428739480669768,
+          0.3288215025469858,
+          0.3204109411646052,
+          0.05184653741999844,
+          0.1478569933563909,
+          0.06723893485720393,
+          0.19132805854638024,
+          0.15415009720577175,
+          0.3262138529049502,
+          0.0775051550781818,
+          0.19324325578741608,
+          0.10132355237923708,
+          0.24505012407176477,
+          0.218865247408985,
+          0.3468239298167438,
+          0.22771513089175605,
+          0.3356424590462673,
+          0.2744798329867546,
+          0.3059461180927198,
+          0.32186981431708245,
+          0.19288637386485635
+        ],
+        [
+          0.2869417859098323,
+          0.5058065663091718,
+          0.21248073300639153,
+          0.3955742682425555,
+          0.047535797187760735,
+          0.12430928844277991,
+          0.18154751457679583,
+          0.3776368963835405,
+          0.13122790554858457,
+          0.273753915310552,
+          0.022893577484286762,
+          0.06372280912478269,
+          0.1036812523808499,
+          0.2280570988246404,
+          0.06364340710750462,
+          0.16305357825346894,
+          0.011278705481442382,
+          0.03196589713422266,
+          0.6392340685305108,
+          0.250017442269844,
+          0.5439799478049061,
+          0.16602143396286542,
+          0.21074413667125863,
+          0.03158281068408465,
+          0.49973243302391995,
+          0.14106613294180292,
+          0.41537866858181743,
+          0.08897849933360726,
+          0.12121773362683624,
+          0.014747467776552193,
+          0.108651885944734,
+          0.013190661762416797,
+          0.06399254370486035,
+          0.007861010065416,
+          0.011441974379861039,
+          0.001079397528190095,
+          0.86317576409288,
+          0.9162792080793213,
+          0.8170208516254206,
+          0.893879364782085,
+          0.5363407090589869,
+          0.727808676928256,
+          0.7885541156901926,
+          0.8780503157688005,
+          0.7070579045198423,
+          0.8293023718208126,
+          0.4049501369808292,
+          0.596596171166401,
+          0.7002509509563378,
+          0.8238669974641923,
+          0.5963585156495418,
+          0.7596544134320621,
+          0.274725255550696,
+          0.4666590223426117,
+          0.9453831697005703,
+          0.8256375265111189,
+          0.9277426241871273,
+          0.7621567710349161,
+          0.8121480903490809,
+          0.46253342935832675,
+          0.9166308478498935,
+          0.7540268452462761,
+          0.8880071962658271,
+          0.6651755605032591,
+          0.7182165185181828,
+          0.333474537463559,
+          0.6928287160118535,
+          0.28622926790223735,
+          0.6003110134314457,
+          0.2168589744997541,
+          0.2642330071360049,
+          0.049410442790513716
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift CoursePassStatus toward Pass (and away from Fail). The deployment will reach individuals with MathReadiness=HigherReadiness as well as MathReadiness=LowerReadiness, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "ScaffoldedModularPathway",
+        "value": "Full",
+        "min_improvement": 0.3163,
+        "improvement_low": 0.3668,
+        "improvement_high": 0.3163
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "CoursePassStatus",
+          "group": "MathReadiness",
+          "intervention_avg": "AcceleratedCorequisiteModel",
+          "intervention_rob": "ScaffoldedModularPathway",
+          "intervention_bad": "PureOnlineSelfPaced",
+          "confounder": "PriorMathAttempts"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "ScaffoldedModularPathway",
+            "value": "Full",
+            "min_improvement": 0.3163,
+            "improvement_low": 0.3668,
+            "improvement_high": 0.3163
+          },
+          "avg_best_but_uneven": {
+            "variable": "AcceleratedCorequisiteModel",
+            "value": "Full",
+            "min_improvement": 0.0941,
+            "improvement_low": 0.0941,
+            "improvement_high": 0.2686
+          },
+          "harmful_in_subgroup": {
+            "variable": "PureOnlineSelfPaced",
+            "value": "Yes",
+            "min_improvement": -0.0701,
+            "improvement_low": -0.0701,
+            "improvement_high": 0.1325
+          },
+          "subgroups": [
+            "HigherReadiness",
+            "LowerReadiness"
+          ],
+          "group_variable": "MathReadiness",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "ScaffoldedModularPathway",
+              "value": "Full",
+              "improvement_low": 0.3668,
+              "improvement_high": 0.3163,
+              "min_improvement": 0.3163
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

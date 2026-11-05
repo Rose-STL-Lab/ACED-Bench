@@ -1,0 +1,511 @@
+{
+  "meta": {
+    "topic": "Social Science",
+    "n_nodes": 10,
+    "topology": "invalid_premise:valid_proposed_intervention",
+    "seed": 9604,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "invalid_premise",
+    "sub_variant": "valid_proposed_intervention"
+  },
+  "story": "A national immigration research institute maintains longitudinal administrative records on resettlement program participants across multiple cities. The researcher has access to these records and can request both observational and interventional samples from the institute's database.",
+  "non_intervenable_variables": [
+    {
+      "name": "EmploymentIntegration",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HostCountryLanguageProficiency",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PreMigrationEducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "YearsSinceArrival",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "LocalSocialNetworkSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "CredentialRecognitionStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NeighborhoodEthnicDensity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PerceivedDiscrimination",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "EmploymentIntegration",
+      "values": [
+        "FullyIntegrated",
+        "PartiallyIntegrated",
+        "NotIntegrated"
+      ],
+      "desc": "Degree of stable employment in occupation matching qualifications",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "IntensiveLanguageProgram",
+      "values": [
+        "None",
+        "Standard",
+        "Intensive"
+      ],
+      "desc": "Level of structured host-country language instruction provided",
+      "role": "proposed_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "MentorshipMatching",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether immigrant is paired with an established community mentor",
+      "role": "intervenable_alt",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HostCountryLanguageProficiency",
+      "values": [
+        "Fluent",
+        "Intermediate",
+        "Beginner"
+      ],
+      "desc": "Self-assessed and tested proficiency in host-country language",
+      "role": "alt_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PreMigrationEducationLevel",
+      "values": [
+        "Tertiary",
+        "Secondary",
+        "PrimaryOrLess"
+      ],
+      "desc": "Highest educational credential obtained before migration",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "YearsSinceArrival",
+      "values": [
+        "FiveOrMore",
+        "TwoToFour",
+        "UnderTwo"
+      ],
+      "desc": "Duration of residence in host country since initial arrival",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "LocalSocialNetworkSize",
+      "values": [
+        "Large",
+        "Moderate",
+        "Small"
+      ],
+      "desc": "Number of regular social contacts with host-country nationals",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "CredentialRecognitionStatus",
+      "values": [
+        "FullyRecognized",
+        "PartiallyRecognized",
+        "NotRecognized"
+      ],
+      "desc": "Extent to which foreign qualifications are officially validated",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NeighborhoodEthnicDensity",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Proportion of co-ethnic residents in immigrant's neighborhood",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PerceivedDiscrimination",
+      "values": [
+        "None",
+        "Occasional",
+        "Frequent"
+      ],
+      "desc": "Frequency of self-reported discrimination in job-seeking contexts",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "IntensiveLanguageProgram",
+      "HostCountryLanguageProficiency"
+    ],
+    [
+      "IntensiveLanguageProgram",
+      "NeighborhoodEthnicDensity"
+    ],
+    [
+      "MentorshipMatching",
+      "EmploymentIntegration"
+    ],
+    [
+      "HostCountryLanguageProficiency",
+      "EmploymentIntegration"
+    ],
+    [
+      "PreMigrationEducationLevel",
+      "EmploymentIntegration"
+    ],
+    [
+      "YearsSinceArrival",
+      "IntensiveLanguageProgram"
+    ],
+    [
+      "CredentialRecognitionStatus",
+      "LocalSocialNetworkSize"
+    ],
+    [
+      "PerceivedDiscrimination",
+      "LocalSocialNetworkSize"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MentorshipMatching",
+      "parents": [],
+      "values": [
+        [
+          0.6708001262014164
+        ],
+        [
+          0.3291998737985836
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PreMigrationEducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.7171329657409115
+        ],
+        [
+          0.15654969607277108
+        ],
+        [
+          0.12631733818631752
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "YearsSinceArrival",
+      "parents": [],
+      "values": [
+        [
+          0.39322084503480026
+        ],
+        [
+          0.2141639280182449
+        ],
+        [
+          0.3926152269469548
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CredentialRecognitionStatus",
+      "parents": [],
+      "values": [
+        [
+          0.4852935551181984
+        ],
+        [
+          0.273178209788513
+        ],
+        [
+          0.24152823509328872
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PerceivedDiscrimination",
+      "parents": [],
+      "values": [
+        [
+          0.19339540679851244
+        ],
+        [
+          0.4063801439264122
+        ],
+        [
+          0.4002244492750755
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "IntensiveLanguageProgram",
+      "parents": [
+        "YearsSinceArrival"
+      ],
+      "values": [
+        [
+          0.40221309322913223,
+          0.5453681206758363,
+          0.6813924233352607
+        ],
+        [
+          0.2787594984780405,
+          0.2130197115823132,
+          0.14999746479114595
+        ],
+        [
+          0.3190274082928272,
+          0.24161216774185057,
+          0.16861011187359323
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "LocalSocialNetworkSize",
+      "parents": [
+        "PerceivedDiscrimination",
+        "CredentialRecognitionStatus"
+      ],
+      "values": [
+        [
+          0.2829663580923768,
+          0.4169854360324501,
+          0.43744009001543316,
+          0.01358246494242986,
+          0.134986154367783,
+          0.33027793112952564,
+          0.0002333889375369754,
+          0.003529631084602708,
+          0.04624246375919279
+        ],
+        [
+          0.3858358366152575,
+          0.5511037345395317,
+          0.56037113886857,
+          0.024940963701316165,
+          0.24025286334691057,
+          0.5697752926458544,
+          0.0005771408100286759,
+          0.00846010090767391,
+          0.10743156501384617
+        ],
+        [
+          0.3311978052923657,
+          0.03191082942801831,
+          0.002188771115996826,
+          0.961476571356254,
+          0.6247609822853065,
+          0.09994677622461992,
+          0.9991894702524344,
+          0.9880102680077234,
+          0.8463259712269612
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HostCountryLanguageProficiency",
+      "parents": [
+        "IntensiveLanguageProgram"
+      ],
+      "values": [
+        [
+          0.1572043593169525,
+          0.34045147771499196,
+          0.8635296405884123
+        ],
+        [
+          0.3056232680939796,
+          0.3239542165169442,
+          0.12044579827933785
+        ],
+        [
+          0.5371723725890679,
+          0.33559430576806376,
+          0.01602456113224993
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NeighborhoodEthnicDensity",
+      "parents": [
+        "IntensiveLanguageProgram"
+      ],
+      "values": [
+        [
+          0.23126794109792623,
+          0.28081191517743537,
+          0.24588142223602905
+        ],
+        [
+          0.46414385207220243,
+          0.17235085154472451,
+          0.0461513439395475
+        ],
+        [
+          0.3045882068298714,
+          0.5468372332778402,
+          0.7079672338244234
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmploymentIntegration",
+      "parents": [
+        "PreMigrationEducationLevel",
+        "HostCountryLanguageProficiency",
+        "MentorshipMatching"
+      ],
+      "values": [
+        [
+          0.8747843895729341,
+          0.8010347302426865,
+          0.5114418896383616,
+          0.34029410028454204,
+          0.23262235408362802,
+          0.12257574398933954,
+          0.8281075227714794,
+          0.7119350445787919,
+          0.3553146542900677,
+          0.2204995824793896,
+          0.14490308208476455,
+          0.06455889800464021,
+          0.5761243238549041,
+          0.3881098873486517,
+          0.10540480568307421,
+          0.048338700272899014,
+          0.028981061933165457,
+          0.011039514438173107
+        ],
+        [
+          0.11168216275788634,
+          0.16537852215681417,
+          0.30261305588102977,
+          0.3379778675976859,
+          0.3417769750881833,
+          0.2819236979477146,
+          0.14420884374914816,
+          0.2200207662081661,
+          0.3342887786843667,
+          0.31879514899558675,
+          0.2810917066158026,
+          0.21179721245109676,
+          0.2802564365065004,
+          0.33230828784563476,
+          0.26793671201801983,
+          0.20232223772407926,
+          0.14792264602034258,
+          0.10257114496789717
+        ],
+        [
+          0.013533447669179476,
+          0.03358674760049936,
+          0.18594505448060866,
+          0.3217280321177721,
+          0.42560067082818875,
+          0.5955005580629458,
+          0.027683633479372468,
+          0.0680441892130421,
+          0.31039656702556556,
+          0.4607052685250236,
+          0.5740052112994329,
+          0.7236438895442631,
+          0.1436192396385955,
+          0.2795818248057134,
+          0.6266584822989059,
+          0.7493390620030217,
+          0.8230962920464919,
+          0.8863893405939297
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_invalid_premise",
+      "difficulty": "hard",
+      "question": "An analyst suggests setting IntensiveLanguageProgram=Intensive as a way to shift EmploymentIntegration toward FullyIntegrated (and away from NotIntegrated). Investigate whether this is a sensible intervention to run in this study, and if not, recommend a different intervention you would actually deploy to shift EmploymentIntegration toward FullyIntegrated.",
+      "answer": {
+        "is_valid_intervention": true,
+        "invalid_reason": null,
+        "proposed_intervention": {
+          "variable": "IntensiveLanguageProgram",
+          "value": "Intensive"
+        }
+      },
+      "metadata": {
+        "archetype": "invalid_premise",
+        "sub_variant": "valid_proposed_intervention",
+        "roles": {
+          "target": "EmploymentIntegration",
+          "proposed_intervention": "IntensiveLanguageProgram",
+          "intervenable_alt": "MentorshipMatching",
+          "alt_mediator": "HostCountryLanguageProficiency",
+          "confounder": "PreMigrationEducationLevel"
+        },
+        "gold": {
+          "is_valid_intervention": true,
+          "valid_reason": "proposed_intervention_meaningfully_improves_target",
+          "proposed_intervention": {
+            "variable": "IntensiveLanguageProgram",
+            "value": "Intensive"
+          },
+          "proposed_effect": -0.4977,
+          "acceptable_alternatives": [
+            {
+              "variable": "IntensiveLanguageProgram",
+              "value": "Intensive",
+              "improvement": 0.4977
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

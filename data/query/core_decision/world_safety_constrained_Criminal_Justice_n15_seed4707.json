@@ -1,0 +1,795 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "safety_constrained",
+    "seed": 4707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "safety_constrained",
+    "sub_variant": null
+  },
+  "story": "A state department of corrections maintains detailed administrative records on individuals released from its facilities. The research team has access to these records and can request both observational and interventional data samples from participating reentry programs.",
+  "non_intervenable_variables": [
+    {
+      "name": "SteadyEmploymentStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RecidivismRisk",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "JobReadinessScore",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorConvictionSeverity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeAtRelease",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingStability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilySupportNetwork",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "SteadyEmploymentStatus",
+      "values": [
+        "Employed",
+        "Underemployed",
+        "Unemployed"
+      ],
+      "desc": "Whether the individual holds stable full-time employment post-release.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "RecidivismRisk",
+      "values": [
+        "NoReoffense",
+        "MinorReoffense",
+        "SeriousReoffense"
+      ],
+      "desc": "Classification of any new criminal offense within twelve months post-release.",
+      "role": "safety_outcome",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "VocationalTrainingProgram",
+      "values": [
+        "None",
+        "PartTime",
+        "FullTime"
+      ],
+      "desc": "Enrollment level in a structured vocational skills training program.",
+      "role": "good_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "UnsupervisedJobPlacement",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Degree of direct job placement without ongoing case manager oversight.",
+      "role": "risky_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "OnlineJobSearchWorkshop",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Participation in a brief online workshop on job searching techniques.",
+      "role": "weak_intervention",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "JobReadinessScore",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Assessed preparedness for workforce entry based on skills and interview performance.",
+      "role": "good_mediator",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PriorConvictionSeverity",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Severity classification of the individual's most serious prior conviction.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeAtRelease",
+      "values": [
+        "Young",
+        "MiddleAge",
+        "Older"
+      ],
+      "desc": "Age group of the individual at the time of release from incarceration.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "NoHighSchool",
+        "HighSchoolOrGED",
+        "SomeCollegeOrMore"
+      ],
+      "desc": "Highest level of formal education completed prior to incarceration.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "SubstanceUseHistory",
+      "values": [
+        "None",
+        "Moderate",
+        "Severe"
+      ],
+      "desc": "Documented history of substance use disorders before release.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingStability",
+      "values": [
+        "Stable",
+        "Transitional",
+        "Unstable"
+      ],
+      "desc": "Type of housing arrangement the individual has upon release.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MentorshipAssignment",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the individual is paired with a community reentry mentor.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TransportationAccess",
+      "values": [
+        "Adequate",
+        "Limited"
+      ],
+      "desc": "Availability of reliable transportation for commuting to employment.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ParoleSupervisionLevel",
+      "values": [
+        "Standard",
+        "Intensive"
+      ],
+      "desc": "Assigned level of parole officer supervision frequency post-release.",
+      "role": "background",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilySupportNetwork",
+      "values": [
+        "Strong",
+        "Weak",
+        "None"
+      ],
+      "desc": "Extent of supportive family relationships available to the individual.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "VocationalTrainingProgram",
+      "JobReadinessScore"
+    ],
+    [
+      "VocationalTrainingProgram",
+      "EducationLevel"
+    ],
+    [
+      "UnsupervisedJobPlacement",
+      "SteadyEmploymentStatus"
+    ],
+    [
+      "UnsupervisedJobPlacement",
+      "RecidivismRisk"
+    ],
+    [
+      "OnlineJobSearchWorkshop",
+      "SteadyEmploymentStatus"
+    ],
+    [
+      "JobReadinessScore",
+      "SteadyEmploymentStatus"
+    ],
+    [
+      "JobReadinessScore",
+      "AgeAtRelease"
+    ],
+    [
+      "PriorConvictionSeverity",
+      "SteadyEmploymentStatus"
+    ],
+    [
+      "PriorConvictionSeverity",
+      "RecidivismRisk"
+    ],
+    [
+      "PriorConvictionSeverity",
+      "TransportationAccess"
+    ],
+    [
+      "HousingStability",
+      "VocationalTrainingProgram"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "UnsupervisedJobPlacement",
+      "parents": [],
+      "values": [
+        [
+          0.6683954476103743
+        ],
+        [
+          0.20581983041913715
+        ],
+        [
+          0.12578472197048868
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "OnlineJobSearchWorkshop",
+      "parents": [],
+      "values": [
+        [
+          0.09766858684998943
+        ],
+        [
+          0.9023314131500105
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorConvictionSeverity",
+      "parents": [],
+      "values": [
+        [
+          0.09655836452961213
+        ],
+        [
+          0.3847407753460093
+        ],
+        [
+          0.5187008601243785
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SubstanceUseHistory",
+      "parents": [],
+      "values": [
+        [
+          0.13296180741574273
+        ],
+        [
+          0.40001968639860797
+        ],
+        [
+          0.4670185061856493
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HousingStability",
+      "parents": [],
+      "values": [
+        [
+          0.49345295341132034
+        ],
+        [
+          0.09943523157326162
+        ],
+        [
+          0.4071118150154181
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MentorshipAssignment",
+      "parents": [],
+      "values": [
+        [
+          0.14936800390207194
+        ],
+        [
+          0.8506319960979281
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ParoleSupervisionLevel",
+      "parents": [],
+      "values": [
+        [
+          0.09433819485699062
+        ],
+        [
+          0.9056618051430093
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FamilySupportNetwork",
+      "parents": [],
+      "values": [
+        [
+          0.4867976946776966
+        ],
+        [
+          0.09695365493207433
+        ],
+        [
+          0.41624865039022896
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RecidivismRisk",
+      "parents": [
+        "PriorConvictionSeverity",
+        "UnsupervisedJobPlacement"
+      ],
+      "values": [
+        [
+          0.5623510763196549,
+          0.2772007205303359,
+          0.05361032131310357,
+          0.3867838463116764,
+          0.14200513513314106,
+          0.02355821697755703,
+          0.06460797350806571,
+          0.012219131142083126,
+          0.0015397250407638069
+        ],
+        [
+          0.2879268671513205,
+          0.32909223313232855,
+          0.20332637451894295,
+          0.3457071262451086,
+          0.2823370715280328,
+          0.14137671862633922,
+          0.22806911413114186,
+          0.10148560220453112,
+          0.03955268836132272
+        ],
+        [
+          0.14972205652902473,
+          0.39370704633733555,
+          0.7430633041679535,
+          0.2675090274432151,
+          0.575657793338826,
+          0.8350650643961037,
+          0.7073229123607925,
+          0.8862952666533858,
+          0.9589075865979135
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TransportationAccess",
+      "parents": [
+        "PriorConvictionSeverity"
+      ],
+      "values": [
+        [
+          0.670277566345692,
+          0.18555288747834145,
+          0.02489738817200611
+        ],
+        [
+          0.329722433654308,
+          0.8144471125216585,
+          0.9751026118279938
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "VocationalTrainingProgram",
+      "parents": [
+        "HousingStability"
+      ],
+      "values": [
+        [
+          0.35791396892030475,
+          0.015232494174630701,
+          0.0002024427376256453
+        ],
+        [
+          0.23592697155616305,
+          0.8642434658456113,
+          0.9886291812853755
+        ],
+        [
+          0.4061590595235323,
+          0.12052403997975805,
+          0.011168375976998733
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "JobReadinessScore",
+      "parents": [
+        "VocationalTrainingProgram"
+      ],
+      "values": [
+        [
+          0.1676232972180009,
+          0.728769954172924,
+          0.909030436084722
+        ],
+        [
+          0.28400844987361584,
+          0.20474282279845257,
+          0.0834823317893114
+        ],
+        [
+          0.5483682529083832,
+          0.06648722302862337,
+          0.0074872321259666155
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [
+        "VocationalTrainingProgram"
+      ],
+      "values": [
+        [
+          0.3018034175681146,
+          0.5194651659216427,
+          0.6318245996654633
+        ],
+        [
+          0.39845565038205677,
+          0.09382241972839446,
+          0.015611372734746654
+        ],
+        [
+          0.29974093204982877,
+          0.38671241434996284,
+          0.3525640275997901
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SteadyEmploymentStatus",
+      "parents": [
+        "PriorConvictionSeverity",
+        "JobReadinessScore",
+        "UnsupervisedJobPlacement",
+        "OnlineJobSearchWorkshop"
+      ],
+      "values": [
+        [
+          0.8247939464695756,
+          0.8878622649678332,
+          0.9564900585095647,
+          0.9732580702151158,
+          0.9863896455989847,
+          0.9910931108716202,
+          0.3728103048035881,
+          0.5557597811688675,
+          0.7858184278285406,
+          0.873928663191924,
+          0.9340572227454718,
+          0.9618608130150844,
+          0.05670736563903685,
+          0.12324914731409539,
+          0.3772090850145713,
+          0.543027037925533,
+          0.7373018881893175,
+          0.8402717151900836,
+          0.6915359513509447,
+          0.7948242420627821,
+          0.9181411199768772,
+          0.9510016850774888,
+          0.9753499778876937,
+          0.9850713342596489,
+          0.18176045815685615,
+          0.3263962081649944,
+          0.6286627961627788,
+          0.7707896579335668,
+          0.8760571678218907,
+          0.9247042235568789,
+          0.02043575646608671,
+          0.04831712463177548,
+          0.18627538703169727,
+          0.32433977880270326,
+          0.5860947576087718,
+          0.7068101527532258,
+          0.1967707739651554,
+          0.32407209950717925,
+          0.6352872520825392,
+          0.7598768618690308,
+          0.8722158666128632,
+          0.924102013797085,
+          0.014170158441304063,
+          0.03509338596463867,
+          0.13772436131222401,
+          0.2720859809350974,
+          0.49632367701249713,
+          0.6601091897071036,
+          0.0009025336120844635,
+          0.002278824598768108,
+          0.014014293959098697,
+          0.03253512186123592,
+          0.10701431685950126,
+          0.2096336295064281
+        ],
+        [
+          0.1468794191424094,
+          0.10099847054510538,
+          0.041491250696503196,
+          0.026019357756541787,
+          0.013424108627544158,
+          0.008839278920539569,
+          0.322085743421584,
+          0.28297132986956264,
+          0.17731278804432005,
+          0.11133656769290985,
+          0.06173316978177847,
+          0.036610495828267496,
+          0.19934767031865408,
+          0.2792895237935738,
+          0.3255790602847523,
+          0.290195731202729,
+          0.20718158791966412,
+          0.13768731752156307,
+          0.2311461507269635,
+          0.1728650713195098,
+          0.07537929361419425,
+          0.04680580330469243,
+          0.0240425592286033,
+          0.014700865558136853,
+          0.3049402176189551,
+          0.3354075704860285,
+          0.26829397914947783,
+          0.1818613984808546,
+          0.11069209731305589,
+          0.07030150982564375,
+          0.1329795043132849,
+          0.18353392699157806,
+          0.31197684074682425,
+          0.3313215907334306,
+          0.27277783709679515,
+          0.22688639133189836,
+          0.3167310143611612,
+          0.3318684548623895,
+          0.2574846299349806,
+          0.1944690377346243,
+          0.1134112200056978,
+          0.07042640952804086,
+          0.10623279109664384,
+          0.1599078501699204,
+          0.296395527520165,
+          0.3341296266198567,
+          0.31132924327236594,
+          0.24330373427204283,
+          0.030109318903532137,
+          0.04952675587458345,
+          0.10533262959051633,
+          0.16483216327403777,
+          0.26140352808134704,
+          0.3153742432027058
+        ],
+        [
+          0.02832663438801513,
+          0.011139264487061555,
+          0.002018690793932161,
+          0.0007225720283425578,
+          0.00018624577347114957,
+          6.761020784006761e-05,
+          0.3051039517748279,
+          0.16126888896157,
+          0.036868784127139384,
+          0.014734769115166222,
+          0.004209607472749711,
+          0.0015286911566482191,
+          0.743944964042309,
+          0.5974613288923308,
+          0.2972118547006764,
+          0.1667772308717379,
+          0.05551652389101835,
+          0.022040967288353384,
+          0.07731789792209172,
+          0.03231068661770807,
+          0.006479586408928603,
+          0.002192511617818765,
+          0.0006074628837029455,
+          0.0002278001822141884,
+          0.5132993242241888,
+          0.3381962213489772,
+          0.10304322468774339,
+          0.04734894358557857,
+          0.013250734865053421,
+          0.004994266617477216,
+          0.8465847392206285,
+          0.7681489483766465,
+          0.5017477722214785,
+          0.34433863046386615,
+          0.141127405294433,
+          0.06630345591487578,
+          0.48649821167368335,
+          0.3440594456304312,
+          0.10722811798248015,
+          0.045654100396344884,
+          0.014372913381438979,
+          0.005471576674874168,
+          0.8795970504620522,
+          0.8049987638654409,
+          0.5658801111676109,
+          0.393784392445046,
+          0.19234707971513687,
+          0.09658707602085355,
+          0.9689881474843833,
+          0.9481944195266484,
+          0.880653076450385,
+          0.8026327148647263,
+          0.6315821550591516,
+          0.4749921272908661
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeAtRelease",
+      "parents": [
+        "JobReadinessScore"
+      ],
+      "values": [
+        [
+          0.3724934419546352,
+          0.13460615780345392,
+          0.038704413734171876
+        ],
+        [
+          0.34871796176194736,
+          0.43327642301603214,
+          0.4283562083076608
+        ],
+        [
+          0.2787885962834175,
+          0.432117419180514,
+          0.5329393779581674
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_safety_constrained",
+      "difficulty": "hard",
+      "question": "You want to shift SteadyEmploymentStatus toward Employed (and away from Unemployed), but only if the same action does not make RecidivismRisk more likely to be SeriousReoffense. Investigate the system and recommend a single intervention you would deploy.",
+      "answer": {
+        "variable": "VocationalTrainingProgram",
+        "value": "FullTime"
+      },
+      "metadata": {
+        "archetype": "safety_constrained",
+        "sub_variant": null,
+        "roles": {
+          "target": "SteadyEmploymentStatus",
+          "safety_outcome": "RecidivismRisk",
+          "good_intervention": "VocationalTrainingProgram",
+          "risky_intervention": "UnsupervisedJobPlacement",
+          "weak_intervention": "OnlineJobSearchWorkshop",
+          "good_mediator": "JobReadinessScore",
+          "confounder": "PriorConvictionSeverity"
+        },
+        "gold": {
+          "best_safe_action": {
+            "variable": "VocationalTrainingProgram",
+            "value": "FullTime"
+          },
+          "all_safe_improvers": [
+            {
+              "variable": "VocationalTrainingProgram",
+              "value": "FullTime",
+              "delta_target": -0.2177,
+              "delta_safety": 0.0
+            }
+          ],
+          "rejected_risky": [
+            {
+              "variable": "UnsupervisedJobPlacement",
+              "value": "Partial",
+              "delta_target": -0.3038,
+              "delta_safety": 0.2259,
+              "reason": "worsens safety"
+            },
+            {
+              "variable": "UnsupervisedJobPlacement",
+              "value": "Full",
+              "delta_target": -0.5541,
+              "delta_safety": 0.4698,
+              "reason": "worsens safety"
+            }
+          ],
+          "baselines": {
+            "E_target": 0.7588,
+            "E_safety": 1.4056
+          },
+          "safety_tolerance": 0.08,
+          "min_effect": 0.2
+        }
+      }
+    }
+  ]
+}

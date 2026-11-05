@@ -1,0 +1,735 @@
+{
+  "meta": {
+    "topic": "Screening & diagnosis",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 24000,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A large metropolitan breast screening program operates across multiple clinic sites. The research team has access to comprehensive patient records and screening data, and can request both observational and interventional study samples from participating facilities.",
+  "non_intervenable_variables": [
+    {
+      "name": "DiagnosticAccuracyLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BreastDensityCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilyHistoryOfBreastCancer",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorMammogramCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HormoneReplacementUse",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RadiologistExperienceLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FacilityVolumeCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "BodyMassIndexGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorBreastBiopsyHistory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MenopauseStatus",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "DiagnosticAccuracyLevel",
+      "values": [
+        "High",
+        "Moderate",
+        "Low"
+      ],
+      "desc": "Overall classification accuracy of mammographic screening interpretation.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ImagingModality",
+      "values": [
+        "Standard2D",
+        "Tomosynthesis3D"
+      ],
+      "desc": "Type of mammographic imaging technology used during screening.",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AiAssistedDetection",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Whether artificial intelligence software assists radiologist interpretation.",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DoubleReadingProtocol",
+      "values": [
+        "SingleRead",
+        "IndependentDoubleRead"
+      ],
+      "desc": "Number of independent radiologist reads per mammogram.",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "ScreeningInterval",
+      "values": [
+        "Biennial",
+        "Annual"
+      ],
+      "desc": "Time interval between consecutive routine mammography appointments.",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "BreastDensityCategory",
+      "values": [
+        "FattyScattered",
+        "HeterogeneouslyDense",
+        "ExtremelyDense"
+      ],
+      "desc": "BI-RADS breast tissue density classification from mammographic appearance.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PatientAgeGroup",
+      "values": [
+        "40to49",
+        "50to64",
+        "65plus"
+      ],
+      "desc": "Age range of the patient at the time of mammographic screening.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilyHistoryOfBreastCancer",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a first-degree relative has been diagnosed with breast cancer.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorMammogramCount",
+      "values": [
+        "None",
+        "OneToThree",
+        "FourOrMore"
+      ],
+      "desc": "Number of previous mammographic examinations in the patient record.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HormoneReplacementUse",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient is currently using hormone replacement therapy.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RadiologistExperienceLevel",
+      "values": [
+        "Junior",
+        "Senior"
+      ],
+      "desc": "Years of dedicated mammography reading experience of the interpreting radiologist.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FacilityVolumeCategory",
+      "values": [
+        "LowVolume",
+        "HighVolume"
+      ],
+      "desc": "Annual number of mammographic examinations performed at the screening facility.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "BodyMassIndexGroup",
+      "values": [
+        "Normal",
+        "Overweight",
+        "Obese"
+      ],
+      "desc": "Patient body mass index category at the time of screening.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorBreastBiopsyHistory",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has undergone a previous breast biopsy procedure.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MenopauseStatus",
+      "values": [
+        "Premenopausal",
+        "Postmenopausal"
+      ],
+      "desc": "Patient menopausal status at the time of the mammographic examination.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ImagingModality",
+      "DiagnosticAccuracyLevel"
+    ],
+    [
+      "AiAssistedDetection",
+      "DiagnosticAccuracyLevel"
+    ],
+    [
+      "DoubleReadingProtocol",
+      "DiagnosticAccuracyLevel"
+    ],
+    [
+      "ScreeningInterval",
+      "DiagnosticAccuracyLevel"
+    ],
+    [
+      "BreastDensityCategory",
+      "DiagnosticAccuracyLevel"
+    ],
+    [
+      "FamilyHistoryOfBreastCancer",
+      "ScreeningInterval"
+    ],
+    [
+      "HormoneReplacementUse",
+      "AiAssistedDetection"
+    ],
+    [
+      "RadiologistExperienceLevel",
+      "AiAssistedDetection"
+    ],
+    [
+      "PriorBreastBiopsyHistory",
+      "MenopauseStatus"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ImagingModality",
+      "parents": [],
+      "values": [
+        [
+          0.9071075120217901
+        ],
+        [
+          0.09289248797820993
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DoubleReadingProtocol",
+      "parents": [],
+      "values": [
+        [
+          0.4083357916703903
+        ],
+        [
+          0.5916642083296096
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BreastDensityCategory",
+      "parents": [],
+      "values": [
+        [
+          0.20077890902061316
+        ],
+        [
+          0.5589432587655988
+        ],
+        [
+          0.240277832213788
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PatientAgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.4073973555010146
+        ],
+        [
+          0.35981332679766853
+        ],
+        [
+          0.2327893177013169
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilyHistoryOfBreastCancer",
+      "parents": [],
+      "values": [
+        [
+          0.758714798767366
+        ],
+        [
+          0.241285201232634
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorMammogramCount",
+      "parents": [],
+      "values": [
+        [
+          0.2463259587097026
+        ],
+        [
+          0.41875347995155404
+        ],
+        [
+          0.3349205613387434
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HormoneReplacementUse",
+      "parents": [],
+      "values": [
+        [
+          0.7015334213097058
+        ],
+        [
+          0.29846657869029425
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "RadiologistExperienceLevel",
+      "parents": [],
+      "values": [
+        [
+          0.21155180631436749
+        ],
+        [
+          0.7884481936856326
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FacilityVolumeCategory",
+      "parents": [],
+      "values": [
+        [
+          0.4290043293217627
+        ],
+        [
+          0.5709956706782373
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "BodyMassIndexGroup",
+      "parents": [],
+      "values": [
+        [
+          0.43420724473942224
+        ],
+        [
+          0.16225476597765617
+        ],
+        [
+          0.4035379892829216
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorBreastBiopsyHistory",
+      "parents": [],
+      "values": [
+        [
+          0.5517293861936448
+        ],
+        [
+          0.4482706138063552
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ScreeningInterval",
+      "parents": [
+        "FamilyHistoryOfBreastCancer"
+      ],
+      "values": [
+        [
+          0.5377019111763731,
+          0.1800016676560586
+        ],
+        [
+          0.4622980888236269,
+          0.8199983323439415
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AiAssistedDetection",
+      "parents": [
+        "HormoneReplacementUse",
+        "RadiologistExperienceLevel"
+      ],
+      "values": [
+        [
+          0.5016795966004446,
+          0.38206063467782897,
+          0.5804269236759423,
+          0.45933918372869226
+        ],
+        [
+          0.4983204033995554,
+          0.6179393653221711,
+          0.4195730763240577,
+          0.5406608162713077
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "MenopauseStatus",
+      "parents": [
+        "PriorBreastBiopsyHistory"
+      ],
+      "values": [
+        [
+          0.4370679630595408,
+          0.8364368070730027
+        ],
+        [
+          0.5629320369404591,
+          0.16356319292699728
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DiagnosticAccuracyLevel",
+      "parents": [
+        "BreastDensityCategory",
+        "DoubleReadingProtocol",
+        "ImagingModality",
+        "ScreeningInterval",
+        "AiAssistedDetection"
+      ],
+      "values": [
+        [
+          0.16111106877137168,
+          0.20736052974218025,
+          0.3364802487455372,
+          0.417520991480296,
+          0.8095500910914246,
+          0.8446423844151479,
+          0.8932455561151212,
+          0.9178964760145316,
+          0.9030809426429341,
+          0.9254726282348835,
+          0.9503605291189928,
+          0.957788049604319,
+          0.990297154870833,
+          0.9923476679229,
+          0.9943961778381645,
+          0.9960784267616432,
+          0.05964220108348462,
+          0.08999321660050089,
+          0.17233043894932562,
+          0.2066263675318062,
+          0.6728211686950903,
+          0.7433635047937844,
+          0.812316915791085,
+          0.8454827026314327,
+          0.8313542106058036,
+          0.8684957352772377,
+          0.9158647103915863,
+          0.9267272489743072,
+          0.9821575611222838,
+          0.9858458111719319,
+          0.9907174907349383,
+          0.9921424409552725,
+          0.0050316274275379385,
+          0.006858610998386965,
+          0.015514506881218425,
+          0.022510029351044777,
+          0.21896927604649732,
+          0.2797100027173092,
+          0.41566702409811407,
+          0.4970108003204478,
+          0.4766890635071769,
+          0.5354426297981765,
+          0.6759110920096971,
+          0.7303473951860491,
+          0.9287676523268984,
+          0.9407500879315835,
+          0.9648279021673231,
+          0.9656123933917423
+        ],
+        [
+          0.30445319183928216,
+          0.3031394297800963,
+          0.33549662066666674,
+          0.3211091045214415,
+          0.15931101817804133,
+          0.13380999426835768,
+          0.09719304532500415,
+          0.07526778330108488,
+          0.0889057816994216,
+          0.06897636773875612,
+          0.04736108813690319,
+          0.04058909994421466,
+          0.009607863682807576,
+          0.007589855016244195,
+          0.005576604153984927,
+          0.0039047871171340215,
+          0.21486703296994908,
+          0.25340047245894254,
+          0.2966095378599415,
+          0.31965004887350956,
+          0.24177508555578273,
+          0.19804898660340636,
+          0.15724485856715228,
+          0.13300016643065204,
+          0.1445417025428589,
+          0.11573213793954887,
+          0.07689790136994772,
+          0.0679327754474225,
+          0.017542554560247885,
+          0.013943788885750588,
+          0.009200951597003746,
+          0.0077946204289378,
+          0.06915772650389498,
+          0.0746354662104533,
+          0.11349029754498288,
+          0.13779078474891404,
+          0.33402813795718517,
+          0.33451570408166525,
+          0.33867683427424006,
+          0.3001718011552035,
+          0.3224534024849207,
+          0.3002517610612961,
+          0.24008617508673172,
+          0.20518951732821958,
+          0.06629588301472339,
+          0.056130290674482115,
+          0.03386874628881809,
+          0.03337427065823525
+        ],
+        [
+          0.5344357393893461,
+          0.4895000404777234,
+          0.3280231305877959,
+          0.2613699039982625,
+          0.031138890730534108,
+          0.021547621316494455,
+          0.009561398559874488,
+          0.006835740684383623,
+          0.008013275657644186,
+          0.005551004026360552,
+          0.0022783827441038764,
+          0.0016228504514663054,
+          9.498144635916965e-05,
+          6.247706085582683e-05,
+          2.7218007850515698e-05,
+          1.678612122287435e-05,
+          0.7254907659465663,
+          0.6566063109405565,
+          0.5310600231907329,
+          0.47372358359468425,
+          0.08540374574912708,
+          0.05858750860280919,
+          0.030438225641762576,
+          0.02151713093791534,
+          0.024104086851337445,
+          0.015772126783213485,
+          0.007237388238465937,
+          0.005339975578270356,
+          0.00029988431746838843,
+          0.00021039994231734555,
+          8.155766805796629e-05,
+          6.29386157896824e-05,
+          0.9258106460685671,
+          0.9185059227911596,
+          0.8709951955737987,
+          0.8396991859000411,
+          0.4470025859963174,
+          0.38577429320102546,
+          0.24565614162764585,
+          0.2028173985243487,
+          0.2008575340079025,
+          0.16430560914052744,
+          0.08400273290357121,
+          0.06446308748573143,
+          0.004936464658378291,
+          0.003119621393934457,
+          0.0013033515438586488,
+          0.001013335950022461
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts DiagnosticAccuracyLevel toward High (and away from Low). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes DiagnosticAccuracyLevel.",
+      "answer": [
+        {
+          "variable": "DoubleReadingProtocol",
+          "value": "IndependentDoubleRead",
+          "improvement": 0.4863
+        },
+        {
+          "variable": "ImagingModality",
+          "value": "Tomosynthesis3D",
+          "improvement": 0.4947
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "DiagnosticAccuracyLevel",
+          "intervention_A": "ImagingModality",
+          "intervention_B": "AiAssistedDetection",
+          "intervention_C": "DoubleReadingProtocol",
+          "intervention_D": "ScreeningInterval",
+          "confounder": "BreastDensityCategory"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "DoubleReadingProtocol",
+              "value": "IndependentDoubleRead",
+              "improvement": 0.4863
+            },
+            {
+              "variable": "ImagingModality",
+              "value": "Tomosynthesis3D",
+              "improvement": 0.4947
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "DoubleReadingProtocol",
+              "value": "SingleRead",
+              "improvement": -0.7047
+            },
+            {
+              "variable": "DoubleReadingProtocol",
+              "value": "IndependentDoubleRead",
+              "improvement": 0.4863
+            },
+            {
+              "variable": "ImagingModality",
+              "value": "Standard2D",
+              "improvement": -0.0507
+            },
+            {
+              "variable": "ImagingModality",
+              "value": "Tomosynthesis3D",
+              "improvement": 0.4947
+            },
+            {
+              "variable": "ScreeningInterval",
+              "value": "Biennial",
+              "improvement": -0.0976
+            },
+            {
+              "variable": "ScreeningInterval",
+              "value": "Annual",
+              "improvement": 0.0803
+            },
+            {
+              "variable": "AiAssistedDetection",
+              "value": "Off",
+              "improvement": -0.0312
+            },
+            {
+              "variable": "AiAssistedDetection",
+              "value": "On",
+              "improvement": 0.0236
+            }
+          ],
+          "threshold": 0.2833,
+          "baseline_E_target": 0.6716
+        }
+      }
+    }
+  ]
+}

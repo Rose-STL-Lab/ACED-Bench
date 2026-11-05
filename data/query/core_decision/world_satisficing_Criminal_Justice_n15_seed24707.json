@@ -1,0 +1,1139 @@
+{
+  "meta": {
+    "topic": "Criminal Justice",
+    "n_nodes": 15,
+    "topology": "satisficing",
+    "seed": 24707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A state department of corrections oversees reentry programming across multiple facilities and community supervision offices. The research team has access to administrative records and can request both observational and interventional data samples from enrolled participants.",
+  "non_intervenable_variables": [
+    {
+      "name": "RecidivismStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorArrestCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeAtEnrollment",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrimarySubstance",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EmploymentAtEntry",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HousingStability",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EducationLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MentalHealthDiagnosis",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "Gender",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "TransportationAccess",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "FamilySupportLevel",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "RecidivismStatus",
+      "values": [
+        "NoReoffense",
+        "Misdemeanor",
+        "Felony"
+      ],
+      "desc": "Severity level of any new criminal charge within 18 months of enrollment",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "JudicialSupervisionFrequency",
+      "values": [
+        "Monthly",
+        "Biweekly",
+        "Weekly"
+      ],
+      "desc": "Scheduled frequency of status hearings before the drug court judge",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CognititiveBehavioralTherapy",
+      "values": [
+        "None",
+        "GroupOnly",
+        "GroupPlusIndividual"
+      ],
+      "desc": "Format and intensity of cognitive-behavioral therapy sessions provided",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PeerMentorAssignment",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether participant is paired with a trained recovery peer mentor",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "VocationalTrainingAccess",
+      "values": [
+        "None",
+        "PartTime",
+        "FullTime"
+      ],
+      "desc": "Level of enrollment in court-linked vocational skills training program",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorArrestCount",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Number of prior arrests on participant record at program entry",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeAtEnrollment",
+      "values": [
+        "Under25",
+        "25to39",
+        "40Plus"
+      ],
+      "desc": "Age category of participant at the time of drug court enrollment",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PrimarySubstance",
+      "values": [
+        "Opioids",
+        "Stimulants",
+        "Other"
+      ],
+      "desc": "Primary substance of misuse identified during clinical intake assessment",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EmploymentAtEntry",
+      "values": [
+        "Employed",
+        "Unemployed"
+      ],
+      "desc": "Whether participant held any employment at program enrollment",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HousingStability",
+      "values": [
+        "Stable",
+        "Unstable",
+        "Homeless"
+      ],
+      "desc": "Participant housing situation documented at intake screening",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EducationLevel",
+      "values": [
+        "NoHighSchool",
+        "HighSchool",
+        "PostSecondary"
+      ],
+      "desc": "Highest level of formal education completed by participant",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MentalHealthDiagnosis",
+      "values": [
+        "None",
+        "OneDisorder",
+        "CoOccurring"
+      ],
+      "desc": "Count of co-occurring mental health diagnoses at clinical screening",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "Gender",
+      "values": [
+        "Male",
+        "Female",
+        "Other"
+      ],
+      "desc": "Self-reported gender identity recorded during enrollment process",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TransportationAccess",
+      "values": [
+        "Reliable",
+        "Limited",
+        "None"
+      ],
+      "desc": "Participant self-reported access to transportation for court appointments",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "FamilySupportLevel",
+      "values": [
+        "Strong",
+        "Moderate",
+        "Minimal"
+      ],
+      "desc": "Degree of family or household support documented by case manager",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "RecidivismStatus",
+      "MentalHealthDiagnosis"
+    ],
+    [
+      "JudicialSupervisionFrequency",
+      "RecidivismStatus"
+    ],
+    [
+      "CognititiveBehavioralTherapy",
+      "RecidivismStatus"
+    ],
+    [
+      "CognititiveBehavioralTherapy",
+      "PrimarySubstance"
+    ],
+    [
+      "PeerMentorAssignment",
+      "RecidivismStatus"
+    ],
+    [
+      "VocationalTrainingAccess",
+      "RecidivismStatus"
+    ],
+    [
+      "PriorArrestCount",
+      "RecidivismStatus"
+    ],
+    [
+      "AgeAtEnrollment",
+      "HousingStability"
+    ],
+    [
+      "PrimarySubstance",
+      "FamilySupportLevel"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "JudicialSupervisionFrequency",
+      "parents": [],
+      "values": [
+        [
+          0.3862125459997848
+        ],
+        [
+          0.12872963314551228
+        ],
+        [
+          0.485057820854703
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "CognititiveBehavioralTherapy",
+      "parents": [],
+      "values": [
+        [
+          0.703290130928079
+        ],
+        [
+          0.09796168713411463
+        ],
+        [
+          0.19874818193780627
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PeerMentorAssignment",
+      "parents": [],
+      "values": [
+        [
+          0.12829982327375694
+        ],
+        [
+          0.8717001767262431
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "VocationalTrainingAccess",
+      "parents": [],
+      "values": [
+        [
+          0.13475748660439943
+        ],
+        [
+          0.677768240912585
+        ],
+        [
+          0.1874742724830155
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PriorArrestCount",
+      "parents": [],
+      "values": [
+        [
+          0.5691123481643926
+        ],
+        [
+          0.175182382626935
+        ],
+        [
+          0.25570526920867254
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeAtEnrollment",
+      "parents": [],
+      "values": [
+        [
+          0.16969613987532703
+        ],
+        [
+          0.30087859782194504
+        ],
+        [
+          0.529425262302728
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EmploymentAtEntry",
+      "parents": [],
+      "values": [
+        [
+          0.3863768137315642
+        ],
+        [
+          0.6136231862684359
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "EducationLevel",
+      "parents": [],
+      "values": [
+        [
+          0.19805713140453893
+        ],
+        [
+          0.46448013253358605
+        ],
+        [
+          0.337462736061875
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "Gender",
+      "parents": [],
+      "values": [
+        [
+          0.09603214604465891
+        ],
+        [
+          0.5918868557083184
+        ],
+        [
+          0.31208099824702257
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TransportationAccess",
+      "parents": [],
+      "values": [
+        [
+          0.3336452263079791
+        ],
+        [
+          0.5312247171762421
+        ],
+        [
+          0.13513005651577883
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "PrimarySubstance",
+      "parents": [
+        "CognititiveBehavioralTherapy"
+      ],
+      "values": [
+        [
+          0.32606363064963667,
+          0.02134713722476427,
+          0.0008990209650127537
+        ],
+        [
+          0.3921433556066809,
+          0.4223221597384437,
+          0.2925740307437617
+        ],
+        [
+          0.2817930137436823,
+          0.556330703036792,
+          0.7065269482912255
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RecidivismStatus",
+      "parents": [
+        "PriorArrestCount",
+        "CognititiveBehavioralTherapy",
+        "PeerMentorAssignment",
+        "VocationalTrainingAccess",
+        "JudicialSupervisionFrequency"
+      ],
+      "values": [
+        [
+          0.16140852762308738,
+          0.18791754381575282,
+          0.21549159961824274,
+          0.27054233036190023,
+          0.3085357741652278,
+          0.30643695014171135,
+          0.3302095583705716,
+          0.3764574467581572,
+          0.3943607132161856,
+          0.8176520484314673,
+          0.8326287539614428,
+          0.8414149211254253,
+          0.8655192502690164,
+          0.8725368368407598,
+          0.8923214058734067,
+          0.8942814391753588,
+          0.9076685656378333,
+          0.9180999954489522,
+          0.7050295079672085,
+          0.7505194437142795,
+          0.7574694255792013,
+          0.7842312343724603,
+          0.8219393480468721,
+          0.8210444892428111,
+          0.8375896041958004,
+          0.8543444952730639,
+          0.8648796671486308,
+          0.9669378798294282,
+          0.9710121914125155,
+          0.9738158956588422,
+          0.9794333573564364,
+          0.9804086727181398,
+          0.9820449590164679,
+          0.9817978310121398,
+          0.9852885447109945,
+          0.9858441567607865,
+          0.9097625375049249,
+          0.9185120027552316,
+          0.924901531797531,
+          0.9352400230044786,
+          0.9442283261286761,
+          0.9463370630450633,
+          0.9501817994988894,
+          0.9578123873807696,
+          0.9586651132995749,
+          0.9911421933381014,
+          0.9918421609791946,
+          0.9917873609119177,
+          0.993377746173755,
+          0.9939808479493653,
+          0.9944464369611613,
+          0.9951897704518378,
+          0.9956673700019573,
+          0.9956069435920907,
+          0.061073421119528494,
+          0.07594077197199638,
+          0.0887587888297878,
+          0.12144882667066291,
+          0.13442597003279716,
+          0.15488117316731714,
+          0.15760803134398219,
+          0.20081925887486518,
+          0.21055452138632966,
+          0.6873849143244322,
+          0.7132500948070896,
+          0.7103639794357793,
+          0.7733964540665251,
+          0.7900557052985455,
+          0.8065625784103468,
+          0.8179390937846063,
+          0.8259300143668467,
+          0.8462504537195077,
+          0.5385687644954612,
+          0.5781022159225837,
+          0.5866742400242175,
+          0.6633875333844437,
+          0.6922408940999436,
+          0.7130444159137668,
+          0.7237431423020868,
+          0.742687277033634,
+          0.7690633289371782,
+          0.9399287745676365,
+          0.9520477741044561,
+          0.9528659392033823,
+          0.9616696742234512,
+          0.9647118494086365,
+          0.9651269217784681,
+          0.9679337043063073,
+          0.971051343067809,
+          0.9743724697289962,
+          0.8331842377545926,
+          0.8497301589149213,
+          0.8641814038319431,
+          0.8868017095003201,
+          0.8931576061796401,
+          0.9041489898869793,
+          0.9124216093024733,
+          0.9214800202168066,
+          0.9236591701620706,
+          0.9833924343187572,
+          0.9839869873956161,
+          0.9845037715323487,
+          0.9887347129398502,
+          0.9890845919356512,
+          0.9904909394629982,
+          0.9910589517289375,
+          0.9918530213769942,
+          0.9921832768558562,
+          0.004837140393388518,
+          0.005765447569686188,
+          0.007157706651202119,
+          0.010134290998178919,
+          0.012316786590403387,
+          0.015017000122822482,
+          0.015603788245526776,
+          0.018617830789893767,
+          0.0216597873121307,
+          0.22316772911410138,
+          0.26073191813463825,
+          0.26756335039693585,
+          0.32759058104703265,
+          0.39382624525962345,
+          0.4006066159648047,
+          0.4158257732574944,
+          0.45290100292790586,
+          0.492992007069275,
+          0.11543549634844111,
+          0.1376296664269995,
+          0.1634375219261913,
+          0.19687830558708538,
+          0.22583113675897803,
+          0.24712797972275033,
+          0.27060644303700776,
+          0.31917582454597127,
+          0.32931764929665885,
+          0.7774912422140078,
+          0.8008509011175194,
+          0.8122908620796085,
+          0.8348029118822098,
+          0.8478999600916578,
+          0.8652475646458364,
+          0.8703875061619119,
+          0.881438642401785,
+          0.8913422774361659,
+          0.48342782257682754,
+          0.49508121428737306,
+          0.5217587707442706,
+          0.5933982583044903,
+          0.6244005445328591,
+          0.6471431133116579,
+          0.6774608314358901,
+          0.6989495202781372,
+          0.7053133292213499,
+          0.9321698973372285,
+          0.9379983112845658,
+          0.9443165864915897,
+          0.9481102480289297,
+          0.9544744413788546,
+          0.9595023118658634,
+          0.9633235280199346,
+          0.9670018744940473,
+          0.966603572734337
+        ],
+        [
+          0.29699757228268775,
+          0.307352996197145,
+          0.31215315507661157,
+          0.3215181117266076,
+          0.3223282864499312,
+          0.33717258461584937,
+          0.3274316176714295,
+          0.32892454078220185,
+          0.34434377359178553,
+          0.15101075784780071,
+          0.14177849165116857,
+          0.13808946190148133,
+          0.11861549564864855,
+          0.11380563010867581,
+          0.09740523955254261,
+          0.0963792573410553,
+          0.08467866395177188,
+          0.07515043461618054,
+          0.2235264693330004,
+          0.19604557898539815,
+          0.19407399488668656,
+          0.1808225680147442,
+          0.14867650007443403,
+          0.1523230233846179,
+          0.13948466296122158,
+          0.12734546586893886,
+          0.11902809009809048,
+          0.03201525123961884,
+          0.028182751525654345,
+          0.02550221514184526,
+          0.020121475449620084,
+          0.01922983558915443,
+          0.017641801760697497,
+          0.017912744158060375,
+          0.014478851813938088,
+          0.013958757837941541,
+          0.08259160713225512,
+          0.07535694088341334,
+          0.06992124660583528,
+          0.06100851482277132,
+          0.052615696775975516,
+          0.05097200806302179,
+          0.04747356557788343,
+          0.04028926282706015,
+          0.03977721372068085,
+          0.00876428609336411,
+          0.008089784003136773,
+          0.00814980835508083,
+          0.006576559789778093,
+          0.005984398628325751,
+          0.005523132703584444,
+          0.004783861008567707,
+          0.004311478659620592,
+          0.0043744975813211785,
+          0.21004662750957623,
+          0.2195546385510184,
+          0.25166409685702773,
+          0.26430786968659864,
+          0.27878193102644866,
+          0.2962587779566434,
+          0.2955936520957644,
+          0.3090149004578806,
+          0.321254499232774,
+          0.2294100579501192,
+          0.21598330440106547,
+          0.22302188041617255,
+          0.18024574893442813,
+          0.17032555931957444,
+          0.16057508232542805,
+          0.15088904879212817,
+          0.1488230527892237,
+          0.13246346270482728,
+          0.29515492810352134,
+          0.2811531561513246,
+          0.28720327252683847,
+          0.24606083994102937,
+          0.22939499787309667,
+          0.21887728296557804,
+          0.21498496807292936,
+          0.20293897755605877,
+          0.182678832790842,
+          0.0569983526439461,
+          0.045520506529820357,
+          0.045022838133010126,
+          0.036842385582134235,
+          0.03404174300607164,
+          0.03371314121997654,
+          0.031073215804830304,
+          0.02818531065322251,
+          0.024977341747667466,
+          0.14451012400560723,
+          0.12992197565005897,
+          0.11884625444229915,
+          0.10139579375531912,
+          0.09683675607041248,
+          0.0876234245490979,
+          0.08041672077311676,
+          0.07264435230173262,
+          0.07129795896760303,
+          0.016298221924293296,
+          0.015767266007104992,
+          0.015288129288287,
+          0.011128642607013534,
+          0.010802600873208492,
+          0.009408444538796858,
+          0.008854163170477202,
+          0.008078275750342598,
+          0.007758760091043339,
+          0.06675400979976606,
+          0.07597599789363658,
+          0.08177189693166546,
+          0.09156872067651035,
+          0.10490692855050315,
+          0.114383686943834,
+          0.1207196952571044,
+          0.12311505224713115,
+          0.12807397351745406,
+          0.3187226494513899,
+          0.33829882796141386,
+          0.3472707744223782,
+          0.34892206499621925,
+          0.32037221328708493,
+          0.31909238510911875,
+          0.3239116894250152,
+          0.3186040415570323,
+          0.31529864674202257,
+          0.2645696593852206,
+          0.2935727859216004,
+          0.2906062631390357,
+          0.3260115927571941,
+          0.3221267379814368,
+          0.33205168593981454,
+          0.3257580172399271,
+          0.33108233615838606,
+          0.3254096588570152,
+          0.17739443208396813,
+          0.16379491625121398,
+          0.15635071261393554,
+          0.1432453399486767,
+          0.13354819615167973,
+          0.11908274022172992,
+          0.11527915838631107,
+          0.10711764599948576,
+          0.09891606581257766,
+          0.3081010813963832,
+          0.32057557327672903,
+          0.3078363741488909,
+          0.2792614846786922,
+          0.2662487905111303,
+          0.25781680003699115,
+          0.23396155119590842,
+          0.22978155572983433,
+          0.22811125009285105,
+          0.06321735331861292,
+          0.05836860955585613,
+          0.05234309706545296,
+          0.04961414059560259,
+          0.043652956706222365,
+          0.0389669779443563,
+          0.035289485004543764,
+          0.03192289203478338,
+          0.032390761571458364
+        ],
+        [
+          0.5415939000942249,
+          0.5047294599871022,
+          0.4723552453051458,
+          0.4079395579114921,
+          0.36913593938484096,
+          0.35639046524243934,
+          0.342358823957999,
+          0.294618012459641,
+          0.26129551319202887,
+          0.031337193720731835,
+          0.025592754387388658,
+          0.020495616973093444,
+          0.01586525408233501,
+          0.01365753305056444,
+          0.010273354574050736,
+          0.009339303483585845,
+          0.007652770410394768,
+          0.0067495699348674035,
+          0.07144402269979094,
+          0.05343497730032239,
+          0.04845657953411216,
+          0.03494619761279546,
+          0.0293841518786939,
+          0.02663248737257104,
+          0.022925732842977997,
+          0.018310038857997184,
+          0.016092242753278634,
+          0.0010468689309528964,
+          0.0008050570618301205,
+          0.0006818891993124787,
+          0.00044516719394355154,
+          0.0003614916927058549,
+          0.0003132392228347335,
+          0.0002894248297997898,
+          0.0002326034750673771,
+          0.0001970854012719489,
+          0.007645855362819997,
+          0.006131056361354967,
+          0.005177221596633723,
+          0.0037514621727500414,
+          0.0031559770953484374,
+          0.0026909288919150175,
+          0.0023446349232272303,
+          0.0018983497921703175,
+          0.0015576729797442811,
+          9.352056853441232e-05,
+          6.805501766850775e-05,
+          6.283073300157866e-05,
+          4.569403646692213e-05,
+          3.475342230884659e-05,
+          3.043033525424842e-05,
+          2.6368539594448363e-05,
+          2.115133842218506e-05,
+          1.8558826588162396e-05,
+          0.7288799513708953,
+          0.7045045894769852,
+          0.6595771143131844,
+          0.6142433036427385,
+          0.5867920989407542,
+          0.5488600488760395,
+          0.5467983165602534,
+          0.49016584066725416,
+          0.4681909793808963,
+          0.08320502772544863,
+          0.07076660079184488,
+          0.06661414014804805,
+          0.04635779699904688,
+          0.039618735381880016,
+          0.03286233926422512,
+          0.031171857423265534,
+          0.025246932843929554,
+          0.02128608357566505,
+          0.16627630740101743,
+          0.14074462792609183,
+          0.12612248744894386,
+          0.09055162667452699,
+          0.07836410802695978,
+          0.0680783011206551,
+          0.061271889624983776,
+          0.054373745410307345,
+          0.048257838271979756,
+          0.003072872788417555,
+          0.002431719365723639,
+          0.0021112226636076283,
+          0.0014879401944144792,
+          0.0012464075852919017,
+          0.0011599370015553002,
+          0.0009930798888623338,
+          0.0007633462789684305,
+          0.0006501885233363324,
+          0.022305638239800245,
+          0.02034786543501976,
+          0.01697234172575766,
+          0.01180249674436075,
+          0.010005637749947265,
+          0.008227585563922685,
+          0.00716166992440988,
+          0.005875627481460718,
+          0.005042870870326422,
+          0.00030934375694946254,
+          0.00024574659727870883,
+          0.00020809917936425205,
+          0.00013664445313619377,
+          0.00011280719114033216,
+          0.00010061599820508174,
+          8.6885100585189e-05,
+          6.870287266339888e-05,
+          5.796305310057783e-05,
+          0.9284088498068453,
+          0.9182585545366773,
+          0.9110703964171324,
+          0.8982969883253107,
+          0.8827762848590934,
+          0.8705993129333435,
+          0.8636765164973689,
+          0.8582671169629751,
+          0.8502662391704152,
+          0.4581096214345088,
+          0.40096925390394783,
+          0.38516587518068596,
+          0.3234873539567481,
+          0.28580154145329156,
+          0.28030099892607657,
+          0.26026253731749044,
+          0.2284949555150619,
+          0.19170934618870245,
+          0.6199948442663383,
+          0.5687975476514001,
+          0.545956214934773,
+          0.47711010165572065,
+          0.45204212525958504,
+          0.4208203343374352,
+          0.4036355397230652,
+          0.3497418392956427,
+          0.3452726918463259,
+          0.04511432570202395,
+          0.03535418263126661,
+          0.03135842530645597,
+          0.02195174816911355,
+          0.018551843756662363,
+          0.0156696951324335,
+          0.014333335451777063,
+          0.011443711598729032,
+          0.00974165675125648,
+          0.20847109602678934,
+          0.18434321243589802,
+          0.17040485510683853,
+          0.12734025701681742,
+          0.10935066495601056,
+          0.09504008665135098,
+          0.08857761736820155,
+          0.07126892399202847,
+          0.06657542068579907,
+          0.004612749344158445,
+          0.0036330791595779116,
+          0.0033403164429573425,
+          0.0022756113754676156,
+          0.0018726019149229683,
+          0.001530710189780256,
+          0.0013869869755217174,
+          0.0010752334711694002,
+          0.0010056656942045428
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HousingStability",
+      "parents": [
+        "AgeAtEnrollment"
+      ],
+      "values": [
+        [
+          0.3830559712958809,
+          0.14049553939778006,
+          0.030293584858638808
+        ],
+        [
+          0.3075953913960749,
+          0.16447637577504656,
+          0.05170291932734031
+        ],
+        [
+          0.3093486373080442,
+          0.6950280848271734,
+          0.9180034958140207
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FamilySupportLevel",
+      "parents": [
+        "PrimarySubstance"
+      ],
+      "values": [
+        [
+          0.3273139915747372,
+          0.5102043325592291,
+          0.6057268052893848
+        ],
+        [
+          0.35374392090142587,
+          0.09322624150256706,
+          0.018712871908830916
+        ],
+        [
+          0.318942087523837,
+          0.39656942593820377,
+          0.3755603228017841
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MentalHealthDiagnosis",
+      "parents": [
+        "RecidivismStatus"
+      ],
+      "values": [
+        [
+          0.3214337821499191,
+          0.11470976891818015,
+          0.01920663109197789
+        ],
+        [
+          0.3582011543986879,
+          0.8650647585510547,
+          0.9801942760971118
+        ],
+        [
+          0.320365063451393,
+          0.02022547253076525,
+          0.0005990928109102394
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts RecidivismStatus toward NoReoffense (and away from Felony). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes RecidivismStatus.",
+      "answer": [
+        {
+          "variable": "CognititiveBehavioralTherapy",
+          "value": "GroupOnly",
+          "improvement": 0.2418
+        },
+        {
+          "variable": "CognititiveBehavioralTherapy",
+          "value": "GroupPlusIndividual",
+          "improvement": 0.3224
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "RecidivismStatus",
+          "intervention_A": "JudicialSupervisionFrequency",
+          "intervention_B": "CognititiveBehavioralTherapy",
+          "intervention_C": "PeerMentorAssignment",
+          "intervention_D": "VocationalTrainingAccess",
+          "confounder": "PriorArrestCount"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "CognititiveBehavioralTherapy",
+              "value": "GroupOnly",
+              "improvement": 0.2418
+            },
+            {
+              "variable": "CognititiveBehavioralTherapy",
+              "value": "GroupPlusIndividual",
+              "improvement": 0.3224
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "CognititiveBehavioralTherapy",
+              "value": "None",
+              "improvement": -0.1248
+            },
+            {
+              "variable": "CognititiveBehavioralTherapy",
+              "value": "GroupOnly",
+              "improvement": 0.2418
+            },
+            {
+              "variable": "CognititiveBehavioralTherapy",
+              "value": "GroupPlusIndividual",
+              "improvement": 0.3224
+            },
+            {
+              "variable": "PeerMentorAssignment",
+              "value": "No",
+              "improvement": -0.6735
+            },
+            {
+              "variable": "PeerMentorAssignment",
+              "value": "Yes",
+              "improvement": 0.0991
+            },
+            {
+              "variable": "VocationalTrainingAccess",
+              "value": "None",
+              "improvement": -0.0928
+            },
+            {
+              "variable": "VocationalTrainingAccess",
+              "value": "PartTime",
+              "improvement": 0.002
+            },
+            {
+              "variable": "VocationalTrainingAccess",
+              "value": "FullTime",
+              "improvement": 0.0594
+            },
+            {
+              "variable": "JudicialSupervisionFrequency",
+              "value": "Monthly",
+              "improvement": -0.0259
+            },
+            {
+              "variable": "JudicialSupervisionFrequency",
+              "value": "Biweekly",
+              "improvement": 0.003
+            },
+            {
+              "variable": "JudicialSupervisionFrequency",
+              "value": "Weekly",
+              "improvement": 0.0198
+            }
+          ],
+          "threshold": 0.1705,
+          "baseline_E_target": 0.3611
+        }
+      }
+    }
+  ]
+}

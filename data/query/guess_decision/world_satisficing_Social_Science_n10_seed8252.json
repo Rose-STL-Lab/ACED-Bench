@@ -1,0 +1,802 @@
+{
+  "meta": {
+    "topic": "Social Science",
+    "n_nodes": 10,
+    "topology": "satisficing",
+    "seed": 8252,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "satisficing",
+    "sub_variant": null
+  },
+  "story": "A national development research institute partners with central banking authorities and telecommunications regulators across several provinces. The institute maintains access to household survey records and can request both observational and interventional data collection rounds.",
+  "non_intervenable_variables": [
+    {
+      "name": "FinancialInclusionLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HeadOfHouseholdEducation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "RuralUrbanLocation",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HouseholdSize",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "NearestBankDistance",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "FinancialInclusionLevel",
+      "values": [
+        "FullyIncluded",
+        "PartiallyIncluded",
+        "Excluded"
+      ],
+      "desc": "Degree of household participation in formal financial services",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "MobileMoneyAccess",
+      "values": [
+        "None",
+        "BasicAccess",
+        "FullAccess"
+      ],
+      "desc": "Level of mobile money platform availability provided to household",
+      "role": "intervention_A",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "FinancialLiteracyTraining",
+      "values": [
+        "None",
+        "SingleSession",
+        "MultiSession"
+      ],
+      "desc": "Number of structured financial literacy workshops offered to household members",
+      "role": "intervention_B",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SimplifiedKycProcess",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a streamlined know-your-customer identity verification process is offered",
+      "role": "intervention_C",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "CommunityAgentPresence",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether a local banking agent operates within the household's community",
+      "role": "intervention_D",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "HouseholdIncomeLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Monthly household income bracket based on national poverty thresholds",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HeadOfHouseholdEducation",
+      "values": [
+        "NoFormal",
+        "Primary",
+        "SecondaryOrHigher"
+      ],
+      "desc": "Highest education level completed by the head of household",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "RuralUrbanLocation",
+      "values": [
+        "Rural",
+        "Urban"
+      ],
+      "desc": "Whether the household is situated in a rural or urban area",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HouseholdSize",
+      "values": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
+      "desc": "Number of individuals residing in the household categorized by size",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "NearestBankDistance",
+      "values": [
+        "Under5km",
+        "5to15km",
+        "Over15km"
+      ],
+      "desc": "Distance from the household to the closest formal bank branch",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "MobileMoneyAccess",
+      "FinancialInclusionLevel"
+    ],
+    [
+      "FinancialLiteracyTraining",
+      "FinancialInclusionLevel"
+    ],
+    [
+      "SimplifiedKycProcess",
+      "FinancialInclusionLevel"
+    ],
+    [
+      "SimplifiedKycProcess",
+      "NearestBankDistance"
+    ],
+    [
+      "SimplifiedKycProcess",
+      "RuralUrbanLocation"
+    ],
+    [
+      "CommunityAgentPresence",
+      "FinancialInclusionLevel"
+    ],
+    [
+      "HouseholdIncomeLevel",
+      "FinancialInclusionLevel"
+    ],
+    [
+      "HouseholdSize",
+      "FinancialLiteracyTraining"
+    ],
+    [
+      "NearestBankDistance",
+      "RuralUrbanLocation"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "MobileMoneyAccess",
+      "parents": [],
+      "values": [
+        [
+          0.09843590551410145
+        ],
+        [
+          0.36647243873233826
+        ],
+        [
+          0.5350916557535603
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "SimplifiedKycProcess",
+      "parents": [],
+      "values": [
+        [
+          0.5663898908555912
+        ],
+        [
+          0.43361010914440884
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "CommunityAgentPresence",
+      "parents": [],
+      "values": [
+        [
+          0.8096385915969426
+        ],
+        [
+          0.19036140840305737
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HouseholdIncomeLevel",
+      "parents": [],
+      "values": [
+        [
+          0.6520595745690679
+        ],
+        [
+          0.255253377536006
+        ],
+        [
+          0.09268704789492609
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HeadOfHouseholdEducation",
+      "parents": [],
+      "values": [
+        [
+          0.2910760955508076
+        ],
+        [
+          0.18570111847707102
+        ],
+        [
+          0.5232227859721214
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "HouseholdSize",
+      "parents": [],
+      "values": [
+        [
+          0.09738604692328363
+        ],
+        [
+          0.30187218291634593
+        ],
+        [
+          0.6007417701603704
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "NearestBankDistance",
+      "parents": [
+        "SimplifiedKycProcess"
+      ],
+      "values": [
+        [
+          0.35087329276149565,
+          0.2754946143513232
+        ],
+        [
+          0.4012726043774597,
+          0.2906554790769354
+        ],
+        [
+          0.24785410286104467,
+          0.4338499065717414
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "FinancialLiteracyTraining",
+      "parents": [
+        "HouseholdSize"
+      ],
+      "values": [
+        [
+          0.39847704805554274,
+          0.7246470112102946,
+          0.9011403990310961
+        ],
+        [
+          0.23576867891073638,
+          0.05639345417866506,
+          0.0092238884879579
+        ],
+        [
+          0.36575427303372077,
+          0.2189595346110403,
+          0.08963571248094593
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "RuralUrbanLocation",
+      "parents": [
+        "SimplifiedKycProcess",
+        "NearestBankDistance"
+      ],
+      "values": [
+        [
+          0.6685638844493408,
+          0.9647667628431297,
+          0.9973169010530981,
+          0.9484692691084037,
+          0.9960135933384139,
+          0.9997052447149577
+        ],
+        [
+          0.33143611555065927,
+          0.03523323715687038,
+          0.0026830989469018743,
+          0.05153073089159626,
+          0.003986406661586018,
+          0.0002947552850423838
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "FinancialInclusionLevel",
+      "parents": [
+        "HouseholdIncomeLevel",
+        "CommunityAgentPresence",
+        "SimplifiedKycProcess",
+        "MobileMoneyAccess",
+        "FinancialLiteracyTraining"
+      ],
+      "values": [
+        [
+          0.15393585163608256,
+          0.17983100067114957,
+          0.20791291783151186,
+          0.25740457475992323,
+          0.27707091725965716,
+          0.3192124715203978,
+          0.33284667701921433,
+          0.36917338501341057,
+          0.3979007234719219,
+          0.8200437568860348,
+          0.8423456294186459,
+          0.8406201264826124,
+          0.8675493283825229,
+          0.8884667801805642,
+          0.8911840332646856,
+          0.8941223737787098,
+          0.9074832595406592,
+          0.9105268699567074,
+          0.9084423436759478,
+          0.915050766003703,
+          0.9248120821613965,
+          0.9377244971942229,
+          0.9467295830128127,
+          0.9467535619623826,
+          0.9514847450156945,
+          0.9541367771882973,
+          0.9608552927576943,
+          0.9908295071102673,
+          0.9917154285162817,
+          0.9913005909598197,
+          0.9929436206153591,
+          0.9935892978515038,
+          0.9943952000668167,
+          0.9950094901755383,
+          0.9954044008037193,
+          0.9957165480626317,
+          0.06571396439179439,
+          0.0728756770585795,
+          0.08141619668504088,
+          0.11874146097015392,
+          0.1366200153760347,
+          0.157344532933594,
+          0.16874392152325574,
+          0.19580404218144942,
+          0.20808651836916633,
+          0.6720239261591903,
+          0.7170310051862651,
+          0.728946582247405,
+          0.7790646070297874,
+          0.7884053637208926,
+          0.804269728750116,
+          0.820931016015276,
+          0.8375084301700159,
+          0.8487951210383913,
+          0.8294750258509861,
+          0.852221470035244,
+          0.8592496142844991,
+          0.8856315210592347,
+          0.9012270713507212,
+          0.9021718226440633,
+          0.9122265417445256,
+          0.9246604355253307,
+          0.9252526340880609,
+          0.9829916800498975,
+          0.9834967758977645,
+          0.9855736989528242,
+          0.9881441634751479,
+          0.989376529718548,
+          0.9893120354139597,
+          0.9911818776148911,
+          0.9918540913968815,
+          0.9924264345295308,
+          0.005162131657419316,
+          0.0057113714019799994,
+          0.006825205420616066,
+          0.01011767767156276,
+          0.013095453677601034,
+          0.0138281092619394,
+          0.01664437860643892,
+          0.019049827053175903,
+          0.022885393733265286,
+          0.2324972212658425,
+          0.2515550545602957,
+          0.2822384866336273,
+          0.33503704851460564,
+          0.36734563245014296,
+          0.3908010451087804,
+          0.4258565460959981,
+          0.4616223635048165,
+          0.47275929756001134,
+          0.4735116902739457,
+          0.49861467996787834,
+          0.5473430588219382,
+          0.6090383602150552,
+          0.619372595887738,
+          0.6509492503716432,
+          0.6504587037974244,
+          0.6951626664471791,
+          0.7103965225696306,
+          0.9266596669724945,
+          0.9318106024903633,
+          0.9421075928361548,
+          0.9502518913800017,
+          0.9589558104386312,
+          0.9596985843070625,
+          0.9635453885644234,
+          0.9677533480842087,
+          0.9669053673913004
+        ],
+        [
+          0.2844259362675382,
+          0.3204575370108258,
+          0.3201709375678755,
+          0.3295288639763688,
+          0.3377188608641817,
+          0.3329865030881719,
+          0.33525836326540054,
+          0.33635822249673447,
+          0.33148702304696864,
+          0.14914646385558342,
+          0.13325523372414902,
+          0.1373641303715065,
+          0.11722593145527169,
+          0.09922968458610641,
+          0.09769234644567004,
+          0.09604029777100732,
+          0.0845860995021003,
+          0.0827270388673586,
+          0.08411245620266276,
+          0.07840650236917503,
+          0.06990074164426262,
+          0.058759074385536195,
+          0.050370692526647734,
+          0.050618148901243165,
+          0.046194688409439126,
+          0.04391914650291547,
+          0.037556956396921005,
+          0.009084406801337076,
+          0.00821394110419007,
+          0.008634010178411023,
+          0.007012998810590886,
+          0.006375960832520019,
+          0.005574855938355939,
+          0.004964425462534701,
+          0.004572825808523057,
+          0.00426477854767934,
+          0.2248813754311868,
+          0.23316880351354594,
+          0.24180409828998223,
+          0.2656407637016708,
+          0.28647201123701493,
+          0.279407093692072,
+          0.30048835594027634,
+          0.31538546590768646,
+          0.31760627510899864,
+          0.24087835491403345,
+          0.2116057545226483,
+          0.211105799876375,
+          0.17798995035274204,
+          0.17385109096592233,
+          0.16274017619134953,
+          0.14932514883161774,
+          0.13931940980795499,
+          0.13026890209501935,
+          0.14531190073598255,
+          0.12787499074056938,
+          0.1232053339090147,
+          0.10262706645444339,
+          0.08923812355140469,
+          0.08991676825545719,
+          0.08058150339851863,
+          0.0695588079909727,
+          0.06932391246259967,
+          0.016718870733216,
+          0.016260367516601395,
+          0.014202717069437305,
+          0.011709625916798609,
+          0.010510742429938243,
+          0.010579849233203969,
+          0.00873522784502929,
+          0.008079248726908685,
+          0.007513687328641288,
+          0.06935459982922902,
+          0.07257826115905881,
+          0.0787649985289488,
+          0.09619855199346149,
+          0.10916232498560753,
+          0.11479161509559092,
+          0.1141898496355775,
+          0.12901795900448934,
+          0.13408410363142423,
+          0.31758499858693917,
+          0.33120336896100255,
+          0.3266203935937535,
+          0.3293295387514988,
+          0.345489078273904,
+          0.34009431228804066,
+          0.33213301132703105,
+          0.3138486743022005,
+          0.3179251845753501,
+          0.3116313662123386,
+          0.3197633301282514,
+          0.2899341137759875,
+          0.2679362046514694,
+          0.2697730304602077,
+          0.25174829772014007,
+          0.26004861706540633,
+          0.2304361373169752,
+          0.2226465042979174,
+          0.06838211291697403,
+          0.06427773415057408,
+          0.05459132688555928,
+          0.04760221271214601,
+          0.039175425236372956,
+          0.038711099649225325,
+          0.03508245735782475,
+          0.03115049357136502,
+          0.032131072695294846
+        ],
+        [
+          0.5616382120963793,
+          0.4997114623180247,
+          0.47191614460061254,
+          0.41306656126370783,
+          0.38521022187616116,
+          0.34780102539143026,
+          0.33189495971538524,
+          0.29446839248985485,
+          0.2706122534811095,
+          0.030809779258381763,
+          0.02439913685720515,
+          0.022015743145881263,
+          0.015224740162205496,
+          0.012303535233329334,
+          0.011123620289644162,
+          0.009837328450282819,
+          0.007930640957240536,
+          0.00674609117593396,
+          0.007445200121389495,
+          0.006542731627121868,
+          0.005287176194340844,
+          0.0035164284202409803,
+          0.0028997244605394193,
+          0.002628289136374314,
+          0.0023205665748664717,
+          0.0019440763087873437,
+          0.0015877508453848203,
+          8.608608839560418e-05,
+          7.063037952836698e-05,
+          6.539886176929132e-05,
+          4.3380574049999716e-05,
+          3.474131597610616e-05,
+          2.9943994827256012e-05,
+          2.6084361927122657e-05,
+          2.2773387757622063e-05,
+          1.867338968910195e-05,
+          0.7094046601770188,
+          0.6939555194278745,
+          0.6767797050249769,
+          0.6156177753281752,
+          0.5769079733869503,
+          0.5632483733743341,
+          0.530767722536468,
+          0.48881049191086423,
+          0.47430720652183517,
+          0.08709771892677635,
+          0.07136324029108661,
+          0.05994761787621995,
+          0.04294544261747068,
+          0.037743545313185016,
+          0.0329900950585345,
+          0.02974383515310626,
+          0.02317216002202919,
+          0.020935976866589386,
+          0.02521307341303142,
+          0.019903539224186695,
+          0.01754505180648629,
+          0.011741412486322008,
+          0.00953480509787421,
+          0.007911409100479501,
+          0.00719195485695587,
+          0.005780756483696697,
+          0.005423453449339401,
+          0.0002894492168866053,
+          0.000242856585634083,
+          0.00022358397773865525,
+          0.00014621060805346692,
+          0.00011272785151371558,
+          0.00010811535283626906,
+          8.289454007973668e-05,
+          6.66598762099495e-05,
+          5.9878141827900144e-05,
+          0.9254832685133516,
+          0.9217103674389612,
+          0.9144097960504353,
+          0.8936837703349757,
+          0.8777422213367915,
+          0.8713802756424698,
+          0.8691657717579836,
+          0.8519322139423346,
+          0.8430305026353104,
+          0.44991778014721834,
+          0.41724157647870164,
+          0.3911411197726192,
+          0.3356334127338955,
+          0.28716528927595303,
+          0.2691046426031789,
+          0.24201044257697069,
+          0.22452896219298302,
+          0.20931551786463864,
+          0.2148569435137156,
+          0.18162198990387007,
+          0.16272282740207425,
+          0.12302543513347546,
+          0.1108543736520543,
+          0.0973024519082168,
+          0.08949267913716923,
+          0.07440119623584567,
+          0.06695697313245191,
+          0.004958220110531445,
+          0.003911663359062691,
+          0.0033010802782859534,
+          0.0021458959078522123,
+          0.0018687643249957863,
+          0.0015903160437122103,
+          0.0013721540777519089,
+          0.0010961583444261888,
+          0.0009635599134048002
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_satisficing",
+      "difficulty": "hard",
+      "question": "Find an action that meaningfully shifts FinancialInclusionLevel toward FullyIncluded (and away from Excluded). Investigate the system and recommend one intervention you would deploy, or report that nothing in the available actions meaningfully changes FinancialInclusionLevel.",
+      "answer": [
+        {
+          "variable": "CommunityAgentPresence",
+          "value": "Yes",
+          "improvement": 0.5931
+        },
+        {
+          "variable": "SimplifiedKycProcess",
+          "value": "Yes",
+          "improvement": 0.4714
+        }
+      ],
+      "metadata": {
+        "archetype": "satisficing",
+        "sub_variant": null,
+        "roles": {
+          "target": "FinancialInclusionLevel",
+          "intervention_A": "MobileMoneyAccess",
+          "intervention_B": "FinancialLiteracyTraining",
+          "intervention_C": "SimplifiedKycProcess",
+          "intervention_D": "CommunityAgentPresence",
+          "confounder": "HouseholdIncomeLevel"
+        },
+        "gold": {
+          "feasible_actions": [
+            {
+              "variable": "CommunityAgentPresence",
+              "value": "Yes",
+              "improvement": 0.5931
+            },
+            {
+              "variable": "SimplifiedKycProcess",
+              "value": "Yes",
+              "improvement": 0.4714
+            }
+          ],
+          "all_actions": [
+            {
+              "variable": "CommunityAgentPresence",
+              "value": "No",
+              "improvement": -0.1395
+            },
+            {
+              "variable": "CommunityAgentPresence",
+              "value": "Yes",
+              "improvement": 0.5931
+            },
+            {
+              "variable": "SimplifiedKycProcess",
+              "value": "No",
+              "improvement": -0.3609
+            },
+            {
+              "variable": "SimplifiedKycProcess",
+              "value": "Yes",
+              "improvement": 0.4714
+            },
+            {
+              "variable": "MobileMoneyAccess",
+              "value": "None",
+              "improvement": -0.167
+            },
+            {
+              "variable": "MobileMoneyAccess",
+              "value": "BasicAccess",
+              "improvement": -0.0322
+            },
+            {
+              "variable": "MobileMoneyAccess",
+              "value": "FullAccess",
+              "improvement": 0.0528
+            },
+            {
+              "variable": "FinancialLiteracyTraining",
+              "value": "None",
+              "improvement": -0.0117
+            },
+            {
+              "variable": "FinancialLiteracyTraining",
+              "value": "SingleSession",
+              "improvement": 0.0258
+            },
+            {
+              "variable": "FinancialLiteracyTraining",
+              "value": "MultiSession",
+              "improvement": 0.0527
+            }
+          ],
+          "threshold": 0.2621,
+          "baseline_E_target": 0.6612
+        }
+      }
+    }
+  ]
+}

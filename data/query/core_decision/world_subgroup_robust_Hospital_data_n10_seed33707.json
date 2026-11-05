@@ -1,0 +1,646 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 10,
+    "topology": "subgroup_robust",
+    "seed": 33707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A large urban teaching hospital's emergency department maintains detailed electronic records on patient visits. The research team has access to these records and can request both observational extracts and prospective interventional study samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "TimeToClinician",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PatientAgeCategory",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AcuityLevel",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ArrivalMode",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "EdCensusLoad",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ChiefComplaintComplexity",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorEdVisits",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "TimeToClinician",
+      "values": [
+        "UnderThirtyMin",
+        "ThirtyToSixtyMin",
+        "OverSixtyMin"
+      ],
+      "desc": "Elapsed time from ED arrival to first clinician evaluation.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "PatientAgeCategory",
+      "values": [
+        "Elderly",
+        "NonElderly"
+      ],
+      "desc": "Whether the patient is aged 65 or older at presentation.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AiTriagePrioritization",
+      "values": [
+        "Off",
+        "Active"
+      ],
+      "desc": "Use of an AI algorithm to assign initial triage queue position.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "NurseledRapidAssessment",
+      "values": [
+        "None",
+        "Partial",
+        "Full"
+      ],
+      "desc": "Extent of a dedicated nurse-led rapid assessment at ED intake.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "KioskSelfCheckIn",
+      "values": [
+        "None",
+        "Available"
+      ],
+      "desc": "Availability of electronic self-service kiosks for ED registration.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "AcuityLevel",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Emergency Severity Index category assigned at initial presentation.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ArrivalMode",
+      "values": [
+        "WalkIn",
+        "Ambulance"
+      ],
+      "desc": "Whether the patient arrived by ambulance or walked in.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "EdCensusLoad",
+      "values": [
+        "Low",
+        "Moderate",
+        "High"
+      ],
+      "desc": "Number of patients currently occupying the ED at time of arrival.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "ChiefComplaintComplexity",
+      "values": [
+        "Simple",
+        "Complex"
+      ],
+      "desc": "Whether the presenting chief complaint involves multiple organ systems.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorEdVisits",
+      "values": [
+        "None",
+        "OneOrMore"
+      ],
+      "desc": "Number of ED visits by the same patient in the preceding 12 months.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "PatientAgeCategory",
+      "TimeToClinician"
+    ],
+    [
+      "PatientAgeCategory",
+      "ArrivalMode"
+    ],
+    [
+      "AiTriagePrioritization",
+      "TimeToClinician"
+    ],
+    [
+      "AiTriagePrioritization",
+      "NurseledRapidAssessment"
+    ],
+    [
+      "NurseledRapidAssessment",
+      "TimeToClinician"
+    ],
+    [
+      "KioskSelfCheckIn",
+      "TimeToClinician"
+    ],
+    [
+      "KioskSelfCheckIn",
+      "NurseledRapidAssessment"
+    ],
+    [
+      "AcuityLevel",
+      "TimeToClinician"
+    ],
+    [
+      "ChiefComplaintComplexity",
+      "KioskSelfCheckIn"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "PatientAgeCategory",
+      "parents": [],
+      "values": [
+        [
+          0.09970445979960149
+        ],
+        [
+          0.9002955402003985
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AiTriagePrioritization",
+      "parents": [],
+      "values": [
+        [
+          0.09912585421070017
+        ],
+        [
+          0.9008741457892998
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "AcuityLevel",
+      "parents": [],
+      "values": [
+        [
+          0.31311434705657903
+        ],
+        [
+          0.09406092913293666
+        ],
+        [
+          0.5928247238104843
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "EdCensusLoad",
+      "parents": [],
+      "values": [
+        [
+          0.09496808590342526
+        ],
+        [
+          0.47921316521203844
+        ],
+        [
+          0.4258187488845364
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "ChiefComplaintComplexity",
+      "parents": [],
+      "values": [
+        [
+          0.7448603473707953
+        ],
+        [
+          0.2551396526292047
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorEdVisits",
+      "parents": [],
+      "values": [
+        [
+          0.48024152210104804
+        ],
+        [
+          0.519758477898952
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ArrivalMode",
+      "parents": [
+        "PatientAgeCategory"
+      ],
+      "values": [
+        [
+          0.5309743172320005,
+          0.8847253303993095
+        ],
+        [
+          0.46902568276799955,
+          0.11527466960069047
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "KioskSelfCheckIn",
+      "parents": [
+        "ChiefComplaintComplexity"
+      ],
+      "values": [
+        [
+          0.6192313111481715,
+          0.9741612407374762
+        ],
+        [
+          0.3807686888518285,
+          0.025838759262523797
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "NurseledRapidAssessment",
+      "parents": [
+        "KioskSelfCheckIn",
+        "AiTriagePrioritization"
+      ],
+      "values": [
+        [
+          0.29559594785556104,
+          0.23669742152524084,
+          0.14096289011077912,
+          0.15037554252618188
+        ],
+        [
+          0.39100687008409923,
+          0.57782666138134,
+          0.145998730467077,
+          0.287434986449284
+        ],
+        [
+          0.31339718206033973,
+          0.18547591709341918,
+          0.713038379422144,
+          0.5621894710245341
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "TimeToClinician",
+      "parents": [
+        "AcuityLevel",
+        "PatientAgeCategory",
+        "AiTriagePrioritization",
+        "NurseledRapidAssessment",
+        "KioskSelfCheckIn"
+      ],
+      "values": [
+        [
+          0.3680213621590856,
+          0.1901407578855708,
+          0.4744279756113719,
+          0.2592139478792466,
+          0.7605664032905829,
+          0.6006502218150258,
+          0.6324346532722755,
+          0.4227283159376905,
+          0.7113939419204726,
+          0.5338656029395141,
+          0.8900630857723311,
+          0.8101873150601948,
+          0.10126545851038557,
+          0.45296692701353714,
+          0.16193671581143054,
+          0.5243058801472208,
+          0.4723805109725612,
+          0.7959699541139282,
+          0.6471890712084445,
+          0.8796090235330707,
+          0.7334416088444937,
+          0.9065945163204431,
+          0.887246584001056,
+          0.9663670536280129,
+          0.17506183108351264,
+          0.07615835982876006,
+          0.2673263630979119,
+          0.12294276090644336,
+          0.5985962527950414,
+          0.3998431219601187,
+          0.43527053832467055,
+          0.23441354912262813,
+          0.5472268096775252,
+          0.31999219880771096,
+          0.8088031929368389,
+          0.6664238394885236,
+          0.03943055974160146,
+          0.2510524824450004,
+          0.06814478252007151,
+          0.3473015806332668,
+          0.27831908731563787,
+          0.6679101992668381,
+          0.44594706436380377,
+          0.7813755807678116,
+          0.5418484762249566,
+          0.838073893303671,
+          0.7932374934088925,
+          0.9388175623661423,
+          0.01872261049491755,
+          0.006244304702726949,
+          0.031234473738822845,
+          0.010980661951305943,
+          0.16179776086032704,
+          0.06790619441918486,
+          0.08168957455910711,
+          0.027875386135430613,
+          0.1245135119489902,
+          0.04580085649128075,
+          0.39584214361415987,
+          0.21304578778368952,
+          0.0029197004987295263,
+          0.02802551980769818,
+          0.004952446533921575,
+          0.046401161603498144,
+          0.03488338159335079,
+          0.2170589719763642,
+          0.0765187253577978,
+          0.3656894718395263,
+          0.11405272761168951,
+          0.46714173002741827,
+          0.41389517882955745,
+          0.7668044770089953
+        ],
+        [
+          0.32602607895546504,
+          0.32177571151248385,
+          0.3103022811039729,
+          0.32708884120286635,
+          0.1922841863222788,
+          0.2729014394778035,
+          0.26281017758307773,
+          0.32491235511513333,
+          0.2223822991371449,
+          0.299371396788049,
+          0.09935883234660824,
+          0.15718103970840835,
+          0.25231486386633456,
+          0.31373668861519494,
+          0.29382877003911695,
+          0.304890952296066,
+          0.32222680820466787,
+          0.17062569742250366,
+          0.250611973168924,
+          0.10631296834303841,
+          0.2044373090937322,
+          0.08523797320200423,
+          0.10163107274126497,
+          0.03261063181156391,
+          0.3115539755996688,
+          0.23858243408015228,
+          0.3295709218738612,
+          0.26783993897244746,
+          0.2748599007145159,
+          0.3306268005439725,
+          0.3164209309419193,
+          0.3267721666231613,
+          0.2958350781961364,
+          0.34007839125168005,
+          0.16023909919182183,
+          0.24114726953088308,
+          0.1678269130854133,
+          0.3238587581233846,
+          0.2142899657827652,
+          0.3364461203587807,
+          0.32630898890501064,
+          0.23851910504933352,
+          0.3162980661011368,
+          0.17713958696302168,
+          0.2968124932106635,
+          0.13882388894566766,
+          0.17359183817362062,
+          0.05779474644291128,
+          0.12623791038808352,
+          0.07092034623456166,
+          0.16285577170780724,
+          0.09192720315062795,
+          0.29772815402637437,
+          0.21283088002632097,
+          0.23074556743799654,
+          0.13899447366351905,
+          0.2732478630980656,
+          0.17973250810392755,
+          0.33260323459260066,
+          0.30964940645277866,
+          0.05452800723729617,
+          0.1613244924161464,
+          0.06857981829547659,
+          0.18734354075579462,
+          0.17052183775213878,
+          0.33025798498289305,
+          0.22911255230129565,
+          0.3305582941394179,
+          0.2701890893051348,
+          0.3220568957848095,
+          0.3135888402248061,
+          0.18867962390976398
+        ],
+        [
+          0.3059525588854493,
+          0.4880835306019453,
+          0.21526974328465515,
+          0.413697210917887,
+          0.04714941038713837,
+          0.12644833870717082,
+          0.10475516914464673,
+          0.2523593289471762,
+          0.06622375894238261,
+          0.16676300027243687,
+          0.010578081881060694,
+          0.03263164523139688,
+          0.6464196776232798,
+          0.23329638437126773,
+          0.5442345141494525,
+          0.17080316755671318,
+          0.20539268082277087,
+          0.03340434846356806,
+          0.10219895562263148,
+          0.01407800812389094,
+          0.06212108206177421,
+          0.00816751047755271,
+          0.011122343257679053,
+          0.0010223145604231676,
+          0.5133841933168185,
+          0.6852592060910876,
+          0.4031027150282269,
+          0.6092173001211092,
+          0.12654384649044279,
+          0.26953007749590885,
+          0.24830853073341014,
+          0.4388142842542106,
+          0.15693811212633837,
+          0.33992940994060894,
+          0.030957707871339238,
+          0.09242889098059334,
+          0.7927425271729852,
+          0.42508875943161495,
+          0.7175652516971632,
+          0.3162522990079526,
+          0.39537192377935154,
+          0.09357069568382828,
+          0.23775486953505942,
+          0.04148483226916678,
+          0.16133903056438,
+          0.02310221775066132,
+          0.03317066841748696,
+          0.0033876911909465923,
+          0.855039479116999,
+          0.9228353490627114,
+          0.8059097545533699,
+          0.8970921348980662,
+          0.5404740851132986,
+          0.7192629255544941,
+          0.6875648580028962,
+          0.8331301402010504,
+          0.6022386249529441,
+          0.7744666354047918,
+          0.27155462179323947,
+          0.47730480576353185,
+          0.9425522922639742,
+          0.8106499877761554,
+          0.9264677351706018,
+          0.7662552976407072,
+          0.7945947806545104,
+          0.4526830430407428,
+          0.6943687223409066,
+          0.30375223402105583,
+          0.6157581830831758,
+          0.21080137418777234,
+          0.27251598094563645,
+          0.044515899081240706
+        ]
+      ],
+      "cardinality": 3
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift TimeToClinician toward UnderThirtyMin (and away from OverSixtyMin). The deployment will reach individuals with PatientAgeCategory=Elderly as well as PatientAgeCategory=NonElderly, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "NurseledRapidAssessment",
+        "value": "Full",
+        "min_improvement": 0.3326,
+        "improvement_low": 0.3475,
+        "improvement_high": 0.3326
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "TimeToClinician",
+          "group": "PatientAgeCategory",
+          "intervention_avg": "AiTriagePrioritization",
+          "intervention_rob": "NurseledRapidAssessment",
+          "intervention_bad": "KioskSelfCheckIn",
+          "confounder": "AcuityLevel"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "NurseledRapidAssessment",
+            "value": "Full",
+            "min_improvement": 0.3326,
+            "improvement_low": 0.3475,
+            "improvement_high": 0.3326
+          },
+          "avg_best_but_uneven": {
+            "variable": "AiTriagePrioritization",
+            "value": "Active",
+            "min_improvement": 0.0289,
+            "improvement_low": 0.0289,
+            "improvement_high": 0.0645
+          },
+          "harmful_in_subgroup": {
+            "variable": "KioskSelfCheckIn",
+            "value": "Available",
+            "min_improvement": -0.0618,
+            "improvement_low": -0.0618,
+            "improvement_high": 0.4642
+          },
+          "subgroups": [
+            "Elderly",
+            "NonElderly"
+          ],
+          "group_variable": "PatientAgeCategory",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "NurseledRapidAssessment",
+              "value": "Full",
+              "improvement_low": 0.3475,
+              "improvement_high": 0.3326,
+              "min_improvement": 0.3326
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}

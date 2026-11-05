@@ -1,0 +1,716 @@
+{
+  "meta": {
+    "topic": "Hospital data",
+    "n_nodes": 15,
+    "topology": "subgroup_robust",
+    "seed": 3707,
+    "llm_model": "us.anthropic.claude-opus-4-6-v1",
+    "n_questions": 1,
+    "archetype": "subgroup_robust",
+    "sub_variant": null
+  },
+  "story": "A large metropolitan hospital network maintains comprehensive patient records spanning admissions, follow-up care, and demographic information. The research team has access to these records and can request both observational and interventional data samples.",
+  "non_intervenable_variables": [
+    {
+      "name": "ThirtyDayReadmission",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "ComorbidityBurden",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "SocioeconomicStatus",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "AgeGroup",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "IndexLengthOfStay",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DischargeDisposition",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PriorAdmissions",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "MedicationCount",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "PrimaryCareAccess",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "InsuranceType",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "HealthLiteracy",
+      "reason": "marked non-intervenable in role plan"
+    },
+    {
+      "name": "DischargeInstructionClarity",
+      "reason": "marked non-intervenable in role plan"
+    }
+  ],
+  "variables": [
+    {
+      "name": "ThirtyDayReadmission",
+      "values": [
+        "NoReadmission",
+        "Readmitted"
+      ],
+      "desc": "Whether the patient was readmitted within 30 days of discharge.",
+      "role": "target",
+      "intervenable": false,
+      "preferred_low": true
+    },
+    {
+      "name": "ComorbidityBurden",
+      "values": [
+        "LowComorbidity",
+        "HighComorbidity"
+      ],
+      "desc": "Classification of patient chronic condition burden at discharge.",
+      "role": "group",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "TelehealthFollowUp",
+      "values": [
+        "None",
+        "Weekly"
+      ],
+      "desc": "Scheduled post-discharge telehealth check-in visits with a clinician.",
+      "role": "intervention_avg",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "TransitionalCareCoordination",
+      "values": [
+        "None",
+        "Standard",
+        "Enhanced"
+      ],
+      "desc": "Level of nurse-led care coordination during the post-discharge transition period.",
+      "role": "intervention_rob",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "DigitalMedReminders",
+      "values": [
+        "Off",
+        "On"
+      ],
+      "desc": "Automated digital medication reminder notifications sent to patients via app.",
+      "role": "intervention_bad",
+      "intervenable": true,
+      "preferred_low": null
+    },
+    {
+      "name": "SocioeconomicStatus",
+      "values": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "desc": "Patient neighborhood-level socioeconomic classification at admission.",
+      "role": "confounder",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "AgeGroup",
+      "values": [
+        "Under65",
+        "Over65"
+      ],
+      "desc": "Patient age category at the time of index hospitalization.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "IndexLengthOfStay",
+      "values": [
+        "Short",
+        "Medium",
+        "Long"
+      ],
+      "desc": "Duration of the initial hospital stay in categorized days.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DischargeDisposition",
+      "values": [
+        "Home",
+        "SkilledFacility"
+      ],
+      "desc": "Location to which the patient was discharged after hospitalization.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PriorAdmissions",
+      "values": [
+        "None",
+        "OneOrTwo",
+        "ThreeOrMore"
+      ],
+      "desc": "Number of hospital admissions in the 12 months before index stay.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "MedicationCount",
+      "values": [
+        "FewMeds",
+        "ManyMeds"
+      ],
+      "desc": "Number of distinct medications prescribed at discharge.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "PrimaryCareAccess",
+      "values": [
+        "No",
+        "Yes"
+      ],
+      "desc": "Whether the patient has an established primary care provider.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "InsuranceType",
+      "values": [
+        "PublicInsurance",
+        "PrivateInsurance"
+      ],
+      "desc": "Category of the patient's health insurance coverage at admission.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "HealthLiteracy",
+      "values": [
+        "Low",
+        "Adequate"
+      ],
+      "desc": "Patient self-reported ability to understand health information.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    },
+    {
+      "name": "DischargeInstructionClarity",
+      "values": [
+        "Unclear",
+        "Clear"
+      ],
+      "desc": "Nurse-assessed patient comprehension of discharge instructions.",
+      "role": "background",
+      "intervenable": false,
+      "preferred_low": null
+    }
+  ],
+  "edges": [
+    [
+      "ComorbidityBurden",
+      "ThirtyDayReadmission"
+    ],
+    [
+      "TelehealthFollowUp",
+      "ThirtyDayReadmission"
+    ],
+    [
+      "TransitionalCareCoordination",
+      "ThirtyDayReadmission"
+    ],
+    [
+      "TransitionalCareCoordination",
+      "InsuranceType"
+    ],
+    [
+      "DigitalMedReminders",
+      "ThirtyDayReadmission"
+    ],
+    [
+      "DigitalMedReminders",
+      "DischargeInstructionClarity"
+    ],
+    [
+      "SocioeconomicStatus",
+      "ThirtyDayReadmission"
+    ],
+    [
+      "IndexLengthOfStay",
+      "DigitalMedReminders"
+    ],
+    [
+      "MedicationCount",
+      "TransitionalCareCoordination"
+    ]
+  ],
+  "cpds": [
+    {
+      "child": "ComorbidityBurden",
+      "parents": [],
+      "values": [
+        [
+          0.5830706916417446
+        ],
+        [
+          0.4169293083582554
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TelehealthFollowUp",
+      "parents": [],
+      "values": [
+        [
+          0.31817074767371567
+        ],
+        [
+          0.6818292523262843
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "SocioeconomicStatus",
+      "parents": [],
+      "values": [
+        [
+          0.12940504158901486
+        ],
+        [
+          0.09810146171395386
+        ],
+        [
+          0.7724934966970313
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "AgeGroup",
+      "parents": [],
+      "values": [
+        [
+          0.5782815626902172
+        ],
+        [
+          0.42171843730978276
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "IndexLengthOfStay",
+      "parents": [],
+      "values": [
+        [
+          0.390948404287259
+        ],
+        [
+          0.5154892893383115
+        ],
+        [
+          0.09356230637442928
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DischargeDisposition",
+      "parents": [],
+      "values": [
+        [
+          0.6689956740791593
+        ],
+        [
+          0.3310043259208407
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PriorAdmissions",
+      "parents": [],
+      "values": [
+        [
+          0.09591990830536758
+        ],
+        [
+          0.7811354282738106
+        ],
+        [
+          0.12294466342082186
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "MedicationCount",
+      "parents": [],
+      "values": [
+        [
+          0.904991169133696
+        ],
+        [
+          0.09500883086630388
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "PrimaryCareAccess",
+      "parents": [],
+      "values": [
+        [
+          0.9049658118620605
+        ],
+        [
+          0.09503418813793939
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "HealthLiteracy",
+      "parents": [],
+      "values": [
+        [
+          0.8088417643373312
+        ],
+        [
+          0.1911582356626688
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "DigitalMedReminders",
+      "parents": [
+        "IndexLengthOfStay"
+      ],
+      "values": [
+        [
+          0.6085286757064057,
+          0.8317489907849697,
+          0.9401959934823269
+        ],
+        [
+          0.3914713242935943,
+          0.16825100921503036,
+          0.059804006517673036
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "TransitionalCareCoordination",
+      "parents": [
+        "MedicationCount"
+      ],
+      "values": [
+        [
+          0.31463940141027935,
+          0.01849617903060777
+        ],
+        [
+          0.3369759060933991,
+          0.6907877271265018
+        ],
+        [
+          0.34838469249632154,
+          0.29071609384289054
+        ]
+      ],
+      "cardinality": 3
+    },
+    {
+      "child": "DischargeInstructionClarity",
+      "parents": [
+        "DigitalMedReminders"
+      ],
+      "values": [
+        [
+          0.5317564765831694,
+          0.5586152455861174
+        ],
+        [
+          0.46824352341683073,
+          0.4413847544138825
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "ThirtyDayReadmission",
+      "parents": [
+        "SocioeconomicStatus",
+        "ComorbidityBurden",
+        "TelehealthFollowUp",
+        "TransitionalCareCoordination",
+        "DigitalMedReminders"
+      ],
+      "values": [
+        [
+          0.5455778850898546,
+          0.27181419440843135,
+          0.6749294695374989,
+          0.39757804545430986,
+          0.9434454663172247,
+          0.835934947293325,
+          0.8589555926747288,
+          0.6451685376919745,
+          0.9143445329185131,
+          0.7641872811129399,
+          0.9887687319744819,
+          0.9630528358247172,
+          0.14846125416447895,
+          0.641716031100656,
+          0.2351508788927662,
+          0.7539199904035432,
+          0.6829193067287697,
+          0.9596037159767921,
+          0.8523442068010738,
+          0.9844099235820158,
+          0.9181688950237487,
+          0.9914308110368785,
+          0.9881691161185139,
+          0.9989472186976525,
+          0.280153384454807,
+          0.09817109358830256,
+          0.3955804326690006,
+          0.15929583145685,
+          0.8313095555442898,
+          0.6074694760702024,
+          0.6371888469342986,
+          0.3366212934806287,
+          0.7543922674022355,
+          0.48998823230831073,
+          0.9586545773441028,
+          0.8801566889839144,
+          0.04797774194366409,
+          0.35769844985543314,
+          0.08504411967091392,
+          0.4988808198310312,
+          0.396239711828662,
+          0.8871883580038914,
+          0.651498018169369,
+          0.9519578008968471,
+          0.7630264773932095,
+          0.9718871528303236,
+          0.9608643740475789,
+          0.9965093828865667,
+          0.02175213224373105,
+          0.0064428821930089695,
+          0.0403797329328886,
+          0.011560219698005917,
+          0.22656574442249566,
+          0.08408674615518412,
+          0.0962232643878403,
+          0.031272619878302585,
+          0.16138519474955987,
+          0.05967289276805939,
+          0.5875604411280448,
+          0.3285073475776937,
+          0.003107472265571752,
+          0.032194887769041655,
+          0.005305192560455422,
+          0.05853303073532609,
+          0.03745421750488843,
+          0.3086591978980097,
+          0.09788560009507045,
+          0.5364197760792526,
+          0.17050679451064757,
+          0.6998579304026509,
+          0.5873852511459332,
+          0.944434266047671
+        ],
+        [
+          0.45442211491014534,
+          0.7281858055915685,
+          0.3250705304625011,
+          0.60242195454569,
+          0.056554533682775354,
+          0.16406505270667499,
+          0.1410444073252712,
+          0.3548314623080255,
+          0.08565546708148696,
+          0.23581271888706018,
+          0.011231268025518128,
+          0.036947164175282814,
+          0.851538745835521,
+          0.3582839688993439,
+          0.7648491211072338,
+          0.2460800095964568,
+          0.31708069327123034,
+          0.040396284023208044,
+          0.14765579319892622,
+          0.015590076417984162,
+          0.08183110497625137,
+          0.008569188963121543,
+          0.011830883881486067,
+          0.0010527813023476198,
+          0.719846615545193,
+          0.9018289064116976,
+          0.6044195673309993,
+          0.8407041685431499,
+          0.1686904444557103,
+          0.39253052392979754,
+          0.3628111530657015,
+          0.6633787065193714,
+          0.2456077325977644,
+          0.5100117676916892,
+          0.04134542265589733,
+          0.1198433110160857,
+          0.9520222580563359,
+          0.6423015501445669,
+          0.9149558803290861,
+          0.5011191801689688,
+          0.6037602881713381,
+          0.1128116419961086,
+          0.348501981830631,
+          0.04804219910315287,
+          0.2369735226067905,
+          0.02811284716967642,
+          0.03913562595242117,
+          0.003490617113433467,
+          0.9782478677562689,
+          0.993557117806991,
+          0.9596202670671113,
+          0.9884397803019941,
+          0.7734342555775043,
+          0.9159132538448159,
+          0.9037767356121598,
+          0.9687273801216975,
+          0.8386148052504402,
+          0.9403271072319407,
+          0.4124395588719552,
+          0.6714926524223063,
+          0.9968925277344283,
+          0.9678051122309583,
+          0.9946948074395445,
+          0.9414669692646739,
+          0.9625457824951116,
+          0.6913408021019903,
+          0.9021143999049296,
+          0.4635802239207474,
+          0.8294932054893523,
+          0.3001420695973491,
+          0.4126147488540668,
+          0.055565733952329124
+        ]
+      ],
+      "cardinality": 2
+    },
+    {
+      "child": "InsuranceType",
+      "parents": [
+        "TransitionalCareCoordination"
+      ],
+      "values": [
+        [
+          0.5089376776034005,
+          0.31161456690345646,
+          0.16507827772057476
+        ],
+        [
+          0.4910623223965996,
+          0.6883854330965435,
+          0.8349217222794253
+        ]
+      ],
+      "cardinality": 2
+    }
+  ],
+  "questions": [
+    {
+      "id": 0,
+      "question_type": "advanced_subgroup_robust",
+      "difficulty": "hard",
+      "question": "Recommend an intervention you would deploy to shift ThirtyDayReadmission toward NoReadmission (and away from Readmitted). The deployment will reach individuals with ComorbidityBurden=LowComorbidity as well as ComorbidityBurden=HighComorbidity, so explain how your choice performs for each.",
+      "answer": {
+        "variable": "TransitionalCareCoordination",
+        "value": "Enhanced",
+        "min_improvement": 0.1903,
+        "improvement_low": 0.2104,
+        "improvement_high": 0.1903
+      },
+      "metadata": {
+        "archetype": "subgroup_robust",
+        "sub_variant": null,
+        "roles": {
+          "target": "ThirtyDayReadmission",
+          "group": "ComorbidityBurden",
+          "intervention_avg": "TelehealthFollowUp",
+          "intervention_rob": "TransitionalCareCoordination",
+          "intervention_bad": "DigitalMedReminders",
+          "confounder": "SocioeconomicStatus"
+        },
+        "gold": {
+          "robust_action": {
+            "variable": "TransitionalCareCoordination",
+            "value": "Enhanced",
+            "min_improvement": 0.1903,
+            "improvement_low": 0.2104,
+            "improvement_high": 0.1903
+          },
+          "avg_best_but_uneven": {
+            "variable": "TelehealthFollowUp",
+            "value": "Weekly",
+            "min_improvement": 0.0595,
+            "improvement_low": 0.0595,
+            "improvement_high": 0.1244
+          },
+          "harmful_in_subgroup": {
+            "variable": "DigitalMedReminders",
+            "value": "On",
+            "min_improvement": -0.1004,
+            "improvement_low": -0.1004,
+            "improvement_high": 0.2355
+          },
+          "subgroups": [
+            "LowComorbidity",
+            "HighComorbidity"
+          ],
+          "group_variable": "ComorbidityBurden",
+          "min_effect": 0.2,
+          "acceptable_robust_actions": [
+            {
+              "variable": "TransitionalCareCoordination",
+              "value": "Enhanced",
+              "improvement_low": 0.2104,
+              "improvement_high": 0.1903,
+              "min_improvement": 0.1903
+            }
+          ],
+          "accept_threshold": 0.1
+        }
+      }
+    }
+  ]
+}
